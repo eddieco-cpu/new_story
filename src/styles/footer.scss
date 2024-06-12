@@ -1,0 +1,294 @@
+.footer {
+  width: 100%;
+  background-color: #fafafa;
+  letter-spacing: 1px;
+  border-top: 1px solid #d8d8d8;
+
+  .container {
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    padding: 40px 0;
+  }
+
+  .footer-info {
+    width: 25%;
+    padding: 0 40px 0 0;
+
+    .footer-logo {
+      width: 140px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .logo-udn {
+        width: 40px;
+
+        img {
+          width: 100%;
+          vertical-align: middle;
+        }
+      }
+
+      .logo-txt {
+        width: 98px;
+
+        img {
+          width: 100%;
+          vertical-align: middle;
+        }
+      }
+    }
+
+    &__txt {
+      color: #c99b7e;
+      font-size: 14px;
+      word-break: break-all;
+
+      &+.footer-info__txt {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .footer-link {
+    flex-grow: 1;
+    display: flex;
+    padding: 10px 20px 0 0;
+
+    &__group {
+      &+.footer-link__group {
+        margin-left: 40px;
+      }
+
+      h3 {
+        font-size: 16px;
+        color: var(--primary-300-rgb);
+        margin-bottom: 15px;
+        font-weight: 400;
+      }
+
+      a {
+        display: block;
+        text-decoration: none;
+        color: #777777;
+        font-size: 14px;
+
+        &+a {
+          margin-top: 10px;
+        }
+
+        &:hover {
+          color: var(--primary-300-rgb);
+        }
+      }
+
+      &--social {
+        a {
+          margin-left: 25px;
+          position: relative;
+
+          i {
+            position: absolute;
+            left: -30px;
+            top: -6px;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .app-download {
+    min-width: 300px;
+    width: 25%;
+    padding: 10px 0 0;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--primary-300-rgb);
+      margin-bottom: 10px;
+    }
+
+    &__wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    &__img {
+      width: 80px;
+      margin-right: 15px;
+
+      img {
+        width: 100%;
+        vertical-align: middle;
+      }
+    }
+
+    &__link {
+      margin-right: 15px;
+
+      &--item {
+        width: 100px;
+
+        a {
+          text-decoration: none;
+          display: block;
+
+          img {
+            width: 100%;
+            vertical-align: middle;
+          }
+        }
+      }
+
+      .apple-store {
+        margin-bottom: 10px;
+      }
+    }
+
+    .qr-code {
+      width: 90px;
+
+      img {
+        width: 100%;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .copyright {
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    background-color: var(--primary-300-rgb);
+    padding: 10px 5px;
+  }
+}
+
+@media screen and (max-width: 1297px) {
+  .footer {
+    .container {
+      max-width: 970px;
+    }
+
+    .footer-link {
+      &__group {
+        &+.footer-link__group {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .footer {
+    .container {
+      max-width: 740px;
+    }
+
+    .footer-info {
+      width: 23%;
+      padding: 0 20px 0 0;
+    }
+
+    .footer-link {
+      &__group {
+        &+.footer-link__group {
+          margin-left: 15px;
+        }
+      }
+    }
+
+    .app-download {
+      min-width: 240px;
+
+      &__img {
+        width: 60px;
+      }
+
+      &__link {
+        &--item {
+          width: 80px;
+        }
+
+        .apple-store {
+          margin-bottom: 5px;
+        }
+      }
+
+      .qr-code {
+        width: 70px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .footer {
+    .container {
+      max-width: 767px;
+      padding: 30px 0;
+    }
+
+    .footer-info {
+      display: none;
+    }
+
+    .footer-link {
+      display: none;
+    }
+
+    .app-download {
+      min-width: 300px;
+      padding: 0;
+      margin: auto;
+
+      &__img {
+        width: 80px;
+      }
+
+      &__link {
+        &--item {
+          width: 100px;
+        }
+
+        .apple-store {
+          margin-bottom: 10px;
+        }
+      }
+
+      .qr-code {
+        width: 90px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .footer {
+    .app-download {
+      min-width: 240px;
+
+      &__img {
+        width: 60px;
+      }
+
+      &__link {
+        &--item {
+          width: 80px;
+        }
+
+        .apple-store {
+          margin-bottom: 5px;
+        }
+      }
+
+      .qr-code {
+        width: 70px;
+      }
+    }
+  }
+}

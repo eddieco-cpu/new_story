@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+
+  --landscape-300: 248 244 241;
+  --landscape-300-rgb: rgb(248, 244, 241);
+
+  --landscape-400: 243 232 223;
+  --landscape-400-rgb: rgb(243, 232, 223);
+
+  --landscape-450: 234 223 213;
+  --landscape-450-rgb: rgb(234, 223, 213);
+
+
+  --accent-200: 245 179 91;
+  --accent-200-rgb: rgb(245, 179, 91);
+
+  --accent-250: 255 153 112;
+  --accent-250-rgb: rgb(255, 153, 112);
+
+  --accent-300: 255 90 25;
+  --accent-300-rgb: rgb(255, 90, 25);
+
+
+  --primary-150: 195 144 112;
+  --primary-150-rgb: rgb(195, 144, 112);
+
+  --primary-200: 169 127 98;
+  --primary-200-rgb: rgb(169, 127, 98);
+
+  --primary-300: 180 121 84;
+  --primary-300-rgb: rgb(180, 121, 84);
+
+
+  --secondary-450: 174 53 53;
+  --secondary-450-rgb: rgb(174, 53, 53);
+
+  --secondary-500: 155 44 0;
+  --secondary-500-rgb: rgb(155, 44, 0);
+
+
+  --ash-100: 249 249 249;
+  --ash-100-rgb: rgb(249, 249, 249);
+
+  --ash-300: 221 221 221;
+  --ash-300-rgb: rgb(221, 221, 221);
+
+  --ash-350: 216 216 216;
+  --ash-350-rgb: rgb(216, 216, 216);
+
+  --ash-500: 171 171 171;
+  --ash-500-rgb: rgb(171, 171, 171);
+
+  --ash-600: 122 122 122;
+  --ash-600-rgb: rgb(122, 122, 122);
+
+  --ash-650: 119 119 119;
+  --ash-650-rgb: rgb(119, 119, 119);
+
+
+  --prompt-info: 92 126 216;
+  --prompt-info-rgb: rgb(92, 126, 216);
+}
