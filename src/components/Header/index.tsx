@@ -32,13 +32,13 @@ const Header: React.FC = () => {
               <ul className="search-select__list">
                 <li>
                   {/* onClick={() => searchType('1', 'b')} data-value="1" */}
-                  <a href="javascript: void(0);" >
+                  <a  >
                     找書刊
                   </a>
                 </li>
                 <li>
                   {/* onClick={() => searchType('1', 'a')} data-value="2" */}
-                  <a href="javascript: void(0);" >
+                  <a  >
                     找課程
                   </a>
                 </li>
@@ -53,7 +53,7 @@ const Header: React.FC = () => {
 
           <div className="tools-box">
             <span className="tools-box__item search-btn">
-              <a href="javascript:void(0);">
+              <a>
                 <Image src="/images/search.svg" alt="搜尋" width={24} height={24} />
               </a>
             </span>
@@ -91,7 +91,8 @@ const Header: React.FC = () => {
               <span className="cart-num" id="cart-num_span">0</span>
             </span>
             <span className="tools-box__item">
-              <a href="javascript:window.location.href='../center/login.do?redirect='+encodeURIComponent(window.location.href)">
+              {/* href="javascript:window.location.href='../center/login.do?redirect='+encodeURIComponent(window.location.href)" */}
+              <a>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <g clipPath="url(#clipUser)">
                     <path
