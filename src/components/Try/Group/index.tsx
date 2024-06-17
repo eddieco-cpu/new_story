@@ -9,7 +9,7 @@ import Child5 from './Child5'
 
 export type Size = "S" | "M" | "L"
 
-export default function index() {
+export default function Index() {
 	//
 	const [size, setSize] = useState<Size>("S")
 	const sizes: Size[] = ["S", "M", "L"]	//精華

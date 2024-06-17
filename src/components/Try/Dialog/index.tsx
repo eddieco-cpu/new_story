@@ -5,7 +5,7 @@ import Child from './Child'
 
 var css = 'flex justify-start items-center gap-2 py-2'
 
-export default function index() {
+export default function Index() {
 	//
 	const [now, setNow] = useState<Date | null>(null)	//重點 -> Date type
 
