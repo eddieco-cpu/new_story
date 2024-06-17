@@ -59,7 +59,66 @@
   --ash-650: 119 119 119;
   --ash-650-rgb: rgb(119, 119, 119);
 
+  --ash-850: 63 61 62;
+  --ash-850-rgb: rgb(63, 61, 62);
+
+  --ash-900: 34 34 34;
+  --ash-900-rgb: rgb(34, 34, 34);
+
 
   --prompt-info: 92 126 216;
   --prompt-info-rgb: rgb(92, 126, 216);
+}
+
+* {
+  font-family: var(--font-noto-sans-tc), sans-serif;
+  letter-spacing: 1px;
+  font-weight: 300;
+  color: var(--ash-900-rgb);
+}
+
+@layer components {
+
+  .component_p-6 {
+    @apply p-6;
+  }
+
+  .pic-base {
+    @apply block overflow-hidden min-w-32 aspect-video;
+
+    img {
+      @apply block w-full h-full object-cover object-center;
+    }
+  }
+
+  .tag-center {
+    @apply flex items-center justify-center leading-none;
+  }
+
+  .border-extralight {
+    @apply border border-solid border-ash-300;
+  }
+
+  .rounded-half {
+    @apply rounded-[50px];
+  }
+}
+
+
+//
+.embla {
+  overflow: hidden;
+  width: 100%;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  position: relative;
+  min-width: 100%;
+  padding: 10px;
+  background: #ccc;
+  text-align: center;
 }
