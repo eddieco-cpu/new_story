@@ -7,7 +7,7 @@
 - 描述: 使用 Splidejs 時，會出現以下錯誤訊息
 
   ```js
-  import { Splide, SplideSlide } from '@splidejs/react-splide';
+  import { Splide, SplideSlide } from "@splidejs/react-splide";
 
   /**
    * Could not find a declaration file for module '@splidejs/react-splide'.
@@ -25,7 +25,7 @@
 
   ```js
   // @ts-ignore
-  import { Splide, SplideSlide } from '@splidejs/react-splide';
+  import { Splide, SplideSlide } from "@splidejs/react-splide";
   ```
 
 - 缺點: 這樣做的話，就無法享受到 TypeScript 的好處，因為 TypeScript 無法檢查這個模組的型別。
@@ -64,7 +64,7 @@
 2. 新增內容 (這個檔案的目的是告訴 TypeScript 如何處理 @splidejs/react-splide)
 
    ```ts
-   declare module '@splidejs/react-splide';
+   declare module "@splidejs/react-splide";
    //...  //詳見: 實體檔
    ```
 

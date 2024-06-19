@@ -33,7 +33,7 @@ export default function index() {
   return (
     <div>
       <p>Line</p>
-      <List {...{cards}} />
+      <List {...{ cards }} />
     </div>
-  )
+  );
 }

@@ -27,7 +27,8 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "讀創故事",
-  description: "讀創故事匯聚文學、小說、人文、知識、生活、圖文…等多元的優質創作內容，我們致力於提供作者最完善的創作舞台、給予讀者最豐富的精神食糧。",
+  description:
+    "讀創故事匯聚文學、小說、人文、知識、生活、圖文…等多元的優質創作內容，我們致力於提供作者最完善的創作舞台、給予讀者最豐富的精神食糧。",
 };
 
 export default function RootLayout({
@@ -36,11 +37,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${roboto.variable} ${noto_sans_tc.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${roboto.variable} ${noto_sans_tc.variable}`}
+    >
       <head>
-        <link rel="icon" href="https://udn.com/static/img/icons/icon-128x128.png" sizes="128x128"></link>
-        <link rel="icon" href="https://udn.com/static/img/icons/icon-192x192.png" sizes="192x192"></link>
-        <link rel="icon" type="image/x-icon" href="https://udn.com/static/img/favicon.ico"></link>
+        <link
+          rel="icon"
+          href="https://udn.com/static/img/icons/icon-128x128.png"
+          sizes="128x128"
+        ></link>
+        <link
+          rel="icon"
+          href="https://udn.com/static/img/icons/icon-192x192.png"
+          sizes="192x192"
+        ></link>
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href="https://udn.com/static/img/favicon.ico"
+        ></link>
         <link
           href="https://s.udn.com.tw/static/font-icons/css/fontello.css"
           rel="stylesheet"
@@ -52,10 +68,10 @@ export default function RootLayout({
           type="text/css"
         />
       </head>
-      <body className=" bg-landscape-300" >
+      <body className="bg-landscape-300">
         <Header />
-        <main className=" max-w-7xl max-xl:max-w-[970px] max-lg:max-w-[740px] max-md:max-w-none ring-1 min-h-screen m-auto">
-        {children}
+        <main className="m-auto min-h-screen max-w-[var(--container-width)] ring-1 max-md:max-w-none">
+          {children}
         </main>
         <Footer />
       </body>

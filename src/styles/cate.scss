@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sort {
+  &-item {
+    //@apply grid grid-cols-[auto_1fr] gap-x-2;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem;
+
+    &:nth-of-type(1) {
+      --icon-bg: rgb(248, 136, 136);
+
+      .sort-item-sort {
+        --ash-600-rgb: #fff;
+      }
+    }
+
+    &:nth-of-type(2) {
+      --icon-bg: rgb(255, 154, 115);
+
+      .sort-item-sort {
+        --ash-600-rgb: #fff;
+      }
+    }
+
+    &:nth-of-type(3) {
+      --icon-bg: rgb(245, 206, 104);
+
+      .sort-item-sort {
+        --ash-600-rgb: #fff;
+      }
+    }
+
+    &-sort {
+      //@apply w-8 h-8 tag-center translate-y-[-5px];
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 1;
+      transform: translateY(-3px);
+
+      &__icon {
+        //@apply w-6 h-6 tag-center rounded-full ring-1 bg-white text-ash-600;
+        width: 24px;
+        height: 24px;
+        display: block;
+        text-align: center;
+        font-size: 16px;
+        line-height: 1;
+        padding: 3px 0 5px;
+        border-radius: 50%;
+        background-color: var(--icon-bg, #fff);
+        font-weight: 900;
+
+        color: var(--ash-600-rgb);
+      }
+    }
+
+    &-link {
+      //@apply h-[22px] flex gap-2 justify-start items-start overflow-hidden ring-1 group-hover:h-[98px]
+
+      position: relative;
+
+      height: 22px;
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-start;
+      align-items: flex-start;
+      overflow: hidden;
+      //border: 1px solid transparent;
+
+      //outline: 1px solid #ccc;
+
+      &__art {
+        //@apply flex-shrink-0 w-full
+
+        flex-shrink: 0;
+        width: 100%;
+        height: 22px;
+        overflow: hidden;
+        transition: height 0.4s linear 0.2s;
+
+        &-title {
+          //@apply  h-6 text-base font-normal text-ash-900 line-clamp-1 mb-1 group-hover:line-clamp-2 group-hover:h-12
+
+          word-break: break-all;
+          height: 1.5rem;
+          font-size: 1rem;
+          font-weight: 400;
+          color: var(--ash-900-rgb);
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          margin-bottom: 0.25rem;
+        }
+
+        &-para {
+          //@apply text-sm font-normal text-primary-200 line-clamp-1 overflow-hidden
+
+          word-break: break-all;
+          font-size: 0.875rem;
+          font-weight: 400;
+          color: var(--primary-200-rgb);
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+        }
+
+        &-amount {
+          word-break: break-all;
+          font-size: 0.875rem;
+          font-weight: 400;
+          color: var(--ash-600-rgb);
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+
+          position: absolute;
+          top: 0;
+          right: 0;
+          z-index: 1;
+
+          //outline: 1px solid orange;
+          width: 75px;
+          height: 100%;
+          padding-right: 5px;
+          text-align: right;
+          background-color: var(--landscape-500-rgb);
+        }
+      }
+    }
+
+    .book-base {
+      transition: opacity 0.6s cubic-bezier(0, 0, 0.58, 1) 0.6s;
+      opacity: 0;
+    }
+  }
+
+  &-item--active {
+    .sort-item {
+      &-link {
+        height: 98px;
+
+        &__art {
+          width: calc(100% - 78px);
+          height: 98px;
+
+          &-title {
+            //@apply line-clamp-2 h-12
+            -webkit-line-clamp: 2;
+            height: 3rem;
+          }
+
+          // &-para {
+          //   //@apply line-clamp-2
+          // }
+
+          &-amount {
+            position: static;
+            width: auto;
+            height: auto;
+            padding: 0;
+            text-align: left;
+          }
+        }
+      }
+    }
+
+    .book-base {
+      opacity: 1;
+    }
+  }
+}

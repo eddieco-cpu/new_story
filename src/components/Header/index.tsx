@@ -1,60 +1,85 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
-import '@styles/header.scss';
+import "@styles/header.scss";
 
 const Header: React.FC = () => {
   return (
     <header className="header">
       <div className="container">
-
         {/* top */}
         <div className="header-wrapper">
-
           <div className="hamburger">
-            <Image src="/images/humburger.svg" alt="Hamburger Menu" width={24} height={24} />
+            <Image
+              src="/images/humburger.svg"
+              alt="Hamburger Menu"
+              width={24}
+              height={24}
+            />
           </div>
 
           <h1 className="logo">
             <a href="https://udn.com/news/index" className="logo-udn">
-              <Image src="/images/reading-logo.svg" alt="聯合新聞網" width={100} height={24} />
+              <Image
+                src="/images/reading-logo.svg"
+                alt="聯合新聞網"
+                width={100}
+                height={24}
+              />
             </a>
             <a href="https://reading.udn.com/read/index" className="logo-txt">
-              <Image src="/images/reading-brand.svg" alt="琅琅悅讀" width={100} height={24} />
+              <Image
+                src="/images/reading-brand.svg"
+                alt="琅琅悅讀"
+                width={100}
+                height={24}
+              />
             </a>
           </h1>
 
           {/* onSubmit={() => validateForm('1')} */}
-          <form action="store_search.do" className="search" >
+          <form action="store_search.do" className="search">
             <div className="search-select">
               <input type="hidden" className="search-select__value" />
               <div className="search-select__toggle">找書刊</div>
               <ul className="search-select__list">
                 <li>
                   {/* onClick={() => searchType('1', 'b')} data-value="1" */}
-                  <a  >
-                    找書刊
-                  </a>
+                  <a>找書刊</a>
                 </li>
                 <li>
                   {/* onClick={() => searchType('1', 'a')} data-value="2" */}
-                  <a  >
-                    找課程
-                  </a>
+                  <a>找課程</a>
                 </li>
               </ul>
             </div>
             <input type="hidden" name="k_type" id="k_type1" value="b" />
-            <input type="search" className="search__input" placeholder="搜尋書名、作者、出版社、ISBN" name="k" id="k1" />
+            <input
+              type="search"
+              className="search__input"
+              placeholder="搜尋書名、作者、出版社、ISBN"
+              name="k"
+              id="k1"
+            />
             <button className="search__submit">
-              <Image src="/images/search.svg" alt="搜尋" width={24} height={24} />
+              <Image
+                src="/images/search.svg"
+                alt="搜尋"
+                width={24}
+                height={24}
+              />
             </button>
           </form>
 
           <div className="tools-box">
             <span className="tools-box__item search-btn">
               <a>
-                <Image src="/images/search.svg" alt="搜尋" width={24} height={24} />
+                <Image
+                  src="/images/search.svg"
+                  alt="搜尋"
+                  width={24}
+                  height={24}
+                />
               </a>
             </span>
             <span className="tools-box__item">
@@ -88,7 +113,9 @@ const Header: React.FC = () => {
                   />
                 </svg>
               </a>
-              <span className="cart-num" id="cart-num_span">0</span>
+              <span className="cart-num" id="cart-num_span">
+                0
+              </span>
             </span>
             <span className="tools-box__item">
               {/* href="javascript:window.location.href='../center/login.do?redirect='+encodeURIComponent(window.location.href)" */}
@@ -106,14 +133,18 @@ const Header: React.FC = () => {
                   </g>
                   <defs>
                     <clipPath id="clipUser">
-                      <rect width="20" height="18.9789" fill="white" transform="translate(0 0.5)" />
+                      <rect
+                        width="20"
+                        height="18.9789"
+                        fill="white"
+                        transform="translate(0 0.5)"
+                      />
                     </clipPath>
                   </defs>
                 </svg>
               </a>
             </span>
           </div>
-
         </div>
 
         {/* nav */}
@@ -125,7 +156,6 @@ const Header: React.FC = () => {
             {/* 其餘的導航項目，按需添加 */}
           </div>
         </nav>
-        
       </div>
     </header>
   );

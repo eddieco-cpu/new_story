@@ -1,10 +1,10 @@
 //### 方法三: 宣告 + @splidejs/splide (因為只有他有 export types) (@splidejs/react-splide 沒有) + 結合處理
 //# 參考來源: self + gpt + read node_modules/@splidejs/(splide | react-splide)
 
-declare module '@splidejs/react-splide' {
-  import { FC, ReactNode } from 'react';
-  import { Options as SplideOptions } from '@splidejs/splide';
-  import { DetailedHTMLProps, LiHTMLAttributes } from 'react';
+declare module "@splidejs/react-splide" {
+  import { FC, ReactNode } from "react";
+  import { Options as SplideOptions } from "@splidejs/splide";
+  import { DetailedHTMLProps, LiHTMLAttributes } from "react";
 
   export interface SplideProps {
     options?: SplideOptions;

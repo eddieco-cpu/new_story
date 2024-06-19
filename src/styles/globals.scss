@@ -3,6 +3,24 @@
 @tailwind utilities;
 
 :root {
+  --container-width: 1280px;
+
+  @media (max-width: 1280px) {
+    --container-width: 970px;
+  }
+
+  @media (max-width: 1024px) {
+    --container-width: 740px;
+  }
+
+  @media (max-width: 768px) {
+    --container-width: 100vw;
+  }
+
+  --container-width-full: 1280px;
+  --container-width-desktop: 970px;
+  --container-width-tablet: 740px;
+  --container-width-mobile: 100vw;
 
   --landscape-300: 248 244 241;
   --landscape-300-rgb: rgb(248, 244, 241);
@@ -13,6 +31,8 @@
   --landscape-450: 234 223 213;
   --landscape-450-rgb: rgb(234, 223, 213);
 
+  --landscape-500: 253 246 241;
+  --landscape-500-rgb: rgb(253, 246, 241);
 
   --accent-200: 245 179 91;
   --accent-200-rgb: rgb(245, 179, 91);
@@ -23,7 +43,6 @@
   --accent-300: 255 90 25;
   --accent-300-rgb: rgb(255, 90, 25);
 
-
   --primary-150: 195 144 112;
   --primary-150-rgb: rgb(195, 144, 112);
 
@@ -33,13 +52,14 @@
   --primary-300: 180 121 84;
   --primary-300-rgb: rgb(180, 121, 84);
 
-
   --secondary-450: 174 53 53;
   --secondary-450-rgb: rgb(174, 53, 53);
 
   --secondary-500: 155 44 0;
   --secondary-500-rgb: rgb(155, 44, 0);
 
+  --secondary-700: 67 40 25;
+  --secondary-700-rgb: rgb(67, 40, 25);
 
   --ash-100: 249 249 249;
   --ash-100-rgb: rgb(249, 249, 249);
@@ -65,7 +85,6 @@
   --ash-900: 34 34 34;
   --ash-900-rgb: rgb(34, 34, 34);
 
-
   --prompt-info: 92 126 216;
   --prompt-info-rgb: rgb(92, 126, 216);
 }
@@ -78,16 +97,35 @@
 }
 
 @layer components {
-
   .component_p-6 {
     @apply p-6;
   }
 
+  .news-base {
+    border-radius: 15px 5px 15px 5px;
+  }
+
+  .book-base {
+    @apply aspect-[18/25] rounded-md;
+  }
+
   .pic-base {
-    @apply block overflow-hidden min-w-32 aspect-video;
+    @apply block overflow-hidden;
 
     img {
-      @apply block w-full h-full object-cover object-center;
+      @apply block h-full w-full object-cover object-center;
+    }
+  }
+
+  .title-base {
+    @apply flex items-center justify-between;
+
+    & :first-child {
+      @apply text-[22px] font-medium tracking-[2px];
+    }
+
+    &>a {
+      @apply tag-center border-extralight rounded-xl px-2 py-1 text-sm font-normal leading-none text-ash-600;
     }
   }
 
@@ -102,23 +140,39 @@
   .rounded-half {
     @apply rounded-[50px];
   }
+
+  // free glide
+  .free-glide-flex {
+    @apply flex items-center justify-start;
+
+    &>* {
+      @apply flex-shrink-0;
+    }
+  }
+
+  .free-glide-grid {
+    @apply grid grid-cols-[auto_auto];
+  }
 }
 
+// stretch-bg
+.stretch-bg {
+  @apply absolute m-auto;
+  height: calc(100% - 60px);
+  width: calc(100vw - 60px);
+  transform: translateX(calc((100vw - 60px - var(--container-width)) / 2 * -1));
 
-//
-.embla {
-  overflow: hidden;
-  width: 100%;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: var(--bg, #ccc);
+  box-shadow: 0 0 0 30px var(--bg, #ccc);
 }
 
-.embla__container {
-  display: flex;
-}
-
-.embla__slide {
-  position: relative;
-  min-width: 100%;
-  padding: 10px;
-  background: #ccc;
-  text-align: center;
+@media (max-width: 768px) {
+  .stretch-bg {
+    display: none;
+  }
 }

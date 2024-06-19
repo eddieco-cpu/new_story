@@ -45,7 +45,7 @@
       font-size: 14px;
       word-break: break-all;
 
-      &+.footer-info__txt {
+      & + .footer-info__txt {
         margin-top: 15px;
       }
     }
@@ -57,7 +57,7 @@
     padding: 10px 20px 0 0;
 
     &__group {
-      &+.footer-link__group {
+      & + .footer-link__group {
         margin-left: 40px;
       }
 
@@ -74,7 +74,7 @@
         color: #777777;
         font-size: 14px;
 
-        &+a {
+        & + a {
           margin-top: 10px;
         }
 
@@ -175,7 +175,7 @@
 
     .footer-link {
       &__group {
-        &+.footer-link__group {
+        & + .footer-link__group {
           margin-left: 20px;
         }
       }
@@ -196,7 +196,7 @@
 
     .footer-link {
       &__group {
-        &+.footer-link__group {
+        & + .footer-link__group {
           margin-left: 15px;
         }
       }
