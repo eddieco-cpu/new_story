@@ -1,20 +1,47 @@
 //### 方法三: 宣告 + @splidejs/splide (因為只有他有 export types) (@splidejs/react-splide 沒有) + 結合處理
 //# 參考來源: self + gpt + read node_modules/@splidejs/(splide | react-splide)
 
+// declare module "@splidejs/react-splide" {
+//   import { FC, ReactNode } from "react";
+//   import { Options as SplideOptions } from "@splidejs/splide";
+//   import { DetailedHTMLProps, LiHTMLAttributes } from "react";
+
+//   export interface SplideProps {
+//     options?: SplideOptions;
+//     children?: ReactNode;
+//   }
+
+//   export const Splide: FC<SplideProps>;
+//   export const SplideSlide: FC<
+//     DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>
+//   >;
+// }
+
+//new
 declare module "@splidejs/react-splide" {
-  import { FC, ReactNode } from "react";
-  import { Options as SplideOptions } from "@splidejs/splide";
-  import { DetailedHTMLProps, LiHTMLAttributes } from "react";
+	import React from "react";
+	import { Options } from "@splidejs/splide";
 
-  export interface SplideProps {
-    options?: SplideOptions;
-    children?: ReactNode;
-  }
+	export interface SplideProps {
+		options?: Options;
+		children?: ReactNode;
+		hasTrack?: boolean;
+		className?: string;
+	}
 
-  export const Splide: FC<SplideProps>;
-  export const SplideSlide: FC<
-    DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>
-  >;
+	export const Splide: React.FC<SplideProps>;
+	export const SplideSlide: React.FC<
+		React.DetailedHTMLProps<
+			React.LiHTMLAttributes<HTMLLIElement>,
+			HTMLLIElement
+		>
+	>;
+	export const SplideTrack: React.FC<
+		React.DetailedHTMLProps<
+			React.HTMLAttributes<HTMLDivElement>,
+			HTMLDivElement
+		>
+	>;
 }
 
 //### 方法二: 宣告 + 簡單處理

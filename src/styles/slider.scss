@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+//
+.splide__arrow {
+  @apply absolute bottom-0 top-0 m-auto h-10 w-10 rounded-md;
+
+  background-color: rgba($color: #fff, $alpha: 0.5);
+  transform: translateY(1px);
+  opacity: 1;
+
+  &:hover {
+    opacity: 1;
+
+    i {
+      color: var(--accent-300-rgb);
+    }
+  }
+
+  &--prev {
+    @apply left-0;
+  }
+
+  &--next {
+    @apply right-0;
+  }
+
+  i {
+    font-size: 20px;
+    color: white;
+    line-height: 40px;
+    transform: scale(1.2);
+  }
+}
+
+.splide__pagination__page.is-active {
+  background-color: var(--accent-300-rgb);
+}

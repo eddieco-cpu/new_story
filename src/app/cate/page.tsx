@@ -4,6 +4,7 @@ import { Category, Categories, SortBook } from "@/types/cate";
 import randomPicture from "@utils/randomPicture";
 import randomText from "@utils/randomText";
 
+import Slider from "./components/Slider";
 import HeroSection from "./components/HeroSection";
 import CategoriesList from "./components/CategoriesList";
 import SortCard from "./components/SortCard";
@@ -82,6 +83,15 @@ const categories: Categories = [
 		isEmphasis: false,
 	},
 ];
+
+//
+const Sliders = Array.from({ length: 6 }, (_, i) => i + 1).map((i) => ({
+	id: new Date().getTime() + i,
+	link: "",
+	title: randomText(3, 20),
+	alt: randomText(3, 20),
+	src: randomPicture(),
+}));
 
 //
 const popularCards = Array.from({ length: 8 }, (_, i) => i + 1).map((i) => ({
@@ -178,14 +188,9 @@ const newPunblishedSorts: SortBook[] = Array.from(
 export default function Cate() {
 	return (
 		<section>
-			<section>
-				<picture className="block aspect-video h-[330px] w-full overflow-hidden">
-					<img
-						src={randomPicture()}
-						alt=""
-						className="block h-full w-full object-cover object-center"
-					/>
-				</picture>
+			<section className="block h-[330px] w-full overflow-hidden">
+				{/* 330 | 405 */}
+				<Slider />
 			</section>
 
 			<section className="px-6 py-5">
@@ -259,8 +264,11 @@ export default function Cate() {
 			<UiSection titleChildren="最近更新" titleLink="/cate">
 				<FreeGlide className="free-glide-flex gap-x-8">
 					{newUpdatedCards.map((card) => (
-						<div key={card.id} className="w-[calc(220px+64px)] px-8">
-							<Link href={card.link} className="w-[220px]">
+						<div
+							key={card.id}
+							className="w-[calc(220px+64px)] px-8 max-md:w-[180px] max-md:px-0"
+						>
+							<Link href={card.link} className="w-[220px] max-md:w-[180px]">
 								<picture className="pic-base book-base mb-2 w-full">
 									<img src={card.picture} alt="" />
 								</picture>
