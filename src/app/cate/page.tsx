@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Category, Categories, SortBook } from "@/types/cate";
+import { PhotoSlider } from "@/types";
 
 import randomPicture from "@utils/randomPicture";
 import randomText from "@utils/randomText";
@@ -85,8 +86,11 @@ const categories: Categories = [
 ];
 
 //
-const Sliders = Array.from({ length: 6 }, (_, i) => i + 1).map((i) => ({
-	id: new Date().getTime() + i,
+const photoSliders: PhotoSlider[] = Array.from(
+	{ length: 6 },
+	(_, i) => i + 1
+).map((i) => ({
+	id: `${new Date().getTime() + i}`,
 	link: "",
 	title: randomText(3, 20),
 	alt: randomText(3, 20),
@@ -188,9 +192,9 @@ const newPunblishedSorts: SortBook[] = Array.from(
 export default function Cate() {
 	return (
 		<section>
-			<section className="block h-[330px] w-full overflow-hidden">
+			<section className="h-[330px] overflow-hidden max-xl:h-[calc(var(--container-width)*33/128)] max-md:aspect-[375/313] max-md:h-auto md:mt-5">
 				{/* 330 | 405 */}
-				<Slider />
+				<Slider {...{ photoSliders }} />
 			</section>
 
 			<section className="px-6 py-5">

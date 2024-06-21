@@ -97,8 +97,12 @@
 }
 
 @layer components {
-  .component_p-6 {
+  .ui-section-base {
     @apply p-6;
+
+    @media (max-width: 768px) {
+      @apply pr-0;
+    }
   }
 
   .news-base {

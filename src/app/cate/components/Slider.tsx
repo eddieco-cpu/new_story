@@ -4,20 +4,12 @@ import React from "react";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { Options as SplideOptions } from "@splidejs/splide";
 
+import { PhotoSlider } from "@/types";
+
 import "@splidejs/react-splide/css";
 import "@styles/slider.scss";
 
-//import randomPicture from '../../utils/randomPicture';
-
-const photos = [
-	"https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2019/10/02/draft/6890302.jpg",
-	"https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2017/08/30/draft/3938967.jpg",
-	"https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2019/10/16/draft/6948338.jpg",
-	"https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2019/10/12/99/6932740.jpg",
-	"https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2019/10/17/99/6952256.jpg",
-];
-
-const SplideComponent: React.FC = () => {
+function SplideComponent({ photoSliders }: { photoSliders: PhotoSlider[] }) {
 	//
 	const options: SplideOptions = {
 		rewind: true,
@@ -31,14 +23,14 @@ const SplideComponent: React.FC = () => {
 
 	return (
 		<>
-			<Splide options={options} hasTrack={false} className="relative h-[330px]">
+			<Splide options={options} hasTrack={false} className="relative">
 				<SplideTrack>
-					{photos.map((photo, index) => (
+					{photoSliders.map((photo, index) => (
 						<SplideSlide key={index}>
-							<picture className="block aspect-video w-full overflow-hidden">
+							<picture className="block aspect-[128/33] w-full overflow-hidden max-md:aspect-[375/313]">
 								<img
-									src={photo}
-									alt={`Image ${index + 1}`}
+									src={photo.src}
+									alt={`${photo.alt}`}
 									className="block h-full w-full object-cover object-center"
 								/>
 							</picture>
@@ -57,6 +49,6 @@ const SplideComponent: React.FC = () => {
 			</Splide>
 		</>
 	);
-};
+}
 
 export default SplideComponent;
