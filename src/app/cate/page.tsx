@@ -1,17 +1,21 @@
 import Link from "next/link";
 import { Category, Categories, SortBook } from "@/types/cate";
-import { PhotoSlider } from "@/types";
+import { PhotoSlider, NewsType } from "@/types";
 
 import randomPicture from "@utils/randomPicture";
 import randomText from "@utils/randomText";
 
-import Slider from "./components/Slider";
+import PurePhotoSlider from "@/components/slider/PurePhotoSlider";
+import NewsSlider from "@/components/slider/NewsSlider";
+
 import HeroSection from "./components/HeroSection";
 import CategoriesList from "./components/CategoriesList";
 import SortCard from "./components/SortCard";
 
 import { UiTitle, UiSection } from "@/components/UI";
 import FreeGlide from "@/components/UI/FreeGlide";
+import ChildLink from "@/components/UI/ChildLink";
+
 import PageNameInDev from "@/components/UI/PageNameInDev";
 
 import "@styles/cate.scss";
@@ -86,6 +90,13 @@ const categories: Categories = [
 ];
 
 //
+const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
+	(i) => ({
+		link: "",
+		text: randomText(15, 50),
+	})
+);
+
 const photoSliders: PhotoSlider[] = Array.from(
 	{ length: 6 },
 	(_, i) => i + 1
@@ -194,18 +205,11 @@ export default function Cate() {
 		<section>
 			<section className="h-[330px] overflow-hidden max-xl:h-[calc(var(--container-width)*33/128)] max-md:aspect-[375/313] max-md:h-auto md:mt-5">
 				{/* 330 | 405 */}
-				<Slider {...{ photoSliders }} />
+				<PurePhotoSlider {...{ photoSliders }} />
 			</section>
 
 			<section className="px-6 py-5">
-				<article className="flex items-center justify-start gap-2">
-					<span className="news-base block flex h-[30px] w-[70px] items-center justify-center bg-secondary-450 text-white">
-						News
-					</span>
-					<div>
-						<p className="text-lg text-ash-850">{randomText(15, 50)}</p>
-					</div>
-				</article>
+				<NewsSlider newsArray={newsArray} />
 			</section>
 
 			<section className="px-6 py-4">
@@ -225,7 +229,8 @@ export default function Cate() {
 				<FreeGlide className="free-glide-flex w-[1240px] flex-wrap content-start items-start gap-x-8 gap-y-4">
 					{popularCards.map((card) => (
 						<Link
-							href={card.link}
+							//href={card.link}
+							href={"https://health.udn.com/health/index"}
 							key={card.id}
 							className="grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
 						>
@@ -237,7 +242,9 @@ export default function Cate() {
 									{card.title}
 								</h3>
 								<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
-									{card.author}
+									<ChildLink link="https://www.youtube.com/?app=desktop&hl=zh-tw">
+										{card.author}
+									</ChildLink>
 								</p>
 							</article>
 						</Link>

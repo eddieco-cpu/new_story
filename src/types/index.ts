@@ -5,3 +5,8 @@ export type PhotoSlider = {
 	alt: string;
 	src: string;
 };
+
+export type NewsType = {
+	link: string;
+	text: string;
+};
