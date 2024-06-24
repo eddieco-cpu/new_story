@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-export default function ChildLink({
+export default function NestedLink({
 	children,
 	link,
 	className,
@@ -15,7 +15,7 @@ export default function ChildLink({
 	//
 	const router = useRouter();
 
-	const doLink = (e: React.MouseEvent) => {
+	const navigateToLink = (e: React.MouseEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
 		router.push(link);
@@ -25,7 +25,7 @@ export default function ChildLink({
 	return (
 		<span
 			className={className ? `${className}` : ""}
-			onClick={(e) => doLink(e)}
+			onClick={(e) => navigateToLink(e)}
 		>
 			{children}
 		</span>

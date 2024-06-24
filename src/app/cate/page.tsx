@@ -7,14 +7,15 @@ import randomText from "@utils/randomText";
 
 import PurePhotoSlider from "@/components/slider/PurePhotoSlider";
 import NewsSlider from "@/components/slider/NewsSlider";
+import CategoriesList from "@/components/slider/CategoriesList";
 
 import HeroSection from "./components/HeroSection";
-import CategoriesList from "./components/CategoriesList";
-import SortCard from "./components/SortCard";
+
+import SortBox from "@/components/SortBox";
 
 import { UiTitle, UiSection } from "@/components/UI";
 import FreeGlide from "@/components/UI/FreeGlide";
-import ChildLink from "@/components/UI/ChildLink";
+import NestedLink from "@/components/UI/NestedLink";
 
 import PageNameInDev from "@/components/UI/PageNameInDev";
 
@@ -93,7 +94,7 @@ const categories: Categories = [
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
 	(i) => ({
 		link: "",
-		text: randomText(15, 50),
+		text: randomText(40, 80),
 	})
 );
 
@@ -131,6 +132,7 @@ const newUpdatedCards = Array.from({ length: 4 }, (_, i) => i + 1).map((i) => ({
 	id: new Date().getTime() + i,
 	title: randomText(3, 20),
 	author: randomText(3, 20),
+	authorLink: "",
 	link: "",
 	picture: randomPicture(),
 	content: randomText(20, 100),
@@ -242,9 +244,9 @@ export default function Cate() {
 									{card.title}
 								</h3>
 								<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
-									<ChildLink link="https://www.youtube.com/?app=desktop&hl=zh-tw">
+									<NestedLink link="https://www.youtube.com/?app=desktop&hl=zh-tw">
 										{card.author}
-									</ChildLink>
+									</NestedLink>
 								</p>
 							</article>
 						</Link>
@@ -288,7 +290,9 @@ export default function Cate() {
 										{card.title}
 									</h3>
 									<p className="mb-9 line-clamp-1 text-base font-normal text-primary-200">
-										{card.author}
+										<NestedLink link={card.authorLink} className="text-inherit">
+											{card.author}
+										</NestedLink>
 									</p>
 									<p className="line-clamp-3 h-[70px] text-left text-sm font-normal text-ash-600">
 										{card.content}
@@ -308,14 +312,10 @@ export default function Cate() {
 				<section className="p-6">
 					<UiTitle className="mb-5 justify-center">言情排行</UiTitle>
 					<FreeGlide className="free-glide-flex gap-x-[30px]">
-						<SortCard cardSorts={hotSorts} cardName="暢銷榜" cardLink="" />
-						<SortCard cardSorts={viewedSorts} cardName="瀏覽榜" cardLink="" />
-						<SortCard
-							cardSorts={collectedSorts}
-							cardName="收藏榜"
-							cardLink=""
-						/>
-						<SortCard
+						<SortBox cardSorts={hotSorts} cardName="暢銷榜" cardLink="" />
+						<SortBox cardSorts={viewedSorts} cardName="瀏覽榜" cardLink="" />
+						<SortBox cardSorts={collectedSorts} cardName="收藏榜" cardLink="" />
+						<SortBox
 							cardSorts={newPunblishedSorts}
 							cardName="新書榜"
 							cardLink=""
