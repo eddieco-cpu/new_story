@@ -19,19 +19,17 @@ import NestedLink from "@/components/UI/NestedLink";
 
 import PageNameInDev from "@/components/UI/PageNameInDev";
 
-import "@styles/cate.scss";
-
 const categories: Categories = [
 	{
 		id: "original",
 		name: "琅琅原創",
-		url: "",
+		url: "/",
 		isEmphasis: true,
 	},
 	{
 		id: "romance",
 		name: "言情",
-		url: "",
+		url: "/cate",
 		isEmphasis: false,
 	},
 	{
@@ -294,7 +292,7 @@ export default function Cate() {
 											{card.author}
 										</NestedLink>
 									</p>
-									<p className="line-clamp-3 h-[70px] text-left text-sm font-normal text-ash-600">
+									<p className="line-clamp-3 h-[62px] text-left text-sm font-normal text-ash-600">
 										{card.content}
 									</p>
 								</article>

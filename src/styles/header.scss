@@ -1,12 +1,18 @@
+@import "./mixin.scss";
+
 .header {
   position: relative;
   width: 100%;
   border-bottom: 1px solid #d8d8d8;
   //background-color: #fff;
-  z-index: 99;
+  z-index: 10;
 
   //
   height: 134px;
+
+  @include mobile {
+    height: 55px;
+  }
 
   &>.container {
     max-width: 1280px;
@@ -241,11 +247,17 @@
     }
   }
 
+
+
   .navigation {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @include mobile {
+      display: none;
+    }
 
     //
     &-wrapper {
@@ -965,6 +977,14 @@
     margin-top: 134px;
   }
 
+  @include mobile {
+    height: 55px;
+
+    &+.header-ref {
+      margin-top: 55px;
+    }
+  }
+
 
   .header-wrapper {
     padding: 10px 0 6px;
@@ -987,7 +1007,7 @@
   height: 1px;
 }
 
-@media screen and (max-width: 1297px) {
+@include desktop {
   .header {
     &>.container {
       max-width: 970px;
@@ -1043,7 +1063,7 @@
   }
 }
 
-@media screen and (max-width: 1023px) {
+@include tablet {
   .header {
     &>.container {
       max-width: 740px;
@@ -1139,14 +1159,14 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@include mobile {
   body.scroll-ban {
     overflow-y: hidden;
   }
 
   .header {
     .container {
-      max-width: 767px;
+      max-width: 768px;
       padding: 0 20px;
     }
 

@@ -2,18 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./mixin.scss";
+
 :root {
+  --home-slide-bg: rgba(0, 0, 0, 0);
   --container-width: 1280px;
 
-  @media (max-width: 1280px) {
+  @include desktop {
     --container-width: 970px;
   }
 
-  @media (max-width: 1024px) {
+  @include tablet {
     --container-width: 740px;
   }
 
-  @media (max-width: 768px) {
+  @include mobile {
     --container-width: 100vw;
   }
 
@@ -100,7 +103,7 @@
   .ui-section-base {
     @apply p-6;
 
-    @media (max-width: 768px) {
+    @include mobile {
       @apply pr-0;
     }
   }
@@ -175,7 +178,7 @@
   box-shadow: 0 0 0 30px var(--bg, #ccc);
 }
 
-@media (max-width: 768px) {
+@include mobile {
   .stretch-bg {
     display: none;
   }

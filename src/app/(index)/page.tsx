@@ -6,6 +6,9 @@ import { PhotoSlider, NewsType } from "@/types";
 import randomPicture from "@utils/randomPicture";
 import randomText from "@utils/randomText";
 
+import PhotoAndBgSlider from "./components/PhotoAndBgSlider";
+import BooksGalleryA from "./components/BooksGalleryA";
+
 import PurePhotoSlider from "@/components/slider/PurePhotoSlider";
 import NewsSlider from "@/components/slider/NewsSlider";
 import CategoriesList from "@/components/slider/CategoriesList";
@@ -15,17 +18,19 @@ import { UiTitle, UiSection } from "@/components/UI";
 import FreeGlide from "@/components/UI/FreeGlide";
 import NestedLink from "@/components/UI/NestedLink";
 
+import "@styles/home.scss";
+
 const categories: Categories = [
 	{
 		id: "original",
 		name: "琅琅原創",
-		url: "",
+		url: "/",
 		isEmphasis: true,
 	},
 	{
 		id: "romance",
 		name: "言情",
-		url: "",
+		url: "/cate",
 		isEmphasis: false,
 	},
 	{
@@ -95,6 +100,18 @@ const photoSliders: PhotoSlider[] = Array.from(
 	src: randomPicture(),
 }));
 
+const photoBgSliders: (PhotoSlider & { bg?: string })[] = Array.from(
+	{ length: 6 },
+	(_, i) => i + 1
+).map((i) => ({
+	id: `${new Date().getTime() + i}`,
+	link: "",
+	title: randomText(3, 20),
+	alt: randomText(3, 20),
+	src: randomPicture(),
+	bg: "#d9e9e8",
+}));
+
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
 	(i) => ({
 		link: "",
@@ -155,12 +172,29 @@ const novelCards = Array.from({ length: 12 }, (_, i) => i + 1).map((i) => ({
 	typeLink: "",
 }));
 
+const newUpdatedCards = Array.from({ length: 25 }, (_, i) => i + 1).map(
+	(i) => ({
+		id: new Date().getTime() + i,
+		title: randomText(3, 20),
+		author: randomText(3, 20),
+		authorLink: "",
+		link: "",
+		picture: randomPicture(),
+		content: randomText(20, 100),
+	})
+);
+
+const ads = Array.from({ length: 4 }, (_, i) => i + 1).map((i) => ({
+	id: new Date().getTime() + i,
+	picture: randomPicture(),
+}));
+
 export default function Home() {
 	return (
 		<section>
-			<section className="h-[330px] overflow-hidden max-xl:h-[calc(var(--container-width)*33/128)] max-md:aspect-[375/313] max-md:h-auto md:mt-5">
-				{/* 330 | 405 */}
-				<PurePhotoSlider {...{ photoSliders }} />
+			<section className="slider-bg-container relative mt-[calc(330px-405px+20px)] aspect-[1280/405] max-xl:mt-[calc(250px-970*405/1280*1px+20px)] max-lg:mt-[calc(191px-740*405/1280*1px+20px)] max-md:mt-0 max-md:aspect-[375/313]">
+				{/* 330 | 405, 313 | 313 */}
+				<PhotoAndBgSlider {...{ photoSliders: photoBgSliders }} />
 			</section>
 
 			<section className="px-6 py-5">
@@ -307,6 +341,85 @@ export default function Home() {
 				{/* 330 | 405 */}
 				<PurePhotoSlider {...{ photoSliders }} />
 			</section>
+
+			{/* --- */}
+			<UiSection titleChildren="AD" titleLink="/cate">
+				<FreeGlide className="free-glide-flex gap-7">
+					{ads.map((ad) => (
+						<div key={ad.id} className="h-[237px] w-[286px]">
+							<picture className="pic-base h-[237px] w-[286px]">
+								<img src={ad.picture} alt="" />
+							</picture>
+						</div>
+					))}
+				</FreeGlide>
+			</UiSection>
+
+			{/* --- */}
+			<BooksGalleryA></BooksGalleryA>
+
+			<UiSection titleChildren="熱門分類小說" titleLink="/cate">
+				<div className="grid grid-cols-[auto_1fr] gap-x-7 gap-y-5 max-lg:grid-cols-1 max-lg:grid-rows-[auto_auto]">
+					<div className="w-[calc(220px+64px)] px-8 max-xl:w-[220px] max-xl:px-0 max-lg:w-auto">
+						<Link
+							href={newUpdatedCards[0].link}
+							className="w-[220px] max-lg:grid max-lg:w-auto max-lg:grid-cols-[auto_1fr] max-lg:grid-rows-1 max-lg:gap-3"
+						>
+							<picture className="pic-base book-base mb-2 w-full max-lg:mb-0 max-lg:w-[140px]">
+								<img src={newUpdatedCards[0].picture} alt="" />
+							</picture>
+							<article className="mb-6 h-[183px] text-center max-lg:mb-0 max-lg:h-auto max-lg:text-left">
+								<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900">
+									{newUpdatedCards[0].title}
+								</h3>
+								<p className="mb-9 line-clamp-1 text-base font-normal text-primary-200">
+									<NestedLink
+										link={newUpdatedCards[0].authorLink}
+										className="text-inherit"
+									>
+										{newUpdatedCards[0].author}
+									</NestedLink>
+								</p>
+								<p className="line-clamp-3 h-[62px] text-left text-sm font-normal text-ash-600">
+									{newUpdatedCards[0].content}
+								</p>
+							</article>
+							<button className="m-auto block h-10 w-[100px] rounded-lg bg-accent-300 text-center leading-10 text-white max-lg:hidden">
+								書籍詳情
+							</button>
+						</Link>
+					</div>
+					<FreeGlide className="free-glide-flex">
+						<div className="max-md_max-children-9 grid grid-cols-3 gap-x-7 gap-y-4 ring-1 max-md:grid-cols-1">
+							{newUpdatedCards.slice(1).map((card, i) => (
+								<div
+									key={card.id}
+									className={
+										"grid w-[calc(220px+64px+2px)] grid-cols-[auto_1fr] gap-[2px] max-md:w-[calc(100vw-24px)]"
+									}
+								>
+									<b className="flex h-6 w-5 items-center justify-center">⦁</b>
+									<article className="flex h-full w-full flex-col items-start justify-start gap-1">
+										<Link
+											className="line-clamp-1 w-full text-lg font-normal text-ash-900"
+											href={card.link}
+										>
+											{/* {i + 1} */}
+											{card.title}
+										</Link>
+										<Link
+											className="line-clamp-1 w-full text-base font-normal text-primary-200"
+											href={card.authorLink}
+										>
+											{card.author}
+										</Link>
+									</article>
+								</div>
+							))}
+						</div>
+					</FreeGlide>
+				</div>
+			</UiSection>
 
 			<UiSection titleChildren="輕小說推薦" titleLink="/cate">
 				<FreeGlide className="free-glide-flex w-[1240px] flex-wrap content-start items-start gap-x-8 gap-y-4">

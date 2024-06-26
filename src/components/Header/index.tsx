@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,10 +9,18 @@ import "@styles/header.scss";
 
 const Header: React.FC = () => {
 	//
+	// const router = useRouter();
+	// const params = useSearchParams();
+	// const pathname = usePathname();
+
 	const targetRef = useRef(null);
 	const [fixHeader, setFixHeader] = useState(false);
 
 	useEffect(() => {
+		// console.log(router);
+		// console.log(params);
+		// console.log(pathname);
+
 		const target = targetRef.current;
 
 		const observer = new IntersectionObserver(

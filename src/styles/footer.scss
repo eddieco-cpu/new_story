@@ -1,3 +1,5 @@
+@import "./mixin.scss";
+
 .footer {
   width: 100%;
   background-color: #fafafa;
@@ -45,7 +47,7 @@
       font-size: 14px;
       word-break: break-all;
 
-      & + .footer-info__txt {
+      &+.footer-info__txt {
         margin-top: 15px;
       }
     }
@@ -57,7 +59,7 @@
     padding: 10px 20px 0 0;
 
     &__group {
-      & + .footer-link__group {
+      &+.footer-link__group {
         margin-left: 40px;
       }
 
@@ -74,7 +76,7 @@
         color: #777777;
         font-size: 14px;
 
-        & + a {
+        &+a {
           margin-top: 10px;
         }
 
@@ -167,7 +169,7 @@
   }
 }
 
-@media screen and (max-width: 1297px) {
+@include desktop {
   .footer {
     .container {
       max-width: 970px;
@@ -175,7 +177,7 @@
 
     .footer-link {
       &__group {
-        & + .footer-link__group {
+        &+.footer-link__group {
           margin-left: 20px;
         }
       }
@@ -183,7 +185,7 @@
   }
 }
 
-@media screen and (max-width: 1023px) {
+@include tablet {
   .footer {
     .container {
       max-width: 740px;
@@ -196,7 +198,7 @@
 
     .footer-link {
       &__group {
-        & + .footer-link__group {
+        &+.footer-link__group {
           margin-left: 15px;
         }
       }
@@ -226,10 +228,10 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@include mobile {
   .footer {
     .container {
-      max-width: 767px;
+      max-width: 768px;
       padding: 30px 0;
     }
 

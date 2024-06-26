@@ -5,8 +5,6 @@ import React from "react";
 
 import { SortBook } from "@/types/cate";
 
-import "@styles/cate.scss";
-
 export default function Item({
 	sort,
 	i,

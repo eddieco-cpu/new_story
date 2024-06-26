@@ -4,6 +4,7 @@ import React from "react";
 import { SortBook } from "@/types/cate";
 
 import List from "./List";
+import "@styles/components/sortBox.scss";
 
 export default function Index({
 	cardSorts,
