@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { Options as SplideOptions } from "@splidejs/splide";
 
@@ -11,12 +11,16 @@ import "@styles/slider.scss";
 
 import "@styles/home.scss";
 
+const defaultBg = "rgb(248, 244, 241)"; //--landscape-300-rgb
+
 function SplideComponent({
 	photoSliders,
 }: {
 	photoSliders: (PhotoSlider & { bg?: string })[];
 }) {
 	//
+	const splideRef = useRef(null);
+
 	const options: SplideOptions = {
 		rewind: true,
 		gap: "1rem",
@@ -27,9 +31,48 @@ function SplideComponent({
 		perPage: 1,
 	};
 
+	//
+	useEffect(() => {
+		//
+		document.documentElement.style.setProperty(
+			"--home-slide-bg",
+			photoSliders[0].bg || defaultBg
+		);
+
+		// @ts-ignore
+		const splide = splideRef.current?.splide;
+		if (!splide) return;
+
+		//
+		//splide.on("active" ...)	// too late
+		splide.on(
+			"move",
+			(newIndex: number, prevIndex: number, destIndex: number) => {
+				console.log("Move");
+				console.log(newIndex, prevIndex, destIndex);
+
+				//
+				const bg = photoSliders[newIndex]?.bg || defaultBg;
+				document.documentElement.style.setProperty("--home-slide-bg", bg);
+			}
+		);
+
+		//
+		return () => {
+			console.log("Slide bye bye");
+			document.documentElement.style.setProperty("--home-slide-bg", defaultBg);
+		};
+	}, []);
+
 	return (
 		<>
-			<Splide options={options} hasTrack={false} className="relative">
+			<Splide
+				options={options}
+				hasTrack={false}
+				className="relative"
+				// @ts-ignore
+				ref={splideRef}
+			>
 				<SplideTrack>
 					{photoSliders.map((photo, index) => (
 						<SplideSlide key={index}>
