@@ -15,6 +15,8 @@ import CategoriesList from "@/components/slider/CategoriesList";
 import SortBox from "@/components/SortBox";
 
 import { UiTitle, UiSection } from "@/components/UI";
+import { UiButton } from "@/components/UI/client";
+
 import FreeGlide from "@/components/UI/FreeGlide";
 import NestedLink from "@/components/UI/NestedLink";
 
@@ -295,9 +297,9 @@ export default function Home() {
 									</p>
 								</article>
 							</Link>
-							<button className="h-9 w-[100px] rounded-lg border border-accent-300 text-sm leading-8 text-accent-300">
+							<UiButton variant="secondary" className="text-sm">
 								追蹤
-							</button>
+							</UiButton>
 						</div>
 					))}
 				</FreeGlide>
@@ -392,9 +394,9 @@ export default function Home() {
 									{newUpdatedCards[0].content}
 								</p>
 							</article>
-							<button className="m-auto block h-10 w-[100px] rounded-lg bg-accent-300 text-center leading-10 text-white max-lg:hidden">
+							<UiButton className="block max-lg:hidden" variant="primary">
 								書籍詳情
-							</button>
+							</UiButton>
 						</Link>
 					</div>
 					<FreeGlide className="free-glide-flex">

@@ -68,6 +68,9 @@
   --ash-100: 249 249 249;
   --ash-100-rgb: rgb(249, 249, 249);
 
+  --ash-200: 236 236 236;
+  --ash-200-rgb: rgb(236, 236, 236);
+
   --ash-300: 221 221 221;
   --ash-300-rgb: rgb(221, 221, 221);
 
@@ -147,6 +150,33 @@
 
   .rounded-half {
     @apply rounded-[50px];
+  }
+
+  // btn
+  .btn-base {
+    @apply mx-auto my-[1px] h-9 w-[100px] shrink-0 rounded-lg ring-1 ring-accent-300 leading-8 text-accent-300 transition-all duration-200;
+  }
+
+  .primary-btn-base {
+    @apply bg-accent-300 text-ash-100;
+
+    &:hover {
+      @apply bg-accent-250
+    }
+  }
+
+  .secondary-btn-base {
+    &:hover {
+      @apply bg-white
+    }
+  }
+
+  .tertiary-btn-base {
+    @apply ring-ash-350 bg-ash-200 text-ash-600;
+
+    &:hover {
+      @apply bg-ash-300
+    }
   }
 
   // free glide
