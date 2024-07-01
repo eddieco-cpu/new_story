@@ -136,26 +136,26 @@ export default function Page() {
 				>
 					<UiButton
 						variant="primary"
-						className="m-0 h-[38px] max-md:order-4 md:flex-1"
+						className="m-0 h-[38px] flex-1 max-md:order-4"
 					>
 						開始閱讀
 					</UiButton>
 					<UiButton
 						variant="primary"
-						className="m-0 h-[38px] max-md:order-3 md:flex-1"
+						className="m-0 h-[38px] flex-1 max-md:order-3"
 					>
 						全本購買
 					</UiButton>
 					<UiButton
 						variant="secondary"
-						className="m-0 flex h-[38px] flex-1 items-center justify-center gap-2 max-md:order-1"
+						className="m-0 flex h-[38px] flex-1 items-center justify-center gap-2 max-md:order-1 max-md:max-w-12"
 					>
 						<i className="i-heart-empty text-inherit"></i>
 						<span className="text-inherit max-md:hidden">收藏</span>
 					</UiButton>
 					<UiButton
 						variant="secondary"
-						className="m-0 flex h-[38px] flex-1 items-center justify-center gap-2 max-md:order-2"
+						className="m-0 flex h-[38px] flex-1 items-center justify-center gap-2 max-md:order-2 max-md:max-w-12"
 					>
 						<i className="i-heart-empty text-inherit"></i>
 						<span className="text-inherit max-md:hidden">分享</span>

@@ -58,7 +58,7 @@ export default function Page() {
 			{/* - */}
 			<section className="grid grid-cols-[1fr_auto] grid-rows-[auto_auto] gap-x-7 gap-y-5 max-xl:grid-rows-[auto_auto_auto] max-lg:flex max-lg:flex-col max-lg:items-stretch max-lg:justify-start max-md:gap-y-2">
 				{/* left_top */}
-				<div className="rounded-2xl bg-landscape-400 px-6 py-4 max-md:rounded-none max-md:px-5">
+				<div className="rounded-2xl bg-landscape-400 px-6 py-4 max-xl:col-span-2 max-md:rounded-none max-md:px-5">
 					<BoxOverview></BoxOverview>
 				</div>
 

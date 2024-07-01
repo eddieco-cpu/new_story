@@ -10,7 +10,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import { UiTitle } from "@/components/UI";
 import { UiButton } from "@/components/UI/client";
 import NestedLink from "@/components/UI/NestedLink";
-import CardTag from "../components/CardTag";
+
 import ArticleExpansion from "../components/ArticleExpansion";
 import BoxRecommendation from "../components/BoxRecommendation";
 
