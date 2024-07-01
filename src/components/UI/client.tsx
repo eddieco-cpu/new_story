@@ -64,6 +64,10 @@ export const UiButton: React.FC<UiButtonProps> = ({
 };
 
 export const UiTag: React.FC<UiTagProps> = (props) => {
+	//
+	const router = useRouter();
+
+	//
 	const classNameString = `shrink-0 rounded border px-[6px] py-[3px] text-xs font-normal leading-none `;
 	const classNameInteractString = `transition-all hover:bg-[rgba(255,255,255,1)] active:bg-landscape-400 cursor-pointer `;
 
@@ -106,8 +110,6 @@ export const UiTag: React.FC<UiTagProps> = (props) => {
 
 	if (props.el === "nestedLink") {
 		const { el, children, className, link, ...rest } = props;
-
-		const router = useRouter();
 
 		const navigateToLink = (e: React.MouseEvent) => {
 			e.preventDefault();
