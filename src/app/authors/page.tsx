@@ -8,9 +8,8 @@ import randomText from "@utils/randomText";
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
 import { UiTitle } from "@/components/UI";
-import { UiButton } from "@/components/UI/client";
+import { UiButton, UiTag } from "@/components/UI/client";
 import NestedLink from "@/components/UI/NestedLink";
-import CardTag from "./components/CardTag";
 import ArticleExpansion from "./components/ArticleExpansion";
 
 //
@@ -125,21 +124,39 @@ export default function Page() {
 										{card.title}
 									</h3>
 									<div className="mt-[-2px] flex items-center justify-start gap-2 overflow-hidden max-md:hidden">
-										<CardTag className="border-secondary-450 text-secondary-450">
+										<UiTag
+											el="span"
+											className="border-secondary-450 text-secondary-450"
+										>
 											簽約
-										</CardTag>
-										<CardTag className="border-prompt-info text-prompt-info">
+										</UiTag>
+										<UiTag
+											el="span"
+											className="border-prompt-info text-prompt-info"
+										>
 											連載中
-										</CardTag>
-										<CardTag className="border-[rgb(222,131,92)] text-[rgb(222,131,92)]">
+										</UiTag>
+										<UiTag
+											el="nestedLink"
+											link="#"
+											className="border-[rgb(222,131,92)] text-[rgb(222,131,92)] hover:border-accent-300 hover:text-accent-300"
+										>
 											愛情言情
-										</CardTag>
-										<CardTag className="border-[rgb(222,131,92)] text-[rgb(222,131,92)]">
+										</UiTag>
+										<UiTag
+											el="nestedLink"
+											link="#"
+											className="border-[rgb(222,131,92)] text-[rgb(222,131,92)] hover:border-accent-300 hover:text-accent-300"
+										>
 											愛情言情
-										</CardTag>
-										<CardTag className="border-[rgb(222,131,92)] text-[rgb(222,131,92)]">
+										</UiTag>
+										<UiTag
+											el="nestedLink"
+											link="#"
+											className="border-[rgb(222,131,92)] text-[rgb(222,131,92)] hover:border-accent-300 hover:text-accent-300"
+										>
 											愛情言情
-										</CardTag>
+										</UiTag>
 									</div>
 									<div>
 										<p className="line-clamp-1 w-full text-sm font-normal text-primary-200">
