@@ -4,6 +4,7 @@ import Link from "next/link";
 import { NewsType } from "@/types";
 import randomPicture from "@utils/randomPicture";
 import randomText from "@utils/randomText";
+import randomInt from "@/utils/randomInt";
 
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -11,11 +12,10 @@ import { UiTitle } from "@/components/UI";
 import { UiButton, UiTag } from "@/components/UI/client";
 import NestedLink from "@/components/UI/NestedLink";
 
-import ArticleExpansion from "./components/ArticleExpansion";
-
 import BoxRecommendation from "./components/BoxRecommendation";
 import BoxCreator from "./components/BoxCreator";
 import BoxOverview from "./components/BoxOverview";
+import BoxDetail from "./components/BoxDetail";
 
 //
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
@@ -45,6 +45,49 @@ const novelCards = Array.from({ length: 12 }, (_, i) => i + 1).map((i) => ({
 	typeLink: "",
 }));
 
+//
+export type MessageType = {
+	id: number;
+	name: string;
+	context: string;
+	time: Date;
+};
+export type CommentType = MessageType & {
+	likesNumber: number;
+	feedbacks: MessageType[];
+};
+export type DetailType = {
+	summary: string;
+	chapter: { id: number; title: string }[];
+	comment: CommentType[];
+};
+
+let detail: DetailType = {
+	//
+	summary: randomText(800, 1200),
+
+	chapter: Array.from({ length: 106 }, (_, i) => i + 1).map((i) => ({
+		id: new Date().getTime() + i,
+		title: randomText(3, 20),
+	})),
+
+	comment: Array.from({ length: 26 }, (_, i) => i + 1).map((i) => ({
+		id: new Date().getTime() + i,
+		name: randomText(3, 20),
+		context: randomText(20, 100),
+		time: new Date(),
+		likesNumber: Math.floor(Math.random() * 30),
+		feedbacks: Array.from({ length: randomInt(0, 5) }, (_, i) => i + 1).map(
+			(i) => ({
+				id: new Date().getTime() + i,
+				name: randomText(3, 20),
+				context: randomText(20, 100),
+				time: new Date(),
+			})
+		),
+	})),
+};
+
 export default function Page() {
 	return (
 		<section>
@@ -69,8 +112,7 @@ export default function Page() {
 
 				{/* left_bottom */}
 				<div className="col-start-1 row-start-2 max-xl:row-start-3">
-					{/* --- */}
-					<article className="h-[3000px] bg-slate-100 ring-1"></article>
+					<BoxDetail detail={detail}></BoxDetail>
 				</div>
 
 				{/* right_bottom */}

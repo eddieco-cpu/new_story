@@ -8,24 +8,24 @@ export default function ArticleExpansion({ article }: { article: string }) {
 	return (
 		<div
 			className={
-				"grid transition-all duration-500 ease-linear max-md:min-h-36 " +
-				`${isExpanded ? " max-md:grid-rows-[1fr]" : " max-md:grid-rows-[0fr]"}`
+				"grid min-h-36 transition-all duration-500 ease-in " +
+				`${isExpanded ? " grid-rows-[1fr]" : " grid-rows-[0fr]"}`
 			}
 		>
-			<article className="overflow-hidden break-words text-base font-normal text-ash-850 max-md:min-h-36">
+			<article className="min-h-36 overflow-hidden break-words text-base font-normal text-ash-850">
 				{article}
 			</article>
 			<section
 				className={
-					"mt-[-40px] overflow-hidden transition-all delay-300 duration-300 ease-linear md:hidden " +
-					`${!isExpanded ? " h-[120px]" : " h-0"}`
+					"mt-[-40px] overflow-hidden transition-all delay-500 duration-0 ease-linear " +
+					`${!isExpanded ? " h-[120px]" : " h-16 opacity-0"}`
 				}
 			>
 				<div
 					className="h-16 border-b border-landscape-450"
 					style={{
 						backgroundImage:
-							"linear-gradient(to top, var(--landscape-400-rgb), rgba(0,0,0,0))",
+							"linear-gradient(to top, var(--landscape-300-rgb), rgba(0,0,0,0))",
 					}}
 				></div>
 				<div
