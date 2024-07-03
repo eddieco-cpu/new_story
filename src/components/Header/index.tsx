@@ -5,6 +5,8 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
+import Drawer from "./Drawer";
+
 import "@styles/header.scss";
 
 const Header: React.FC = () => {
@@ -16,6 +18,7 @@ const Header: React.FC = () => {
 	const targetRef = useRef(null);
 	const [fixHeader, setFixHeader] = useState(false);
 	const [isSearchBox, setIsSearchBox] = useState(false);
+	const [isDrawer, setIsDrawer] = useState(false);
 
 	useEffect(() => {
 		// console.log(router);
@@ -60,7 +63,7 @@ const Header: React.FC = () => {
 				<div className="container">
 					{/* top */}
 					<div className="header-wrapper">
-						<div className="hamburger">
+						<div className="hamburger" onClick={() => setIsDrawer(true)}>
 							<Image
 								src="/images/humburger.svg"
 								alt="Hamburger Menu"
@@ -366,6 +369,7 @@ const Header: React.FC = () => {
 					</nav>
 				</div>
 			</header>
+			<Drawer {...{ isDrawer, setIsDrawer }}></Drawer>
 			<div ref={targetRef} className={`header-ref`}></div>
 		</>
 	);
