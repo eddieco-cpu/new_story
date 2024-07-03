@@ -127,7 +127,7 @@ export default function Page() {
 
 				{/* --- */}
 				<div
-					className="flex items-center justify-start gap-4 max-md:fixed max-md:bottom-0 max-md:left-0 max-md:z-10 max-md:w-full max-md:bg-white max-md:px-5 max-md:py-4 max-md:shadow-2xl"
+					className="flex items-center justify-start gap-4 max-md:fixed max-md:bottom-0 max-md:left-0 max-md:z-[9] max-md:w-full max-md:bg-white max-md:px-5 max-md:py-4 max-md:shadow-2xl"
 					style={
 						{
 							"--tw-shadow": "0 0 25px 0 rgba(0,0,0,0.2)",

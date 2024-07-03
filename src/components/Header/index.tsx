@@ -15,6 +15,7 @@ const Header: React.FC = () => {
 
 	const targetRef = useRef(null);
 	const [fixHeader, setFixHeader] = useState(false);
+	const [isSearchBox, setIsSearchBox] = useState(false);
 
 	useEffect(() => {
 		// console.log(router);
@@ -88,41 +89,175 @@ const Header: React.FC = () => {
 						</h1>
 
 						{/* onSubmit={() => validateForm('1')} */}
-						<form action="store_search.do" className="search">
-							<div className="search-select">
-								<input type="hidden" className="search-select__value" />
-								<div className="search-select__toggle">找作品</div>
-								<ul className="search-select__list">
-									<li>
-										{/* onClick={() => searchType('1', 'b')} data-value="1" */}
-										<a>找作品</a>
-									</li>
-									<li>
-										{/* onClick={() => searchType('1', 'a')} data-value="2" */}
-										<a>找作者</a>
-									</li>
-								</ul>
-							</div>
-							<input type="hidden" name="k_type" id="k_type1" value="b" />
-							<input
-								type="search"
-								className="search__input"
-								placeholder="搜尋書名、作者、出版社、ISBN"
-								name="k"
-								id="k1"
-							/>
-							<button className="search__submit">
-								<Image
-									src="/images/search.svg"
-									alt="搜尋"
-									width={24}
-									height={24}
+						<form
+							className={"search " + `${isSearchBox ? "search--active" : ""}`}
+						>
+							<div className="search__form-wrapper">
+								{/* --- search inputer --- */}
+								<div className="search-select">
+									<div className="search-select__toggle">找作品</div>
+									<ul className="search-select__list">
+										<li>
+											{/* onClick={() => searchType('1', 'b')} data-value="1" */}
+											<a>找作品</a>
+										</li>
+										<li>
+											{/* onClick={() => searchType('1', 'a')} data-value="2" */}
+											<a>找作者</a>
+										</li>
+									</ul>
+								</div>
+								<input
+									type="search"
+									className={
+										"search__input " +
+										`${isSearchBox ? "search__input--active" : ""}`
+									}
+									placeholder="搜尋書名、作者、出版社、ISBN"
+									onFocus={() => setIsSearchBox(true)}
 								/>
-							</button>
+								<button className={"search__submit"}>
+									<Image
+										src="/images/search.svg"
+										alt="搜尋"
+										width={24}
+										height={24}
+									/>
+								</button>
+
+								{/* --- isSearchBox --- */}
+								<section
+									className={
+										"search-box search-box__wrapper " +
+										`${!isSearchBox ? " search-box--none" : " "}`
+									}
+								>
+									{/* - */}
+									<section className="search-box__container">
+										<div className="container-top">
+											<p className="container-title container-title--top">
+												<span className="container-title__des">最近搜尋</span>
+												<b className="container-title__btn">清除</b>
+											</p>
+											<ul className="container-group container-group--top">
+												<li className="container-group__item">
+													<picture className="container-group__item-icon">
+														<Image
+															src="/images/search.svg"
+															alt=""
+															width={15}
+															height={15}
+														/>
+													</picture>
+													<span className="container-group__item-name">
+														總裁
+													</span>
+												</li>
+												<li className="container-group__item">
+													<picture className="container-group__item-icon">
+														<Image
+															src="/images/search.svg"
+															alt=""
+															width={15}
+															height={15}
+														/>
+													</picture>
+													<span className="container-group__item-name">
+														奇幻
+													</span>
+												</li>
+												<li className="container-group__item">
+													<picture className="container-group__item-icon">
+														<Image
+															src="/images/search.svg"
+															alt=""
+															width={15}
+															height={15}
+														/>
+													</picture>
+													<span className="container-group__item-name">
+														言情
+													</span>
+												</li>
+												<li className="container-group__item">
+													<picture className="container-group__item-icon">
+														<Image
+															src="/images/search.svg"
+															alt=""
+															width={15}
+															height={15}
+														/>
+													</picture>
+													<span className="container-group__item-name">
+														推理
+													</span>
+												</li>
+												<li className="container-group__item">
+													<picture className="container-group__item-icon">
+														<Image
+															src="/images/search.svg"
+															alt=""
+															width={15}
+															height={15}
+														/>
+													</picture>
+													<span className="container-group__item-name">
+														推理
+													</span>
+												</li>
+												<li className="container-group__item">
+													<picture className="container-group__item-icon">
+														<Image
+															src="/images/search.svg"
+															alt=""
+															width={15}
+															height={15}
+														/>
+													</picture>
+													<span className="container-group__item-name">
+														推理
+													</span>
+												</li>
+											</ul>
+										</div>
+										<div className="container-main">
+											<p className="container-title container-title--main">
+												<span className="container-title__des">熱門關鍵字</span>
+											</p>
+											<ul className="container-group container-group--main">
+												<li className="container-group__item">總裁</li>
+												<li className="container-group__item">言情</li>
+												<li className="container-group__item">奇幻</li>
+												<li className="container-group__item">推理</li>
+												<li className="container-group__item">推理</li>
+											</ul>
+										</div>
+									</section>
+									{/* - */}
+									<div
+										className="search-box__bg"
+										onClick={() => setIsSearchBox(false)}
+									></div>
+								</section>
+
+								{/* --- ad box --- */}
+								<section className="search-ad search-ad__wrapper">
+									<p className="search-ad__title">活動專區</p>
+									<div className="search-ad__box pic-base">
+										<img
+											src="https://uc.udn.com.tw/photo/2019/06/11/99/6418904.jpg"
+											alt=""
+										/>
+									</div>
+								</section>
+							</div>
 						</form>
 
 						<div className="tools-box">
-							<span className="tools-box__item search-btn">
+							<span
+								className="tools-box__item search-btn"
+								onClick={() => setIsSearchBox((v) => !v)}
+							>
 								<a>
 									<Image
 										src="/images/search.svg"
