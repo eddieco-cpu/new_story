@@ -13,7 +13,7 @@ import "@styles/home.scss";
 
 const defaultBg = "rgb(248, 244, 241)"; //--landscape-300-rgb
 
-function SplideComponent({
+function PhotoAndBgSlider({
 	photoSliders,
 }: {
 	photoSliders: (PhotoSlider & { bg?: string })[];
@@ -23,7 +23,7 @@ function SplideComponent({
 
 	const options: SplideOptions = {
 		rewind: true,
-		gap: "1rem",
+		gap: "0rem",
 		type: "loop",
 		autoplay: true,
 		interval: 6000,
@@ -69,7 +69,7 @@ function SplideComponent({
 			<Splide
 				options={options}
 				hasTrack={false}
-				className="relative"
+				className="slider-bg-wrapper relative"
 				// @ts-ignore
 				ref={splideRef}
 			>
@@ -78,13 +78,15 @@ function SplideComponent({
 						<SplideSlide key={index}>
 							{/* 1280/330, 375/313 */}
 							{/* 1280/405, 375/313 */}
-							<picture className="slider-bg-container block aspect-[1280/405] w-full overflow-hidden max-md:aspect-[375/313]">
-								<img
-									src={photo.src}
-									alt={`${photo.alt}`}
-									className="block h-full w-full object-cover object-center"
-								/>
-							</picture>
+							<div className="slider-bg-container aspect-[1280/405] w-full max-md:aspect-[375/313]">
+								<picture className="block aspect-[1280/405] w-full overflow-hidden max-md:aspect-[375/313]">
+									<img
+										src={photo.src}
+										alt={`${photo.alt}`}
+										className="block h-full w-full object-cover object-center"
+									/>
+								</picture>
+							</div>
 						</SplideSlide>
 					))}
 				</SplideTrack>
@@ -102,4 +104,4 @@ function SplideComponent({
 	);
 }
 
-export default SplideComponent;
+export default PhotoAndBgSlider;

@@ -202,7 +202,7 @@ const ads = Array.from({ length: 4 }, (_, i) => i + 1).map((i) => ({
 export default function Home() {
 	return (
 		<section>
-			<section className="slider-bg-container relative mt-[calc(330px-405px+20px)] aspect-[1280/405] max-xl:mt-[calc(250px-970*405/1280*1px+20px)] max-lg:mt-[calc(191px-740*405/1280*1px+20px)] max-md:mt-0 max-md:aspect-[375/313]">
+			<section className="slider-bg-outer relative mt-[calc(330px-405px+20px)] aspect-[1280/405] max-xl:mt-[calc(250px-970*405/1280*1px+20px)] max-lg:mt-[calc(191px-740*405/1280*1px+20px)] max-md:mt-0 max-md:aspect-[375/313]">
 				{/* 330 | 405, 313 | 313 */}
 				<PhotoAndBgSlider {...{ photoSliders: photoBgSliders }} />
 			</section>
