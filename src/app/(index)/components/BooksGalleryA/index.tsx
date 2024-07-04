@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { imgClassNameInGroupHover } from "@utils/data";
 import randomPicture from "@utils/randomPicture";
 import randomText from "@utils/randomText";
 
@@ -40,21 +41,25 @@ export default function BooksGalleryA() {
 				<div className="w-[calc(220px+64px)] px-8 max-xl:w-[220px] max-xl:px-0 max-lg:w-auto">
 					<Link
 						href={bookCards[0].link}
-						className="w-[220px] max-lg:grid max-lg:w-auto max-lg:grid-cols-[auto_1fr] max-lg:grid-rows-1 max-lg:gap-3 max-md:h-[146px] max-md:w-[calc(100vw-40px)]"
+						className="group w-[220px] max-lg:grid max-lg:w-auto max-lg:grid-cols-[auto_1fr] max-lg:grid-rows-1 max-lg:gap-3 max-md:h-[146px] max-md:w-[calc(100vw-40px)]"
 					>
 						<picture className="pic-base book-base mb-2 w-full max-lg:mb-0 max-lg:w-[140px] max-md:h-[146px] max-md:w-auto">
-							<img src={bookCards[0].picture} alt="" />
+							<img
+								src={bookCards[0].picture}
+								alt=""
+								className={imgClassNameInGroupHover}
+							/>
 						</picture>
 						<article
 							className={`mb-6 h-[183px] text-center max-lg:mb-0 max-lg:h-auto max-lg:text-left max-md:flex max-md:h-[146px] max-md:w-full max-md:flex-col max-md:items-start max-md:justify-start max-md:gap-2`}
 						>
-							<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 max-md:mb-0">
+							<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220 max-md:mb-0">
 								{bookCards[0].title}
 							</h3>
 							<p className="mb-9 line-clamp-1 text-base font-normal text-primary-200 max-md:mb-0">
 								<NestedLink
 									link={bookCards[0].authorLink}
-									className="text-inherit"
+									className="text-inherit hover:text-accent-250 active:text-accent-220"
 								>
 									{bookCards[0].author}
 								</NestedLink>
@@ -65,11 +70,8 @@ export default function BooksGalleryA() {
 						</article>
 					</Link>
 				</div>
-				<FreeGlide
-					className="free-glide-flex"
-					containerClassName="max-md:pointer-events-none"
-				>
-					<div className="grid grid-cols-3 gap-x-7 gap-y-4 ring-1 max-md:grid-cols-1">
+				<FreeGlide className="free-glide-flex" disableInMoblie={true}>
+					<div className="grid grid-cols-3 gap-x-7 gap-y-4 max-md:grid-cols-1">
 						<List bookCards={bookCards.slice(1, 11)} />
 						<List bookCards={bookCards.slice(11, 21)} />
 						<List bookCards={bookCards.slice(21)} />

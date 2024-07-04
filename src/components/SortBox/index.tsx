@@ -4,6 +4,8 @@ import React from "react";
 import { SortBook } from "@/types/cate";
 
 import List from "./List";
+
+import { UiMoreLink } from "@components/UI";
 import "@styles/components/sortBox.scss";
 
 export default function Index({
@@ -21,12 +23,7 @@ export default function Index({
 				<b className="pl-[38px] text-xl font-normal tracking-[4px] text-secondary-700">
 					{cardName}
 				</b>
-				<Link
-					href={cardLink}
-					className="tag-center border-extralight rounded-xl px-2 py-1 text-sm font-normal leading-none text-ash-600"
-				>
-					更多
-				</Link>
+				<UiMoreLink href={cardLink} />
 			</p>
 
 			<div className="absolute left-[-2px] top-[14px] z-[-1] h-14 w-[calc(100%+2px)] rotate-[-6deg] rounded-t-[30px] bg-landscape-500"></div>

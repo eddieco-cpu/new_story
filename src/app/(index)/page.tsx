@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Category, Categories, SortBook } from "@/types/cate";
 import { PhotoSlider, NewsType } from "@/types";
 
+import { imgClassNameInGroupHover } from "@utils/data";
 import randomPicture from "@utils/randomPicture";
 import randomText from "@utils/randomText";
 
@@ -199,9 +200,16 @@ const ads = Array.from({ length: 4 }, (_, i) => i + 1).map((i) => ({
 	picture: randomPicture(),
 }));
 
+const publishers = Array.from({ length: 6 }, (_, i) => i + 1).map((i) => ({
+	id: new Date().getTime() + i,
+	title: randomText(3, 20),
+	link: "",
+	picture: randomPicture(),
+}));
+
 export default function Home() {
 	return (
-		<section>
+		<section className="pb-5">
 			<section className="slider-bg-outer relative mt-[calc(330px-405px+20px)] aspect-[1280/405] max-xl:mt-[calc(250px-970*405/1280*1px+20px)] max-lg:mt-[calc(191px-740*405/1280*1px+20px)] max-md:mt-0 max-md:aspect-[375/313]">
 				{/* 330 | 405, 313 | 313 */}
 				<PhotoAndBgSlider {...{ photoSliders: photoBgSliders }} />
@@ -223,19 +231,23 @@ export default function Home() {
 						{recommendedCards[0] && (
 							<Link
 								href={recommendedCards[0].link}
-								className="block w-[220px] max-lg:grid max-lg:w-auto max-lg:grid-cols-[auto_1fr] max-lg:grid-rows-1 max-lg:gap-3"
+								className="group block w-[220px] max-lg:grid max-lg:w-auto max-lg:grid-cols-[auto_1fr] max-lg:grid-rows-1 max-lg:gap-3"
 							>
 								<picture className="pic-base book-base mb-2 w-full max-lg:mb-0 max-lg:w-[140px]">
-									<img src={recommendedCards[0].picture} alt="" />
+									<img
+										src={recommendedCards[0].picture}
+										alt=""
+										className={imgClassNameInGroupHover}
+									/>
 								</picture>
 								<article className="h-[183px] text-center max-lg:h-auto max-lg:text-left">
-									<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 max-lg:line-clamp-3 max-lg:h-[78px]">
+									<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220 max-lg:line-clamp-3 max-lg:h-[78px]">
 										{recommendedCards[0].title}
 									</h3>
 									<p className="mb-9 line-clamp-1 text-base font-normal text-primary-200 max-lg:mb-6">
 										<NestedLink
 											link={recommendedCards[0].authorLink}
-											className="text-inherit"
+											className="text-inherit hover:text-accent-300 active:text-accent-300"
 										>
 											{recommendedCards[0].author}
 										</NestedLink>
@@ -253,17 +265,24 @@ export default function Home() {
 							<Link
 								key={card.id}
 								href={card.link}
-								className="grid h-[146px] w-[286px] flex-shrink-0 grid-cols-[auto_1fr] gap-2"
+								className="group grid h-[146px] w-[286px] flex-shrink-0 grid-cols-[auto_1fr] gap-2"
 							>
 								<picture className="pic-base book-base h-[146px]">
-									<img src={card.picture} alt="" />
+									<img
+										src={card.picture}
+										alt=""
+										className={imgClassNameInGroupHover}
+									/>
 								</picture>
 								<article className="flex h-[146px] w-full flex-col items-start justify-start gap-2">
-									<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900">
+									<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 										{card.title}
 									</h3>
 									<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
-										<NestedLink link={card.authorLink} className="text-inherit">
+										<NestedLink
+											link={card.authorLink}
+											className="text-inherit hover:text-accent-250 active:text-accent-220"
+										>
 											{card.author}
 										</NestedLink>
 									</p>
@@ -284,12 +303,16 @@ export default function Home() {
 							className="w-[180px] px-2 pb-[1px] text-center"
 							key={author.id}
 						>
-							<Link href={author.link} className="mb-6 block">
+							<Link href={author.link} className="group mb-6 block">
 								<picture className="pic-base m-auto aspect-square w-[140px] rounded-full">
-									<img src={author.picture} alt="" />
+									<img
+										src={author.picture}
+										alt=""
+										className={imgClassNameInGroupHover}
+									/>
 								</picture>
 								<article className="p-2">
-									<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900">
+									<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 										{author.name}
 									</h3>
 									<p className="line-clamp-3 h-[62px] text-sm font-normal text-ash-600">
@@ -308,16 +331,23 @@ export default function Home() {
 			<UiSection titleChildren="近期熱門" titleLink="/cate">
 				<FreeGlide className="free-glide-flex gap-x-[30px]">
 					{hotCards.map((card) => (
-						<Link href={card.link} key={card.id} className="w-[180px]">
+						<Link href={card.link} key={card.id} className="group w-[180px]">
 							<picture className="pic-base book-base h-full">
-								<img src={card.picture} alt="" />
+								<img
+									src={card.picture}
+									alt=""
+									className={imgClassNameInGroupHover}
+								/>
 							</picture>
 							<article className="h-[104px] p-2">
-								<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900">
+								<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 									{card.title}
 								</h3>
 								<p className="line-clamp-1 text-base font-normal text-primary-200">
-									<NestedLink link={card.authorLink} className="text-inherit">
+									<NestedLink
+										link={card.authorLink}
+										className="text-inherit hover:text-accent-250 active:text-accent-220"
+									>
 										{card.author}
 									</NestedLink>
 								</p>
@@ -347,13 +377,16 @@ export default function Home() {
 				</section>
 			</section>
 
-			<section className="h-[330px] overflow-hidden max-xl:h-[calc(var(--container-width)*33/128)] max-md:aspect-[375/313] max-md:h-auto md:mt-5">
+			<section className="mt-5 h-[330px] overflow-hidden max-xl:h-[calc(var(--container-width)*33/128)] max-md:aspect-[375/313] max-md:h-auto">
 				{/* 330 | 405 */}
 				<PurePhotoSlider {...{ photoSliders }} />
 			</section>
 
 			{/* --- */}
-			<UiSection titleChildren="AD" titleLink="/cate">
+			<UiSection
+				titleChildren={<span className="text-transparent">AD</span>}
+				titleLink="/cate"
+			>
 				<FreeGlide className="free-glide-flex gap-7">
 					{ads.map((ad) => (
 						<div key={ad.id} className="h-[237px] w-[286px]">
@@ -373,19 +406,22 @@ export default function Home() {
 					<div className="w-[calc(220px+64px)] px-8 max-xl:w-[220px] max-xl:px-0 max-lg:w-auto">
 						<Link
 							href={newUpdatedCards[0].link}
-							className="w-[220px] max-lg:grid max-lg:w-auto max-lg:grid-cols-[auto_1fr] max-lg:grid-rows-1 max-lg:gap-3"
+							className="group w-[220px] max-lg:grid max-lg:w-auto max-lg:grid-cols-[auto_1fr] max-lg:grid-rows-1 max-lg:gap-3 max-md:mr-5"
 						>
 							<picture className="pic-base book-base mb-2 w-full max-lg:mb-0 max-lg:w-[140px]">
-								<img src={newUpdatedCards[0].picture} alt="" />
+								<img
+									src={newUpdatedCards[0].picture}
+									className={imgClassNameInGroupHover}
+								/>
 							</picture>
 							<article className="mb-6 h-[183px] text-center max-lg:mb-0 max-lg:h-auto max-lg:text-left">
-								<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900">
+								<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 									{newUpdatedCards[0].title}
 								</h3>
 								<p className="mb-9 line-clamp-1 text-base font-normal text-primary-200">
 									<NestedLink
 										link={newUpdatedCards[0].authorLink}
-										className="text-inherit"
+										className="text-inherit hover:text-accent-250 active:text-accent-220"
 									>
 										{newUpdatedCards[0].author}
 									</NestedLink>
@@ -399,26 +435,26 @@ export default function Home() {
 							</UiButton>
 						</Link>
 					</div>
-					<FreeGlide className="free-glide-flex">
-						<div className="max-md_max-children-9 grid grid-cols-3 gap-x-7 gap-y-4 ring-1 max-md:grid-cols-1">
+					<FreeGlide className="free-glide-flex" disableInMoblie={true}>
+						<div className="max-md_max-children-9 grid grid-cols-3 gap-x-7 gap-y-4 max-md:grid-cols-1">
 							{newUpdatedCards.slice(1).map((card, i) => (
 								<div
 									key={card.id}
 									className={
-										"grid w-[calc(220px+64px+2px)] grid-cols-[auto_1fr] gap-[2px] max-md:w-[calc(100vw-24px)]"
+										"grid w-[calc(220px+64px+2px)] grid-cols-[auto_1fr] gap-[2px] max-md:w-[calc(100vw-24px-20px)]"
 									}
 								>
 									<b className="flex h-6 w-5 items-center justify-center">⦁</b>
 									<article className="flex h-full w-full flex-col items-start justify-start gap-1">
 										<Link
-											className="line-clamp-1 w-full text-lg font-normal text-ash-900"
+											className="line-clamp-1 w-full text-lg font-normal text-ash-900 hover:text-accent-300 active:text-accent-220"
 											href={card.link}
 										>
 											{/* {i + 1} */}
 											{card.title}
 										</Link>
 										<Link
-											className="line-clamp-1 w-full text-base font-normal text-primary-200"
+											className="line-clamp-1 w-full text-base font-normal text-primary-200 hover:text-accent-250 active:text-accent-220"
 											href={card.authorLink}
 										>
 											{card.author}
@@ -437,17 +473,26 @@ export default function Home() {
 						<div className="relative h-[146px] w-[286px]" key={card.id}>
 							<Link
 								href={card.link}
-								className="grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
+								className="group grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
 							>
 								<picture className="pic-base book-base h-full">
-									<img src={card.picture} alt="" />
+									<img
+										src={card.picture}
+										alt=""
+										className={imgClassNameInGroupHover}
+									/>
 								</picture>
 								<article className="flex h-full w-full flex-col items-start justify-start gap-2">
-									<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900">
+									<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 										{card.title}
 									</h3>
 									<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
-										{card.author}
+										<NestedLink
+											link="/"
+											className="text-inherit hover:text-accent-250 active:text-accent-220"
+										>
+											{card.author}
+										</NestedLink>
 									</p>
 									{/* <p className="mt-1 line-clamp-2 w-full text-sm font-normal text-ash-600">
 									{card.content}
@@ -456,13 +501,93 @@ export default function Home() {
 							</Link>
 							<Link
 								href={card.typeLink}
-								className="absolute bottom-0 left-[114px] flex h-6 w-[75px] items-center justify-center rounded bg-[rgb(235,235,235)] text-sm font-normal text-ash-600"
+								className="absolute bottom-[2px] left-[114px] flex h-6 min-w-[75px] items-center justify-center rounded bg-[rgb(235,235,235)] px-1 text-sm font-normal text-ash-600 hover:bg-ash-200 hover:text-ash-850 hover:ring-1 hover:ring-ash-500"
 							>
 								{card.type}
 							</Link>
 						</div>
 					))}
 				</FreeGlide>
+			</UiSection>
+
+			{/* --- */}
+			<UiSection
+				titleChildren="2023 台漫大回顧"
+				titleLink="/cate"
+				className="rounded-2xl bg-landscape-400"
+			>
+				<FreeGlide className="free-glide-flex gap-[30px]">
+					{publishers.map((publisher) => (
+						<div key={publisher.id} className="w-[180px] pb-[10px]">
+							<Link
+								href={publisher.link}
+								className="group block w-full transition-transform"
+							>
+								<picture className="pic-base aspect-square w-[180px] rounded">
+									<img
+										src={publisher.picture}
+										alt=""
+										className={imgClassNameInGroupHover}
+									/>
+								</picture>
+								<div className="py-[10px]">
+									<p className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
+										{publisher.title}
+									</p>
+								</div>
+							</Link>
+							<p className="line-clamp-1 w-full text-base font-normal text-primary-200 hover:text-accent-250 active:text-accent-220">
+								<Link
+									href={publisher.link}
+									className="text-base font-normal text-primary-200 hover:text-accent-250 active:text-accent-220"
+								>
+									{publisher.title}
+								</Link>
+							</p>
+						</div>
+					))}
+				</FreeGlide>
+			</UiSection>
+
+			{/* --- */}
+			<UiSection
+				titleChildren={<span className="text-transparent">AD</span>}
+				titleLink="/cate"
+			>
+				<FreeGlide className="free-glide-flex gap-7">
+					{ads.map((ad) => (
+						<div key={ad.id} className="h-[237px] w-[286px]">
+							<picture className="pic-base h-[237px] w-[286px]">
+								<img src={ad.picture} alt="" />
+							</picture>
+						</div>
+					))}
+				</FreeGlide>
+			</UiSection>
+
+			{/* --- */}
+			<UiSection titleChildren="出版社專區" titleLink="/cate">
+				<div className="-mt-4">
+					<FreeGlide className="free-glide-flex mt-4 gap-[30px]">
+						{publishers.map((publisher) => (
+							<div key={publisher.id} className="group w-[180px]">
+								<Link
+									href={publisher.link}
+									className="block w-full transition-transform group-hover:-translate-y-4"
+								>
+									<picture className="pic-base h-[95px] w-[180px] rounded">
+										<img src={publisher.picture} alt="" />
+									</picture>
+									<div className="py-[10px]">
+										<p className="line-clamp-1 w-full text-center text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
+											{publisher.title}
+										</p>
+									</div>
+								</Link>
+							</div>
+						))}
+					</FreeGlide>
+				</div>
 			</UiSection>
 		</section>
 	);

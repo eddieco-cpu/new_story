@@ -70,7 +70,7 @@ export default function RootLayout({
 			</head>
 			<body className="bg-landscape-300">
 				<Header />
-				<main className="m-auto min-h-screen max-w-[var(--container-width)] max-md:max-w-none">
+				<main className="m-auto min-h-screen max-w-[var(--container-width)] ring-1 max-md:max-w-none">
 					{children}
 				</main>
 				<Footer />

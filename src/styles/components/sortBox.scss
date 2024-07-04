@@ -1,3 +1,5 @@
+@import "../mixin.scss";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -143,9 +145,53 @@
       opacity: 0;
     }
   }
+}
 
-  &-item--active {
+@media(min-width:769px) {
+  .sort {
+    &-item--active {
+      .sort-item {
+        &-link {
+          height: 98px;
+
+          &__art {
+            width: calc(100% - 78px);
+            height: 98px;
+
+            &-title {
+              //@apply line-clamp-2 h-12
+              -webkit-line-clamp: 2;
+              height: 3rem;
+            }
+
+            // &-para {
+            //   //@apply line-clamp-2
+            // }
+
+            &-amount {
+              position: static;
+              width: auto;
+              height: auto;
+              padding: 0;
+              text-align: left;
+            }
+          }
+        }
+      }
+
+      .book-base {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .sort-item-group :first-child {
+
     .sort-item {
+      outline: 2px solid orange;
+
       &-link {
         height: 98px;
 

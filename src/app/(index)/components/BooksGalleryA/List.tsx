@@ -21,7 +21,7 @@ export default function List({ bookCards }: { bookCards: BookCard[] }) {
 					key={card.id}
 					href={card.link}
 					className={
-						"max-md:w-[calc(100vw-40px)] md:w-[286px] " +
+						"group max-md:w-[calc(100vw-40px)] md:w-[286px] " +
 						`${i === hoveredIndex ? " grid h-[146px] grid-cols-[auto_1fr] gap-2" : "max-md:grid max-md:h-[146px] max-md:grid-cols-[auto_1fr] max-md:gap-2"}`
 					}
 					onMouseEnter={() => setHoveredIndex(i)}
@@ -32,7 +32,11 @@ export default function List({ bookCards }: { bookCards: BookCard[] }) {
 							`${i === hoveredIndex ? "" : "md:hidden"}`
 						}
 					>
-						<img src={card.picture} alt="" />
+						<img
+							src={card.picture}
+							alt=""
+							className="transition-transform duration-300 max-md:group-hover:scale-110 max-md:group-active:scale-110"
+						/>
 					</picture>
 					<article
 						className={
@@ -46,7 +50,7 @@ export default function List({ bookCards }: { bookCards: BookCard[] }) {
 					>
 						<h3
 							className={
-								"w-full text-lg font-normal text-ash-900 " +
+								"w-full text-lg font-normal text-ash-900 max-md:group-hover:text-accent-300 max-md:group-active:text-accent-220 " +
 								`${i === hoveredIndex ? "line-clamp-2 h-14" : "line-clamp-1 max-md:line-clamp-2 max-md:h-14"}`
 							}
 						>
@@ -58,7 +62,10 @@ export default function List({ bookCards }: { bookCards: BookCard[] }) {
 								`${i === hoveredIndex ? "" : "md:hidden"}`
 							}
 						>
-							<NestedLink link={card.authorLink} className="text-inherit">
+							<NestedLink
+								link={card.authorLink}
+								className="text-inherit hover:text-accent-250 active:text-accent-220"
+							>
 								{card.author}
 							</NestedLink>
 						</p>

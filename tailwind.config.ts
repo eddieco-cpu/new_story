@@ -35,6 +35,7 @@ const config: Config = {
 				},
 				accent: {
 					200: "rgb(var(--accent-200) / <alpha-value>)",
+					220: "rgb(var(--accent-220) / <alpha-value>)",
 					250: "rgb(var(--accent-250) / <alpha-value>)",
 					300: "rgb(var(--accent-300) / <alpha-value>)",
 				},

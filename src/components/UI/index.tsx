@@ -14,6 +14,12 @@ type UiSectionProps = {
 	titleLink?: string;
 };
 
+type UiMoreLinkProps = {
+	children?: ReactNode;
+	className?: string;
+	href: string;
+};
+
 export const UiTitle: React.FC<UiTitleProps> = ({
 	children,
 	className,
@@ -22,7 +28,7 @@ export const UiTitle: React.FC<UiTitleProps> = ({
 	return (
 		<div className={`title-base ${className || ""}`}>
 			<h2>{children}</h2>
-			{titleLink && <Link href={titleLink}>更多</Link>}
+			{titleLink && <UiMoreLink href={titleLink} />}
 		</div>
 	);
 };
@@ -42,5 +48,17 @@ export const UiSection: React.FC<UiSectionProps> = ({
 			)}
 			{children}
 		</section>
+	);
+};
+
+export const UiMoreLink: React.FC<UiMoreLinkProps> = ({
+	children,
+	className,
+	href,
+}) => {
+	return (
+		<Link href={href} className={`more-link-base ${className || ""}`}>
+			{children ? children : "更多"}
+		</Link>
 	);
 };

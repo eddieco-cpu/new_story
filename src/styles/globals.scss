@@ -45,6 +45,9 @@ html {
   --accent-200: 245 179 91;
   --accent-200-rgb: rgb(245, 179, 91);
 
+  --accent-220: 255 179 130;
+  --accent-220-rgb: rgb(255, 179, 130);
+
   --accent-250: 255 153 112;
   --accent-250-rgb: rgb(255, 153, 112);
 
@@ -100,11 +103,14 @@ html {
   --prompt-info-rgb: rgb(92, 126, 216);
 }
 
-* {
-  font-family: var(--font-noto-sans-tc), sans-serif;
-  letter-spacing: 1px;
-  font-weight: 300;
-  color: var(--ash-900-rgb);
+@layer base {
+  * {
+    font-family: var(--font-noto-sans-tc), sans-serif;
+    letter-spacing: 1px;
+    font-weight: 300;
+    color: var(--ash-900-rgb);
+    transition: color 0.2s ease;
+  }
 }
 
 @layer components {
@@ -112,7 +118,7 @@ html {
     @apply p-6;
 
     @include mobile {
-      @apply pr-0;
+      @apply pr-0 pl-5;
     }
   }
 
@@ -132,15 +138,31 @@ html {
     }
   }
 
+  .more-link-base {
+    @apply tag-center flex-shrink-0 border-extralight rounded-xl px-2 py-1 text-sm font-normal leading-none text-ash-600;
+    transition: color 0.2s, border 0.2s, background-color 0.2s;
+
+    &:hover {
+      color: var(--primary-200-rgb);
+      border-color: var(--primary-150-rgb)
+    }
+
+    &:active {
+      background-color: #fff
+    }
+  }
+
   .title-base {
     @apply flex items-center justify-between;
 
-    & :first-child {
+    &> :first-child {
       @apply text-[22px] font-medium tracking-[2px];
     }
 
-    &>a {
-      @apply tag-center border-extralight rounded-xl px-2 py-1 text-sm font-normal leading-none text-ash-600;
+    &> :last-child {
+      @include mobile {
+        @apply mr-5;
+      }
     }
   }
 
@@ -196,6 +218,16 @@ html {
     @apply grid grid-cols-[auto_auto];
   }
 }
+
+//
+@layer utilities {
+  @media (max-width: 768px) {
+    .text-lg {
+      line-height: 1.6rem;
+    }
+  }
+}
+
 
 // stretch-bg
 .stretch-bg {

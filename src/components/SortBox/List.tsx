@@ -14,7 +14,11 @@ export default function List({
 }) {
 	const [hoveredIndex, setHoveredIndex] = useState<number>(0);
 	return (
-		<ul className={className + " grid gap-[5px] rounded-b-lg px-4 pb-4"}>
+		<ul
+			className={
+				className + " sort-item-group grid gap-[5px] rounded-b-lg px-4 pb-4"
+			}
+		>
 			{cardSorts.map((sort, i) => (
 				<Item key={sort.id} {...{ sort, i, hoveredIndex, setHoveredIndex }} />
 			))}

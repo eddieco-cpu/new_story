@@ -7,10 +7,12 @@ function FreeGlide({
 	containerClassName,
 	className,
 	children,
+	disableInMoblie,
 }: {
 	containerClassName?: string;
 	className?: string;
 	children?: React.ReactNode;
+	disableInMoblie?: boolean;
 }) {
 	const [emblaRef] = useEmblaCarousel({ dragFree: true });
 
@@ -19,7 +21,9 @@ function FreeGlide({
 			className={`overflow-hidden ${containerClassName ? containerClassName : ""}`}
 			ref={emblaRef}
 		>
-			<div className={`free-glide-flex items-stretch`}>
+			<div
+				className={`free-glide-flex items-stretch ${disableInMoblie ? "max-md:!transform-none" : ""}`}
+			>
 				{children ? (
 					<div className={`${className}`}>{children}</div>
 				) : (
