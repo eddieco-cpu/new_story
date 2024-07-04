@@ -19,7 +19,7 @@ export default function Introduction({
 	return (
 		<div
 			className={
-				"grid grid-cols-[auto_auto] grid-rows-[auto_auto] gap-x-5 px-6 py-4 ring-1 max-xl:gap-x-4 max-xl:px-5 max-lg:gap-y-4 " +
+				"grid grid-cols-[auto_auto] grid-rows-[auto_auto] gap-x-5 px-6 py-4 max-xl:gap-x-4 max-xl:px-5 max-lg:gap-y-4 " +
 				className
 			}
 			style={

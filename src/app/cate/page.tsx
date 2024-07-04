@@ -4,6 +4,7 @@ import { PhotoSlider, NewsType } from "@/types";
 
 import randomPicture from "@utils/randomPicture";
 import randomText from "@utils/randomText";
+import { imgClassNameInGroupHover } from "@utils/data";
 
 import PurePhotoSlider from "@/components/slider/PurePhotoSlider";
 import NewsSlider from "@/components/slider/NewsSlider";
@@ -232,17 +233,24 @@ export default function Cate() {
 							//href={card.link}
 							href={"https://health.udn.com/health/index"}
 							key={card.id}
-							className="grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
+							className="group grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
 						>
 							<picture className="pic-base book-base h-full">
-								<img src={card.picture} alt="" />
+								<img
+									src={card.picture}
+									alt=""
+									className={imgClassNameInGroupHover}
+								/>
 							</picture>
 							<article className="flex h-full w-full flex-col items-start justify-start gap-2">
-								<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900">
+								<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 									{card.title}
 								</h3>
 								<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
-									<NestedLink link="https://www.youtube.com/?app=desktop&hl=zh-tw">
+									<NestedLink
+										link="https://www.youtube.com/?app=desktop&hl=zh-tw"
+										className="text-inherit hover:text-accent-250 active:text-accent-220"
+									>
 										{card.author}
 									</NestedLink>
 								</p>
@@ -255,16 +263,25 @@ export default function Cate() {
 			<UiSection titleChildren="新品上架" titleLink="/cate">
 				<FreeGlide className="free-glide-flex gap-x-[30px]">
 					{newPunblishedCards.map((card) => (
-						<Link href={card.link} key={card.id} className="w-[180px]">
+						<Link href={card.link} key={card.id} className="group w-[180px]">
 							<picture className="pic-base book-base h-full">
-								<img src={card.picture} alt="" />
+								<img
+									src={card.picture}
+									className={imgClassNameInGroupHover}
+									alt=""
+								/>
 							</picture>
 							<article className="h-[104px] p-2">
-								<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900">
+								<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 									{card.title}
 								</h3>
 								<p className="line-clamp-1 text-base font-normal text-primary-200">
-									{card.author}
+									<NestedLink
+										link={"/"}
+										className="text-inherit hover:text-accent-250 active:text-accent-220"
+									>
+										{card.author}
+									</NestedLink>
 								</p>
 							</article>
 						</Link>
@@ -279,16 +296,26 @@ export default function Cate() {
 							key={card.id}
 							className="w-[calc(220px+64px)] px-8 max-md:w-[180px] max-md:px-0"
 						>
-							<Link href={card.link} className="w-[220px] max-md:w-[180px]">
+							<Link
+								href={card.link}
+								className="group w-[220px] max-md:w-[180px]"
+							>
 								<picture className="pic-base book-base mb-2 w-full">
-									<img src={card.picture} alt="" />
+									<img
+										src={card.picture}
+										alt=""
+										className={imgClassNameInGroupHover}
+									/>
 								</picture>
 								<article className="h-[183px] text-center">
-									<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900">
+									<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 										{card.title}
 									</h3>
 									<p className="mb-9 line-clamp-1 text-base font-normal text-primary-200">
-										<NestedLink link={card.authorLink} className="text-inherit">
+										<NestedLink
+											link={card.authorLink}
+											className="text-inherit hover:text-accent-250 active:text-accent-220"
+										>
 											{card.author}
 										</NestedLink>
 									</p>
@@ -328,17 +355,26 @@ export default function Cate() {
 						<Link
 							href={card.link}
 							key={card.id}
-							className="grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
+							className="group grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
 						>
 							<picture className="pic-base book-base h-full">
-								<img src={card.picture} alt="" />
+								<img
+									src={card.picture}
+									alt=""
+									className={imgClassNameInGroupHover}
+								/>
 							</picture>
 							<article className="flex h-full w-full flex-col items-start justify-start gap-2">
-								<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900">
+								<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 									{card.title}
 								</h3>
 								<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
-									{card.author}
+									<NestedLink
+										link={""}
+										className="text-inherit hover:text-accent-250 active:text-accent-220"
+									>
+										{card.author}
+									</NestedLink>
 								</p>
 								<p className="mt-1 line-clamp-2 w-full text-sm font-normal text-ash-600">
 									{card.content}
@@ -352,16 +388,25 @@ export default function Cate() {
 			<UiSection titleChildren="新品上架" titleLink="/cate">
 				<FreeGlide className="free-glide-flex gap-x-[30px]">
 					{newPunblishedCards.map((card) => (
-						<Link href={card.link} key={card.id} className="w-[180px]">
+						<Link href={card.link} key={card.id} className="group w-[180px]">
 							<picture className="pic-base book-base h-full">
-								<img src={card.picture} alt="" />
+								<img
+									src={card.picture}
+									alt=""
+									className={imgClassNameInGroupHover}
+								/>
 							</picture>
 							<article className="h-[104px] p-2">
-								<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900">
+								<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 									{card.title}
 								</h3>
 								<p className="line-clamp-1 text-base font-normal text-primary-200">
-									{card.author}
+									<NestedLink
+										link=""
+										className="text-inherit hover:text-accent-250 active:text-accent-220"
+									>
+										{card.author}
+									</NestedLink>
 								</p>
 							</article>
 						</Link>
@@ -375,17 +420,26 @@ export default function Cate() {
 						<Link
 							href={card.link}
 							key={card.id}
-							className="grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
+							className="group grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
 						>
 							<picture className="pic-base book-base h-full">
-								<img src={card.picture} alt="" />
+								<img
+									src={card.picture}
+									alt=""
+									className={imgClassNameInGroupHover}
+								/>
 							</picture>
 							<article className="flex h-full w-full flex-col items-start justify-start gap-2">
-								<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900">
+								<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 									{card.title}
 								</h3>
 								<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
-									{card.author}
+									<NestedLink
+										link={""}
+										className="text-inherit hover:text-accent-250 active:text-accent-220"
+									>
+										{card.author}
+									</NestedLink>
 								</p>
 								<p className="mt-1 line-clamp-2 w-full text-sm font-normal text-ash-600">
 									{card.content}
