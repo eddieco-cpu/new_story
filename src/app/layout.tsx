@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 
 import "../styles/globals.scss";
 
+const env = process.env.NODE_ENV;
+
 const inter = Inter({
 	subsets: ["latin"],
 	variable: "--font-inter",
@@ -70,7 +72,12 @@ export default function RootLayout({
 			</head>
 			<body className="bg-landscape-300">
 				<Header />
-				<main className="m-auto min-h-screen max-w-[var(--container-width)] ring-1 max-md:max-w-none">
+				<main
+					className={
+						"m-auto min-h-screen max-w-[var(--container-width)] max-md:max-w-none " +
+						` ${env !== "production" ? " ring-1" : ""}`
+					}
+				>
 					{children}
 				</main>
 				<Footer />

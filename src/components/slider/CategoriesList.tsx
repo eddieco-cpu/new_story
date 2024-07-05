@@ -39,7 +39,7 @@ const CategoriesList = ({ categories }: { categories: Categories }) => {
 	};
 
 	return (
-		<section className="ring-1">
+		<section className="">
 			<Splide options={options}>
 				{categories.map((category) => (
 					<CategoryItem key={category.id} {...{ category }} />

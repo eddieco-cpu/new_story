@@ -8,8 +8,8 @@ import randomText from "@utils/randomText";
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
 import { UiTitle } from "@/components/UI";
-import NestedLink from "@/components/UI/NestedLink";
-import { link } from "fs";
+
+import FilterAside from "./components/FilterAside";
 
 //
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
@@ -180,85 +180,10 @@ export default function Cate() {
 			</section>
 
 			{/* -- */}
-			<section className="grid grid-cols-[auto_1fr] gap-7">
+			<section className="grid grid-cols-[auto_1fr] gap-7 max-md:grid-cols-1">
 				{/* --- */}
-				<aside className="w-60">
-					<section className="grid grid-cols-1 gap-6">
-						{/* ---- */}
-						<section className="flex flex-col items-stretch justify-start gap-4">
-							<p className="rounded-md bg-landscape-450 px-[10px] py-[5px]">
-								分類
-							</p>
-							<nav className="flex flex-wrap content-start justify-start gap-2">
-								{filterCates.map((cate) => (
-									<Link
-										key={cate.id}
-										href={cate.link}
-										className="inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300"
-									>
-										<span>{cate.title}</span>
-									</Link>
-								))}
-							</nav>
-						</section>
-
-						{/* ---- */}
-						<section className="flex flex-col items-stretch justify-start gap-4">
-							<p className="rounded-md bg-landscape-450 px-[10px] py-[5px]">
-								條件篩選
-							</p>
-
-							{/* 字數 */}
-							<div className="grid grid-cols-1 gap-2 pb-2">
-								<p className="px-[10px] font-normal text-primary-200">字數</p>
-								<nav className="flex flex-wrap content-start justify-start gap-2">
-									{filterWordCounts.map((wordCount) => (
-										<Link
-											key={wordCount.id}
-											href={wordCount.link}
-											className="inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300"
-										>
-											<span>{wordCount.title}</span>
-										</Link>
-									))}
-								</nav>
-							</div>
-
-							{/* 狀態 */}
-							<div className="grid grid-cols-1 gap-2 pb-2">
-								<p className="px-[10px] font-normal text-primary-200">狀態</p>
-								<nav className="flex flex-wrap content-start justify-start gap-2">
-									{filterStatus.map((wordCount) => (
-										<Link
-											key={wordCount.id}
-											href={wordCount.link}
-											className="inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300"
-										>
-											<span>{wordCount.title}</span>
-										</Link>
-									))}
-								</nav>
-							</div>
-
-							{/* 更新時間 */}
-							<div className="grid grid-cols-1 gap-2 pb-2">
-								<p className="px-[10px] font-normal text-primary-200">
-									更新時間
-								</p>
-								<nav className="flex flex-wrap content-start justify-start gap-2">
-									{filterTimeAreas.map((wordCount) => (
-										<Link
-											key={wordCount.id}
-											href={wordCount.link}
-											className="inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300"
-										>
-											<span>{wordCount.title}</span>
-										</Link>
-									))}
-								</nav>
-							</div>
-						</section>
-					</section>
+				<aside className="w-60 max-md:w-full">
+					<FilterAside />
 				</aside>
 
 				{/* --- */}

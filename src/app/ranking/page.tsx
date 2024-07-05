@@ -5,6 +5,8 @@ import { NewsType } from "@/types";
 import randomPicture from "@utils/randomPicture";
 import randomText from "@utils/randomText";
 
+import FilterNav from "./components/FilterNav";
+
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
 import { UiTitle } from "@/components/UI";
@@ -50,17 +52,25 @@ function formatDateToYYYYMMDD(date: Date): string {
 	return formatter.format(date).replace(/-/g, ".");
 }
 
+const highlightColors = [
+	"rgb(248, 136, 136)",
+	"rgb(255, 154, 115)",
+	"rgb(245, 206, 104)",
+];
+
 export default function Cate() {
 	return (
 		<section>
-			<section className="py-5">
+			<section className="py-5 max-md:px-5">
 				<NewsSlider newsArray={newsArray} />
 			</section>
-			<section className="pb-5">
+			<section className="pb-5 max-md:px-5">
 				<Breadcrumb />
 			</section>
 			<section className="mb-16 px-6">
 				<UiTitle className="mb-5">排行榜</UiTitle>
+
+				<FilterNav />
 
 				{/* -- */}
 				{/*  max-xl:grid-cols-3 max-lg:w-[calc(286*2px+20px)] max-lg:grid-cols-2 max-md:w-[286px] max-md:grid-cols-1 */}
@@ -79,14 +89,14 @@ export default function Cate() {
 									/>
 								</picture>
 								<article className="grid h-full w-full grid-rows-[auto_1fr_auto] gap-2">
-									<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900">
+									<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
 										{card.title}
 									</h3>
 									<div>
 										<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
 											<NestedLink
 												link={card.authorLink}
-												className="text-inherit transition-all duration-300 hover:text-accent-300"
+												className="text-inherit transition-all duration-300 hover:text-accent-250 active:text-accent-220"
 											>
 												{card.author}
 											</NestedLink>
@@ -97,8 +107,19 @@ export default function Cate() {
 									</p>
 								</article>
 							</Link>
-							<div className="absolute bottom-0 right-3 flex h-12 w-12 items-center justify-center rounded-full bg-white">
-								<p className="text-4xl font-bold italic leading-none text-[rgb(141,141,141)]">
+							<div
+								className={
+									"absolute bottom-0 right-3 flex h-12 w-12 items-center justify-center rounded-full bg-white " +
+									`${i < 3 ? " md:h-16 md:w-16" : ""}`
+								}
+							>
+								<p
+									className={
+										"text-4xl font-bold italic leading-none text-[rgb(141,141,141)] " +
+										`${i < 3 ? " -translate-y-4 text-7xl" : ""}`
+									}
+									style={i < 3 ? { color: highlightColors[i] } : {}}
+								>
 									{i + 1}
 								</p>
 							</div>

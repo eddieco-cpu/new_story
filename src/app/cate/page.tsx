@@ -213,7 +213,7 @@ export default function Cate() {
 				<NewsSlider newsArray={newsArray} />
 			</section>
 
-			<section className="px-6 py-4">
+			<section className="px-6 py-4 max-md:hidden">
 				<CategoriesList categories={categories} />
 			</section>
 

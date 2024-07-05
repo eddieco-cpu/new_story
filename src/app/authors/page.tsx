@@ -120,7 +120,7 @@ export default function Page() {
 									/>
 								</picture>
 								<article className="grid h-full w-full grid-cols-1 gap-3 max-md:flex max-md:flex-col max-md:items-stretch max-md:justify-start max-md:gap-1">
-									<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 transition-all duration-300 group-hover:text-accent-300 max-md:h-[52px]">
+									<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 transition-all duration-300 group-hover:text-accent-300 group-active:text-accent-220 max-md:h-[52px]">
 										{card.title}
 									</h3>
 									<div className="mt-[-2px] flex items-center justify-start gap-2 overflow-hidden max-md:hidden">
