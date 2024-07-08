@@ -136,7 +136,7 @@ export default function Comment({ comment }: { comment: CommentType[] }) {
 					{comment.map((comment) => (
 						<li
 							key={comment.id}
-							className="mb-2 border-b border-landscape-450 px-6 py-4"
+							className="mb-2 border-b border-landscape-450 px-6 py-4 max-lg:px-0"
 						>
 							{/*  */}
 							<div className="mb-2 flex flex-col items-stretch justify-start gap-2">
@@ -162,10 +162,10 @@ export default function Comment({ comment }: { comment: CommentType[] }) {
 									{comment.feedbacks.map((feedback) => (
 										<li
 											key={feedback.id}
-											className="relative ml-6 mt-8 bg-landscape-400 px-6 py-4"
+											className="relative ml-6 mt-8 rounded-lg bg-landscape-400 px-6 py-4"
 										>
 											<b
-												className="absolute left-0 top-[-16px] block h-4 w-4 bg-landscape-400"
+												className="absolute left-0 top-[-16px] block h-6 w-6 bg-landscape-400"
 												style={{
 													clipPath: "polygon(0 0, 0% 100%, 100% 100%)",
 												}}

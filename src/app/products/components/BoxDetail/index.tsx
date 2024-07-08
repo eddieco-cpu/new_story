@@ -101,7 +101,7 @@ export default function Index({ detail }: { detail: DetailType }) {
 				</div>
 
 				{/***/}
-				<article className="px-6 py-5">
+				<article className="px-6 py-5 max-md:px-5">
 					{/* -- */}
 					{boxType.id === "summary" && (
 						<ArticleExpansion article={detail.summary}></ArticleExpansion>
