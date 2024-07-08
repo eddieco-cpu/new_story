@@ -177,14 +177,14 @@ export default function Page() {
 							<div className="absolute bottom-0 right-0 flex items-center justify-center gap-4 max-md:gap-3">
 								<UiButton
 									variant="secondary"
-									className="flex h-[34px] items-center justify-center gap-2 max-md:h-8 max-md:w-[95px] max-md:gap-1 max-md:text-sm"
+									className="flex h-[34px] items-center justify-center gap-2 max-md:h-8 max-md:w-[90px] max-md:gap-1 max-md:rounded-md max-md:text-sm"
 								>
 									<i className="i-heart-empty text-inherit"></i>
 									<span className="text-inherit">收藏</span>
 								</UiButton>
 								<UiButton
 									variant="primary"
-									className="h-[34px] max-md:h-8 max-md:w-[95px] max-md:text-sm"
+									className="h-[34px] max-md:h-8 max-md:w-[90px] max-md:text-sm"
 								>
 									開始閱讀
 								</UiButton>
