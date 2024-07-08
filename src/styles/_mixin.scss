@@ -1,17 +1,16 @@
 @mixin desktop {
 
   //小螢幕桌機
-  @media(max-width:1280px) {
+  @media(max-width:1297px) {
     @content;
   }
-
-  //
 }
+
 
 @mixin tablet {
 
   //平板
-  @media(max-width:1024px) {
+  @media(max-width:1023px) {
     @content;
   }
 }
@@ -19,7 +18,7 @@
 @mixin mobile {
 
   //手機
-  @media(max-width:768px) {
+  @media(max-width:767px) {
     @content;
   }
 }

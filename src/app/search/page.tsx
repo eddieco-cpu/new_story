@@ -170,12 +170,12 @@ export default function Cate() {
 	return (
 		<section>
 			{/* -- */}
-			<section className="py-5">
+			<section className="py-5 max-md:px-5">
 				<NewsSlider newsArray={newsArray} />
 			</section>
 
 			{/* -- */}
-			<section className="pb-5">
+			<section className="pb-5 max-md:hidden">
 				<Breadcrumb />
 			</section>
 
@@ -189,15 +189,18 @@ export default function Cate() {
 				{/* --- */}
 				<section className="grid grid-cols-1 gap-5">
 					{/* ---- */}
-					<div className="flex items-center justify-between">
+					<div className="flex items-center justify-between max-md:px-5">
 						<UiTitle>全站分類</UiTitle>
 						<div>熱門瀏覽</div>
 					</div>
 
 					{/* ---- */}
-					<ul className="m-auto grid grid-cols-5 gap-7 max-xl:w-[calc(180*3px+28*2px)] max-xl:grid-cols-3 max-lg:w-[calc(180*2px+28*1px)] max-lg:grid-cols-2">
+					<ul className="m-auto grid grid-cols-5 gap-7 pb-7 max-xl:w-[calc(180*3px+28*2px)] max-xl:grid-cols-3 max-lg:w-[calc(180*2px+28*1px)] max-lg:grid-cols-2 max-md:max-w-[calc(100vw-12px)] max-md:gap-5">
 						{rankBooks.map((card) => (
-							<li className="group w-[180px]" key={card.id}>
+							<li
+								className="group w-[180px] max-md:max-w-[calc(50vw-10px-6px)]"
+								key={card.id}
+							>
 								<Link
 									href={card.link}
 									className="block overflow-hidden rounded bg-white transition-all duration-500 group-hover:translate-y-[-10px]"

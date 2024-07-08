@@ -467,6 +467,46 @@ export default function Home() {
 				</div>
 			</UiSection>
 
+			{/* --- */}
+			<UiSection
+				titleChildren="2023 台漫大回顧"
+				titleLink="/cate"
+				className="rounded-2xl bg-landscape-400"
+			>
+				<FreeGlide className="free-glide-flex gap-[30px]">
+					{publishers.map((publisher) => (
+						<div key={publisher.id} className="w-[180px] pb-[10px]">
+							<Link
+								href={publisher.link}
+								className="group block w-full transition-transform"
+							>
+								<picture className="pic-base aspect-square w-[180px] rounded">
+									<img
+										src={publisher.picture}
+										alt=""
+										className={imgClassNameInGroupHover}
+									/>
+								</picture>
+								<div className="py-[10px]">
+									<p className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
+										{publisher.title}
+									</p>
+								</div>
+							</Link>
+							<p className="line-clamp-1 w-full text-base font-normal text-primary-200 hover:text-accent-250 active:text-accent-220">
+								<Link
+									href={publisher.link}
+									className="text-base font-normal text-primary-200 hover:text-accent-250 active:text-accent-220"
+								>
+									{publisher.title}
+								</Link>
+							</p>
+						</div>
+					))}
+				</FreeGlide>
+			</UiSection>
+
+			{/* --- */}
 			<UiSection titleChildren="輕小說推薦" titleLink="/cate">
 				<FreeGlide className="free-glide-flex w-[1240px] flex-wrap content-start items-start gap-x-8 gap-y-4">
 					{novelCards.map((card) => (
@@ -505,45 +545,6 @@ export default function Home() {
 							>
 								{card.type}
 							</Link>
-						</div>
-					))}
-				</FreeGlide>
-			</UiSection>
-
-			{/* --- */}
-			<UiSection
-				titleChildren="2023 台漫大回顧"
-				titleLink="/cate"
-				className="rounded-2xl bg-landscape-400"
-			>
-				<FreeGlide className="free-glide-flex gap-[30px]">
-					{publishers.map((publisher) => (
-						<div key={publisher.id} className="w-[180px] pb-[10px]">
-							<Link
-								href={publisher.link}
-								className="group block w-full transition-transform"
-							>
-								<picture className="pic-base aspect-square w-[180px] rounded">
-									<img
-										src={publisher.picture}
-										alt=""
-										className={imgClassNameInGroupHover}
-									/>
-								</picture>
-								<div className="py-[10px]">
-									<p className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
-										{publisher.title}
-									</p>
-								</div>
-							</Link>
-							<p className="line-clamp-1 w-full text-base font-normal text-primary-200 hover:text-accent-250 active:text-accent-220">
-								<Link
-									href={publisher.link}
-									className="text-base font-normal text-primary-200 hover:text-accent-250 active:text-accent-220"
-								>
-									{publisher.title}
-								</Link>
-							</p>
 						</div>
 					))}
 				</FreeGlide>

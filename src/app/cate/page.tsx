@@ -201,6 +201,11 @@ const newPunblishedSorts: SortBook[] = Array.from(
 	picture: randomPicture(),
 }));
 
+const ads = Array.from({ length: 4 }, (_, i) => i + 1).map((i) => ({
+	id: new Date().getTime() + i,
+	picture: randomPicture(),
+}));
+
 export default function Cate() {
 	return (
 		<section>
@@ -446,6 +451,22 @@ export default function Cate() {
 								</p>
 							</article>
 						</Link>
+					))}
+				</FreeGlide>
+			</UiSection>
+
+			{/* --- */}
+			<UiSection
+				titleChildren={<span className="text-transparent">AD</span>}
+				titleLink="/cate"
+			>
+				<FreeGlide className="free-glide-flex gap-7">
+					{ads.map((ad) => (
+						<div key={ad.id} className="h-[237px] w-[286px]">
+							<picture className="pic-base h-[237px] w-[286px]">
+								<img src={ad.picture} alt="" />
+							</picture>
+						</div>
 					))}
 				</FreeGlide>
 			</UiSection>

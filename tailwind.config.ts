@@ -8,6 +8,11 @@ const config: Config = {
 	],
 	theme: {
 		extend: {
+			screens: {
+				//xl: { max: "1279px" }, // 自定義的 xl 設置
+				xl: "1298px",
+				lg: "1024px",
+			},
 			backgroundImage: {
 				"gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
 				"gradient-conic":

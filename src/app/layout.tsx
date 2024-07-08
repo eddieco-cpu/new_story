@@ -74,7 +74,7 @@ export default function RootLayout({
 				<Header />
 				<main
 					className={
-						"m-auto min-h-screen max-w-[var(--container-width)] max-md:max-w-none " +
+						"m-auto min-h-screen max-w-[var(--container-width)] pb-8 max-md:max-w-none " +
 						` ${env !== "production" ? " ring-1" : ""}`
 					}
 				>

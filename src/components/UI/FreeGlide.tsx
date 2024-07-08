@@ -34,7 +34,7 @@ function FreeGlide({
 						}}
 					></div>
 				)}
-				<div className={`w-[1px] flex-shrink-0`}></div>
+				<div className={`w-[1px] flex-shrink-0 max-md:w-6`}></div>
 			</div>
 		</div>
 	);

@@ -42,10 +42,10 @@ const rankBooks = Array.from({ length: 16 }, (_, i) => i + 1).map((i) => ({
 export default function Page() {
 	return (
 		<section>
-			<section className="py-5">
+			<section className="py-5 max-md:px-5">
 				<NewsSlider newsArray={newsArray} />
 			</section>
-			<section className="pb-5">
+			<section className="pb-5 max-md:hidden">
 				<Breadcrumb />
 			</section>
 			<section className="mb-5 rounded-2xl bg-landscape-400 px-32 py-12 max-lg:px-5 max-lg:py-6">
@@ -92,7 +92,7 @@ export default function Page() {
 				{/* -- */}
 				<ArticleExpansion article={author.about}></ArticleExpansion>
 			</section>
-			<section className="mb-16 px-6">
+			<section className="mb-16 px-6 max-md:px-0">
 				{/* -- */}
 				<div className="border-b border-landscape-400 px-6">
 					<p className="inline-flex items-end justify-center gap-1 border-b-2 border-accent-300 px-6 py-4">
@@ -102,7 +102,7 @@ export default function Page() {
 				</div>
 
 				{/* -- */}
-				<ul className="m-auto grid grid-cols-2 gap-x-[30px] gap-y-10 pb-8 pt-4 max-xl:grid-cols-1">
+				<ul className="m-auto grid grid-cols-2 gap-x-[30px] gap-y-10 pb-8 pt-4 max-xl:grid-cols-1 max-md:gap-y-7 max-md:px-5">
 					{rankBooks.map((card, i) => (
 						<li
 							className="group relative h-[205px] max-md:h-[162px]"

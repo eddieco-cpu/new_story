@@ -53,10 +53,10 @@ function formatDateToYYYYMMDD(date: Date): string {
 export default function Cate() {
 	return (
 		<section>
-			<section className="py-5">
+			<section className="py-5 max-md:px-5">
 				<NewsSlider newsArray={newsArray} />
 			</section>
-			<section className="pb-5">
+			<section className="pb-5 max-md:hidden">
 				<Breadcrumb />
 			</section>
 			<section className="mb-16 px-6">
