@@ -103,13 +103,13 @@ const photoSliders: PhotoSlider[] = Array.from(
 	src: randomPicture(),
 }));
 
-const backgrounds = [
-	"#d9e9e8",
-	"#f3e8df",
-	"#E6E6FA",
-	"#F5F5DC",
-	"#FFF0F5",
-	"#F0FFF0",
+const backgroundsAndThemes = [
+	["#d9e9e8", "light"],
+	["#222", "dark"],
+	["#E6E6FA", "light"],
+	["#F5F5DC", "light"],
+	["#FFF0F5", "light"],
+	["#31444D", "dark"],
 ];
 const photoBgSliders: (PhotoSlider & { bg?: string })[] = Array.from(
 	{ length: 6 },
@@ -120,7 +120,8 @@ const photoBgSliders: (PhotoSlider & { bg?: string })[] = Array.from(
 	title: randomText(3, 20),
 	alt: randomText(3, 20),
 	src: randomPicture(),
-	bg: backgrounds[i - 1],
+	bg: backgroundsAndThemes[i - 1][0],
+	theme: backgroundsAndThemes[i - 1][1],
 }));
 
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(

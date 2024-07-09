@@ -16,7 +16,7 @@ const defaultBg = "rgb(248, 244, 241)"; //--landscape-300-rgb
 function PhotoAndBgSlider({
 	photoSliders,
 }: {
-	photoSliders: (PhotoSlider & { bg?: string })[];
+	photoSliders: (PhotoSlider & { bg?: string; theme?: string })[];
 }) {
 	//
 	const splideRef = useRef(null);
@@ -53,7 +53,14 @@ function PhotoAndBgSlider({
 
 				//
 				const bg = photoSliders[newIndex]?.bg || defaultBg;
+				const headerDarkTheme = photoSliders[newIndex]?.theme === "dark";
+
 				document.documentElement.style.setProperty("--home-slide-bg", bg);
+				if (headerDarkTheme) {
+					document.documentElement.setAttribute("data-header-theme", "dark");
+				} else {
+					document.documentElement.removeAttribute("data-header-theme");
+				}
 			}
 		);
 
@@ -61,6 +68,7 @@ function PhotoAndBgSlider({
 		return () => {
 			console.log("Slide bye bye");
 			document.documentElement.style.setProperty("--home-slide-bg", defaultBg);
+			document.documentElement.removeAttribute("data-header-theme");
 		};
 	}, []);
 
