@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_TC, Roboto } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
-import "../styles/globals.scss";
-
-const env = process.env.NODE_ENV;
+import "@/styles/globals.scss";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -70,18 +66,7 @@ export default function RootLayout({
 					type="text/css"
 				/>
 			</head>
-			<body className="bg-landscape-300">
-				<Header />
-				<main
-					className={
-						"m-auto min-h-screen max-w-[var(--container-width)] pb-8 max-md:max-w-none " +
-						` ${env !== "production" ? " ring-1" : ""}`
-					}
-				>
-					{children}
-				</main>
-				<Footer />
-			</body>
+			<body className="bg-landscape-300">{children}</body>
 		</html>
 	);
 }

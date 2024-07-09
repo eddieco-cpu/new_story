@@ -1,5 +1,7 @@
 import Link from "next/link";
-import React, { ReactNode, ComponentPropsWithoutRef } from "react";
+import React, { ReactNode } from "react";
+
+const env = process.env.NODE_ENV;
 
 type UiTitleProps = {
 	children: ReactNode;
@@ -18,6 +20,24 @@ type UiMoreLinkProps = {
 	children?: ReactNode;
 	className?: string;
 	href: string;
+};
+
+type UiMainProps = {
+	children?: ReactNode;
+	className?: string;
+};
+
+export const UiMain: React.FC<UiMainProps> = ({ children, className }) => {
+	return (
+		<main
+			className={
+				"m-auto min-h-screen max-w-[var(--container-width)] pb-8 max-md:max-w-none " +
+				` ${env !== "production" ? " ring-1" : ""} ${className || ""}`
+			}
+		>
+			{children}
+		</main>
+	);
 };
 
 export const UiTitle: React.FC<UiTitleProps> = ({
