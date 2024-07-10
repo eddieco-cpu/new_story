@@ -1,0 +1,20 @@
+@import "./mixin.scss";
+
+:root {
+  --piece-nav: #DBC68F;
+  --piece-border: #CDBD95;
+  --piece-body: #D6CEBC;
+  --piece-content: #E6E2D7;
+  --piece-text-color: #222;
+}
+
+.piece {
+  &_main {
+    --icon-hover: var(--ash-350-rgb);
+    --icon-active: var(--accent-300-rgb);
+
+    @include tablet {
+      --container-width: 100%;
+    }
+  }
+}

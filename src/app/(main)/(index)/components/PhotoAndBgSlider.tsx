@@ -9,8 +9,6 @@ import { PhotoSlider } from "@/types";
 import "@splidejs/react-splide/css";
 import "@styles/slider.scss";
 
-import "@styles/home.scss";
-
 const defaultBg = "rgb(248, 244, 241)"; //--landscape-300-rgb
 
 function PhotoAndBgSlider({

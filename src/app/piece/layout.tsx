@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+
 import { UiMain } from "@/components/UI";
+
+import "@/styles/piece.scss";
 
 export const metadata: Metadata = {
 	title: "讀創故事 piece",
@@ -13,10 +17,24 @@ export default function Layout({
 }>) {
 	return (
 		<>
-			<header className="h-[75px] bg-[rgba(229,208,193,0.5)]">
-				<p className="m-auto max-w-[1024px] py-4">言情 / 文章</p>
+			<header className="piece_header bg-[var(--piece-nav,orange)] py-4">
+				<nav className="mx-auto flex h-11 max-w-[1080px] items-center justify-start gap-2 ring-1 max-lg:px-5">
+					<a href="https://udn.com/news/index" className="logo-udn">
+						<Image
+							src="/images/reading-logo.svg"
+							alt="聯合新聞網"
+							width={43}
+							height={32}
+						/>
+					</a>
+					<a className="">言情 / 文章</a>
+				</nav>
 			</header>
-			<UiMain>{children}</UiMain>
+			<section className="piece_main bg-[var(--piece-body,white)] py-4 max-lg:pt-0">
+				<UiMain className="flex items-start justify-center gap-[18px] *:flex-shrink-0 max-xl:gap-2 max-lg:flex-col max-lg:gap-0">
+					{children}
+				</UiMain>
+			</section>
 		</>
 	);
 }

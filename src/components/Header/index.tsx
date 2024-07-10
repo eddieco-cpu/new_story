@@ -7,12 +7,14 @@ import Link from "next/link";
 
 import Drawer from "./Drawer";
 
-import Shelf from "@components/UI/svg/Shelf";
-import Pen from "@components/UI/svg/Pen";
-import Avatar from "@components/UI/svg/Avatar";
-import Hamburger from "@components/UI/svg/Hamburger";
-import Magnifier from "@components/UI/svg/Magnifier";
-import Cross from "@components/UI/svg/Cross";
+import {
+	Avatar,
+	Cross,
+	Hamburger,
+	Magnifier,
+	Pen,
+	Shelf,
+} from "@components/UI/svg";
 
 import "@styles/header.scss";
 
@@ -79,16 +81,16 @@ const Header: React.FC = () => {
 								<Image
 									src="/images/reading-logo.svg"
 									alt="聯合新聞網"
-									width={100}
-									height={24}
+									width={43}
+									height={32}
 								/>
 							</a>
 							<a href="https://reading.udn.com/read/index" className="logo-txt">
 								<Image
 									src="/images/reading-brand.svg"
 									alt="琅琅悅讀"
-									width={100}
-									height={24}
+									width={132}
+									height={32}
 								/>
 							</a>
 						</h1>
