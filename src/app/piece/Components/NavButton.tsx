@@ -23,7 +23,9 @@ function Icon({ name, className }: { name: string; className?: string }) {
 		return (
 			<PieceCata
 				className={
-					"group-hover:*:fill-[var(--icon-hover)] group-hover:*:stroke-[var(--icon-hover)] group-active:*:fill-[var(--icon-active)] group-active:*:stroke-[var(--icon-active)] " +
+					"*:fill-[var(--piece-text)] *:stroke-[var(--piece-text)] " +
+					` group-hover:*:fill-[var(--icon-hover)] group-hover:*:stroke-[var(--icon-hover)] group-active:*:fill-[var(--icon-active)] group-active:*:stroke-[var(--icon-active)]` +
+					" " +
 					className
 				}
 			/>
@@ -32,7 +34,9 @@ function Icon({ name, className }: { name: string; className?: string }) {
 		return (
 			<PieceDetail
 				className={
-					"group-hover:*:stroke-[var(--icon-hover)] group-active:*:stroke-[var(--icon-active)] " +
+					"*:stroke-[var(--piece-text)] " +
+					` group-hover:*:stroke-[var(--icon-hover)] group-active:*:stroke-[var(--icon-active)]` +
+					" " +
 					className
 				}
 			/>
@@ -41,7 +45,8 @@ function Icon({ name, className }: { name: string; className?: string }) {
 		return (
 			<PieceHeart
 				className={
-					"group-hover:*:stroke-[var(--icon-hover)] group-active:*:stroke-[var(--icon-active)] " +
+					"*:stroke-[var(--piece-text)] " +
+					` group-hover:*:stroke-[var(--icon-hover)] group-active:*:stroke-[var(--icon-active)]` +
 					className
 				}
 			/>
@@ -50,7 +55,8 @@ function Icon({ name, className }: { name: string; className?: string }) {
 		return (
 			<PieceMoon
 				className={
-					"group-hover:*:stroke-[var(--icon-hover)] group-active:*:stroke-[var(--icon-active)] " +
+					"*:stroke-[var(--piece-text)] " +
+					` group-hover:*:stroke-[var(--icon-hover)] group-active:*:stroke-[var(--icon-active)]` +
 					className
 				}
 			/>
@@ -60,7 +66,8 @@ function Icon({ name, className }: { name: string; className?: string }) {
 		return (
 			<PieceWarn
 				className={
-					"group-hover:*:stroke-[var(--icon-hover)] group-active:*:stroke-[var(--icon-active)] " +
+					"*:stroke-[var(--piece-text)] " +
+					` group-hover:*:stroke-[var(--icon-hover)] group-active:*:stroke-[var(--icon-active)]` +
 					className
 				}
 			/>

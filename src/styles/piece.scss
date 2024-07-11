@@ -1,20 +1,77 @@
 @import "./mixin.scss";
 
 :root {
-  --piece-nav: #DBC68F;
-  --piece-border: #CDBD95;
-  --piece-body: #D6CEBC;
-  --piece-content: #E6E2D7;
-  --piece-text-color: #222;
+  //
+  --default-nav: #EEE2D9;
+  --default-border: #EADFD5;
+  --default-body: #F8F4F1;
+  --default-aside: rgba(255, 255, 255, 0.7);
+  --default-content: rgba(255, 255, 255, 0.4); //#F8F4F1;
+  --default-text: #222;
+
+  //
+  --yellow-nav: #DBC68F;
+  --yellow-border: #CDBD95;
+  --yellow-body: #D6CEBC;
+  --yellow-aside: rgba(255, 255, 255, 0.7);
+  --yellow-content: rgba(255, 255, 255, 0.4); //#E6E2D7;
+  --yellow-text: #222;
+
+  //
+  --blue-nav: #BED6D9;
+  --blue-border: #A6CED2;
+  --blue-body: #D5DEDF;
+  --blue-aside: rgba(255, 255, 255, 0.7);
+  --blue-content: rgba(255, 255, 255, 0.4);
+  --blue-text: #222;
+
+  //
+  --green-nav: #BFD6B7;
+  --green-border: #A9C59F;
+  --green-body: #DAE1D7;
+  --green-aside: rgba(255, 255, 255, 0.7);
+  --green-content: rgba(255, 255, 255, 0.4); //#E6E2D7;
+  --green-text: #222;
+
+  //
+  --dark-nav: #070707;
+  --dark-border: #222222;
+  --dark-body: #0D0D0D;
+  --dark-aside: #222222;
+  --dark-content: rgba(255, 255, 255, 0.03);
+  --dark-text: #ABABAB;
+
+
+  //
+  --piece-nav: var(--default-nav);
+  --piece-border: var(--default-border);
+  --piece-body: var(--default-body);
+  --piece-aside: var(--default-aside);
+  --piece-content: var(--default-content);
+  --piece-text: var(--default-text);
 }
 
 .piece {
+  &_header {
+    transition: background-color 0.3s, color 0.3s;
+  }
+
   &_main {
     --icon-hover: var(--ash-350-rgb);
     --icon-active: var(--accent-300-rgb);
 
+    transition: background-color 0.3s, color 0.3s;
+
     @include tablet {
       --container-width: 100%;
     }
+  }
+
+  &_aside {
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  &_nav {
+    transition: background-color 0.3s, color 0.3s;
   }
 }
