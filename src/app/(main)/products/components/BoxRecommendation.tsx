@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import randomPicture from "@utils/randomPicture";
-import randomText from "@utils/randomText";
+import randomPicture from "@tools/randomPicture";
+import randomText from "@tools/randomText";
 
-import { UiTitle } from "@/components/UI";
+import { UiTitle } from "@/components/ui";
 
 //
 const novelCards = Array.from({ length: 12 }, (_, i) => i + 1).map((i) => ({

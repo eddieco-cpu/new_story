@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_TC, Roboto } from "next/font/google";
 
+import { Toaster } from "@/components/ui/toaster";
+
 import "@/styles/globals.scss";
 
 const inter = Inter({
@@ -66,7 +68,10 @@ export default function RootLayout({
 					type="text/css"
 				/>
 			</head>
-			<body className="bg-landscape-300">{children}</body>
+			<body className="bg-landscape-300">
+				{children}
+				<Toaster />
+			</body>
 		</html>
 	);
 }

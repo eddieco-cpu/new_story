@@ -8,102 +8,163 @@ html {
   scroll-behavior: smooth;
 }
 
-:root {
-  --home-slide-bg: rgba(0, 0, 0, 0);
-  //transition: --home-slide-bg 0.5s ease-in-out;
-  --container-width: 1280px;
 
-  @include desktop {
-    --container-width: 970px;
+@layer base {
+
+  :root {
+    --home-slide-bg: rgba(0, 0, 0, 0);
+    //transition: --home-slide-bg 0.5s ease-in-out;
+    --container-width: 1280px;
+
+    @include desktop {
+      --container-width: 970px;
+    }
+
+    @include tablet {
+      --container-width: 740px;
+    }
+
+    @include mobile {
+      --container-width: 100vw;
+    }
+
+    --container-width-full: 1280px;
+    --container-width-desktop: 970px;
+    --container-width-tablet: 740px;
+    --container-width-mobile: 100vw;
+
+    --landscape-300: 248 244 241;
+    --landscape-300-rgb: rgb(248, 244, 241);
+
+    --landscape-400: 243 232 223;
+    --landscape-400-rgb: rgb(243, 232, 223);
+
+    --landscape-450: 234 223 213;
+    --landscape-450-rgb: rgb(234, 223, 213);
+
+    --landscape-500: 253 246 241;
+    --landscape-500-rgb: rgb(253, 246, 241);
+
+    --accent-200: 245 179 91;
+    --accent-200-rgb: rgb(245, 179, 91);
+
+    --accent-220: 255 179 130;
+    --accent-220-rgb: rgb(255, 179, 130);
+
+    --accent-250: 255 153 112;
+    --accent-250-rgb: rgb(255, 153, 112);
+
+    --accent-300: 255 90 25;
+    --accent-300-rgb: rgb(255, 90, 25);
+
+    --primary-150: 195 144 112;
+    --primary-150-rgb: rgb(195, 144, 112);
+
+    --primary-200: 169 127 98;
+    --primary-200-rgb: rgb(169, 127, 98);
+
+    --primary-300: 180 121 84;
+    --primary-300-rgb: rgb(180, 121, 84);
+
+    --secondary-450: 174 53 53;
+    --secondary-450-rgb: rgb(174, 53, 53);
+
+    --secondary-500: 155 44 0;
+    --secondary-500-rgb: rgb(155, 44, 0);
+
+    --secondary-700: 67 40 25;
+    --secondary-700-rgb: rgb(67, 40, 25);
+
+    --ash-100: 249 249 249;
+    --ash-100-rgb: rgb(249, 249, 249);
+
+    --ash-200: 236 236 236;
+    --ash-200-rgb: rgb(236, 236, 236);
+
+    --ash-300: 221 221 221;
+    --ash-300-rgb: rgb(221, 221, 221);
+
+    --ash-350: 216 216 216;
+    --ash-350-rgb: rgb(216, 216, 216);
+
+    --ash-500: 171 171 171;
+    --ash-500-rgb: rgb(171, 171, 171);
+
+    --ash-600: 122 122 122;
+    --ash-600-rgb: rgb(122, 122, 122);
+
+    --ash-650: 119 119 119;
+    --ash-650-rgb: rgb(119, 119, 119);
+
+    --ash-850: 63 61 62;
+    --ash-850-rgb: rgb(63, 61, 62);
+
+    --ash-900: 34 34 34;
+    --ash-900-rgb: rgb(34, 34, 34);
+
+    --prompt-info: 92 126 216;
+    --prompt-info-rgb: rgb(92, 126, 216);
+
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
   }
 
-  @include tablet {
-    --container-width: 740px;
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
-
-  @include mobile {
-    --container-width: 100vw;
-  }
-
-  --container-width-full: 1280px;
-  --container-width-desktop: 970px;
-  --container-width-tablet: 740px;
-  --container-width-mobile: 100vw;
-
-  --landscape-300: 248 244 241;
-  --landscape-300-rgb: rgb(248, 244, 241);
-
-  --landscape-400: 243 232 223;
-  --landscape-400-rgb: rgb(243, 232, 223);
-
-  --landscape-450: 234 223 213;
-  --landscape-450-rgb: rgb(234, 223, 213);
-
-  --landscape-500: 253 246 241;
-  --landscape-500-rgb: rgb(253, 246, 241);
-
-  --accent-200: 245 179 91;
-  --accent-200-rgb: rgb(245, 179, 91);
-
-  --accent-220: 255 179 130;
-  --accent-220-rgb: rgb(255, 179, 130);
-
-  --accent-250: 255 153 112;
-  --accent-250-rgb: rgb(255, 153, 112);
-
-  --accent-300: 255 90 25;
-  --accent-300-rgb: rgb(255, 90, 25);
-
-  --primary-150: 195 144 112;
-  --primary-150-rgb: rgb(195, 144, 112);
-
-  --primary-200: 169 127 98;
-  --primary-200-rgb: rgb(169, 127, 98);
-
-  --primary-300: 180 121 84;
-  --primary-300-rgb: rgb(180, 121, 84);
-
-  --secondary-450: 174 53 53;
-  --secondary-450-rgb: rgb(174, 53, 53);
-
-  --secondary-500: 155 44 0;
-  --secondary-500-rgb: rgb(155, 44, 0);
-
-  --secondary-700: 67 40 25;
-  --secondary-700-rgb: rgb(67, 40, 25);
-
-  --ash-100: 249 249 249;
-  --ash-100-rgb: rgb(249, 249, 249);
-
-  --ash-200: 236 236 236;
-  --ash-200-rgb: rgb(236, 236, 236);
-
-  --ash-300: 221 221 221;
-  --ash-300-rgb: rgb(221, 221, 221);
-
-  --ash-350: 216 216 216;
-  --ash-350-rgb: rgb(216, 216, 216);
-
-  --ash-500: 171 171 171;
-  --ash-500-rgb: rgb(171, 171, 171);
-
-  --ash-600: 122 122 122;
-  --ash-600-rgb: rgb(122, 122, 122);
-
-  --ash-650: 119 119 119;
-  --ash-650-rgb: rgb(119, 119, 119);
-
-  --ash-850: 63 61 62;
-  --ash-850-rgb: rgb(63, 61, 62);
-
-  --ash-900: 34 34 34;
-  --ash-900-rgb: rgb(34, 34, 34);
-
-  --prompt-info: 92 126 216;
-  --prompt-info-rgb: rgb(92, 126, 216);
 }
 
 @layer base {
+  * {
+    @apply border-border;
+  }
+
   * {
     font-family: var(--font-noto-sans-tc), sans-serif;
     letter-spacing: 1px;
@@ -111,7 +172,12 @@ html {
     color: var(--ash-900-rgb);
     transition: color 0.2s ease;
   }
+
+  body {
+    //@apply bg-background text-foreground;
+  }
 }
+
 
 @layer components {
   .ui-section-base {

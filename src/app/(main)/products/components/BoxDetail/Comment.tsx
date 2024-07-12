@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 
 import { type CommentType } from "../../page";
 
-import { UiButton } from "@/components/UI/client";
+import { UiButton } from "@/components/ui/client";
 
 //
 const commentRules = [

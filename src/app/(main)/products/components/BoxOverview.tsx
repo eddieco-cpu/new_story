@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { CSSProperties } from "react";
 
-import randomPicture from "@utils/randomPicture";
-import randomText from "@utils/randomText";
+import randomPicture from "@tools/randomPicture";
+import randomText from "@tools/randomText";
 
-import { UiButton, UiTag } from "@/components/UI/client";
+import { UiButton, UiTag } from "@/components/ui/client";
 
 //
 const productData = {

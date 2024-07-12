@@ -3,12 +3,12 @@
 import Link from "next/link";
 import React, { useState } from "react";
 
-import randomPicture from "@utils/randomPicture";
-import randomText from "@utils/randomText";
+import randomPicture from "@tools/randomPicture";
+import randomText from "@tools/randomText";
 
-import { UiTitle, UiSection } from "@/components/UI";
-import FreeGlide from "@/components/UI/FreeGlide";
-import NestedLink from "@/components/UI/NestedLink";
+import { UiTitle, UiSection } from "@/components/ui";
+import FreeGlide from "@/components/ui/FreeGlide";
+import NestedLink from "@/components/ui/NestedLink";
 
 import { type BookCard } from "./index";
 

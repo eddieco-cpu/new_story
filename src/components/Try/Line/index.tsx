@@ -1,7 +1,7 @@
 import List from "./List";
 
-import randomPicture from "@utils/randomPicture";
-import randomText from "@utils/randomText";
+import randomPicture from "@tools/randomPicture";
+import randomText from "@tools/randomText";
 
 export type Card = {
 	title: string;

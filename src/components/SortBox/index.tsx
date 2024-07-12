@@ -5,7 +5,7 @@ import { SortBook } from "@/types/cate";
 
 import List from "./List";
 
-import { UiMoreLink } from "@components/UI";
+import { UiMoreLink } from "@components/ui";
 import "@styles/components/sortBox.scss";
 
 export default function Index({

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
-import FreeGlide from "@/components/UI/FreeGlide";
+import FreeGlide from "@/components/ui/FreeGlide";
 
 import { IntroCard } from "@/types/cate";
 

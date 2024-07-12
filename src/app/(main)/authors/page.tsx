@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { NewsType } from "@/types";
-import randomPicture from "@utils/randomPicture";
-import randomText from "@utils/randomText";
+import randomPicture from "@tools/randomPicture";
+import randomText from "@tools/randomText";
 
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
-import { UiTitle } from "@/components/UI";
-import { UiButton, UiTag } from "@/components/UI/client";
-import NestedLink from "@/components/UI/NestedLink";
+import { UiTitle } from "@/components/ui";
+import { UiButton, UiTag } from "@/components/ui/client";
+import NestedLink from "@/components/ui/NestedLink";
 import ArticleExpansion from "./components/ArticleExpansion";
 
 //

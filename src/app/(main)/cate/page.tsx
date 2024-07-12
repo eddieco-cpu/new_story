@@ -2,9 +2,9 @@ import Link from "next/link";
 import { Category, Categories, SortBook } from "@/types/cate";
 import { PhotoSlider, NewsType } from "@/types";
 
-import randomPicture from "@utils/randomPicture";
-import randomText from "@utils/randomText";
-import { imgClassNameInGroupHover } from "@utils/data";
+import randomPicture from "@tools/randomPicture";
+import randomText from "@tools/randomText";
+import { imgClassNameInGroupHover } from "@tools/data";
 
 import PurePhotoSlider from "@/components/slider/PurePhotoSlider";
 import NewsSlider from "@/components/slider/NewsSlider";
@@ -14,11 +14,11 @@ import HeroSection from "./components/HeroSection";
 
 import SortBox from "@/components/SortBox";
 
-import { UiTitle, UiSection } from "@/components/UI";
-import FreeGlide from "@/components/UI/FreeGlide";
-import NestedLink from "@/components/UI/NestedLink";
+import { UiTitle, UiSection } from "@/components/ui";
+import FreeGlide from "@/components/ui/FreeGlide";
+import NestedLink from "@/components/ui/NestedLink";
 
-import PageNameInDev from "@/components/UI/PageNameInDev";
+import PageNameInDev from "@/components/ui/PageNameInDev";
 
 const categories: Categories = [
 	{

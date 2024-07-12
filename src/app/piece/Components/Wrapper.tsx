@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import useMode from "../Hooks/useMode";
 
 import NavButton from "./NavButton";
-import { Cross } from "@components/UI/svg";
+import { Cross } from "@components/ui/svg";
 
 import ArticleBox from "./ArticleBox";
 

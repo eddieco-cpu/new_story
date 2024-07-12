@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Category, Categories, SortBook } from "@/types/cate";
 import { PhotoSlider, NewsType } from "@/types";
 
-import { imgClassNameInGroupHover } from "@utils/data";
-import randomPicture from "@utils/randomPicture";
-import randomText from "@utils/randomText";
+import { imgClassNameInGroupHover } from "@tools/data";
+import randomPicture from "@tools/randomPicture";
+import randomText from "@tools/randomText";
 
 import PhotoAndBgSlider from "./components/PhotoAndBgSlider";
 import BooksGalleryA from "./components/BooksGalleryA";
@@ -15,11 +15,11 @@ import NewsSlider from "@/components/slider/NewsSlider";
 import CategoriesList from "@/components/slider/CategoriesList";
 import SortBox from "@/components/SortBox";
 
-import { UiTitle, UiSection } from "@/components/UI";
-import { UiButton } from "@/components/UI/client";
+import { UiTitle, UiSection } from "@/components/ui";
+import { UiButton } from "@/components/ui/client";
 
-import FreeGlide from "@/components/UI/FreeGlide";
-import NestedLink from "@/components/UI/NestedLink";
+import FreeGlide from "@/components/ui/FreeGlide";
+import NestedLink from "@/components/ui/NestedLink";
 
 import "@styles/home.scss";
 
