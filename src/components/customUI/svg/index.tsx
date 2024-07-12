@@ -4,6 +4,7 @@ import Hamburger from "./Hamburger";
 import Magnifier from "./Magnifier";
 import Pen from "./Pen";
 import Shelf from "./Shelf";
+import Sorting from "./Sorting";
 
 import PieceCata from "./PieceCata";
 import PieceDetail from "./PieceDetail";
@@ -19,6 +20,7 @@ export {
 	Magnifier,
 	Pen,
 	Shelf,
+	Sorting,
 
 	//
 	PieceCata,

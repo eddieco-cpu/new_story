@@ -8,6 +8,7 @@ import randomText from "@tools/randomText";
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
 import { UiTitle } from "@/components/customUI";
+import { Sorting as SortingIcon } from "@/components/customUI/svg";
 
 import FilterAside from "./components/FilterAside";
 
@@ -166,7 +167,7 @@ const filterTimeAreas = [
 	},
 ];
 
-export default function Cate() {
+export default function Page() {
 	return (
 		<section>
 			{/* -- */}
@@ -191,7 +192,12 @@ export default function Cate() {
 					{/* ---- */}
 					<div className="flex items-center justify-between max-md:px-5">
 						<UiTitle>全站分類</UiTitle>
-						<div>熱門瀏覽</div>
+						<nav className="flex items-center justify-center gap-2 *:flex-shrink-0">
+							<span className="flex items-center justify-center gap-1 *:flex-shrink-0">
+								<SortingIcon />
+								<b className="text-sm font-normal text-ash-600">排序</b>
+							</span>
+						</nav>
 					</div>
 
 					{/* ---- */}
