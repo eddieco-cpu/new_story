@@ -9,8 +9,8 @@ import FilterNav from "./components/FilterNav";
 
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
-import { UiTitle } from "@/components/ui";
-import NestedLink from "@/components/ui/NestedLink";
+import { UiTitle } from "@/components/customUI";
+import NestedLink from "@/components/customUI/NestedLink";
 
 //
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(

@@ -9,7 +9,7 @@ import { type DetailType } from "../../page";
 import ArticleExpansion from "./ArticleExpansion";
 import Comment from "./Comment";
 
-import { UiButton } from "@/components/ui/client";
+import { UiButton } from "@/components/customUI/client";
 
 type BoxType =
 	| {

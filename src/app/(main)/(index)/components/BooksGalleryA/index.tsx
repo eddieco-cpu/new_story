@@ -4,9 +4,9 @@ import { imgClassNameInGroupHover } from "@tools/data";
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
 
-import { UiTitle, UiSection } from "@/components/ui";
-import FreeGlide from "@/components/ui/FreeGlide";
-import NestedLink from "@/components/ui/NestedLink";
+import { UiSection } from "@/components/customUI";
+import FreeGlide from "@/components/customUI/FreeGlide";
+import NestedLink from "@/components/customUI/NestedLink";
 
 import List from "./List";
 

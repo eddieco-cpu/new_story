@@ -7,8 +7,7 @@ import randomText from "@tools/randomText";
 
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
-import { UiTitle } from "@/components/ui";
-import { link } from "fs";
+import { UiTitle } from "@/components/customUI";
 
 //
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(

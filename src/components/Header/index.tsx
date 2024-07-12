@@ -14,7 +14,7 @@ import {
 	Magnifier,
 	Pen,
 	Shelf,
-} from "@components/ui/svg";
+} from "@components/customUI/svg";
 
 import "@styles/header.scss";
 

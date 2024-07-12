@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { UiMain } from "@/components/ui";
+import { UiMain } from "@/components/customUI";
 import Wrapper from "./Components/Wrapper";
 
 import "@/styles/piece.scss";

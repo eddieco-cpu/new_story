@@ -6,9 +6,9 @@ import React, { useState } from "react";
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
 
-import { UiTitle, UiSection } from "@/components/ui";
-import FreeGlide from "@/components/ui/FreeGlide";
-import NestedLink from "@/components/ui/NestedLink";
+import { UiTitle, UiSection } from "@/components/customUI";
+import FreeGlide from "@/components/customUI/FreeGlide";
+import NestedLink from "@/components/customUI/NestedLink";
 
 import { type BookCard } from "./index";
 

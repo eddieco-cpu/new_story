@@ -4,7 +4,7 @@ import Link from "next/link";
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
 
-import { UiTitle } from "@/components/ui";
+import { UiTitle } from "@/components/customUI";
 
 //
 const novelCards = Array.from({ length: 12 }, (_, i) => i + 1).map((i) => ({

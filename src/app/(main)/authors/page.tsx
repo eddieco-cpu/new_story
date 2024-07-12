@@ -7,9 +7,9 @@ import randomText from "@tools/randomText";
 
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
-import { UiTitle } from "@/components/ui";
-import { UiButton, UiTag } from "@/components/ui/client";
-import NestedLink from "@/components/ui/NestedLink";
+import { UiTitle } from "@/components/customUI";
+import { UiButton, UiTag } from "@/components/customUI/client";
+import NestedLink from "@/components/customUI/NestedLink";
 import ArticleExpansion from "./components/ArticleExpansion";
 
 //

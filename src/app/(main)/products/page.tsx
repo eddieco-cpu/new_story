@@ -4,13 +4,13 @@ import Link from "next/link";
 import { NewsType } from "@/types";
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
-import randomInt from "@/utils/randomInt";
+import randomInt from "@tools/randomInt";
 
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
-import { UiTitle } from "@/components/ui";
-import { UiButton, UiTag } from "@/components/ui/client";
-import NestedLink from "@/components/ui/NestedLink";
+import { UiTitle } from "@/components/customUI";
+import { UiButton, UiTag } from "@/components/customUI/client";
+import NestedLink from "@/components/customUI/NestedLink";
 
 import BoxRecommendation from "./components/BoxRecommendation";
 import BoxCreator from "./components/BoxCreator";

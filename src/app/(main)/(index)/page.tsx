@@ -15,11 +15,11 @@ import NewsSlider from "@/components/slider/NewsSlider";
 import CategoriesList from "@/components/slider/CategoriesList";
 import SortBox from "@/components/SortBox";
 
-import { UiTitle, UiSection } from "@/components/ui";
-import { UiButton } from "@/components/ui/client";
+import { UiTitle, UiSection } from "@/components/customUI";
+import { UiButton } from "@/components/customUI/client";
 
-import FreeGlide from "@/components/ui/FreeGlide";
-import NestedLink from "@/components/ui/NestedLink";
+import FreeGlide from "@/components/customUI/FreeGlide";
+import NestedLink from "@/components/customUI/NestedLink";
 
 import "@styles/home.scss";
 

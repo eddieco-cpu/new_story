@@ -4,8 +4,8 @@ import Link from "next/link";
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
 
-import { UiButton } from "@/components/ui/client";
-import NestedLink from "@/components/ui/NestedLink";
+import { UiButton } from "@/components/customUI/client";
+import NestedLink from "@/components/customUI/NestedLink";
 
 //
 const author = {

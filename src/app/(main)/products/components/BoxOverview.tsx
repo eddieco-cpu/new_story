@@ -5,7 +5,7 @@ import { CSSProperties } from "react";
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
 
-import { UiButton, UiTag } from "@/components/ui/client";
+import { UiButton, UiTag } from "@/components/customUI/client";
 
 //
 const productData = {

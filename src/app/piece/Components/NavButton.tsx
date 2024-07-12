@@ -9,7 +9,7 @@ import {
 	PieceMoon,
 	PieceSetting,
 	PieceWarn,
-} from "@components/ui/svg";
+} from "@components/customUI/svg";
 
 //
 type NavButtonProps = {

@@ -7,7 +7,7 @@ import randomText from "@tools/randomText";
 
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
-import { UiTitle } from "@/components/ui";
+import { UiTitle } from "@/components/customUI";
 
 import FilterAside from "./components/FilterAside";
 

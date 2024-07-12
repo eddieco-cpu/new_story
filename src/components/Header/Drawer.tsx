@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { ReactNode, ComponentPropsWithoutRef } from "react";
 
-import { UiButton } from "@/components/ui/client";
+import { UiButton } from "@/components/customUI/client";
 
 export default function Drawer({
 	isDrawer,

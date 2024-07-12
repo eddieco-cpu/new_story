@@ -14,11 +14,11 @@ import HeroSection from "./components/HeroSection";
 
 import SortBox from "@/components/SortBox";
 
-import { UiTitle, UiSection } from "@/components/ui";
-import FreeGlide from "@/components/ui/FreeGlide";
-import NestedLink from "@/components/ui/NestedLink";
+import { UiTitle, UiSection } from "@/components/customUI";
+import FreeGlide from "@/components/customUI/FreeGlide";
+import NestedLink from "@/components/customUI/NestedLink";
 
-import PageNameInDev from "@/components/ui/PageNameInDev";
+import PageNameInDev from "@/components/customUI/PageNameInDev";
 
 const categories: Categories = [
 	{
