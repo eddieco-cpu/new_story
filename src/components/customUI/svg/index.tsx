@@ -5,6 +5,7 @@ import Magnifier from "./Magnifier";
 import Pen from "./Pen";
 import Shelf from "./Shelf";
 import Sorting from "./Sorting";
+import Selecting from "./Selecting";
 
 import PieceCata from "./PieceCata";
 import PieceDetail from "./PieceDetail";
@@ -21,6 +22,7 @@ export {
 	Pen,
 	Shelf,
 	Sorting,
+	Selecting,
 
 	//
 	PieceCata,

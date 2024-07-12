@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import React, { useState } from "react";
+import React from "react";
+import { useSearchContext } from "@contexts/searchContext";
 
 //
 const filterCates = [
@@ -144,12 +145,22 @@ const filterTimeAreas = [
 ];
 
 function FilterCate() {
+	const { isMoblieShowFilterCate, setIsMoblieShowFilterCate } =
+		useSearchContext();
 	return (
 		<section
 			className={
 				"flex flex-col items-stretch justify-start gap-4 " +
-				` max-md:fixed max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:top-0 max-md:z-30 max-md:hidden max-md:bg-[rgba(0,0,0,0.7)]`
+				` max-md:fixed max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:top-0 max-md:z-30 max-md:bg-[rgba(0,0,0,0.7)]` +
+				` transition-opacity duration-200` +
+				` ${isMoblieShowFilterCate ? " max-md:scale-x-100 max-md:opacity-100" : " max-md:scale-x-0 max-md:opacity-0"} `
 			}
+			style={{
+				transition: isMoblieShowFilterCate
+					? ""
+					: " transform 0s ease 0.6s, opacity 0.2s ease 0.4s",
+			}}
+			onClick={() => setIsMoblieShowFilterCate(false)}
 		>
 			<p className="rounded-md bg-landscape-450 px-[10px] py-[5px] max-md:hidden">
 				分類
@@ -157,7 +168,9 @@ function FilterCate() {
 			<nav
 				className={
 					"flex flex-wrap content-start justify-start gap-2 " +
-					` max-md:absolute max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:top-0 max-md:m-auto max-md:h-fit max-md:w-[calc(100%-40px)] max-md:flex-col max-md:content-center max-md:items-center max-md:justify-center max-md:gap-4 max-md:rounded-lg max-md:bg-white max-md:p-5`
+					` max-md:absolute max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:top-0 max-md:m-auto max-md:h-fit max-md:w-[calc(100%-40px)] max-md:flex-col max-md:content-center max-md:items-center max-md:justify-center max-md:gap-4 max-md:rounded-lg max-md:bg-white max-md:p-5` +
+					` duration-400 max-md:transition-opacity` +
+					` ${isMoblieShowFilterCate ? " delay-300 max-md:opacity-100" : " max-md:opacity-0"} `
 				}
 			>
 				{filterCates.map((cate) => (
@@ -180,14 +193,32 @@ function FilterCate() {
 }
 
 function FilterDetailsCondition() {
+	//
+	const {
+		isMoblieShowFilterDetailsCondition,
+		setIsMoblieShowFilterDetailsCondition,
+	} = useSearchContext();
+
 	return (
 		<section
-			className={`max-md:fixed max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:top-0 max-md:z-30 max-md:hidden max-md:bg-[rgba(0,0,0,0.7)]`}
+			className={
+				`overflow-hidden max-md:fixed max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:top-0 max-md:z-30 max-md:bg-[rgba(0,0,0,0.7)] ` +
+				` transition-opacity duration-200` +
+				` ${isMoblieShowFilterDetailsCondition ? " max-md:scale-x-100 max-md:opacity-100" : " max-md:scale-x-0 max-md:opacity-0"} `
+			}
+			style={{
+				transition: isMoblieShowFilterDetailsCondition
+					? ""
+					: " transform 0s ease 0.4s, opacity 0.2s ease 0.4s",
+			}}
+			onClick={() => setIsMoblieShowFilterDetailsCondition(false)}
 		>
 			<section
 				className={
 					"flex flex-col items-stretch justify-start gap-4 " +
-					` max-md:absolute max-md:right-0 max-md:top-0 max-md:h-full max-md:w-[calc(100%-60px)] max-md:bg-landscape-300 max-md:px-4 max-md:py-6`
+					` max-md:absolute max-md:right-0 max-md:top-0 max-md:h-full max-md:w-[calc(100%-60px)] max-md:bg-landscape-300 max-md:px-4 max-md:py-6` +
+					` duration-400 max-md:transition-transform` +
+					` ${isMoblieShowFilterDetailsCondition ? " delay-300 max-md:translate-x-0" : " max-md:translate-x-[100%]"} `
 				}
 			>
 				<p className="rounded-md bg-landscape-450 px-[10px] py-[5px]">

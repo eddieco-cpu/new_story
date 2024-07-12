@@ -22,6 +22,7 @@
       "@/*": ["./src/*"],
       "@styles/*": ["./src/styles/*"],
       "@components/*": ["./src/components/*"],
+			"@contexts/*": ["./src/contexts/*"],
 			"@tools/*": ["./src/tools/*"],
       "@types/*": ["./src/types/*"]
     }
