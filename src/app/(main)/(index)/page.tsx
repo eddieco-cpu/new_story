@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import { Category, Categories, SortBook } from "@/types/cate";
+import { SortBook } from "@/types/cate";
 import { PhotoSlider, NewsType } from "@/types";
 
-import { imgClassNameInGroupHover } from "@tools/data";
+import { imgClassNameInGroupHover } from "@lib/data";
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
 
@@ -22,75 +22,6 @@ import FreeGlide from "@/components/customUI/FreeGlide";
 import NestedLink from "@/components/customUI/NestedLink";
 
 import "@styles/home.scss";
-
-const categories: Categories = [
-	{
-		id: "original",
-		name: "琅琅原創",
-		url: "/",
-		isEmphasis: true,
-	},
-	{
-		id: "romance",
-		name: "言情",
-		url: "/cate",
-		isEmphasis: false,
-	},
-	{
-		id: "lightNovel",
-		name: "輕小說",
-		url: "",
-		isEmphasis: false,
-	},
-	{
-		id: "fantasy",
-		name: "玄幻",
-		url: "",
-		isEmphasis: false,
-	},
-	{
-		id: "suspense",
-		name: "懸疑",
-		url: "",
-		isEmphasis: false,
-	},
-	{
-		id: "adventure",
-		name: "冒險",
-		url: "",
-		isEmphasis: false,
-	},
-	{
-		id: "supernatural",
-		name: "靈異",
-		url: "",
-		isEmphasis: false,
-	},
-	{
-		id: "BL",
-		name: "BL",
-		url: "",
-		isEmphasis: false,
-	},
-	{
-		id: "adult",
-		name: "18+",
-		url: "",
-		isEmphasis: false,
-	},
-	{
-		id: "comic",
-		name: "漫畫",
-		url: "",
-		isEmphasis: true,
-	},
-	{
-		id: "manga",
-		name: "漫畫",
-		url: "",
-		isEmphasis: false,
-	},
-];
 
 const photoSliders: PhotoSlider[] = Array.from(
 	{ length: 6 },
@@ -221,7 +152,7 @@ export default function Home() {
 			</section>
 
 			<section className="px-6 py-4 max-md:hidden">
-				<CategoriesList categories={categories} />
+				<CategoriesList />
 			</section>
 
 			<section className="bg-landscape-400 p-6 max-md:pl-5 max-md:pr-0 lg:rounded-2xl">

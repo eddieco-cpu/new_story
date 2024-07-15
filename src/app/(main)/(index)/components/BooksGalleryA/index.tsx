@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { imgClassNameInGroupHover } from "@tools/data";
+import { imgClassNameInGroupHover } from "@lib/data";
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
 
