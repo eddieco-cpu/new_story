@@ -68,7 +68,7 @@ export default function RootLayout({
 					type="text/css"
 				/>
 			</head>
-			<body className="bg-landscape-300">
+			<body className="bg-landscape-300" suppressHydrationWarning={true}>
 				{children}
 				<Toaster />
 			</body>
