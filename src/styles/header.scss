@@ -3,11 +3,16 @@
 //// General	////
 
 .header {
-  position: relative;
+  //position: relative;
+  position: absolute;
+  //opacity: 0.8;
+  top: 0;
+  left: 0;
   width: 100%;
   border-bottom: 1px solid #d8d8d8;
   //background-color: #fff;
   z-index: 10;
+  transition: background-color 0.5s ease;
 
   //
   height: 134px;
@@ -1034,23 +1039,23 @@
   position: fixed;
   top: 0;
   left: 0;
-  animation: headerscroll 0.3s linear;
+  animation: headerscroll 0.5s ease 0.13s both;
 
   background-color: var(--landscape-300-rgb);
 
   //
   height: 90px;
 
-  &+.header-ref {
-    margin-top: 134px;
-  }
+  // &+.header-ref {
+  //   margin-top: 134px;
+  // }
 
   @include mobile {
     height: 55px;
 
-    &+.header-ref {
-      margin-top: 55px;
-    }
+    // &+.header-ref {
+    //   margin-top: 55px;
+    // }
   }
 
 
@@ -1072,8 +1077,20 @@
 }
 
 .header-ref {
-  height: 1px;
-  margin-bottom: -1px;
+  height: 90px;
+
+  background-color: var(--home-slide-bg);
+  margin-top: calc(134px - 90px);
+  //margin-bottom: calc(90px);
+
+  // height: 134px;
+  // margin-top: 0;
+
+  @include mobile {
+    height: 55px;
+    //margin-top: 55px;
+    margin-top: calc(55px - 55px);
+  }
 }
 
 .header .search {
@@ -1594,7 +1611,7 @@
 
 @keyframes headerscroll {
   from {
-    transform: translateY(-40px);
+    transform: translateY(-100%);
   }
 
   to {

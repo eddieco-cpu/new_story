@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Drawer from "./Drawer";
+import ToTop from "./ToTop";
 
 import {
 	Avatar,
@@ -39,7 +40,9 @@ const Header: React.FC = () => {
 		const observer = new IntersectionObserver(
 			(entries, observer) => {
 				const entry = entries[0];
-				if (entry.isIntersecting) {
+				//console.log(entry);
+
+				if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
 					//alert("Element is in view!");
 					setFixHeader(false);
 				} else {
@@ -50,7 +53,7 @@ const Header: React.FC = () => {
 			{
 				root: null,
 				rootMargin: "0px",
-				threshold: 0.5,
+				threshold: [0, 0.9, 1],
 			}
 		);
 
@@ -322,6 +325,13 @@ const Header: React.FC = () => {
 			</header>
 			<Drawer {...{ isDrawer, setIsDrawer }}></Drawer>
 			<div ref={targetRef} className={`header-ref`}></div>
+			<ToTop
+				className={
+					fixHeader
+						? "translate-y-0 opacity-100 delay-300"
+						: "pointer-events-none translate-y-20 opacity-0 delay-0"
+				}
+			/>
 		</>
 	);
 };
