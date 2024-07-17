@@ -3,9 +3,15 @@
 @tailwind utilities;
 
 @import "./mixin.scss";
+@import "@styles/footer.scss";
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+
+  @include mobile {
+    scroll-padding-top: 60px;
+  }
 }
 
 

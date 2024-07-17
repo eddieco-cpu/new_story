@@ -31,7 +31,7 @@ export const UiMain: React.FC<UiMainProps> = ({ children, className }) => {
 	return (
 		<main
 			className={
-				"m-auto min-h-screen max-w-[var(--container-width)] pb-8 max-md:max-w-none " +
+				"m-auto min-h-[calc(100vh-270px)] max-w-[var(--container-width)] pb-8 max-md:max-w-none " +
 				` ${env !== "production" ? " ring-1" : ""} ${className || ""}`
 			}
 		>
