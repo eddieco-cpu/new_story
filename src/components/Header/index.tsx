@@ -17,6 +17,13 @@ import {
 	Shelf,
 } from "@components/customUI/svg";
 
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+	PopoverClose,
+} from "@/components/ui/popover";
+
 import "@styles/header.scss";
 
 const Header: React.FC = () => {
@@ -105,17 +112,31 @@ const Header: React.FC = () => {
 							<div className="search__form-wrapper">
 								{/* --- search inputer --- */}
 								<div className="search-select">
-									<div className="search-select__toggle">找作品</div>
-									<ul className="search-select__list">
-										<li>
-											{/* onClick={() => searchType('1', 'b')} data-value="1" */}
-											<a>找作品</a>
-										</li>
-										<li>
-											{/* onClick={() => searchType('1', 'a')} data-value="2" */}
-											<a>找作者</a>
-										</li>
-									</ul>
+									{/* -- */}
+									<div className="absolute bottom-0 left-0 right-0 top-0 rounded-s-full">
+										<Popover>
+											<PopoverTrigger className="flex h-full w-full items-center justify-end gap-1 px-1">
+												<p className="text-sm">找作品</p>
+												<i className="i-arrow5-down text-xs"></i>
+											</PopoverTrigger>
+											<PopoverContent
+												align="end"
+												className="w-[90px] bg-landscape-300 p-0"
+											>
+												<PopoverClose asChild>
+													<p className="cursor-pointer py-2 text-center">
+														找作品
+													</p>
+												</PopoverClose>
+												<div className="h-[1px] bg-ash-300"></div>
+												<PopoverClose asChild>
+													<p className="cursor-pointer py-2 text-center">
+														找作者
+													</p>
+												</PopoverClose>
+											</PopoverContent>
+										</Popover>
+									</div>
 								</div>
 								<input
 									type="search"
