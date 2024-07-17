@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { ReactNode, ComponentPropsWithoutRef } from "react";
 
+import { categoryDatas } from "@/lib/data";
+
 import { UiButton } from "@/components/customUI/client";
 
 export default function Drawer({
@@ -98,17 +100,11 @@ export default function Drawer({
 							</li>
 							<li>
 								<nav className="grid grid-cols-2 gap-x-6 gap-y-4">
-									<UiButton className="w-full">琅琅原創</UiButton>
-									<UiButton className="w-full">言情</UiButton>
-									<UiButton className="w-full">輕小說</UiButton>
-									<UiButton className="w-full">玄幻</UiButton>
-									<UiButton className="w-full">懸疑</UiButton>
-									<UiButton className="w-full">琅琅原創</UiButton>
-									<UiButton className="w-full">言情</UiButton>
-									<UiButton className="w-full">輕小說</UiButton>
-									<UiButton className="w-full">玄幻</UiButton>
-									<UiButton className="w-full">懸疑</UiButton>
-									<UiButton className="w-full">言情</UiButton>
+									{categoryDatas.map((cate) => (
+										<Link key={cate.id} href={cate.url}>
+											<UiButton className="w-full">{cate.name}</UiButton>
+										</Link>
+									))}
 								</nav>
 							</li>
 							<li className="pt-2">

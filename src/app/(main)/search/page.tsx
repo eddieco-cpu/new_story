@@ -31,64 +31,6 @@ const rankBooks = Array.from({ length: 60 }, (_, i) => i + 1).map((i) => ({
 	amount: Math.floor(Math.random() * 10000),
 }));
 
-const filterCates = [
-	{
-		id: 11,
-		title: "全部",
-		link: "",
-	},
-	{
-		id: 12,
-		title: "琅琅原創",
-		link: "",
-	},
-	{
-		id: 13,
-		title: "漫畫",
-		link: "",
-	},
-	{
-		id: 14,
-		title: "言情",
-		link: "",
-	},
-	{
-		id: 15,
-		title: "輕小說",
-		link: "",
-	},
-	{
-		id: 21,
-		title: "玄幻",
-		link: "",
-	},
-	{
-		id: 22,
-		title: "懸疑",
-		link: "",
-	},
-	{
-		id: 23,
-		title: "冒險",
-		link: "",
-	},
-	{
-		id: 24,
-		title: "靈異",
-		link: "",
-	},
-	{
-		id: 25,
-		title: "BL",
-		link: "",
-	},
-	{
-		id: 35,
-		title: "18+",
-		link: "",
-	},
-];
-
 const filterWordCounts = [
 	{
 		id: 31,

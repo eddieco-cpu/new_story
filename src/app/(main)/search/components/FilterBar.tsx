@@ -46,22 +46,21 @@ export default function FilterBar() {
 				>
 					<p className="flex w-full items-center justify-between">
 						<span className="text-sm tracking-[2px] text-ash-600 max-md:hidden">
-							熱門瀏覽 {isShowSortOption ? "T" : "F"}
+							熱門瀏覽
 						</span>
 						<span className="md:hidden">
 							<SelectingIcon />
 						</span>
 						<i className="i-arrow5-down text-sm text-ash-600" />
 					</p>
-					{/* {isShowSortOption && (
+					{
 						<ul
 							className={
-								"absolute left-0 top-10 z-[6] w-[101%] overflow-hidden rounded-lg bg-white p-4 shadow-2xl *:p-1" +
-								` ${isShowSortOption ? "" : " w-0 p-0"}`
+								"absolute left-0 top-10 z-[6] m-auto overflow-hidden rounded-lg bg-white shadow-2xl transition-opacity duration-300 *:p-1 *:max-md:mb-3 " +
+								` max-md:fixed max-md:bottom-0 max-md:right-0 max-md:top-0 max-md:z-30 max-md:h-fit max-md:max-w-[calc(100vw-40px)]` +
+								` ${isShowSortOption ? " w-[101%] p-4 opacity-100 max-md:p-5 max-md:pb-2 max-md:delay-300" : " w-0 p-0 opacity-0"}`
 							}
-							onClick={() => (
-								alert(123), alert(6), setIsShowSortOption((v) => !v)
-							)}
+							//onClick={(e) => (e.stopPropagation(), setIsShowSortOption(true))}
 						>
 							<li>
 								<p>熱門瀏覽</p>
@@ -76,16 +75,18 @@ export default function FilterBar() {
 								<p>總字數</p>
 							</li>
 						</ul>
-					)}
-					{isShowSortOption && (
+					}
+					{
 						<div
 							className={
-								"fixed bottom-0 left-0 right-0 top-0 z-[5] bg-[rgba(0,0,0,0.2)]" +
-								` ${isShowSortOption ? "" : " w-0"}`
+								"fixed bottom-0 left-0 right-0 top-0 z-[5] max-md:z-[29] max-md:bg-[rgba(0,0,0,0.7)]" +
+								` ${isShowSortOption ? " opacity-100 max-md:transition-opacity max-md:delay-75" : " pointer-events-none w-0 opacity-0 max-md:w-auto"}`
 							}
-							onClick={() => setIsShowSortOption((v) => !v)}
+							onClick={(e) => (
+								e.stopPropagation(), setIsShowSortOption((v) => !v)
+							)}
 						></div>
-					)} */}
+					}
 				</div>
 			</nav>
 		</div>
