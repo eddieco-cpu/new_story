@@ -3,30 +3,31 @@ import { useState, useEffect } from "react";
 type Mode = "default" | "yellow" | "blue" | "green" | "dark";
 
 function setPieceModeStyle(PieceMode: Mode) {
-	document.documentElement.style.setProperty(
-		"--piece-nav",
-		`var(--${PieceMode}-nav)`
-	);
-	document.documentElement.style.setProperty(
-		"--piece-border",
-		`var(--${PieceMode}-border)`
-	);
-	document.documentElement.style.setProperty(
-		"--piece-body",
-		`var(--${PieceMode}-body)`
-	);
-	document.documentElement.style.setProperty(
-		"--piece-aside",
-		`var(--${PieceMode}-aside)`
-	);
-	document.documentElement.style.setProperty(
-		"--piece-content",
-		`var(--${PieceMode}-content)`
-	);
-	document.documentElement.style.setProperty(
-		"--piece-text",
-		`var(--${PieceMode}-text)`
-	);
+	// document.documentElement.style.setProperty(
+	// 	"--piece-nav",
+	// 	`var(--${PieceMode}-nav)`
+	// );
+	// document.documentElement.style.setProperty(
+	// 	"--piece-border",
+	// 	`var(--${PieceMode}-border)`
+	// );
+	// document.documentElement.style.setProperty(
+	// 	"--piece-body",
+	// 	`var(--${PieceMode}-body)`
+	// );
+	// document.documentElement.style.setProperty(
+	// 	"--piece-aside",
+	// 	`var(--${PieceMode}-aside)`
+	// );
+	// document.documentElement.style.setProperty(
+	// 	"--piece-content",
+	// 	`var(--${PieceMode}-content)`
+	// );
+	// document.documentElement.style.setProperty(
+	// 	"--piece-text",
+	// 	`var(--${PieceMode}-text)`
+	// );
+	document.documentElement.setAttribute("data-piece-mode", PieceMode);
 }
 
 const useMode = () => {
