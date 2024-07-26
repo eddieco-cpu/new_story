@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 import { UiMain } from "@/components/customUI";
+
+import PieceProvider from "@contexts/pieceContext";
 import Wrapper from "./Components/Wrapper";
 
 import "@/styles/piece.scss";
@@ -23,7 +25,9 @@ export default function Page() {
 			</header>
 			<section className="piece_main bg-[var(--piece-body,--default-body)] py-4 max-lg:pt-0">
 				<UiMain className="flex items-start justify-center gap-[18px] *:flex-shrink-0 max-xl:gap-2 max-lg:flex-col max-lg:gap-0">
-					<Wrapper></Wrapper>
+					<PieceProvider>
+						<Wrapper></Wrapper>
+					</PieceProvider>
 				</UiMain>
 			</section>
 		</>
