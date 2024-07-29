@@ -5,13 +5,15 @@ import { UiMain } from "@/components/customUI";
 import PieceProvider from "@contexts/pieceContext";
 import Wrapper from "./Components/Wrapper";
 
+import { unFetchedPieceBase64 } from "@/lib/data";
+
 import "@/styles/piece.scss";
 
 export default function Page() {
 	return (
 		<>
 			<header className="piece_header bg-[var(--piece-nav,--default-nav)] py-4">
-				<nav className="mx-auto flex h-11 max-w-[1080px] items-center justify-start gap-2 ring-1 max-lg:px-5">
+				<nav className="mx-auto flex h-11 max-w-[1080px] items-center justify-start gap-2 max-lg:px-5">
 					<a href="https://udn.com/news/index" className="logo-udn">
 						<Image
 							src="/images/reading-logo.svg"
@@ -26,7 +28,7 @@ export default function Page() {
 			<section className="piece_main bg-[var(--piece-body,--default-body)] py-4 max-lg:pt-0">
 				<UiMain className="flex items-start justify-center gap-[18px] *:flex-shrink-0 max-xl:gap-2 max-lg:flex-col max-lg:gap-0">
 					<PieceProvider>
-						<Wrapper></Wrapper>
+						<Wrapper pieceBase64={unFetchedPieceBase64 as string}></Wrapper>
 					</PieceProvider>
 				</UiMain>
 			</section>

@@ -12,9 +12,9 @@ import { Cross } from "@components/customUI/svg";
 
 import ArticleBox from "./ArticleBox";
 
-export default function Wrapper() {
+export default function Wrapper({ pieceBase64 }: { pieceBase64: string }) {
 	//
-	const { setIsSettingBox } = usePieceContext();
+	const { setIsSettingBox, isPieceLoading } = usePieceContext();
 
 	return (
 		<>
@@ -27,7 +27,7 @@ export default function Wrapper() {
 
 			<section className="w-[1080px] max-xl:max-w-[calc(100%-16px-120px)] max-lg:mb-32 max-lg:w-full max-lg:max-w-none">
 				<article className="piece-body mb-6 min-h-[calc(100vh-75px)] border border-[var(--piece-border)] bg-[var(--piece-content)] px-[60px] py-20 max-lg:px-5 max-lg:py-6 lg:rounded-2xl">
-					<ArticleBox></ArticleBox>
+					<ArticleBox pieceBase64={pieceBase64 as string}></ArticleBox>
 				</article>
 
 				<section className="piece-nav m-auto flex items-center justify-between gap-11 rounded-2xl border border-[var(--piece-border)] bg-[var(--piece-nav)] px-[60px] py-5 max-lg:fixed max-lg:bottom-[60px] max-lg:left-0 max-lg:right-0 max-lg:rounded-none max-lg:px-5 max-lg:py-3">
@@ -65,6 +65,17 @@ export default function Wrapper() {
 					</button>
 				</nav>
 			</aside>
+
+			{
+				<div
+					className={
+						"fixed bottom-0 left-0 right-0 top-0 z-10 m-auto flex items-center justify-center bg-[rgba(248,244,241,0.6)] transition-opacity duration-300" +
+						`${isPieceLoading ? " pointer-events-auto opacity-100" : " pointer-events-none opacity-0"}`
+					}
+				>
+					<p className="text-2xl">loading...</p>
+				</div>
+			}
 
 			<SettingBox />
 		</>
