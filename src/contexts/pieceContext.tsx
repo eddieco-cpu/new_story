@@ -23,6 +23,9 @@ interface PieceContextType {
 
 	lineHeight: LineHeightType;
 	setLineHeight: React.Dispatch<React.SetStateAction<LineHeightType>>;
+
+	isPieceLoading: boolean;
+	setIsPieceLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 //
@@ -34,6 +37,7 @@ const PieceProvider = ({ children }: { children: ReactNode }) => {
 	const [isSettingBox, setIsSettingBox] = useState(false);
 	const [fontSize, setFontSize] = useState(20);
 	const [lineHeight, setLineHeight] = useState<LineHeightType>("S");
+	const [isPieceLoading, setIsPieceLoading] = useState(true);
 
 	return (
 		<>
@@ -49,6 +53,10 @@ const PieceProvider = ({ children }: { children: ReactNode }) => {
 					setFontSize,
 					lineHeight,
 					setLineHeight,
+
+					//
+					isPieceLoading,
+					setIsPieceLoading,
 				}}
 			>
 				{children}

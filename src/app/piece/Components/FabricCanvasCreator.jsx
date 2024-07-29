@@ -44,7 +44,7 @@ function applyBoldStyles(textObject, rawText) {
 //
 export default function FabricCanvas({ decodedHtml }) {
 	//
-	const { fontSize, lineHeight } = usePieceContext();
+	const { fontSize, lineHeight, setIsPieceLoading } = usePieceContext();
 
 	const parentContainerRef = useRef(null);
 	const fabricRef = useRef(null);
@@ -77,10 +77,9 @@ export default function FabricCanvas({ decodedHtml }) {
 
 	useEffect(() => {
 		//
-		//console.log(decodedHtml);
-		// decodedHtml =
-		// 	"測試文字\n這是一段測試文字\n\n這是<b>一段\n測試</b>文字\n" + decodedHtml;
 		let newDecodedHtml = decodedHtml.replace(/<\/?[^>]+(>|$)/g, "");
+		// console.log("newDecodedHtml", newDecodedHtml);
+		//console.log(" decodedHtml", decodedHtml);
 
 		//
 		const parentContainer = parentContainerRef.current;
@@ -152,6 +151,7 @@ export default function FabricCanvas({ decodedHtml }) {
 
 		//
 		window.addEventListener("resize", resizeCanvas);
+		setIsPieceLoading(false);
 
 		//
 		return () => {
