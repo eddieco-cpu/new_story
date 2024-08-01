@@ -8,6 +8,7 @@
   --default-aside: rgb(250, 250, 250); //rgba(255, 255, 255, 0.7);
   --default-content: rgba(255, 255, 255, 0.4); //#F8F4F1;
   --default-text: #222;
+  --default-bg-for-hiddens: #FBF8F7;
 
   //
   --yellow-nav: #DBC68F;
@@ -16,6 +17,7 @@
   --yellow-aside: rgb(243, 243, 243); //rgba(255, 255, 255, 0.7);
   --yellow-content: rgba(255, 255, 255, 0.4); //#E6E2D7;
   --yellow-text: #222;
+  --yellow-bg-for-hiddens: #E6E2D7;
 
   //
   --blue-nav: #BED6D9;
@@ -24,6 +26,7 @@
   --blue-aside: rgb(243, 243, 243); //rgba(255, 255, 255, 0.7);
   --blue-content: rgba(255, 255, 255, 0.4);
   --blue-text: #222;
+  --blue-bg-for-hiddens: #E6EBEC;
 
   //
   --green-nav: #BFD6B7;
@@ -32,6 +35,7 @@
   --green-aside: rgb(243, 243, 243); //rgba(255, 255, 255, 0.7);
   --green-content: rgba(255, 255, 255, 0.4); //#E6E2D7;
   --green-text: #222;
+  --green-bg-for-hiddens: #E9EDE7;
 
   //
   --dark-nav: #070707;
@@ -40,6 +44,8 @@
   --dark-aside: #222222;
   --dark-content: rgba(255, 255, 255, 0.03);
   --dark-text: #ABABAB;
+  --dark-bg-for-hiddens: #151515;
+  ;
 
 
   //
@@ -49,6 +55,7 @@
   --piece-aside: var(--default-aside);
   --piece-content: var(--default-content);
   --piece-text: var(--default-text);
+  --piece-bg-for-hiddens: var(--default-bg-for-hiddens);
 }
 
 .piece {
@@ -74,7 +81,17 @@
   &_nav {
     transition: background-color 0.3s, color 0.3s;
   }
+
+  &_memo {
+    &-gradient {
+      background-color: var(--piece-bg-for-hiddens);
+      box-shadow: 0px -5px 13px 17px var(--piece-bg-for-hiddens);
+      transition: background-color 0.3s, box-shadow 0.3s;
+      //outline: 1px solid orange;
+    }
+  }
 }
+
 
 
 [data-piece-mode="default"] {
@@ -84,6 +101,7 @@
   --piece-aside: var(--default-aside);
   --piece-content: var(--default-content);
   --piece-text: var(--default-text);
+  --piece-bg-for-hiddens: var(--default-bg-for-hiddens);
 
   & &.mode-btn {
     --tw-ring-color: var(--accent-300-rgb);
@@ -97,6 +115,7 @@
   --piece-aside: var(--yellow-aside);
   --piece-content: var(--yellow-content);
   --piece-text: var(--yellow-text);
+  --piece-bg-for-hiddens: var(--yellow-bg-for-hiddens);
 
   & &.mode-btn {
     --tw-ring-color: var(--accent-300-rgb);
@@ -110,6 +129,7 @@
   --piece-aside: var(--blue-aside);
   --piece-content: var(--blue-content);
   --piece-text: var(--blue-text);
+  --piece-bg-for-hiddens: var(--blue-bg-for-hiddens);
 
   & &.mode-btn {
     --tw-ring-color: var(--accent-300-rgb);
@@ -123,6 +143,7 @@
   --piece-aside: var(--green-aside);
   --piece-content: var(--green-content);
   --piece-text: var(--green-text);
+  --piece-bg-for-hiddens: var(--green-bg-for-hiddens);
 
   & &.mode-btn {
     --tw-ring-color: var(--accent-300-rgb);
@@ -136,6 +157,7 @@
   --piece-aside: var(--dark-aside);
   --piece-content: var(--dark-content);
   --piece-text: var(--dark-text);
+  --piece-bg-for-hiddens: var(--dark-bg-for-hiddens);
 
   & &.mode-btn {
     --tw-ring-color: var(--accent-300-rgb);
@@ -143,5 +165,34 @@
 
   .piece canvas {
     filter: invert(100%) sepia(0%) saturate(7434%) hue-rotate(21deg) brightness(121%) contrast(113%);
+  }
+
+  .memo {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    * {
+      color: #fff;
+    }
+
+    .text-accent-300 {
+      color: var(--accent-300-rgb)
+    }
+  }
+
+  .piece-cate span {
+    color: #ddd;
+  }
+
+  .piece-cate .title {
+    color: #bbb;
+  }
+
+  .piece-cate .title-des {
+    color: #aaa;
+    //background-image: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.4));
+  }
+
+  .piece-cate a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }

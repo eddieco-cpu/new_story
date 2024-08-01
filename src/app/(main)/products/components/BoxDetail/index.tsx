@@ -4,12 +4,28 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
-import { type DetailType } from "../../page";
-
 import ArticleExpansion from "./ArticleExpansion";
+import ChaptersList from "./ChaptersList";
 import Comment from "./Comment";
 
 import { UiButton } from "@/components/customUI/client";
+import { type Chapter } from "../../[pid]/page";
+
+export type MessageType = {
+	id: number;
+	name: string;
+	context: string;
+	time: Date;
+};
+export type CommentType = MessageType & {
+	likesNumber: number;
+	feedbacks: MessageType[];
+};
+export type DetailType = {
+	summary: string;
+	chapter: { id: number; title: string }[];
+	comment: CommentType[];
+};
 
 type BoxType =
 	| {
@@ -28,23 +44,39 @@ type BoxType =
 			amount?: number;
 	  };
 
-export default function Index({ detail }: { detail: DetailType }) {
+export default function Index({
+	detail,
+	publish_article,
+	summary,
+	productId,
+	productChapters,
+}: {
+	detail: DetailType;
+	publish_article: string;
+	summary: string;
+	productId: string;
+	productChapters: Chapter[];
+}) {
 	//
 	const [boxTypes] = useState<BoxType[]>([
 		{ id: "summary", name: "簡介" },
-		{ id: "chapter", name: "目錄", amount: 569 },
+		{ id: "chapter", name: "目錄", amount: Number(publish_article) },
 		{ id: "comment", name: "留言" },
 	]);
+	// const [boxType, setBoxType] = useState<BoxType>({
+	// 	id: "summary",
+	// 	name: "簡介",
+	// });
 	const [boxType, setBoxType] = useState<BoxType>({
-		id: "summary",
-		name: "簡介",
+		id: "chapter",
+		name: "目錄",
+		amount: Number(publish_article),
 	});
 
 	const [isCommentRuleExpanded, setIsCommentRuleExpanded] = useState(false);
 
 	//
 	useEffect(() => {
-		//
 		console.log(detail);
 	}, []);
 
@@ -104,33 +136,18 @@ export default function Index({ detail }: { detail: DetailType }) {
 				<article className="px-6 py-5 max-md:px-5">
 					{/* -- */}
 					{boxType.id === "summary" && (
-						<ArticleExpansion article={detail.summary}></ArticleExpansion>
+						<ArticleExpansion article={summary}></ArticleExpansion>
 					)}
 
 					{/* -- */}
-					{boxType.id === "chapter" && (
-						<div>
-							<p className="flex items-center justify-end">
-								<span className="flex scale-y-[120%] cursor-pointer items-center justify-center">
-									<i className="i-down-2 mr-[-5px] block leading-none text-accent-300"></i>
-									<i className="i-up-2 ml-[-5px] block leading-none text-ash-600"></i>
-								</span>
-							</p>
-							<ul className="grid grid-cols-2 gap-x-5 gap-y-3 px-6 py-5 max-xl:px-0 max-xl:py-4 max-md:grid-cols-1">
-								{detail.chapter.map((chapter) => (
-									<li
-										key={chapter.id}
-										className="flex cursor-pointer items-center justify-between gap-2 rounded-lg px-6 py-2 hover:bg-ash-200 active:bg-ash-300 max-xl:px-2"
-									>
-										<span className="flex-grow text-ash-850">
-											{chapter.title}
-										</span>
-										<i className="i-signin flex-shrink-0 text-accent-250"></i>
-									</li>
-								))}
-							</ul>
-						</div>
-					)}
+					{
+						<ChaptersList
+							publish_article={publish_article}
+							productId={productId}
+							productChapters={productChapters}
+							className={boxType.id === "chapter" ? "block" : "hidden"}
+						></ChaptersList>
+					}
 
 					{/* -- */}
 					<Comment comment={detail.comment}></Comment>

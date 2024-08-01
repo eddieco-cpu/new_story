@@ -1,0 +1,207 @@
+import Image from "next/image";
+import Link from "next/link";
+import { cookies } from "next/headers";
+import { redirect, notFound } from "next/navigation";
+
+import { fetchDataWithCookieInServer } from "@/lib/api";
+import { convertCookieObjArrayToString } from "@/lib/helper";
+
+import { UiMain } from "@/components/customUI";
+
+import PieceProvider from "@contexts/pieceContext";
+import Wrapper from "../Components/Wrapper";
+
+import { unFetchedPieceBase64 } from "@/lib/data";
+
+import "@/styles/piece.scss";
+
+//
+export type CategoryType = {
+	id: string;
+	name: string;
+};
+export type ProductDataType = {
+	summary: string;
+	publish_article: string;
+	writer_account: string;
+	collection: string;
+	last_update_chapter_publishtime: string;
+	id: string;
+	author: string;
+	last_update_chapter_id: string;
+	title: string;
+	share: string;
+	words: string;
+	imgcover: string;
+	contentrating: string;
+	status_status: string;
+	is_shelf: string;
+	last_reading_chapter_id: string;
+	status: string;
+	charge_type: string;
+	writer_type: string;
+	buy_point: string;
+	message: string;
+	authorize: string;
+	category: CategoryType[];
+	publishtime: string;
+	read_prohibition: string;
+	is_charge: string;
+	view: string;
+	last_update_chapter_name: string;
+};
+export type Chapter = {
+	point: string;
+	title: string;
+	order: string;
+	publishtime: string;
+	chapter_id: string;
+	isfree: string;
+	ver: string;
+	right: string;
+};
+export type ProductChaptersData = {
+	message: string;
+	status: string;
+	list: Chapter[];
+};
+
+export default async function Page({
+	params: { pieceSlugs },
+}: {
+	params: { pieceSlugs: string[] };
+}) {
+	//
+	const cookieStore = cookies();
+	const um2 = cookieStore.get("um2");
+	const cookieString = convertCookieObjArrayToString([um2]);
+
+	//
+	console.log("pieceSlugs: \n", pieceSlugs);
+	if (pieceSlugs.length !== 2) {
+		notFound();
+		return null;
+	}
+
+	//
+	const pid = pieceSlugs[0];
+	const pieceId = pieceSlugs[1];
+
+	//////
+	var productData: null | ProductDataType = null;
+	try {
+		productData = (await fetchDataWithCookieInServer(
+			`https://story-onlinelab.udn.com/story3/ShowStoreProduct?id=${pid}`,
+			cookieString
+		)) as ProductDataType;
+		if (!productData)
+			throw new Error("fetch productDataerror in products page");
+	} catch (error) {
+		console.log("error \n", error);
+		notFound();
+		return null;
+	}
+	console.log("productData: \n", productData);
+
+	//////
+	var productChaptersData: null | ProductChaptersData = null;
+	try {
+		productChaptersData = await fetchDataWithCookieInServer(
+			`https://story-onlinelab.udn.com/story3/ShowStoreProductChapter?id=${pid}&order_by=chapter`,
+			cookieString
+		);
+		if (!productChaptersData)
+			throw new Error("fetch productChaptersData error in products page");
+	} catch (error) {
+		console.log("error \n", error);
+		notFound();
+		return null;
+	}
+	//console.log("productChaptersData: \n", productChaptersData);
+
+	if (
+		!productData ||
+		!productChaptersData ||
+		productData.status !== "200" ||
+		productChaptersData.status !== "200"
+	) {
+		notFound();
+		return null;
+	}
+
+	//
+	var productChapters = productChaptersData.list;
+	var pieceBase64Value = "";
+	var productChapter = productChapters.find(
+		(chapter) => chapter.chapter_id === pieceId
+	);
+
+	if (productChapter) {
+		console.log("productChapter: \n", productChapter);
+		try {
+			const res = await fetch(
+				`https://story.udn.com/dcstore/ProtectedContent?id=${pieceId}`
+			);
+			if (!res.ok) {
+				throw new Error(`HTTP error! status: ${res.status}`);
+			}
+
+			const text = await res.text(); //txt, not json
+			if (!text.trim().length) throw new Error("fetch text error");
+
+			pieceBase64Value = text;
+			//console.log("pieceBase64Value \n", pieceBase64Value);
+
+			//
+		} catch (error) {
+			console.log("error \n", error);
+			pieceBase64Value = unFetchedPieceBase64;
+		}
+	} else {
+		pieceBase64Value = unFetchedPieceBase64;
+	}
+
+	return (
+		<>
+			<header className="piece_header bg-[var(--piece-nav,--default-nav)] py-4">
+				<nav className="mx-auto flex h-11 max-w-[1080px] items-center justify-start gap-2 max-lg:px-5">
+					<Link href="/" className="logo-udn">
+						<Image
+							src="/images/reading-logo.svg"
+							alt="聯合新聞網"
+							width={43}
+							height={32}
+						/>
+					</Link>
+					<p className="text-sm">
+						{productData.category[0] && (
+							<>
+								<Link href={`/cate/${productData.category[0].id}`}>
+									{productData.category[0].name}
+								</Link>
+								<span className="px-1">/</span>
+							</>
+						)}
+						<Link href={`/products/${pid}`}>{productData.title}</Link>
+						<span className="px-1">/</span>
+						<span>{productChapter?.title || ""}</span>
+					</p>
+				</nav>
+			</header>
+			<section className="piece_main bg-[var(--piece-body,--default-body)] py-4 max-lg:pt-0">
+				<UiMain className="flex items-start justify-center gap-[18px] *:flex-shrink-0 max-xl:gap-2 max-lg:flex-col max-lg:gap-0">
+					<PieceProvider>
+						<Wrapper
+							pieceBase64={pieceBase64Value as string}
+							productId={pid}
+							productChapter={productChapter as Chapter}
+							productChapters={productChapters as Chapter[]}
+							publish_article={productData.publish_article as string}
+							status_status={productData.status_status as string}
+						></Wrapper>
+					</PieceProvider>
+				</UiMain>
+			</section>
+		</>
+	);
+}
