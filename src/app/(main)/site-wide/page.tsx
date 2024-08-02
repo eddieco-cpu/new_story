@@ -35,85 +35,7 @@ const rankBooks = Array.from({ length: 60 }, (_, i) => i + 1).map((i) => ({
 	amount: Math.floor(Math.random() * 10000),
 }));
 
-const filterWordCounts = [
-	{
-		id: 31,
-		title: "全部",
-		link: "",
-	},
-	{
-		id: 32,
-		title: "1萬以下",
-		link: "",
-	},
-	{
-		id: 33,
-		title: "1萬~3萬",
-		link: "",
-	},
-	{
-		id: 34,
-		title: "3萬~5萬",
-		link: "",
-	},
-	{
-		id: 35,
-		title: "5萬~10萬",
-		link: "",
-	},
-	{
-		id: 36,
-		title: "10萬以上",
-		link: "",
-	},
-];
-
-const filterStatus = [
-	{
-		id: 41,
-		title: "全部",
-		link: "",
-	},
-	{
-		id: 42,
-		title: "連載中",
-		link: "",
-	},
-	{
-		id: 43,
-		title: "已完結",
-		link: "",
-	},
-];
-
-const filterTimeAreas = [
-	{
-		id: 51,
-		title: "全部",
-		link: "",
-	},
-	{
-		id: 52,
-		title: "3日內",
-		link: "",
-	},
-	{
-		id: 53,
-		title: "7日內",
-		link: "",
-	},
-	{
-		id: 54,
-		title: "半月內",
-		link: "",
-	},
-	{
-		id: 55,
-		title: "一月內",
-		link: "",
-	},
-];
-
+//
 export default async function Page() {
 	//
 	const fetchedCategoryData = await fetchDataWithCookieInServer(
@@ -125,12 +47,6 @@ export default async function Page() {
 	if (fetchedCategoryData && fetchedCategoryData.list) {
 		categoryDatas = [...fetchedCategoryData.list];
 	}
-
-	const fetchedCateData = await fetchDataWithCookieInServer(
-		"https://story-onlinelab.udn.com/story3/ShowStoreProductList?type=6&amount_per_page=5&page=1",
-		""
-	);
-	console.log("fetchedCateData: \n", fetchedCateData);
 
 	return (
 		<section>

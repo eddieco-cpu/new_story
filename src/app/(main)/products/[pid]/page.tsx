@@ -6,7 +6,9 @@ import { redirect, notFound } from "next/navigation";
 import { fetchDataWithCookieInServer } from "@/lib/api";
 import { convertCookieObjArrayToString } from "@/lib/helper";
 
-import { NewsType } from "@/types";
+import { type NewsType } from "@/types";
+import { type ProductDataType, type CategoryType } from "@/types/product";
+
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
 import randomInt from "@tools/randomInt";
@@ -94,40 +96,6 @@ let detail: DetailType = {
 };
 
 //
-export type CategoryType = {
-	id: string;
-	name: string;
-};
-export type ProductDataType = {
-	summary: string;
-	publish_article: string;
-	writer_account: string;
-	collection: string;
-	last_update_chapter_publishtime: string;
-	id: string;
-	author: string;
-	last_update_chapter_id: string;
-	title: string;
-	share: string;
-	words: string;
-	imgcover: string;
-	contentrating: string;
-	status_status: string;
-	is_shelf: string;
-	last_reading_chapter_id: string;
-	status: string;
-	charge_type: string;
-	writer_type: string;
-	buy_point: string;
-	message: string;
-	authorize: string;
-	category: CategoryType[];
-	publishtime: string;
-	read_prohibition: string;
-	is_charge: string;
-	view: string;
-	last_update_chapter_name: string;
-};
 export type Chapter = {
 	point: string;
 	title: string;
