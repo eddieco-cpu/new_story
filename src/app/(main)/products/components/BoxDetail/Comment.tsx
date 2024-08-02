@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
-import { type CommentType } from "../../page";
+import { type CommentType } from "../../[pid]/page";
 
 import { UiButton } from "@/components/customUI/client";
 

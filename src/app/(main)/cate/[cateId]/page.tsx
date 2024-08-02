@@ -1,13 +1,16 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, notFound } from "next/navigation";
 
 import { SortBook } from "@/types/cate";
-import { PhotoSlider, NewsType } from "@/types";
+import { type PhotoSlider, type NewsType } from "@/types";
+import { type CateData, type FetchedCateData } from "@/types/cate";
 
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
 
-import { categoryDatas, imgClassNameInGroupHover } from "@lib/data";
+import { fetchDataWithCookieInServer } from "@/lib/api";
+
+import { imgClassNameInGroupHover } from "@lib/data"; //categoryDatas,
 
 import PurePhotoSlider from "@/components/slider/PurePhotoSlider";
 import NewsSlider from "@/components/slider/NewsSlider";
@@ -140,13 +143,23 @@ const ads = Array.from({ length: 4 }, (_, i) => i + 1).map((i) => ({
 	picture: randomPicture(),
 }));
 
-export default function Page({ params }: { params: { cateId: string } }) {
+export default async function Page({ params }: { params: { cateId: string } }) {
 	//
 	const { cateId } = params;
 
-	const categoryData = categoryDatas.find((el) => el.id === cateId);
+	//
+	const fetchedCategoryData = await fetchDataWithCookieInServer(
+		"https://story-onlinelab.udn.com/story3/ShowCategory?store=Y",
+		""
+	);
 
-	if (!categoryData) redirect("/404");
+	if (!fetchedCategoryData || !fetchedCategoryData.list) notFound();
+
+	const categoryDatas = fetchedCategoryData.list as CateData[];
+	console.log(" categoryDatas", categoryDatas);
+
+	const categoryData = categoryDatas.find((el) => el.id === cateId);
+	if (!categoryData) notFound();
 
 	return (
 		<section>
@@ -160,7 +173,7 @@ export default function Page({ params }: { params: { cateId: string } }) {
 			</section>
 
 			<section className="px-6 py-4 max-md:hidden">
-				<CategoriesList />
+				<CategoriesList categoryDatas={categoryDatas} />
 			</section>
 
 			<section>

@@ -5,16 +5,18 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { ReactNode, ComponentPropsWithoutRef } from "react";
 
-import { categoryDatas } from "@/lib/data";
+import { CateData } from "@/types/cate";
 
 import { UiButton } from "@/components/customUI/client";
 
 export default function Drawer({
 	isDrawer,
 	setIsDrawer,
+	categoryDatas,
 }: {
 	isDrawer: boolean;
 	setIsDrawer: React.Dispatch<React.SetStateAction<boolean>>;
+	categoryDatas: CateData[];
 }) {
 	return (
 		<div
@@ -101,7 +103,7 @@ export default function Drawer({
 							<li>
 								<nav className="grid grid-cols-2 gap-x-6 gap-y-4">
 									{categoryDatas.map((cate) => (
-										<Link key={cate.id} href={cate.url}>
+										<Link key={cate.id} href={`/cate/${cate.id}`}>
 											<UiButton className="w-full">{cate.name}</UiButton>
 										</Link>
 									))}

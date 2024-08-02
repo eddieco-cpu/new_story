@@ -6,7 +6,7 @@ import Link from "next/link";
 import React from "react";
 import { useSearchContext } from "@contexts/searchContext";
 
-import { categoryDatas } from "@/lib/data";
+import { type CateData, type FetchedCateData } from "@/types/cate";
 
 //
 const filterWordCounts = [
@@ -88,7 +88,7 @@ const filterTimeAreas = [
 	},
 ];
 
-function FilterCate() {
+function FilterCate({ categoryDatas }: { categoryDatas: CateData[] }) {
 	const { isMoblieShowFilterCate, setIsMoblieShowFilterCate } =
 		useSearchContext();
 	return (
@@ -120,7 +120,7 @@ function FilterCate() {
 				{categoryDatas.map((cate) => (
 					<Link
 						key={cate.id}
-						href={cate.url}
+						href={`/cate/${cate.id}`}
 						className={
 							"inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300 " +
 							` max-md:justify-center max-md:border-transparent max-md:py-1`
@@ -221,11 +221,15 @@ function FilterDetailsCondition() {
 	);
 }
 
-export default function FilterAside() {
+export default function FilterAside({
+	categoryDatas,
+}: {
+	categoryDatas: CateData[];
+}) {
 	return (
 		<section className="grid grid-cols-1 gap-6">
 			{/* -- 分類 -- */}
-			<FilterCate />
+			<FilterCate categoryDatas={categoryDatas} />
 
 			{/* -- 條件篩選 -- */}
 			<FilterDetailsCondition />

@@ -18,6 +18,9 @@ interface PieceContextType {
 	isSettingBox: boolean;
 	setIsSettingBox: React.Dispatch<React.SetStateAction<boolean>>;
 
+	isCatagoryBox: boolean;
+	setIsCatagoryBox: React.Dispatch<React.SetStateAction<boolean>>;
+
 	fontSize: number;
 	setFontSize: React.Dispatch<React.SetStateAction<number>>;
 
@@ -35,6 +38,7 @@ const PieceProvider = ({ children }: { children: ReactNode }) => {
 	//
 	const [count, setCount] = useState(5);
 	const [isSettingBox, setIsSettingBox] = useState(false);
+	const [isCatagoryBox, setIsCatagoryBox] = useState(false);
 	const [fontSize, setFontSize] = useState(20);
 	const [lineHeight, setLineHeight] = useState<LineHeightType>("S");
 	const [isPieceLoading, setIsPieceLoading] = useState(true);
@@ -45,8 +49,12 @@ const PieceProvider = ({ children }: { children: ReactNode }) => {
 				value={{
 					count,
 					setCount,
+
+					//
 					isSettingBox,
 					setIsSettingBox,
+					isCatagoryBox,
+					setIsCatagoryBox,
 
 					//
 					fontSize,

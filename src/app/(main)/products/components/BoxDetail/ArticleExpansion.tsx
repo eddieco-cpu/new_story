@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { replaceNewlinesWithBreaks } from "@/lib/helper";
 
 export default function ArticleExpansion({ article }: { article: string }) {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -12,9 +13,10 @@ export default function ArticleExpansion({ article }: { article: string }) {
 				`${isExpanded ? " grid-rows-[1fr]" : " grid-rows-[0fr]"}`
 			}
 		>
-			<article className="min-h-36 overflow-hidden break-words text-base font-normal text-ash-850">
-				{article}
-			</article>
+			<article
+				className="min-h-36 overflow-hidden break-words text-base font-normal text-ash-850"
+				dangerouslySetInnerHTML={{ __html: replaceNewlinesWithBreaks(article) }}
+			></article>
 			<section
 				className={
 					"mt-[-40px] overflow-hidden transition-all delay-500 duration-0 ease-linear " +

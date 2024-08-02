@@ -6,6 +6,7 @@ import Pen from "./Pen";
 import Shelf from "./Shelf";
 import Sorting from "./Sorting";
 import Selecting from "./Selecting";
+import Share from "./Share";
 
 import PieceCata from "./PieceCata";
 import PieceDetail from "./PieceDetail";
@@ -23,6 +24,7 @@ export {
 	Shelf,
 	Sorting,
 	Selecting,
+	Share,
 
 	//
 	PieceCata,
