@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { NewsType } from "@/types";
+import { fetchDataWithCookieInServer } from "@/lib/api";
+
+import { type NewsType } from "@/types";
+import { type CateData, type FetchedCateData } from "@/types/cate";
+
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
 
@@ -110,7 +114,18 @@ const filterTimeAreas = [
 	},
 ];
 
-export default function Page() {
+export default async function Page() {
+	//
+	const fetchedCategoryData = await fetchDataWithCookieInServer(
+		"https://story-onlinelab.udn.com/story3/ShowCategory?store=Y",
+		""
+	);
+	let categoryDatas: CateData[] = [];
+
+	if (fetchedCategoryData && fetchedCategoryData.list) {
+		categoryDatas = [...fetchedCategoryData.list];
+	}
+
 	return (
 		<section>
 			<SearchProvider>
@@ -128,7 +143,7 @@ export default function Page() {
 				<section className="grid grid-cols-[auto_1fr] gap-7 max-md:grid-cols-1">
 					{/* --- */}
 					<aside className="w-60 max-md:w-full">
-						<FilterAside />
+						<FilterAside categoryDatas={categoryDatas} />
 					</aside>
 
 					{/* --- */}

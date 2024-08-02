@@ -5,17 +5,17 @@ import React, { CSSProperties } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { Options as SplideOptions } from "@splidejs/splide";
 
-import { type CategoryData, categoryDatas } from "@lib/data";
+import { type CateData, type FetchedCateData } from "@/types/cate";
 
 import "@splidejs/react-splide/css";
 
-const importantCatas = ["original", "comic"];
+const importantCatas = ["1", "2"];
 
-const CategoryItem = ({ category }: { category: CategoryData }) => {
+const CategoryItem = ({ category }: { category: CateData }) => {
 	return (
 		<SplideSlide className="inline-block">
 			<Link
-				href={category.url}
+				href={`/cate/${category.id}`}
 				className="group flex items-center justify-center gap-1 px-4 py-2"
 				style={
 					{
@@ -38,7 +38,7 @@ const CategoryItem = ({ category }: { category: CategoryData }) => {
 	);
 };
 
-const CategoriesList = () => {
+const CategoriesList = ({ categoryDatas }: { categoryDatas: CateData[] }) => {
 	//
 	const options: SplideOptions = {
 		type: "slide",

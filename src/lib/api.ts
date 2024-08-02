@@ -55,6 +55,21 @@ export function getData(url: string, option = { auth: true }) {
 	});
 }
 
+export async function fetchData(url: string): Promise<any> {
+	//get without cookie
+	try {
+		const res: Response = await fetch(url);
+		if (!res.ok) {
+			throw new Error(`HTTP error! status: ${res.status}`);
+		}
+		const data: any = await res.json();
+		return data;
+	} catch (error) {
+		console.error("Fetch error:", error);
+		return null;
+	}
+}
+
 export async function fetchDataWithCookieInServer(
 	url: string,
 	cookie: string

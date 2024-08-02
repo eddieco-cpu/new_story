@@ -1,7 +1,11 @@
 import Link from "next/link";
 
+import { fetchDataWithCookieInServer } from "@/lib/api";
+
 import { SortBook } from "@/types/cate";
-import { PhotoSlider, NewsType } from "@/types";
+
+import { type PhotoSlider, type NewsType } from "@/types";
+import { type CateData, type FetchedCateData } from "@/types/cate";
 
 import { imgClassNameInGroupHover } from "@lib/data";
 import randomPicture from "@tools/randomPicture";
@@ -139,7 +143,18 @@ const publishers = Array.from({ length: 6 }, (_, i) => i + 1).map((i) => ({
 	picture: randomPicture(),
 }));
 
-export default function Home() {
+export default async function Page() {
+	//
+	const fetchedCategoryData = await fetchDataWithCookieInServer(
+		"https://story-onlinelab.udn.com/story3/ShowCategory?store=Y",
+		""
+	);
+	let categoryDatas: CateData[] = [];
+
+	if (fetchedCategoryData && fetchedCategoryData.list) {
+		categoryDatas = [...fetchedCategoryData.list];
+	}
+
 	return (
 		<section className="pb-5">
 			<section className="slider-bg-outer relative mt-[calc(330px-405px+20px)] aspect-[1280/405] max-xl:mt-[calc(250px-970*405/1280*1px+20px)] max-lg:mt-[calc(191px-740*405/1280*1px+20px)] max-md:mt-0 max-md:aspect-[375/313]">
@@ -152,7 +167,7 @@ export default function Home() {
 			</section>
 
 			<section className="px-6 py-4 max-md:hidden">
-				<CategoriesList />
+				<CategoriesList categoryDatas={categoryDatas} />
 			</section>
 
 			<section className="bg-landscape-400 p-6 max-md:pl-5 max-md:pr-0 lg:rounded-2xl">

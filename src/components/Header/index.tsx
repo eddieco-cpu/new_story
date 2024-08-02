@@ -2,8 +2,13 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+
 import Image from "next/image";
 import Link from "next/link";
+
+import { getData } from "@/lib/api";
+
+import { CateData, FetchedCateData } from "@/types/cate";
 
 import Drawer from "./Drawer";
 import ToTop from "./ToTop";
@@ -36,6 +41,7 @@ const Header: React.FC = () => {
 	const [fixHeader, setFixHeader] = useState(false);
 	const [isSearchBox, setIsSearchBox] = useState(false);
 	const [isDrawer, setIsDrawer] = useState(false);
+	const [categoryDatas, setCategoryDatas] = useState<CateData[]>([]);
 
 	useEffect(() => {
 		// console.log(router);
@@ -74,6 +80,16 @@ const Header: React.FC = () => {
 				observer.unobserve(target);
 			}
 		};
+	}, []);
+
+	useEffect(() => {
+		async function fetchedCategoryData() {
+			const { data } = await getData("/story3/ShowCategory?store=Y");
+			if (data && data.list) {
+				setCategoryDatas(() => [...data.list]);
+			}
+		}
+		fetchedCategoryData();
 	}, []);
 
 	return (
@@ -344,7 +360,7 @@ const Header: React.FC = () => {
 					</nav>
 				</div>
 			</header>
-			<Drawer {...{ isDrawer, setIsDrawer }}></Drawer>
+			<Drawer {...{ isDrawer, setIsDrawer, categoryDatas }}></Drawer>
 			<div ref={targetRef} className={`header-ref`}></div>
 			<ToTop
 				className={
