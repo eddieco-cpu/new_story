@@ -13,43 +13,11 @@ import Wrapper from "../Components/Wrapper";
 
 import { unFetchedPieceBase64 } from "@/lib/data";
 
+import { type CategoryType, type ProductDataType } from "@/types/product";
+
 import "@/styles/piece.scss";
 
 //
-export type CategoryType = {
-	id: string;
-	name: string;
-};
-export type ProductDataType = {
-	summary: string;
-	publish_article: string;
-	writer_account: string;
-	collection: string;
-	last_update_chapter_publishtime: string;
-	id: string;
-	author: string;
-	last_update_chapter_id: string;
-	title: string;
-	share: string;
-	words: string;
-	imgcover: string;
-	contentrating: string;
-	status_status: string;
-	is_shelf: string;
-	last_reading_chapter_id: string;
-	status: string;
-	charge_type: string;
-	writer_type: string;
-	buy_point: string;
-	message: string;
-	authorize: string;
-	category: CategoryType[];
-	publishtime: string;
-	read_prohibition: string;
-	is_charge: string;
-	view: string;
-	last_update_chapter_name: string;
-};
 export type Chapter = {
 	point: string;
 	title: string;

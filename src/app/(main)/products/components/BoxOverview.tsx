@@ -8,7 +8,7 @@ import randomText from "@tools/randomText";
 import { UiButton, UiTag } from "@/components/customUI/client";
 import { Share } from "@/components/customUI/svg";
 
-import { CategoryType, ProductDataType } from "../[pid]/page";
+import { type ProductDataType } from "@/types/product";
 import { formatTimestampToDateString } from "@/lib/helper";
 
 //
