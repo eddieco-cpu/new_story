@@ -50,7 +50,9 @@ export default async function Page() {
 				{/* -- */}
 				<div className="mb-5 flex items-center justify-start pb-2 pt-3 md:gap-4">
 					<UiTitle className="">排行榜</UiTitle>
-					<FilterCate categoryDatas={categoryDatas} />
+					{categoryDatas && categoryDatas.length > 0 && (
+						<FilterCate categoryDatas={categoryDatas} />
+					)}
 				</div>
 
 				{/* -- */}
