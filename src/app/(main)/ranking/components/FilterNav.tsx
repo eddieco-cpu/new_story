@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import React, { useState, useEffect, useCallback } from "react";
 
 type BoxType =
 	| {
@@ -41,6 +43,22 @@ type DateType =
 
 export default function FilterNav() {
 	//
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+
+	const leaderboard = searchParams?.get("leaderboard") || "b";
+	const timing = searchParams?.get("timing") || "t";
+
+	const createQueryString = useCallback(
+		(name: string, value: string) => {
+			const params = new URLSearchParams(searchParams.toString());
+			params.set(name, value);
+
+			return params.toString();
+		},
+		[searchParams]
+	);
+
 	const [boxTypes] = useState<BoxType[]>([
 		{
 			id: "b",
@@ -63,10 +81,6 @@ export default function FilterNav() {
 			name: "留言榜",
 		},
 	]);
-	const [boxType, setBoxType] = useState<BoxType>({
-		id: "b",
-		name: "瀏覽榜",
-	});
 
 	const [dateTypes] = useState<DateType[]>([
 		{
@@ -82,47 +96,43 @@ export default function FilterNav() {
 			name: "總",
 		},
 	]);
-	const [dateType, setDateType] = useState<DateType>({
-		id: "w",
-		name: "週",
-	});
 
 	return (
 		<nav className="mb-14 flex items-center justify-between gap-y-4 max-md:flex-col">
 			<div className="flex items-end justify-start gap-4 overflow-x-auto max-md:w-full max-md:scrollbar-hide">
 				{boxTypes.map((type) => (
-					<div
+					<Link
 						key={type.id}
 						className={
 							"inline-flex cursor-pointer items-end justify-center gap-1 text-nowrap border-b-2 " +
-							`${boxType.id === type.id ? "border-accent-300" : "border-transparent"} px-2`
+							`${leaderboard === type.id ? "border-accent-300" : "border-transparent"} px-2`
 						}
-						onClick={() => setBoxType(type)}
+						href={pathname + "?" + createQueryString("leaderboard", type.id)}
 					>
 						<b
 							className={
 								"text-lg " +
-								`${boxType.id === type.id ? "font-bold text-accent-300" : "font-normal text-ash-600"}`
+								`${leaderboard === type.id ? "font-bold text-accent-300" : "font-normal text-ash-600"}`
 							}
 						>
 							{type.name}
 						</b>
-					</div>
+					</Link>
 				))}
 			</div>
 
 			<div className="grid grid-flow-col gap-4">
 				{dateTypes.map((el) => (
-					<b
+					<Link
 						key={el.id}
 						className={
 							"block aspect-square w-8 cursor-pointer rounded-full bg-white text-center text-lg leading-8 " +
-							`${dateType.id === el.id ? "font-bold text-accent-300" : "font-normal text-ash-600"}`
+							`${timing === el.id ? "font-bold text-accent-300" : "font-normal text-ash-600"}`
 						}
-						onClick={() => setDateType(el)}
+						href={pathname + "?" + createQueryString("timing", el.id)}
 					>
 						{el.name}
-					</b>
+					</Link>
 				))}
 			</div>
 		</nav>
