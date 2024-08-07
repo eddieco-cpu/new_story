@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { redirect, notFound } from "next/navigation";
 
 import { fetchDataWithCookieInServer } from "@/lib/api";
 
 import { type NewsType } from "@/types";
 import { type CateData, type FetchedCateData } from "@/types/cate";
+import { type ResponseOfFetchedProductCardType } from "@/types/product";
 
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
@@ -17,6 +19,9 @@ import Breadcrumb from "@/components/Breadcrumb";
 import FilterAside from "./components/FilterAside";
 import FilterBar from "./components/FilterBar";
 
+import MoreProductsCardGroup from "./components/MoreProductsCardGroup";
+import ProductsCard from "./components/ProductsCard";
+
 //
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
 	(i) => ({
@@ -25,112 +30,61 @@ const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
 	})
 );
 
-const rankBooks = Array.from({ length: 60 }, (_, i) => i + 1).map((i) => ({
-	id: new Date().getTime() + i,
-	title: randomText(3, 20),
-	author: randomText(3, 20),
-	authorLink: "",
-	link: "",
-	picture: randomPicture(),
-	amount: Math.floor(Math.random() * 10000),
-}));
+//
+export default async function Page({
+	searchParams,
+}: {
+	searchParams: { [key: string]: string };
+}) {
+	//
+	console.log("searchParams: \n", searchParams);
 
-const filterWordCounts = [
-	{
-		id: 31,
-		title: "全部",
-		link: "",
-	},
-	{
-		id: 32,
-		title: "1萬以下",
-		link: "",
-	},
-	{
-		id: 33,
-		title: "1萬~3萬",
-		link: "",
-	},
-	{
-		id: 34,
-		title: "3萬~5萬",
-		link: "",
-	},
-	{
-		id: 35,
-		title: "5萬~10萬",
-		link: "",
-	},
-	{
-		id: 36,
-		title: "10萬以上",
-		link: "",
-	},
-];
+	let searchObject: { [key: string]: string } = {
+		type: searchParams.type || "1",
+		amount_per_page: "60",
+		page: "1",
+		complete: searchParams.complete || "",
+		update_time: searchParams.update_time || "",
+		words: searchParams.words || "",
+		category: searchParams.category || "",
+	};
 
-const filterStatus = [
-	{
-		id: 41,
-		title: "全部",
-		link: "",
-	},
-	{
-		id: 42,
-		title: "連載中",
-		link: "",
-	},
-	{
-		id: 43,
-		title: "已完結",
-		link: "",
-	},
-];
-
-const filterTimeAreas = [
-	{
-		id: 51,
-		title: "全部",
-		link: "",
-	},
-	{
-		id: 52,
-		title: "3日內",
-		link: "",
-	},
-	{
-		id: 53,
-		title: "7日內",
-		link: "",
-	},
-	{
-		id: 54,
-		title: "半月內",
-		link: "",
-	},
-	{
-		id: 55,
-		title: "一月內",
-		link: "",
-	},
-];
-
-export default async function Page() {
 	//
 	const fetchedCategoryData = await fetchDataWithCookieInServer(
 		"https://story-onlinelab.udn.com/story3/ShowCategory?store=Y",
 		""
 	);
 	let categoryDatas: CateData[] = [];
-
 	if (fetchedCategoryData && fetchedCategoryData.list) {
 		categoryDatas = [...fetchedCategoryData.list];
 	}
 
-	const fetchedCateData = await fetchDataWithCookieInServer(
-		"https://story-onlinelab.udn.com/story3/ShowStoreProductList?type=6&amount_per_page=5&page=1",
-		""
-	);
-	console.log("fetchedCateData: \n", fetchedCateData);
+	//
+	const toFetchSearchParams = new URLSearchParams();
+	Object.keys(searchObject).forEach((key) => {
+		if (searchObject[key]) {
+			toFetchSearchParams.append(key, searchObject[key]);
+		}
+	});
+
+	let fetchedCateData = null;
+	try {
+		fetchedCateData = await fetchDataWithCookieInServer(
+			`https://story-onlinelab.udn.com/story3/ShowStoreProductList?${toFetchSearchParams.toString()}`,
+			""
+		);
+		if (!fetchedCateData || fetchedCateData.status !== "200") {
+			throw new Error("fetched error");
+		}
+		//
+	} catch (error) {
+		//500 error
+		console.log("error: \n", error);
+		notFound(); //to be continued
+	}
+	const successfulFetchedCateData: ResponseOfFetchedProductCardType =
+		fetchedCateData;
+	console.log("successfulFetchedCateData: \n", successfulFetchedCateData);
 
 	return (
 		<section>
@@ -153,37 +107,30 @@ export default async function Page() {
 					</aside>
 
 					{/* --- */}
-					<section className="grid grid-cols-1 gap-5">
-						{/* ---- */}
-						<FilterBar />
+					<section>
+						<section className="grid grid-cols-1 gap-5">
+							{/* ---- */}
+							<FilterBar />
 
-						{/* ---- */}
-						<ul className="m-auto grid grid-cols-5 gap-7 pb-7 max-xl:w-[calc(180*3px+28*2px)] max-xl:grid-cols-3 max-lg:w-[calc(180*2px+28*1px)] max-lg:grid-cols-2 max-md:max-w-[calc(100vw-12px)] max-md:gap-5">
-							{rankBooks.map((card) => (
-								<li
-									className="group w-[180px] max-md:max-w-[calc(50vw-10px-6px)]"
-									key={card.id}
-								>
-									<Link
-										href={card.link}
-										className="block overflow-hidden rounded bg-white transition-all duration-500 group-hover:translate-y-[-10px]"
-									>
-										<picture className="pic-base book-base w-full rounded-none">
-											<img
-												src={card.picture}
-												alt=""
-												className="transition-all duration-700 group-hover:scale-110"
-											/>
-										</picture>
-										<article className="p-[10px]">
-											<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 transition-all duration-300 group-hover:text-accent-300">
-												{card.title}
-											</h3>
-										</article>
-									</Link>
-								</li>
-							))}
-						</ul>
+							{/* ---- */}
+							<div>
+								<ul className="m-auto grid grid-cols-5 gap-7 pb-7 max-xl:w-[calc(180*3px+28*2px)] max-xl:grid-cols-3 max-lg:w-[calc(180*2px+28*1px)] max-lg:grid-cols-2 max-md:max-w-[calc(100vw-12px)] max-md:gap-5">
+									{successfulFetchedCateData.list.length > 0 &&
+										successfulFetchedCateData.list.map((card) => (
+											<ProductsCard key={card.id} {...{ card }} />
+										))}
+								</ul>
+								{successfulFetchedCateData &&
+									Number(successfulFetchedCateData.data_count) >
+										Number(searchObject.amount_per_page) && (
+										<MoreProductsCardGroup
+											groupClassName="m-auto grid grid-cols-5 gap-7 max-xl:w-[calc(180*3px+28*2px)] max-xl:grid-cols-3 max-lg:w-[calc(180*2px+28*1px)] max-lg:grid-cols-2 max-md:max-w-[calc(100vw-12px)] max-md:gap-5"
+											totalAmount={Number(successfulFetchedCateData.data_count)}
+											loadedAmount={Number(searchObject.amount_per_page)}
+										/>
+									)}
+							</div>
+						</section>
 					</section>
 				</section>
 			</SearchProvider>

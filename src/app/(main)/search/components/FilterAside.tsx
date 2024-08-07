@@ -3,94 +3,120 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import React from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import React, { useCallback } from "react";
 import { useSearchContext } from "@contexts/searchContext";
 
 import { type CateData, type FetchedCateData } from "@/types/cate";
 
+import NestedLink from "@/components/customUI/NestedLink";
+
 //
 const filterWordCounts = [
 	{
-		id: 31,
+		id: "words-all",
 		title: "全部",
-		link: "",
+		paramKey: "words",
+		paramVal: "",
 	},
 	{
-		id: 32,
+		id: "words-1",
 		title: "1萬以下",
-		link: "",
+		paramKey: "words",
+		paramVal: "1",
 	},
 	{
-		id: 33,
+		id: "words-2",
 		title: "1萬~3萬",
-		link: "",
+		paramKey: "words",
+		paramVal: "2",
 	},
 	{
-		id: 34,
+		id: "words-3",
 		title: "3萬~5萬",
-		link: "",
+		paramKey: "words",
+		paramVal: "3",
 	},
 	{
-		id: 35,
+		id: "words-4",
 		title: "5萬~10萬",
-		link: "",
+		paramKey: "words",
+		paramVal: "4",
 	},
 	{
-		id: 36,
+		id: "words-5",
 		title: "10萬以上",
-		link: "",
+		paramKey: "words",
+		paramVal: "5",
 	},
 ];
 
 const filterStatus = [
 	{
-		id: 41,
+		id: "complete-all",
 		title: "全部",
-		link: "",
+		paramKey: "complete",
+		paramVal: "",
 	},
 	{
-		id: 42,
+		id: "complete-1",
 		title: "連載中",
-		link: "",
+		paramKey: "complete",
+		paramVal: "1",
 	},
 	{
-		id: 43,
+		id: "complete-2",
 		title: "已完結",
-		link: "",
+		paramKey: "complete",
+		paramVal: "2",
 	},
 ];
 
 const filterTimeAreas = [
 	{
-		id: 51,
+		id: "update_time-all",
 		title: "全部",
-		link: "",
+		paramKey: "update_time",
+		paramVal: "",
 	},
 	{
-		id: 52,
+		id: "update_time-1",
 		title: "3日內",
-		link: "",
+		paramKey: "update_time",
+		paramVal: "1",
 	},
 	{
-		id: 53,
+		id: "update_time-2",
 		title: "7日內",
-		link: "",
+		paramKey: "update_time",
+		paramVal: "2",
 	},
 	{
-		id: 54,
+		id: "update_time-3",
 		title: "半月內",
-		link: "",
+		paramKey: "update_time",
+		paramVal: "3",
 	},
 	{
-		id: 55,
+		id: "update_time-4",
 		title: "一月內",
-		link: "",
+		paramKey: "update_time",
+		paramVal: "4",
 	},
 ];
 
 function FilterCate({ categoryDatas }: { categoryDatas: CateData[] }) {
-	const { isMoblieShowFilterCate, setIsMoblieShowFilterCate } =
-		useSearchContext();
+	const {
+		isMoblieShowFilterCate,
+		setIsMoblieShowFilterCate,
+		createQueryString,
+	} = useSearchContext();
+
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+
+	const category = searchParams?.get("category") || "";
+
 	return (
 		<section
 			className={
@@ -117,18 +143,27 @@ function FilterCate({ categoryDatas }: { categoryDatas: CateData[] }) {
 					` ${isMoblieShowFilterCate ? " delay-300 max-md:opacity-100" : " max-md:opacity-0"} `
 				}
 			>
-				{categoryDatas.map((cate) => (
+				{[{ name: "全部", id: "" }, ...categoryDatas].map((cate, i) => (
 					<Link
-						key={cate.id}
-						href={`/cate/${cate.id}`}
+						key={cate.id + i}
+						href={pathname + "?" + createQueryString("category", cate.id)}
 						className={
 							"inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300 " +
-							` max-md:justify-center max-md:border-transparent max-md:py-1`
+							` max-md:justify-center max-md:border-0 max-md:border-transparent max-md:py-1` +
+							` ${category === cate.id ? " !border-accent-300 !text-accent-300 *:text-accent-300" : ""} `
 						}
 					>
 						<span className="max-md:text-base max-md:font-medium">
 							{cate.name}
 						</span>
+						{category === cate.id && category !== "" && (
+							<NestedLink
+								link={pathname + "?" + createQueryString("category", "")}
+								className="max-md:hidden"
+							>
+								✕
+							</NestedLink>
+						)}
 					</Link>
 				))}
 			</nav>
@@ -141,7 +176,15 @@ function FilterDetailsCondition() {
 	const {
 		isMoblieShowFilterDetailsCondition,
 		setIsMoblieShowFilterDetailsCondition,
+		createQueryString,
 	} = useSearchContext();
+
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+
+	const complete = searchParams?.get("complete") || "";
+	const update_time = searchParams?.get("update_time") || "";
+	const words = searchParams?.get("words") || "";
 
 	return (
 		<section
@@ -176,10 +219,26 @@ function FilterDetailsCondition() {
 						{filterWordCounts.map((wordCount) => (
 							<Link
 								key={wordCount.id}
-								href={wordCount.link}
-								className="inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300"
+								href={
+									pathname +
+									"?" +
+									createQueryString(wordCount.paramKey, wordCount.paramVal)
+								}
+								className={
+									"inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300 " +
+									` ${words === wordCount.paramVal ? " !border-accent-300 !text-accent-300 *:text-accent-300" : ""} `
+								}
 							>
 								<span>{wordCount.title}</span>
+								{words === wordCount.paramVal && words !== "" && (
+									<NestedLink
+										link={
+											pathname + "?" + createQueryString(wordCount.paramKey, "")
+										}
+									>
+										✕
+									</NestedLink>
+								)}
 							</Link>
 						))}
 					</nav>
@@ -192,10 +251,26 @@ function FilterDetailsCondition() {
 						{filterStatus.map((wordCount) => (
 							<Link
 								key={wordCount.id}
-								href={wordCount.link}
-								className="inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300"
+								href={
+									pathname +
+									"?" +
+									createQueryString(wordCount.paramKey, wordCount.paramVal)
+								}
+								className={
+									"inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300 " +
+									` ${complete === wordCount.paramVal ? " !border-accent-300 !text-accent-300 *:text-accent-300" : ""} `
+								}
 							>
 								<span>{wordCount.title}</span>
+								{complete === wordCount.paramVal && complete !== "" && (
+									<NestedLink
+										link={
+											pathname + "?" + createQueryString(wordCount.paramKey, "")
+										}
+									>
+										✕
+									</NestedLink>
+								)}
 							</Link>
 						))}
 					</nav>
@@ -208,10 +283,26 @@ function FilterDetailsCondition() {
 						{filterTimeAreas.map((wordCount) => (
 							<Link
 								key={wordCount.id}
-								href={wordCount.link}
-								className="inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300"
+								href={
+									pathname +
+									"?" +
+									createQueryString(wordCount.paramKey, wordCount.paramVal)
+								}
+								className={
+									"inline-flex shrink-0 items-start justify-start gap-2 rounded-lg border border-ash-350 px-[10px] py-[5px] text-base font-normal text-ash-900 hover:text-accent-300 " +
+									` ${update_time === wordCount.paramVal ? " !border-accent-300 !text-accent-300 *:text-accent-300" : ""} `
+								}
 							>
 								<span>{wordCount.title}</span>
+								{update_time === wordCount.paramVal && update_time !== "" && (
+									<NestedLink
+										link={
+											pathname + "?" + createQueryString(wordCount.paramKey, "")
+										}
+									>
+										✕
+									</NestedLink>
+								)}
 							</Link>
 						))}
 					</nav>

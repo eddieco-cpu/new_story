@@ -27,7 +27,7 @@ export default function FilterBar() {
 				className="flex h-9 items-center justify-between gap-1 *:flex-shrink-0 max-md:w-32 max-md:rounded-3xl max-md:border max-md:border-ash-300 max-md:bg-white max-md:px-[10px] max-md:py-1 md:hidden"
 				onClick={() => setIsMoblieShowFilterCate(true)}
 			>
-				<b className="text-sm font-normal text-ash-600">分類分類</b>
+				<b className="text-sm font-normal text-ash-600">分類</b>
 				<i className="i-arrow5-down text-sm text-ash-600" />
 			</button>
 

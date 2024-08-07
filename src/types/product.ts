@@ -53,3 +53,10 @@ export type ProductCardType = {
 	status_status: string;
 	last_update_chapter_name: string;
 };
+
+export type ResponseOfFetchedProductCardType = {
+	message: string;
+	status: string;
+	data_count: string;
+	list: ProductCardType[];
+};
