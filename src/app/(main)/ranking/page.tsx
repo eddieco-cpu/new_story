@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import React, { Suspense } from "react";
 import { fetchDataWithCookieInServer } from "@/lib/api";
 
 import { type NewsType } from "@/types";
@@ -10,12 +11,11 @@ import randomText from "@tools/randomText";
 
 import FilterNav from "./components/FilterNav";
 import FilterCate from "./components/FilterCate";
+import RankCardsGroup from "./components/RankCardsGroup";
 
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
 import { UiTitle } from "@/components/customUI";
-
-import RankCardsGroup from "./components/RankCardsGroup";
 
 //
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
@@ -51,15 +51,21 @@ export default async function Page() {
 				<div className="mb-5 flex items-center justify-start pb-2 pt-3 md:gap-4">
 					<UiTitle className="">排行榜</UiTitle>
 					{categoryDatas && categoryDatas.length > 0 && (
-						<FilterCate categoryDatas={categoryDatas} />
+						<Suspense fallback={<div>Loading...</div>}>
+							<FilterCate categoryDatas={categoryDatas} />
+						</Suspense>
 					)}
 				</div>
 
 				{/* -- */}
-				<FilterNav />
+				<Suspense fallback={<div>Loading...</div>}>
+					<FilterNav />
+				</Suspense>
 
 				{/* -- */}
-				<RankCardsGroup />
+				<Suspense fallback={<div>Loading...</div>}>
+					<RankCardsGroup />
+				</Suspense>
 			</section>
 		</section>
 	);
