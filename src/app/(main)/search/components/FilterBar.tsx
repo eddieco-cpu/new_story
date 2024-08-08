@@ -15,9 +15,11 @@ export default function FilterBar() {
 		setIsMoblieShowFilterCate,
 		isMoblieShowFilterDetailsCondition,
 		setIsMoblieShowFilterDetailsCondition,
+		isShowSortOption,
+		setIsShowSortOption,
+		sortOptions,
+		setSortOptions,
 	} = useSearchContext();
-
-	const [isShowSortOption, setIsShowSortOption] = useState(false);
 
 	return (
 		<div className="flex items-center justify-between gap-y-5 max-md:flex-wrap max-md:content-between max-md:px-5">
@@ -46,7 +48,7 @@ export default function FilterBar() {
 				>
 					<p className="flex w-full items-center justify-between">
 						<span className="text-sm tracking-[2px] text-ash-600 max-md:hidden">
-							熱門瀏覽
+							{sortOptions.find((el) => el.isSelected)?.name}
 						</span>
 						<span className="md:hidden">
 							<SelectingIcon />
@@ -62,18 +64,24 @@ export default function FilterBar() {
 							}
 							//onClick={(e) => (e.stopPropagation(), setIsShowSortOption(true))}
 						>
-							<li>
-								<p>熱門瀏覽</p>
-							</li>
-							<li>
-								<p>更新時間</p>
-							</li>
-							<li>
-								<p>總收藏</p>
-							</li>
-							<li>
-								<p>總字數</p>
-							</li>
+							{sortOptions.map((el) => (
+								<li
+									key={el.id}
+									className={
+										"hover:bg-ash-200 " +
+										`${el.isSelected ? " *:text-accent-300" : ""}`
+									}
+									onClick={(e) => (
+										e.stopPropagation(),
+										setSortOptions((arr) =>
+											arr.map((it) => ({ ...it, isSelected: it.id === el.id }))
+										),
+										setIsShowSortOption(false)
+									)}
+								>
+									<p>{el.name}</p>
+								</li>
+							))}
 						</ul>
 					}
 					{
