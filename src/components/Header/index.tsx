@@ -131,7 +131,9 @@ const Header: React.FC = () => {
 							</span>
 							<span className="tools-box__item">
 								<Link href={"https://reading.udn.com/store/center/profile.do"}>
-									<Avatar />
+									<Suspense fallback={<div>Loading...</div>}>
+										<Avatar />
+									</Suspense>
 								</Link>
 							</span>
 						</div>
