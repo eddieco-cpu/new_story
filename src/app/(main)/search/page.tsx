@@ -22,6 +22,8 @@ import FilterBar from "./components/FilterBar";
 import MoreProductsCardGroup from "./components/MoreProductsCardGroup";
 import ProductsCard from "./components/ProductsCard";
 
+import ProductsCardGroup from "./components/ProductsCardGroup";
+
 //
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
 	(i) => ({
@@ -112,8 +114,8 @@ export default async function Page({
 							{/* ---- */}
 							<FilterBar />
 
-							{/* ---- */}
-							<div>
+							{/* -- server + client -- */}
+							{/* <div>
 								<ul className="m-auto grid grid-cols-5 gap-7 pb-7 max-xl:w-[calc(180*3px+28*2px)] max-xl:grid-cols-3 max-lg:w-[calc(180*2px+28*1px)] max-lg:grid-cols-2 max-md:max-w-[calc(100vw-12px)] max-md:gap-5">
 									{successfulFetchedCateData.list.length > 0 &&
 										successfulFetchedCateData.list.map((card) => (
@@ -129,6 +131,11 @@ export default async function Page({
 											loadedAmount={Number(searchObject.amount_per_page)}
 										/>
 									)}
+							</div> */}
+
+							{/* -- client only -- */}
+							<div>
+								<ProductsCardGroup groupClassName="m-auto grid grid-cols-5 gap-7 max-xl:w-[calc(180*3px+28*2px)] max-xl:grid-cols-3 max-lg:w-[calc(180*2px+28*1px)] max-lg:grid-cols-2 max-md:max-w-[calc(100vw-12px)] max-md:gap-5" />
 							</div>
 						</section>
 					</section>

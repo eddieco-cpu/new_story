@@ -1,4 +1,7 @@
 "use client";
+
+import { useSearchParams } from "next/navigation";
+
 import React, { useState } from "react";
 import { useSearchContext } from "@contexts/searchContext";
 
@@ -10,18 +13,38 @@ import {
 
 export default function FilterBar() {
 	//
-	const {
-		isMoblieShowFilterCate,
-		setIsMoblieShowFilterCate,
-		isMoblieShowFilterDetailsCondition,
-		setIsMoblieShowFilterDetailsCondition,
-	} = useSearchContext();
+	const searchParams = useSearchParams();
+	const searchstringParam = searchParams?.get("searchstring") || "";
 
-	const [isShowSortOption, setIsShowSortOption] = useState(false);
+	const {
+		totalAmount,
+
+		setIsMoblieShowFilterCate,
+		setIsMoblieShowFilterDetailsCondition,
+
+		isShowSortOption,
+		setIsShowSortOption,
+		sortOptions,
+		setSortOptions,
+	} = useSearchContext();
 
 	return (
 		<div className="flex items-center justify-between gap-y-5 max-md:flex-wrap max-md:content-between max-md:px-5">
-			<UiTitle className="pl-1 max-md:w-full">全站分類</UiTitle>
+			{searchstringParam ? (
+				<div className="flex items-center justify-start gap-2">
+					<p className="text-ash-600">搜尋</p>
+					<b className="text-2xl font-normal tracking-[2px] text-black">
+						❝{searchstringParam}❞
+					</b>
+					<p className="text-ash-600">共有</p>
+					<span className="font-semibold tracking-[2px] text-accent-300">
+						{totalAmount}
+					</span>
+					<p className="text-ash-600">部作品</p>
+				</div>
+			) : (
+				<UiTitle className="pl-1 max-md:w-full">全站分類</UiTitle>
+			)}
 
 			<button
 				className="flex h-9 items-center justify-between gap-1 *:flex-shrink-0 max-md:w-32 max-md:rounded-3xl max-md:border max-md:border-ash-300 max-md:bg-white max-md:px-[10px] max-md:py-1 md:hidden"
@@ -46,7 +69,7 @@ export default function FilterBar() {
 				>
 					<p className="flex w-full items-center justify-between">
 						<span className="text-sm tracking-[2px] text-ash-600 max-md:hidden">
-							熱門瀏覽
+							{sortOptions.find((el) => el.isSelected)?.name}
 						</span>
 						<span className="md:hidden">
 							<SelectingIcon />
@@ -62,18 +85,24 @@ export default function FilterBar() {
 							}
 							//onClick={(e) => (e.stopPropagation(), setIsShowSortOption(true))}
 						>
-							<li>
-								<p>熱門瀏覽</p>
-							</li>
-							<li>
-								<p>更新時間</p>
-							</li>
-							<li>
-								<p>總收藏</p>
-							</li>
-							<li>
-								<p>總字數</p>
-							</li>
+							{sortOptions.map((el) => (
+								<li
+									key={el.id}
+									className={
+										"hover:bg-ash-200 " +
+										`${el.isSelected ? " *:text-accent-300" : ""}`
+									}
+									onClick={(e) => (
+										e.stopPropagation(),
+										setSortOptions((arr) =>
+											arr.map((it) => ({ ...it, isSelected: it.id === el.id }))
+										),
+										setIsShowSortOption(false)
+									)}
+								>
+									<p>{el.name}</p>
+								</li>
+							))}
 						</ul>
 					}
 					{

@@ -10,10 +10,15 @@ import {
 	ReactNode,
 } from "react";
 
+import { SortOptionType } from "@/types/search";
+
 //
 interface SearchContextType {
 	count: number;
 	setCount: React.Dispatch<React.SetStateAction<number>>;
+
+	totalAmount: number;
+	setTotalAmount: React.Dispatch<React.SetStateAction<number>>;
 
 	isMoblieShowFilterCate: boolean;
 	setIsMoblieShowFilterCate: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,6 +27,12 @@ interface SearchContextType {
 	setIsMoblieShowFilterDetailsCondition: React.Dispatch<
 		React.SetStateAction<boolean>
 	>;
+
+	isShowSortOption: boolean;
+	setIsShowSortOption: React.Dispatch<React.SetStateAction<boolean>>;
+
+	sortOptions: SortOptionType[];
+	setSortOptions: React.Dispatch<React.SetStateAction<SortOptionType[]>>;
 
 	createQueryString: (name: string, value: string) => string;
 }
@@ -32,14 +43,44 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined);
 const SearchProvider = ({ children }: { children: ReactNode }) => {
 	//
 	const searchParams = useSearchParams();
-
 	const [count, setCount] = useState<number>(5);
+
+	//
+	const [totalAmount, setTotalAmount] = useState(0);
+
+	//
 	const [isMoblieShowFilterCate, setIsMoblieShowFilterCate] = useState(false);
 	const [
 		isMoblieShowFilterDetailsCondition,
 		setIsMoblieShowFilterDetailsCondition,
 	] = useState(false);
 
+	//
+	const [isShowSortOption, setIsShowSortOption] = useState(false);
+	const [sortOptions, setSortOptions] = useState([
+		{
+			id: "view",
+			name: "熱門瀏覽",
+			isSelected: true,
+		},
+		{
+			id: "last_update_chapter_time",
+			name: "更新時間",
+			isSelected: false,
+		},
+		{
+			id: "collection",
+			name: "總收藏",
+			isSelected: false,
+		},
+		{
+			id: "words",
+			name: "總字數",
+			isSelected: false,
+		},
+	]);
+
+	//
 	const createQueryString = useCallback(
 		(name: string, value: string) => {
 			const params = new URLSearchParams(searchParams.toString());
@@ -56,10 +97,21 @@ const SearchProvider = ({ children }: { children: ReactNode }) => {
 				value={{
 					count,
 					setCount,
+
+					totalAmount,
+					setTotalAmount,
+
 					isMoblieShowFilterCate,
 					setIsMoblieShowFilterCate,
+
 					isMoblieShowFilterDetailsCondition,
 					setIsMoblieShowFilterDetailsCondition,
+
+					isShowSortOption,
+					setIsShowSortOption,
+					sortOptions,
+					setSortOptions,
+
 					createQueryString,
 				}}
 			>
