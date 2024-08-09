@@ -21,10 +21,9 @@ export default function MoreProductsCardGroup({
 }) {
 	//
 	const searchParams = useSearchParams();
-	const { sortOptions } = useSearchContext();
+	const { sortOptions, totalAmount, setTotalAmount } = useSearchContext();
 
 	const [cards, setCards] = useState<ProductCardType[]>([]);
-	const [totalAmount, setTotalAmount] = useState(0);
 	const amount_per_page = 60;
 
 	//
@@ -54,6 +53,7 @@ export default function MoreProductsCardGroup({
 			update_time: searchParams?.get("update_time") || "",
 			words: searchParams?.get("words") || "",
 			category: searchParams?.get("category") || "",
+			searchstring: searchParams?.get("searchstring") || "",
 		};
 
 		try {

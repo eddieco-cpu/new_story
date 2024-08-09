@@ -17,6 +17,9 @@ interface SearchContextType {
 	count: number;
 	setCount: React.Dispatch<React.SetStateAction<number>>;
 
+	totalAmount: number;
+	setTotalAmount: React.Dispatch<React.SetStateAction<number>>;
+
 	isMoblieShowFilterCate: boolean;
 	setIsMoblieShowFilterCate: React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -41,6 +44,9 @@ const SearchProvider = ({ children }: { children: ReactNode }) => {
 	//
 	const searchParams = useSearchParams();
 	const [count, setCount] = useState<number>(5);
+
+	//
+	const [totalAmount, setTotalAmount] = useState(0);
 
 	//
 	const [isMoblieShowFilterCate, setIsMoblieShowFilterCate] = useState(false);
@@ -91,6 +97,9 @@ const SearchProvider = ({ children }: { children: ReactNode }) => {
 				value={{
 					count,
 					setCount,
+
+					totalAmount,
+					setTotalAmount,
 
 					isMoblieShowFilterCate,
 					setIsMoblieShowFilterCate,

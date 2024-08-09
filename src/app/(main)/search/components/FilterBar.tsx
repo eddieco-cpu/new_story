@@ -1,4 +1,7 @@
 "use client";
+
+import { useSearchParams } from "next/navigation";
+
 import React, { useState } from "react";
 import { useSearchContext } from "@contexts/searchContext";
 
@@ -10,11 +13,15 @@ import {
 
 export default function FilterBar() {
 	//
+	const searchParams = useSearchParams();
+	const searchstringParam = searchParams?.get("searchstring") || "";
+
 	const {
-		isMoblieShowFilterCate,
+		totalAmount,
+
 		setIsMoblieShowFilterCate,
-		isMoblieShowFilterDetailsCondition,
 		setIsMoblieShowFilterDetailsCondition,
+
 		isShowSortOption,
 		setIsShowSortOption,
 		sortOptions,
@@ -23,7 +30,21 @@ export default function FilterBar() {
 
 	return (
 		<div className="flex items-center justify-between gap-y-5 max-md:flex-wrap max-md:content-between max-md:px-5">
-			<UiTitle className="pl-1 max-md:w-full">全站分類</UiTitle>
+			{searchstringParam ? (
+				<div className="flex items-center justify-start gap-2">
+					<p className="text-ash-600">搜尋</p>
+					<b className="text-2xl font-normal tracking-[2px] text-black">
+						❝{searchstringParam}❞
+					</b>
+					<p className="text-ash-600">共有</p>
+					<span className="font-semibold tracking-[2px] text-accent-300">
+						{totalAmount}
+					</span>
+					<p className="text-ash-600">部作品</p>
+				</div>
+			) : (
+				<UiTitle className="pl-1 max-md:w-full">全站分類</UiTitle>
+			)}
 
 			<button
 				className="flex h-9 items-center justify-between gap-1 *:flex-shrink-0 max-md:w-32 max-md:rounded-3xl max-md:border max-md:border-ash-300 max-md:bg-white max-md:px-[10px] max-md:py-1 md:hidden"

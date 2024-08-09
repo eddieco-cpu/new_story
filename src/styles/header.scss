@@ -1135,6 +1135,7 @@
     bottom: 0;
     right: 0;
     z-index: 4;
+    height: 100vh;
     //background-color: rgba(0, 0, 0, 0.1);
   }
 
@@ -1162,6 +1163,16 @@
       &__btn {
         font-size: 14px;
         color: var(--secondary-450-rgb);
+        cursor: pointer;
+
+        &:hover {
+          color: lighten($color: rgb(155, 44, 0), $amount: 12);
+          opacity: 0.7;
+        }
+
+        &:active {
+          color: #ddd;
+        }
       }
     }
 
@@ -1199,6 +1210,12 @@
             transition: color 0.3s ease;
           }
 
+          &:first-child:not(:only-child) {
+            .container-group__item-name {
+              color: var(--accent-300-rgb)
+            }
+          }
+
           &:hover {
             .container-group__item-name {
               color: var(--ash-600-rgb);
@@ -1207,7 +1224,8 @@
 
           &:active {
             .container-group__item-name {
-              color: var(--ash-350-rgb);
+              //color: var(--ash-350-rgb);
+              color: var(--accent-300-rgb)
             }
           }
         }

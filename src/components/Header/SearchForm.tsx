@@ -21,6 +21,22 @@ export default function SearchForm({
 	setIsSearchBox: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 	//
+	const router = useRouter();
+	const searchParams = useSearchParams();
+
+	const searchstringParam = searchParams?.get("searchstring") || "";
+
+	const createQueryString = useCallback(
+		(name: string, value: string) => {
+			const params = new URLSearchParams(searchParams.toString());
+			params.set(name, value);
+
+			return params.toString();
+		},
+		[searchParams]
+	);
+
+	//
 	const [searchTypes, setSearchTypes] = useState([
 		{
 			id: "piece",
@@ -33,12 +49,68 @@ export default function SearchForm({
 			isSelected: false,
 		},
 	]);
+
+	const [popularSearchstrings, setPopularSearchstrings] = useState([
+		"總裁",
+		"言情",
+		"奇幻",
+		"推理",
+		"靈異",
+	]);
+	const [recentSearchstrings, setRecentSearchstrings] = useState<string[]>([]);
 	const [searchstring, setSearchstring] = useState("");
 
 	//
 	useEffect(() => {
-		//searchstring
+		setSearchstring(searchstringParam);
 	}, []);
+
+	useEffect(() => {
+		const searchstring = searchParams?.get("searchstring") || "";
+		if (!searchstring) return;
+
+		handleStorageSearchStrings(searchstring);
+	}, [searchParams]);
+
+	//
+	function searchWithSearchstring(str?: string) {
+		if (str) {
+			setSearchstring(str);
+			router.push("/search/" + "?" + createQueryString("searchstring", str));
+		} else {
+			router.push(
+				"/search/" + "?" + createQueryString("searchstring", searchstring)
+			);
+		}
+		setIsSearchBox(false);
+	}
+
+	function removeRecentSearchstrings() {
+		localStorage.removeItem("search-strings");
+		setRecentSearchstrings([]);
+		//router.push("/search/" + "?" + createQueryString("searchstring", ""));
+	}
+
+	function handleStorageSearchStrings(str?: string) {
+		const storageSearchStrings = localStorage.getItem("search-strings");
+		let newSearchStrings: string[] = [];
+
+		if (storageSearchStrings) {
+			const parsedSearchStrings = JSON.parse(storageSearchStrings);
+			if (Array.isArray(parsedSearchStrings)) {
+				newSearchStrings = [...parsedSearchStrings];
+			}
+		}
+
+		newSearchStrings = [(str || searchstring) as string, ...newSearchStrings];
+		const uniqueSearchStrings = Array.from(new Set<string>(newSearchStrings));
+		newSearchStrings = [...uniqueSearchStrings];
+
+		if (newSearchStrings.length) {
+			setRecentSearchstrings(() => newSearchStrings);
+			localStorage.setItem("search-strings", JSON.stringify(newSearchStrings));
+		}
+	}
 
 	return (
 		<div className={"search " + `${isSearchBox ? "search--active" : ""}`}>
@@ -90,10 +162,19 @@ export default function SearchForm({
 						"search__input " + `${isSearchBox ? "search__input--active" : ""}`
 					}
 					placeholder="搜尋書名、作者、出版社、ISBN"
+					value={searchstring}
 					onFocus={() => setIsSearchBox(true)}
-					//onInput={(e) }
+					onInput={(e: React.ChangeEvent<HTMLInputElement>) => (
+						setIsSearchBox(true), setSearchstring(e.target.value)
+					)}
+					onKeyDown={(event) =>
+						event.key === "Enter" && searchWithSearchstring()
+					}
 				/>
-				<button className={"search__submit"} onClick={() => alert("@@@")}>
+				<button
+					className={"search__submit"}
+					onClick={() => searchWithSearchstring()}
+				>
 					<Image src="/images/search.svg" alt="搜尋" width={24} height={24} />
 				</button>
 
@@ -109,75 +190,46 @@ export default function SearchForm({
 						<div className="container-top">
 							<p className="container-title container-title--top">
 								<span className="container-title__des">最近搜尋</span>
-								<b className="container-title__btn">清除</b>
+								<b
+									className="container-title__btn"
+									onClick={removeRecentSearchstrings}
+								>
+									清除
+								</b>
 							</p>
 							<ul className="container-group container-group--top">
-								<li className="container-group__item">
-									<picture className="container-group__item-icon">
-										<Image
-											src="/images/search.svg"
-											alt=""
-											width={15}
-											height={15}
-										/>
-									</picture>
-									<span className="container-group__item-name">總裁</span>
-								</li>
-								<li className="container-group__item">
-									<picture className="container-group__item-icon">
-										<Image
-											src="/images/search.svg"
-											alt=""
-											width={15}
-											height={15}
-										/>
-									</picture>
-									<span className="container-group__item-name">奇幻</span>
-								</li>
-								<li className="container-group__item">
-									<picture className="container-group__item-icon">
-										<Image
-											src="/images/search.svg"
-											alt=""
-											width={15}
-											height={15}
-										/>
-									</picture>
-									<span className="container-group__item-name">言情</span>
-								</li>
-								<li className="container-group__item">
-									<picture className="container-group__item-icon">
-										<Image
-											src="/images/search.svg"
-											alt=""
-											width={15}
-											height={15}
-										/>
-									</picture>
-									<span className="container-group__item-name">推理</span>
-								</li>
-								<li className="container-group__item">
-									<picture className="container-group__item-icon">
-										<Image
-											src="/images/search.svg"
-											alt=""
-											width={15}
-											height={15}
-										/>
-									</picture>
-									<span className="container-group__item-name">推理</span>
-								</li>
-								<li className="container-group__item">
-									<picture className="container-group__item-icon">
-										<Image
-											src="/images/search.svg"
-											alt=""
-											width={15}
-											height={15}
-										/>
-									</picture>
-									<span className="container-group__item-name">推理</span>
-								</li>
+								{recentSearchstrings.length === 0 && (
+									<li className="container-group__item pointer-events-none opacity-60">
+										<picture className="container-group__item-icon opacity-70">
+											<Image
+												src="/images/search.svg"
+												alt=""
+												width={15}
+												height={15}
+											/>
+										</picture>
+										<span className="container-group__item-name text-ash-500">
+											搜尋書名、作者、出版社、ISBN
+										</span>
+									</li>
+								)}
+								{recentSearchstrings.map((el, i) => (
+									<li
+										className="container-group__item"
+										key={i}
+										onClick={() => searchWithSearchstring(el)}
+									>
+										<picture className="container-group__item-icon">
+											<Image
+												src="/images/search.svg"
+												alt=""
+												width={15}
+												height={15}
+											/>
+										</picture>
+										<span className="container-group__item-name">{el}</span>
+									</li>
+								))}
 							</ul>
 						</div>
 						<div className="container-main">
@@ -185,11 +237,15 @@ export default function SearchForm({
 								<span className="container-title__des">熱門關鍵字</span>
 							</p>
 							<ul className="container-group container-group--main">
-								<li className="container-group__item">總裁</li>
-								<li className="container-group__item">言情</li>
-								<li className="container-group__item">奇幻</li>
-								<li className="container-group__item">推理</li>
-								<li className="container-group__item">推理</li>
+								{popularSearchstrings.map((el, i) => (
+									<li
+										className="container-group__item"
+										key={i}
+										onClick={() => searchWithSearchstring(el)}
+									>
+										{el}
+									</li>
+								))}
 							</ul>
 						</div>
 					</section>
