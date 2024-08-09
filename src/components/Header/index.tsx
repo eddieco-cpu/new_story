@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, Suspense } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -108,7 +108,9 @@ const Header: React.FC = () => {
 						</h1>
 
 						{/* -- */}
-						<SearchForm {...{ isSearchBox, setIsSearchBox }} />
+						<Suspense fallback={<div>Loading...</div>}>
+							<SearchForm {...{ isSearchBox, setIsSearchBox }} />
+						</Suspense>
 
 						<div className="tools-box">
 							<span
