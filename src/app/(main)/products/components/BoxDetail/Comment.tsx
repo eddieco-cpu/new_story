@@ -7,6 +7,7 @@ import React, { useState, useEffect } from "react";
 import { type CommentType } from "../../[pid]/page";
 
 import { UiButton } from "@/components/customUI/client";
+import ViolationReportButton from "@/components/customUI/ViolationReportButton";
 
 //
 const commentRules = [
@@ -47,17 +48,14 @@ function FeedbackToggler({
 						<span className="block translate-y-[2px] text-xs text-ash-600">
 							回覆
 						</span>
-						<b className="translate-y-[1px] text-ash-600">{feedbackLength}</b>
+						<b className="translate-y-[1px] text-ash-600 font-normal">{feedbackLength}</b>
 					</p>
 
 					{/* -- */}
 					{childrenLike}
 				</nav>
 
-				<span className="flex cursor-pointer items-end justify-center">
-					<i className="i-attention translate-y-[2px] scale-[120%] text-ash-500"></i>
-					<b className="ml-[-1px] text-xs text-ash-500">檢舉</b>
-				</span>
+				<ViolationReportButton />
 			</div>
 
 			{/* - */}
@@ -76,7 +74,7 @@ export default function Comment({ comment }: { comment: CommentType[] }) {
 	const [isCommentRuleExpanded, setIsCommentRuleExpanded] = useState(false);
 
 	//
-	useEffect(() => {}, []);
+	useEffect(() => { }, []);
 
 	return (
 		<>
@@ -152,7 +150,7 @@ export default function Comment({ comment }: { comment: CommentType[] }) {
 								childrenLike={
 									<p className="flex cursor-pointer items-center justify-center gap-[2px]">
 										<i className="i-like scale-[120%] text-ash-600"></i>
-										<b className="translate-y-[1px] text-ash-600">
+										<b className="translate-y-[1px] text-ash-600 font-normal">
 											{comment.likesNumber}
 										</b>
 									</p>

@@ -1,3 +1,5 @@
+import cookies from "js-cookie";
+
 export function convertCookieObjArrayToString(arr: any[]): string {
 	return arr.map((obj) => `${obj?.name}=${obj?.value}`).join(";");
 }
@@ -23,4 +25,20 @@ export function formatTimestampToDateString(
 
 export function replaceNewlinesWithBreaks(input: string): string {
 	return input.replace(/\r?\n/g, "<br />");
+}
+
+export function isLoginWithinYear() {
+	if (cookies.get("udngold") && cookies.get("udnland")) return true;
+	return false;
+}
+
+export function isLoginWithinDay() {
+	if (
+		cookies.get("udngold") &&
+		cookies.get("udnland") &&
+		cookies.get("um2") &&
+		cookies.get("udnmember")
+	)
+		return true;
+	return false;
 }

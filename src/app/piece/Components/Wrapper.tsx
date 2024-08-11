@@ -19,6 +19,9 @@ import { unFetchedPieceBase64 } from "@/lib/data";
 
 import { type Chapter } from "../[...pieceSlugs]/page";
 
+import ViolationReportBox from "@/components/ViolationReportBox";
+import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
+
 export default function Wrapper({
 	pieceBase64,
 	productId,
@@ -26,6 +29,7 @@ export default function Wrapper({
 	productChapters,
 	publish_article,
 	status_status,
+	title
 }: {
 	pieceBase64: string;
 	productId: string;
@@ -33,6 +37,7 @@ export default function Wrapper({
 	productChapters: Chapter[];
 	publish_article: string;
 	status_status: string;
+	title: string;
 }) {
 	//
 	const pathname = usePathname();
@@ -40,12 +45,18 @@ export default function Wrapper({
 	const { setIsSettingBox, isPieceLoading, isCatagoryBox, setIsCatagoryBox } =
 		usePieceContext();
 
+	function setViolationReportBox() {
+		BlockPopupModal.setChildren(<ViolationReportBox id={productId} name={title} />);
+		BlockPopupModal.setBlockClassName(" w-[900px] h-[647px] max-h-[calc(100vh-40px)] pb-6 max-lg:pb-6");
+		BlockPopupModal.setIsOpen(true);
+	}
+
 	return (
 		<>
 			<aside className="sticky top-0 z-[1] block w-[60px] max-lg:w-full">
 				<nav className="piece-aside m-auto mt-4 flex flex-col items-center justify-center gap-4 bg-[var(--piece-aside)] py-4 *:flex-shrink-0 max-lg:mb-[-1px] max-lg:mt-0 max-lg:flex-row max-lg:justify-start max-lg:border-b max-lg:border-[var(--piece-border)] max-lg:px-5 max-lg:py-2 lg:rounded-lg">
 					<NavButton icon="detail">作品詳情</NavButton>
-					<NavButton icon="warn">舉報</NavButton>
+					<NavButton icon="warn" onClick={setViolationReportBox}>舉報</NavButton>
 				</nav>
 			</aside>
 
@@ -205,6 +216,7 @@ export default function Wrapper({
 						className={
 							"flex flex-col items-center justify-center max-lg:hidden"
 						}
+						onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
 					>
 						<i className="i-arrow5-up -mt-1 block text-2xl text-primary-300"></i>
 						<p className="-mt-1 mb-1 text-xs text-primary-300">TOP</p>

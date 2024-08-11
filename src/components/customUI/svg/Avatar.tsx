@@ -1,6 +1,43 @@
-import React from "react";
+"use client";
+
+import { usePathname, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+
+import { isLoginWithinDay } from "@lib/helper";
 
 export default function Avatar() {
+	//
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+
+	const [isLogin, setIsLogin] = useState(false);
+
+	//
+	useEffect(() => {
+		const isLoginDepend = isLoginWithinDay();
+		setIsLogin(isLoginDepend);
+	}, [pathname, searchParams]);
+
+	if (isLogin) {
+		return (
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="20"
+				height="19"
+				fill="none"
+				className="avatar_icon"
+			>
+				<g fill="#666" clipPath="url(#a)">
+					<path d="M10 .516a4.868 4.868 0 1 0 0 9.737 4.868 4.868 0 0 0 0-9.737ZM10 12.569c-5.521 0-10 2.363-10 5.263.001.26.036.518.105.768a1.216 1.216 0 0 0 1.174.863h17.442a1.216 1.216 0 0 0 1.174-.863 2.94 2.94 0 0 0 .105-.768c0-2.916-4.479-5.264-10-5.264Z"></path>
+				</g>
+				<defs>
+					<clipPath id="a">
+						<path fill="#fff" d="M0 .5h20v18.979H0z"></path>
+					</clipPath>
+				</defs>
+			</svg>
+		);
+	}
 	return (
 		<svg
 			width="20"

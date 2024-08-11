@@ -130,10 +130,11 @@ const Header: React.FC = () => {
 								</a>
 							</span>
 							<span className="tools-box__item">
-								{/* href="javascript:window.location.href='../center/login.do?redirect='+encodeURIComponent(window.location.href)" */}
-								<a>
-									<Avatar></Avatar>
-								</a>
+								<Link href={"https://reading.udn.com/store/center/profile.do"}>
+									<Suspense fallback={<div>Loading...</div>}>
+										<Avatar />
+									</Suspense>
+								</Link>
 							</span>
 						</div>
 					</div>
