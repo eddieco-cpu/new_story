@@ -6,7 +6,7 @@ import Slider from "@/components/Try/Slider";
 import Group from "@components/Try/Group";
 import Dialog from "@components/Try/Dialog";
 import Wrapper from "./components/Wrapper";
-import BlockPopupModal from "@/components/customUI/BlockPopup";
+import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 
 function PopupBox() {
 	return (

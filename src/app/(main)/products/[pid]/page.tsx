@@ -188,6 +188,7 @@ export default async function Page({
 						summary={productData.summary}
 						productId={pid}
 						productChapters={productChaptersData.list}
+						title={productData.title}
 					></BoxDetail>
 				</div>
 

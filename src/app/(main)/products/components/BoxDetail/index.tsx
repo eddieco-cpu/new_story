@@ -8,8 +8,12 @@ import ArticleExpansion from "./ArticleExpansion";
 import ChaptersList from "./ChaptersList";
 import Comment from "./Comment";
 
-import { UiButton } from "@/components/customUI/client";
 import { type Chapter } from "../../[pid]/page";
+
+import ViolationReportButton from "@/components/customUI/ViolationReportButton";
+import ViolationReportBox from "@/components/ViolationReportBox";
+
+import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 
 export type MessageType = {
 	id: number;
@@ -29,32 +33,34 @@ export type DetailType = {
 
 type BoxType =
 	| {
-			id: "summary";
-			name: "簡介";
-			amount?: number;
-	  }
+		id: "summary";
+		name: "簡介";
+		amount?: number;
+	}
 	| {
-			id: "chapter";
-			name: "目錄";
-			amount?: number;
-	  }
+		id: "chapter";
+		name: "目錄";
+		amount?: number;
+	}
 	| {
-			id: "comment";
-			name: "留言";
-			amount?: number;
-	  };
+		id: "comment";
+		name: "留言";
+		amount?: number;
+	};
 
 export default function Index({
 	detail,
 	publish_article,
 	summary,
 	productId,
+	title,
 	productChapters,
 }: {
 	detail: DetailType;
 	publish_article: string;
 	summary: string;
 	productId: string;
+	title: string;
 	productChapters: Chapter[];
 }) {
 	//
@@ -80,11 +86,17 @@ export default function Index({
 		console.log(detail);
 	}, []);
 
+	function setViolationReportBox() {
+		BlockPopupModal.setChildren(<ViolationReportBox id={productId} name={title} />);
+		BlockPopupModal.setBlockClassName(" w-[900px] h-[647px] max-h-[calc(100vh-40px)] pb-6 max-lg:pb-6");
+		BlockPopupModal.setIsOpen(true);
+	}
+
 	return (
 		<>
 			<section className="ring-1">
 				{/***/}
-				<div className="flex items-end justify-start border-b border-landscape-400 px-6">
+				<div className="flex items-end justify-start border-b border-landscape-400 px-6 relative">
 					{boxTypes.map((type) =>
 						type.id === "comment" ? (
 							<Link
@@ -130,6 +142,7 @@ export default function Index({
 							</div>
 						)
 					)}
+					<ViolationReportButton name="舉報" className=" absolute my-auto top-0 bottom-0 right-8 h-6" onClick={setViolationReportBox} />
 				</div>
 
 				{/***/}

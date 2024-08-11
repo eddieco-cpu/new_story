@@ -22,7 +22,7 @@ interface BlockPopupModal {
 	setCrossClassName: any; //((newcrossClassName: string) => void) | undefined;
 }
 
-const BlockPopupModal: BlockPopupModal = {
+export const BlockPopupModal: BlockPopupModal = {
 	setIsOpen: undefined,
 	setChildren: undefined,
 	setBlockClassName: undefined,
@@ -30,7 +30,7 @@ const BlockPopupModal: BlockPopupModal = {
 	setCrossClassName: undefined,
 }
 
-export function BlockPopup({
+export default function BlockPopup({
 	isDefaultOpen,
 	onCloseCallback,
 	children,
@@ -83,4 +83,4 @@ export function BlockPopup({
 	);
 }
 
-export default BlockPopupModal;
+

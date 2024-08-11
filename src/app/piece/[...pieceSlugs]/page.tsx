@@ -166,6 +166,7 @@ export default async function Page({
 							productChapters={productChapters as Chapter[]}
 							publish_article={productData.publish_article as string}
 							status_status={productData.status_status as string}
+							title={productData.title as string}
 						></Wrapper>
 					</PieceProvider>
 				</UiMain>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Noto_Sans_TC, Roboto } from "next/font/google";
 
 import { Toaster } from "@/components/ui/toaster";
-import { BlockPopup } from "@/components/customUI/BlockPopup";
+import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 
 import "@/styles/globals.scss";
 
