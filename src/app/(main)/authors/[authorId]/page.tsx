@@ -169,96 +169,98 @@ export default async function Page({
 
 				{/* -- */}
 				<ul className="m-auto grid grid-cols-2 gap-x-[30px] gap-y-10 pb-8 pt-4 max-xl:grid-cols-1 max-md:gap-y-7 max-md:px-5">
-					{authorPiecesData.list.map((card) => (
-						<li
-							className="group relative h-[205px] max-md:h-[162px]"
-							key={card.id}
-						>
-							<Link
-								href={`/products/${card.id}`}
-								className="grid h-full grid-cols-[auto_1fr] gap-2 transition-all duration-500 hover:translate-y-[-5px]"
+					{authorPiecesData.list.length > 0 &&
+						authorPiecesData.list.map((card) => (
+							<li
+								className="group relative h-[205px] max-md:h-[162px]"
+								key={card.id}
 							>
-								<picture className="pic-base book-base h-full">
-									<img
-										src={card.imgcover}
-										alt=""
-										className="transition-all duration-700 group-hover:scale-110"
-									/>
-								</picture>
-								<article className="grid h-full w-full grid-cols-1 gap-3 max-md:flex max-md:flex-col max-md:items-stretch max-md:justify-start max-md:gap-1">
-									<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 transition-all duration-300 group-hover:text-accent-300 group-active:text-accent-220 max-md:h-[52px]">
-										{card.title}
-									</h3>
-									<div className="mt-[-2px] flex items-center justify-start gap-2 overflow-hidden max-md:hidden">
-										<UiTag
-											el="span"
-											className="border-secondary-450 text-secondary-450"
-										>
-											簽約
-										</UiTag>
-										<UiTag
-											el="span"
-											className="border-prompt-info text-prompt-info"
-										>
-											{card.status_status === "Y" ? "已完結" : "連載中"}
-										</UiTag>
-										{card.category.map((tag) => (
+								<Link
+									href={`/products/${card.id}`}
+									className="grid h-full grid-cols-[auto_1fr] gap-2 transition-all duration-500 hover:translate-y-[-5px]"
+								>
+									<picture className="pic-base book-base h-full">
+										<img
+											src={card.imgcover}
+											alt=""
+											className="transition-all duration-700 group-hover:scale-110"
+										/>
+									</picture>
+									<article className="grid h-full w-full grid-cols-1 gap-3 max-md:flex max-md:flex-col max-md:items-stretch max-md:justify-start max-md:gap-1">
+										<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 transition-all duration-300 group-hover:text-accent-300 group-active:text-accent-220 max-md:h-[52px]">
+											{card.title}
+										</h3>
+										<div className="mt-[-2px] flex items-center justify-start gap-2 overflow-hidden max-md:hidden">
 											<UiTag
-												el="nestedLink"
-												link={`/cate/${tag.id}`}
-												className="border-[rgb(222,131,92)] text-[rgb(222,131,92)] hover:border-accent-300 hover:text-accent-300"
+												el="span"
+												className="border-secondary-450 text-secondary-450"
 											>
-												{tag.name}
+												簽約
 											</UiTag>
-										))}
-									</div>
-									<div>
-										<p className="line-clamp-1 w-full text-sm font-normal text-primary-200">
-											<span className="text-inherit">{card.author}</span>
-										</p>
-									</div>
-									<div>
-										<p className="line-clamp-1 w-full text-sm font-normal text-primary-200">
-											<span className="text-ash-600">更新至</span>{" "}
-											<NestedLink
-												className="text-inherit"
-												link={`/piece/${card.id}/${card.last_update_chapter_id}`}
+											<UiTag
+												el="span"
+												className="border-prompt-info text-prompt-info"
 											>
-												{card.last_update_chapter_name}
-											</NestedLink>
+												{card.status_status === "Y" ? "已完結" : "連載中"}
+											</UiTag>
+											{card.category.map((tag, i) => (
+												<UiTag
+													el="nestedLink"
+													link={`/cate/${tag.id}`}
+													className="border-[rgb(222,131,92)] text-[rgb(222,131,92)] hover:border-accent-300 hover:text-accent-300"
+													key={tag.id + i}
+												>
+													{tag.name}
+												</UiTag>
+											))}
+										</div>
+										<div>
+											<p className="line-clamp-1 w-full text-sm font-normal text-primary-200">
+												<span className="text-inherit">{card.author}</span>
+											</p>
+										</div>
+										<div>
+											<p className="line-clamp-1 w-full text-sm font-normal text-primary-200">
+												<span className="text-ash-600">更新至</span>{" "}
+												<NestedLink
+													className="text-inherit"
+													link={`/piece/${card.id}/${card.last_update_chapter_id}`}
+												>
+													{card.last_update_chapter_name}
+												</NestedLink>
+											</p>
+										</div>
+										<p className="line-clamp-1 w-full text-sm font-normal text-ash-600">
+											<time className="text-ash-600">
+												{formatTimestampToDateString(
+													card.last_update_chapter_publishtime
+												)}
+											</time>
 										</p>
-									</div>
-									<p className="line-clamp-1 w-full text-sm font-normal text-ash-600">
-										<time className="text-ash-600">
-											{formatTimestampToDateString(
-												card.last_update_chapter_publishtime
-											)}
-										</time>
-									</p>
-								</article>
-							</Link>
-							<div className="absolute bottom-0 right-0 flex items-center justify-center gap-4 max-md:gap-3">
-								<UiButton
-									variant="secondary"
-									className="flex h-[34px] items-center justify-center gap-2 max-md:h-8 max-md:w-[90px] max-md:gap-1 max-md:rounded-md max-md:text-sm"
-								>
-									<i className="i-heart-empty text-inherit"></i>
-									<span className="text-inherit">收藏</span>
-								</UiButton>
-								<UiButton
-									variant="primary"
-									className="relative h-[34px] max-md:h-8 max-md:w-[90px] max-md:text-sm"
-								>
-									<NestedLink
-										className="absolute bottom-0 left-0 right-0 top-0 block pt-[1px] text-inherit"
-										link={`/piece/${card.id}/${card.last_update_chapter_id}`}
+									</article>
+								</Link>
+								<div className="absolute bottom-0 right-0 flex items-center justify-center gap-4 max-md:gap-3">
+									<UiButton
+										variant="secondary"
+										className="flex h-[34px] items-center justify-center gap-2 max-md:h-8 max-md:w-[90px] max-md:gap-1 max-md:rounded-md max-md:text-sm"
 									>
-										開始閱讀
-									</NestedLink>
-								</UiButton>
-							</div>
-						</li>
-					))}
+										<i className="i-heart-empty text-inherit"></i>
+										<span className="text-inherit">收藏</span>
+									</UiButton>
+									<UiButton
+										variant="primary"
+										className="relative h-[34px] max-md:h-8 max-md:w-[90px] max-md:text-sm"
+									>
+										<NestedLink
+											className="absolute bottom-0 left-0 right-0 top-0 block pt-[1px] text-inherit"
+											link={`/piece/${card.id}/${card.last_update_chapter_id}`}
+										>
+											開始閱讀
+										</NestedLink>
+									</UiButton>
+								</div>
+							</li>
+						))}
 				</ul>
 			</section>
 		</section>
