@@ -36,12 +36,15 @@ export default function RankCard({
 					</h3>
 					<div>
 						<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
-							<NestedLink
+							{/* <NestedLink
 								link={`/authors/${card.author}`}
 								className="text-inherit transition-all duration-300 hover:text-accent-250 active:text-accent-220"
 							>
 								{card.author}
-							</NestedLink>
+							</NestedLink> */}
+							<span className="text-inherit transition-all duration-300">
+								{card.author}
+							</span>
 						</p>
 					</div>
 					<p className="line-clamp-1 w-full text-sm font-normal text-ash-600">

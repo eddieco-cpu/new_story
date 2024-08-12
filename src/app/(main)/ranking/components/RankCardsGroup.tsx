@@ -53,6 +53,7 @@ export default function RankCardsGroup() {
 					`/story3/ShowStoreProductList?amount_per_page=60&page=1&type=${type}&category=${category}`
 				);
 				const fetchedData = data as ResponseOfFetchedProductCardType;
+				//console.log("fetchedData.list: ", fetchedData.list);
 				setCards(() => [...fetchedData.list]);
 			} catch (err) {
 				console.log("error: ", err);

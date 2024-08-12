@@ -8,6 +8,7 @@ import { convertCookieObjArrayToString } from "@/lib/helper";
 
 import { type NewsType } from "@/types";
 import { type ProductDataType, type CategoryType } from "@/types/product";
+import { type AuthorDataType } from "@/types/author";
 
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
@@ -135,6 +136,7 @@ export default async function Page({
 	} catch (error) {
 		console.log("error \n", error);
 	}
+	console.log("productData; \n", productData);
 
 	//
 	var productChaptersData: null | ProductChaptersData = null;
@@ -148,7 +150,7 @@ export default async function Page({
 	} catch (error) {
 		console.log("error \n", error);
 	}
-	console.log("productChaptersData: \n", productChaptersData);
+	//console.log("productChaptersData: \n", productChaptersData);
 
 	if (
 		!productData ||
@@ -156,6 +158,23 @@ export default async function Page({
 		productData.status !== "200" ||
 		productChaptersData.status !== "200"
 	) {
+		notFound();
+	}
+
+	//
+	var authorData: null | AuthorDataType = null;
+	try {
+		authorData = (await fetchDataWithCookieInServer(
+			`https://story-onlinelab.udn.com/story3/AccountData?account=${productData.writer_account}&action=select`,
+			cookieString
+		)) as AuthorDataType;
+		if (!authorData) throw new Error("fetch authorData error in author page");
+	} catch (error) {
+		console.log("error \n", error);
+	}
+	console.log("authorData; \n", authorData);
+
+	if (!authorData || authorData.status !== "200") {
 		notFound();
 	}
 
@@ -177,7 +196,10 @@ export default async function Page({
 
 				{/* right_top */}
 				<div className="col-start-2 row-start-1 aspect-[310/407] w-[310px] rounded-2xl bg-landscape-400 p-3 max-xl:col-span-2 max-xl:col-start-1 max-xl:row-start-2 max-xl:aspect-auto max-xl:min-h-6 max-xl:w-auto max-md:rounded-none">
-					<BoxCreator></BoxCreator>
+					<BoxCreator
+						authorData={authorData}
+						writer_account={productData.writer_account}
+					></BoxCreator>
 				</div>
 
 				{/* left_bottom */}
