@@ -60,3 +60,17 @@ export type ResponseOfFetchedProductCardType = {
 	data_count: string;
 	list: ProductCardType[];
 };
+
+//
+export type ProductCardViaAuthorType = Omit<
+	ProductCardType,
+	| "publish_article"
+	| "collection"
+	| "share"
+	| "words"
+	| "contentrating"
+	| "view"
+> & {
+	last_update_chapter_id: string; // 添加新屬性
+	last_update_chapter_publishtime: string;
+};

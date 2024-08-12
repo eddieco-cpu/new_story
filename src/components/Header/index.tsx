@@ -143,13 +143,15 @@ const Header: React.FC = () => {
 					<nav className="navigation">
 						<div className="navigation-wrapper navigation-wrapper--left">
 							<span className="navigation-item">
-								<Link href="/read/">推薦</Link>
+								<Link href="" style={{ fontWeight: 500 }}>
+									推薦
+								</Link>
 							</span>
 							<span className="navigation-item">
-								<Link href="">全站分類</Link>
+								<Link href="/search/">全站分類</Link>
 							</span>
 							<span className="navigation-item">
-								<Link href="">排行榜</Link>
+								<Link href="/ranking/">排行榜</Link>
 							</span>
 							<span className="navigation-item">
 								<Link href="">成為創作家</Link>
