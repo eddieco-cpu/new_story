@@ -1,8 +1,8 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSearchContext } from "@contexts/searchContext";
 
 import { UiTitle } from "@/components/customUI";
@@ -11,10 +11,15 @@ import {
 	Selecting as SelectingIcon,
 } from "@/components/customUI/svg";
 
+import { decodeIfChineseEncoded } from "@/tools/validator";
+
 export default function FilterBar() {
 	//
 	const searchParams = useSearchParams();
 	const searchstringParam = searchParams?.get("searchstring") || "";
+
+	const pathname = usePathname();
+	const pathnames = pathname.split("/");
 
 	const {
 		totalAmount,
@@ -28,9 +33,23 @@ export default function FilterBar() {
 		setSortOptions,
 	} = useSearchContext();
 
+	//
 	return (
 		<div className="flex items-center justify-between gap-y-5 max-md:flex-wrap max-md:content-between max-md:px-5">
-			{searchstringParam ? (
+			{pathnames[pathnames.length - 3] === "license" &&
+			pathnames[pathnames.length - 1] === "searching" ? (
+				<div className="flex items-center justify-start gap-2">
+					<b className="text-2xl font-normal tracking-[2px] text-black">
+						❝{decodeURI(pathnames[pathnames.length - 2])}❞
+					</b>
+					<p className="text-ash-600">授權，</p>
+					<p className="text-ash-600">共有</p>
+					<span className="font-semibold tracking-[2px] text-accent-300">
+						{totalAmount}
+					</span>
+					<p className="text-ash-600">部作品</p>
+				</div>
+			) : searchstringParam ? (
 				<div className="flex items-center justify-start gap-2">
 					<p className="text-ash-600">搜尋</p>
 					<b className="text-2xl font-normal tracking-[2px] text-black">

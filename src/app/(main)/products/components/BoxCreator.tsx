@@ -101,7 +101,10 @@ export default function BoxCreator({
 					)}
 					<h2 className="line-clamp-2 text-2xl font-normal text-ash-900 max-md:line-clamp-3 max-md:text-sm xl:text-center">
 						{!writer_account ? (
-							<Link href={`#`} className="cursor-pointer hover:text-accent-300">
+							<Link
+								href={`/license/${authorize}/searching`}
+								className="cursor-pointer hover:text-accent-300"
+							>
 								{authorize}
 							</Link>
 						) : (

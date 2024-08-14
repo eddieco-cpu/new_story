@@ -148,7 +148,7 @@ const Header: React.FC = () => {
 								</Link>
 							</span>
 							<span className="navigation-item">
-								<Link href="/search/">全站分類</Link>
+								<Link href="/main-site/">全站分類</Link>
 							</span>
 							<span className="navigation-item">
 								<Link href="/ranking/">排行榜</Link>
