@@ -6,12 +6,13 @@ import { useSearchContext } from "@contexts/searchContext";
 
 import {
 	type ProductCardType,
-	type ResponseOfFetchedProductCardType,
+	type FetchedProductCardListType,
 } from "@/types/product";
 
 import ProductCard from "./ProductsCard";
 import LoadMore from "@/components/customUI/LoadMore";
 
+import { isValidPathSegment } from "@/tools/validator";
 import { getData } from "@/lib/api";
 
 export default function MoreProductsCardGroup({
@@ -21,6 +22,9 @@ export default function MoreProductsCardGroup({
 }) {
 	//
 	const searchParams = useSearchParams();
+	const pathname = usePathname();
+	const pathnames = pathname.split("/");
+
 	const { sortOptions, totalAmount, setTotalAmount } = useSearchContext();
 
 	const [cards, setCards] = useState<ProductCardType[]>([]);
@@ -53,20 +57,39 @@ export default function MoreProductsCardGroup({
 			update_time: searchParams?.get("update_time") || "",
 			words: searchParams?.get("words") || "",
 			category: searchParams?.get("category") || "",
-			searchstring: searchParams?.get("searchstring") || "",
 		};
+
+		if (
+			pathnames[pathnames.length - 3] === "license" &&
+			pathnames[pathnames.length - 1] === "searching"
+		) {
+			searchObject = isValidPathSegment(pathnames[pathnames.length - 2])
+				? {
+						...searchObject,
+						cpstring: decodeURI(pathnames[pathnames.length - 2]),
+					}
+				: searchObject;
+		} else {
+			searchObject = searchParams?.get("searchstring")
+				? {
+						...searchObject,
+						searchstring: searchParams?.get("searchstring") || "",
+					}
+				: searchObject;
+		}
 
 		try {
 			const { data } = await getData(
 				`/story3/ShowStoreProductList?page=${isRefresh ? "1" : Math.floor(cards.length / amount_per_page) + 1}&${new URLSearchParams(searchObject).toString()}`
 			);
-			const fetchedData = data as ResponseOfFetchedProductCardType;
+			const fetchedData = data as FetchedProductCardListType;
+			console.log("fetchedData: ", fetchedData);
 
 			//
 			setTotalAmount(Number(fetchedData.data_count));
 
-			const fetchedDataIds = fetchedData.list.map((el) => el.id);
-			console.log("fetchedDataIds: ", fetchedDataIds); //取得的 api data 目前有重複的可能性
+			//const fetchedDataIds = fetchedData.list.map((el) => el.id);
+			//console.log("fetchedDataIds: ", fetchedDataIds); //取得的 api data 目前有重複的可能性
 
 			if (isRefresh) {
 				setCards(() => [...fetchedData.list]);
@@ -84,7 +107,7 @@ export default function MoreProductsCardGroup({
 	//
 	useEffect(() => {
 		handleFetchCards(true);
-	}, [searchParams]);
+	}, [pathname, searchParams]);
 
 	return (
 		<>

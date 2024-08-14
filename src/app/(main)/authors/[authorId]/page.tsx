@@ -7,8 +7,12 @@ import { fetchDataWithCookieInServer } from "@/lib/api";
 import { convertCookieObjArrayToString } from "@/lib/helper";
 
 import { type NewsType } from "@/types";
-import { type AuthorDataType, type AuthorPiecesData } from "@/types/author";
+import {
+	type FetchedAuthorDataType,
+	type FetchedAuthorPiecesData,
+} from "@/types/author";
 import { type ProductCardViaAuthorType } from "@/types/product";
+import { type Fan, type FetchedAuthorsFollowers } from "@/types/fan";
 
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
@@ -62,12 +66,12 @@ export default async function Page({
 	const cookieString = convertCookieObjArrayToString([um2]);
 
 	//
-	var authorData: null | AuthorDataType = null;
+	var authorData: null | FetchedAuthorDataType = null;
 	try {
 		authorData = (await fetchDataWithCookieInServer(
 			`https://story-onlinelab.udn.com/story3/AccountData?account=${authorId}&action=select`,
 			cookieString
-		)) as AuthorDataType;
+		)) as FetchedAuthorDataType;
 		if (!authorData) throw new Error("fetch authorData error in author page");
 	} catch (error) {
 		console.log("error \n", error);
@@ -75,24 +79,41 @@ export default async function Page({
 	console.log("authorData; \n", authorData);
 
 	//
-	var authorPiecesData: null | AuthorPiecesData = null;
+	var authorPiecesData: null | FetchedAuthorPiecesData = null;
 	try {
 		authorPiecesData = (await fetchDataWithCookieInServer(
 			`https://story-onlinelab.udn.com/story3/AccountData?account=${authorId}&action=select_publish`,
 			cookieString
-		)) as AuthorPiecesData;
+		)) as FetchedAuthorPiecesData;
 		if (!authorPiecesData)
 			throw new Error("fetch authorPiecesData error in author page");
 	} catch (error) {
 		console.log("error \n", error);
 	}
-	console.log("authorPiecesData; \n", authorPiecesData);
+	//console.log("authorPiecesData; \n", authorPiecesData);
+
+	//
+	var authorFollowersData: null | FetchedAuthorsFollowers = null;
+	try {
+		authorFollowersData = (await fetchDataWithCookieInServer(
+			`https://story-onlinelab.udn.com/story3/FollowControl?account=${authorId}&type=10`,
+			""
+		)) as FetchedAuthorsFollowers;
+
+		if (!authorFollowersData)
+			throw new Error("fetch authorFollowersData error in author page");
+		//
+	} catch (error) {
+		console.log("error \n", error);
+	}
 
 	if (
 		!authorData ||
 		!authorPiecesData ||
 		authorData.status !== "200" ||
-		authorPiecesData.status !== "200"
+		authorPiecesData.status !== "200" ||
+		!authorFollowersData ||
+		authorFollowersData.status !== "200"
 	) {
 		notFound();
 	}
@@ -146,7 +167,9 @@ export default async function Page({
 						<div className="h-[22px] w-[1px] bg-ash-500"></div>
 						<p className="flex items-end justify-center gap-2 px-2">
 							<span className="text-sm leading-none text-ash-600">追蹤數</span>
-							<b className="text-lg leading-none">97?</b>
+							<b className="text-lg leading-none">
+								{authorFollowersData.follow_me_list.length}
+							</b>
 						</p>
 					</div>
 				</div>

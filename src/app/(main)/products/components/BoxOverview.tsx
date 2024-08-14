@@ -8,14 +8,14 @@ import randomText from "@tools/randomText";
 import { UiButton, UiTag } from "@/components/customUI/client";
 import { Share } from "@/components/customUI/svg";
 
-import { type ProductDataType } from "@/types/product";
+import { type FetchedProductDataType } from "@/types/product";
 import { formatTimestampToDateString } from "@/lib/helper";
 
 //
 export default function BoxOverview({
 	productData,
 }: {
-	productData: ProductDataType;
+	productData: FetchedProductDataType;
 }) {
 	return (
 		<section className="grid grid-cols-[auto_1fr] grid-rows-[auto_1fr] gap-5 max-md:gap-x-2 max-md:gap-y-4">

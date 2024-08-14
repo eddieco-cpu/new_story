@@ -7,8 +7,11 @@ import { fetchDataWithCookieInServer } from "@/lib/api";
 import { convertCookieObjArrayToString } from "@/lib/helper";
 
 import { type NewsType } from "@/types";
-import { type ProductDataType, type CategoryType } from "@/types/product";
-import { type AuthorDataType } from "@/types/author";
+import {
+	type FetchedProductDataType,
+	type CategoryType,
+} from "@/types/product";
+import { type FetchedAuthorDataType } from "@/types/author";
 
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
@@ -125,18 +128,18 @@ export default async function Page({
 	const cookieString = convertCookieObjArrayToString([um2]);
 
 	//
-	var productData: null | ProductDataType = null;
+	var productData: null | FetchedProductDataType = null;
 	try {
 		productData = (await fetchDataWithCookieInServer(
 			`https://story-onlinelab.udn.com/story3/ShowStoreProduct?id=${pid}`,
 			cookieString
-		)) as ProductDataType;
+		)) as FetchedProductDataType;
 		if (!productData)
 			throw new Error("fetch productDataerror in products page");
 	} catch (error) {
 		console.log("error \n", error);
 	}
-	console.log("productData; \n", productData);
+	//console.log("productData; \n", productData);
 
 	//
 	var productChaptersData: null | ProductChaptersData = null;
@@ -162,17 +165,17 @@ export default async function Page({
 	}
 
 	//
-	var authorData: null | AuthorDataType = null;
+	var authorData: null | FetchedAuthorDataType = null;
 	try {
 		authorData = (await fetchDataWithCookieInServer(
 			`https://story-onlinelab.udn.com/story3/AccountData?account=${productData.writer_account}&action=select`,
 			cookieString
-		)) as AuthorDataType;
+		)) as FetchedAuthorDataType;
 		if (!authorData) throw new Error("fetch authorData error in author page");
 	} catch (error) {
 		console.log("error \n", error);
 	}
-	console.log("authorData; \n", authorData);
+	//console.log("authorData; \n", authorData);
 
 	if (!authorData || authorData.status !== "200") {
 		notFound();
@@ -198,6 +201,8 @@ export default async function Page({
 				<div className="col-start-2 row-start-1 aspect-[310/407] w-[310px] rounded-2xl bg-landscape-400 p-3 max-xl:col-span-2 max-xl:col-start-1 max-xl:row-start-2 max-xl:aspect-auto max-xl:min-h-6 max-xl:w-auto max-md:rounded-none">
 					<BoxCreator
 						authorData={authorData}
+						authorize={productData.authorize}
+						author={productData.author}
 						writer_account={productData.writer_account}
 					></BoxCreator>
 				</div>
