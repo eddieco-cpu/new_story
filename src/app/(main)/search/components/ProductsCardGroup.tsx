@@ -6,7 +6,7 @@ import { useSearchContext } from "@contexts/searchContext";
 
 import {
 	type ProductCardType,
-	type ResponseOfFetchedProductCardType,
+	type FetchedProductCardListType,
 } from "@/types/product";
 
 import ProductCard from "./ProductsCard";
@@ -60,7 +60,7 @@ export default function MoreProductsCardGroup({
 			const { data } = await getData(
 				`/story3/ShowStoreProductList?page=${isRefresh ? "1" : Math.floor(cards.length / amount_per_page) + 1}&${new URLSearchParams(searchObject).toString()}`
 			);
-			const fetchedData = data as ResponseOfFetchedProductCardType;
+			const fetchedData = data as FetchedProductCardListType;
 
 			//
 			setTotalAmount(Number(fetchedData.data_count));

@@ -6,7 +6,7 @@ import { fetchDataWithCookieInServer } from "@/lib/api";
 
 import { type NewsType } from "@/types";
 import { type CateData, type FetchedCateData } from "@/types/cate";
-import { type ResponseOfFetchedProductCardType } from "@/types/product";
+import { type FetchedProductCardListType } from "@/types/product";
 
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
@@ -84,8 +84,7 @@ export default async function Page({
 		console.log("error: \n", error);
 		notFound(); //to be continued
 	}
-	const successfulFetchedCateData: ResponseOfFetchedProductCardType =
-		fetchedCateData;
+	const successfulFetchedCateData: FetchedProductCardListType = fetchedCateData;
 	console.log("successfulFetchedCateData: \n", successfulFetchedCateData);
 
 	return (

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 
 import {
 	type ProductCardType,
-	type ResponseOfFetchedProductCardType,
+	type FetchedProductCardListType,
 } from "@/types/product";
 
 import ProductCard from "../components/ProductsCard";
@@ -36,7 +36,7 @@ export default function MoreProductsCardGroup({
 			const { data } = await getData(
 				`/story3/ShowStoreProductList?amount_per_page=${loadedAmount}&page=${Math.floor((cards.length + loadedAmount) / loadedAmount) + 1}&${searchParams.toString()}`
 			);
-			const fetchedData = data as ResponseOfFetchedProductCardType;
+			const fetchedData = data as FetchedProductCardListType;
 			setCards((arr) => [...arr, ...fetchedData.list]);
 		} catch (err) {
 			console.log("error: ", err);

@@ -1,10 +1,12 @@
+import { FetchedResponseType } from "./index";
+
 //
 export type CategoryType = {
 	id: string;
 	name: string;
 };
 
-export type ProductDataType = {
+export type FetchedProductDataType = {
 	summary: string;
 	publish_article: string;
 	writer_account: string;
@@ -21,11 +23,9 @@ export type ProductDataType = {
 	status_status: string;
 	is_shelf: string;
 	last_reading_chapter_id: string;
-	status: string;
 	charge_type: string;
 	writer_type: string;
 	buy_point: string;
-	message: string;
 	authorize: string;
 	category: CategoryType[];
 	publishtime: string;
@@ -33,7 +33,7 @@ export type ProductDataType = {
 	is_charge: string;
 	view: string;
 	last_update_chapter_name: string;
-};
+} & FetchedResponseType;
 
 export type ProductCardType = {
 	summary: string;
@@ -54,17 +54,16 @@ export type ProductCardType = {
 	last_update_chapter_name: string;
 };
 
-export type ResponseOfFetchedProductCardType = {
-	message: string;
-	status: string;
+export type FetchedProductCardListType = {
 	data_count: string;
 	list: ProductCardType[];
-};
+} & FetchedResponseType;
 
 //
 export type ProductCardViaAuthorType = Omit<
 	ProductCardType,
 	| "publish_article"
+	| "last_update_chapter_time"
 	| "collection"
 	| "share"
 	| "words"

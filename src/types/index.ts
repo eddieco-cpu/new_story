@@ -10,3 +10,8 @@ export type NewsType = {
 	link: string;
 	text: string;
 };
+
+export type FetchedResponseType = {
+	message: string;
+	status: string;
+};

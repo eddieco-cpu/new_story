@@ -13,7 +13,10 @@ import Wrapper from "../Components/Wrapper";
 
 import { unFetchedPieceBase64 } from "@/lib/data";
 
-import { type CategoryType, type ProductDataType } from "@/types/product";
+import {
+	type CategoryType,
+	type FetchedProductDataType,
+} from "@/types/product";
 
 import "@/styles/piece.scss";
 
@@ -56,12 +59,12 @@ export default async function Page({
 	const pieceId = pieceSlugs[1];
 
 	//////
-	var productData: null | ProductDataType = null;
+	var productData: null | FetchedProductDataType = null;
 	try {
 		productData = (await fetchDataWithCookieInServer(
 			`https://story-onlinelab.udn.com/story3/ShowStoreProduct?id=${pid}`,
 			cookieString
-		)) as ProductDataType;
+		)) as FetchedProductDataType;
 		if (!productData)
 			throw new Error("fetch productDataerror in products page");
 	} catch (error) {

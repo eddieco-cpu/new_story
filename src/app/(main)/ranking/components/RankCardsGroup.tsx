@@ -5,7 +5,7 @@ import React, { useEffect, useState, useCallback } from "react";
 
 import {
 	type ProductCardType,
-	type ResponseOfFetchedProductCardType,
+	type FetchedProductCardListType,
 } from "@/types/product";
 
 import RankCard from "./RankCard";
@@ -52,7 +52,7 @@ export default function RankCardsGroup() {
 				const { data } = await getData(
 					`/story3/ShowStoreProductList?amount_per_page=60&page=1&type=${type}&category=${category}`
 				);
-				const fetchedData = data as ResponseOfFetchedProductCardType;
+				const fetchedData = data as FetchedProductCardListType;
 				//console.log("fetchedData.list: ", fetchedData.list);
 				setCards(() => [...fetchedData.list]);
 			} catch (err) {
