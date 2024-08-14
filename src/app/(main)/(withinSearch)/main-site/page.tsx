@@ -1,6 +1,7 @@
 //
 import Link from "next/link";
 import { redirect, notFound } from "next/navigation";
+import React, { Suspense } from "react";
 
 import { type NewsType } from "@/types";
 import randomText from "@tools/randomText";
@@ -40,7 +41,9 @@ export default function Page({
 				<Breadcrumb />
 			</section>
 
-			<AssembleContainer searchParams={searchParams} />
+			<Suspense fallback={<div>Loading...</div>}>
+				<AssembleContainer searchParams={searchParams} />
+			</Suspense>
 		</section>
 	);
 }
