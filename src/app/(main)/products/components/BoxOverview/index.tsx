@@ -11,12 +11,17 @@ import { Share } from "@/components/customUI/svg";
 import { type FetchedProductDataType } from "@/types/product";
 import { formatTimestampToDateString } from "@/lib/helper";
 
+import ButtonsBlock from "./ButtonsBlock";
+
 //
 export default function BoxOverview({
 	productData,
 }: {
 	productData: FetchedProductDataType;
 }) {
+	//
+
+	//
 	return (
 		<section className="grid grid-cols-[auto_1fr] grid-rows-[auto_1fr] gap-5 max-md:gap-x-2 max-md:gap-y-4">
 			{/* - */}
@@ -119,44 +124,9 @@ export default function BoxOverview({
 				</p>
 
 				{/* --- */}
-				<div
-					className="flex items-center justify-start gap-4 max-md:fixed max-md:bottom-0 max-md:left-0 max-md:z-[9] max-md:w-full max-md:bg-white max-md:px-5 max-md:py-4 max-md:shadow-2xl"
-					style={
-						{
-							"--tw-shadow": "0 0 25px 0 rgba(0,0,0,0.2)",
-						} as CSSProperties
-					}
-				>
-					<UiButton
-						variant="primary"
-						className="m-0 h-[38px] flex-1 max-md:order-4"
-					>
-						開始閱讀
-					</UiButton>
-					<UiButton
-						variant="primary"
-						className="m-0 h-[38px] flex-1 max-md:order-3"
-					>
-						全本購買
-					</UiButton>
-					<UiButton
-						variant="secondary"
-						className="m-0 flex h-[38px] flex-1 items-center justify-center gap-2 max-md:order-1 max-md:max-w-12"
-					>
-						<i className="i-heart-empty text-inherit"></i>
-						<span className="text-inherit max-md:hidden">收藏</span>
-					</UiButton>
-					<UiButton
-						variant="secondary"
-						className="m-0 flex h-[38px] flex-1 items-center justify-center gap-2 max-md:order-2 max-md:max-w-12"
-					>
-						{/* <i className="i-heart-empty text-inherit"></i> */}
-						<Share />
-						<span className="text-inherit max-md:hidden">分享</span>
-					</UiButton>
-				</div>
+				<ButtonsBlock></ButtonsBlock>
 
-				{/* --- */}
+				{/* -- tag 先不做 -- */}
 				{/* <div className="flex flex-wrap content-start items-start justify-start gap-x-3 gap-y-[2px] pl-2">
 					{productData.tags.map((tag) => (
 						<Link
