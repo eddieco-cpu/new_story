@@ -125,7 +125,9 @@ export default function BoxOverview({
 
 				{/* --- */}
 				<Suspense fallback={<div>Loading...</div>}>
-					<ButtonsBlock></ButtonsBlock>
+					<ButtonsBlock
+						writer_account={productData.writer_account}
+					></ButtonsBlock>
 				</Suspense>
 
 				{/* -- tag 先不做 -- */}

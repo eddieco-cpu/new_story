@@ -4,13 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 
+import cookies from "js-cookie";
 import { UiButton, UiTag } from "@/components/customUI/client";
 import { Share } from "@/components/customUI/svg";
 
 import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 import { useToast } from "@/components/ui/use-toast";
+
+import { getData } from "@/lib/api";
 
 //
 function ShareBox() {
@@ -130,7 +133,21 @@ function ShareBox() {
 	);
 }
 
-export default function ButtonsBlock() {
+export default function ButtonsBlock({
+	writer_account,
+}: {
+	writer_account: string;
+}) {
+	//
+	const [isCollect, setIsCollect] = useState<boolean | "loading">(false);
+
+	//
+	async function fetchCollectData() {
+		//
+		const acount = cookies.get("udnmember");
+		let url = `/story3/FollowControl?account=${acount}&type=9`;
+	}
+
 	//
 	function handleShare() {
 		BlockPopupModal.setChildren(<ShareBox />);

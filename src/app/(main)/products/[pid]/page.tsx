@@ -123,7 +123,9 @@ export default async function Page({
 }) {
 	//
 	const cookieStore = cookies();
-	const um2 = cookieStore.get("um2");
+	let um2 = cookieStore.get("um2");
+
+	if (um2) um2 = { ...um2, value: encodeURIComponent(um2.value) };
 
 	const cookieString = convertCookieObjArrayToString([um2]);
 
@@ -132,14 +134,14 @@ export default async function Page({
 	try {
 		productData = (await fetchDataWithCookieInServer(
 			`https://story-onlinelab.udn.com/story3/ShowStoreProduct?id=${pid}`,
-			""
+			cookieString
 		)) as FetchedProductDataType;
 		if (!productData)
 			throw new Error("fetch productDataerror in products page");
 	} catch (error) {
 		console.log("error \n", error);
 	}
-	//console.log("productData; \n", productData);
+	console.log("productData; \n", productData);
 
 	//
 	var productChaptersData: null | ProductChaptersData = null;
