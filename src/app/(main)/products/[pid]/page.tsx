@@ -169,7 +169,7 @@ export default async function Page({
 	try {
 		authorData = (await fetchDataWithCookieInServer(
 			`https://story-onlinelab.udn.com/story3/AccountData?account=${productData.writer_account}&action=select`,
-			cookieString
+			""
 		)) as FetchedAuthorDataType;
 		if (!authorData) throw new Error("fetch authorData error in author page");
 	} catch (error) {

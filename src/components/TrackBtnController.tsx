@@ -49,7 +49,7 @@ function ComfirmUnfollowPopup({
 	return (
 		<div className="flex flex-grow flex-col justify-between">
 			<div className="py-16">
-				<p className="text-center text-xl">確定要 '取消' 追蹤嗎？</p>
+				<p className="text-center text-xl">確定要 ❝取消❞ 追蹤嗎？</p>
 			</div>
 			<div className="mx-auto flex w-5/6 max-w-[400px] items-center justify-center gap-5 *:flex-grow">
 				<UiButton
