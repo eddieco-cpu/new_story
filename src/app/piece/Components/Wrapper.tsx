@@ -29,7 +29,7 @@ export default function Wrapper({
 	productChapters,
 	publish_article,
 	status_status,
-	title
+	title,
 }: {
 	pieceBase64: string;
 	productId: string;
@@ -46,8 +46,12 @@ export default function Wrapper({
 		usePieceContext();
 
 	function setViolationReportBox() {
-		BlockPopupModal.setChildren(<ViolationReportBox id={productId} name={title} />);
-		BlockPopupModal.setBlockClassName(" w-[900px] h-[647px] max-h-[calc(100vh-40px)] pb-6 max-lg:pb-6");
+		BlockPopupModal.setChildren(
+			<ViolationReportBox id={productId} name={title} />
+		);
+		BlockPopupModal.setBlockClassName(
+			" w-[900px] h-[647px] max-h-[calc(100vh-40px)] pb-6 max-lg:pb-6"
+		);
 		BlockPopupModal.setIsOpen(true);
 	}
 
@@ -56,7 +60,9 @@ export default function Wrapper({
 			<aside className="sticky top-0 z-[1] block w-[60px] max-lg:w-full">
 				<nav className="piece-aside m-auto mt-4 flex flex-col items-center justify-center gap-4 bg-[var(--piece-aside)] py-4 *:flex-shrink-0 max-lg:mb-[-1px] max-lg:mt-0 max-lg:flex-row max-lg:justify-start max-lg:border-b max-lg:border-[var(--piece-border)] max-lg:px-5 max-lg:py-2 lg:rounded-lg">
 					<NavButton icon="detail">作品詳情</NavButton>
-					<NavButton icon="warn" onClick={setViolationReportBox}>舉報</NavButton>
+					<NavButton icon="warn" onClick={setViolationReportBox}>
+						舉報
+					</NavButton>
 				</nav>
 			</aside>
 
