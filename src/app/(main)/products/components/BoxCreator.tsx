@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { useState, useEffect, ReactNode } from "react";
 
-import { UiButton } from "@/components/customUI/client";
+import TrackBtnController from "@/components/TrackBtnController";
 
 import { type FetchedAuthorDataType } from "@/types/author";
 import { type FetchedProductCardListType } from "@/types/product";
@@ -27,13 +27,6 @@ export default function BoxCreator({
 	authorize: string;
 	author: string;
 }) {
-	//
-	// useEffect(() => {
-	// 	console.log("authorData: ", authorData);
-	// 	console.log("writer_account: ", writer_account);
-	// 	console.log("authorize: ", authorize);
-	// }, []);
-
 	//
 	useEffect(() => {
 		//
@@ -72,10 +65,23 @@ export default function BoxCreator({
 		}
 	}, []);
 
+	//
 	const [authorizerProductsAmount, setAuthorizerProductsAmount] = useState<
 		null | string
 	>(null);
 	const [authorFollowersAmount, setAuthorFollowersAmount] = useState<number>(0);
+	const [adjustFollowersAmount, setAdjustFollowersAmount] = useState<number>(0);
+
+	//
+	function callbackAfterAdjustFollow(v: "add" | "remove") {
+		//alert("callbackTest " + v);
+		if (v === "add") {
+			setAdjustFollowersAmount((prev) => prev + 1);
+		}
+		if (v === "remove") {
+			setAdjustFollowersAmount((prev) => prev - 1);
+		}
+	}
 
 	//
 	return (
@@ -149,15 +155,18 @@ export default function BoxCreator({
 							</p>
 							<div className="h-[50px] w-[1px] bg-ash-500"></div>
 							<p className="flex flex-col items-center justify-center gap-3 px-2">
-								<b className="text-xl leading-none">{authorFollowersAmount}</b>
+								<b className="text-xl leading-none">
+									{authorFollowersAmount + adjustFollowersAmount}
+								</b>
 								<span className="text-sm leading-none text-ash-600">
 									追蹤數
 								</span>
 							</p>
 						</div>
-						<UiButton variant="secondary" className="w-[150px]">
-							追蹤
-						</UiButton>
+						<TrackBtnController
+							writer_account={writer_account}
+							callback={callbackAfterAdjustFollow}
+						/>
 					</div>
 				)}
 			</article>

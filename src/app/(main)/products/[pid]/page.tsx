@@ -132,7 +132,7 @@ export default async function Page({
 	try {
 		productData = (await fetchDataWithCookieInServer(
 			`https://story-onlinelab.udn.com/story3/ShowStoreProduct?id=${pid}`,
-			cookieString
+			""
 		)) as FetchedProductDataType;
 		if (!productData)
 			throw new Error("fetch productDataerror in products page");
@@ -146,7 +146,7 @@ export default async function Page({
 	try {
 		productChaptersData = await fetchDataWithCookieInServer(
 			`https://story-onlinelab.udn.com/story3/ShowStoreProductChapter?id=${pid}&order_by=chapter&amount_per_page=50&page=1`,
-			cookieString
+			""
 		);
 		if (!productChaptersData)
 			throw new Error("fetch productChaptersData error in products page");
@@ -169,7 +169,7 @@ export default async function Page({
 	try {
 		authorData = (await fetchDataWithCookieInServer(
 			`https://story-onlinelab.udn.com/story3/AccountData?account=${productData.writer_account}&action=select`,
-			cookieString
+			""
 		)) as FetchedAuthorDataType;
 		if (!authorData) throw new Error("fetch authorData error in author page");
 	} catch (error) {

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CSSProperties } from "react";
+import React, { Suspense } from "react";
 
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
@@ -124,7 +124,9 @@ export default function BoxOverview({
 				</p>
 
 				{/* --- */}
-				<ButtonsBlock></ButtonsBlock>
+				<Suspense fallback={<div>Loading...</div>}>
+					<ButtonsBlock></ButtonsBlock>
+				</Suspense>
 
 				{/* -- tag 先不做 -- */}
 				{/* <div className="flex flex-wrap content-start items-start justify-start gap-x-3 gap-y-[2px] pl-2">

@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_TC, Roboto } from "next/font/google";
+import React, { Suspense } from "react";
 
 import { Toaster } from "@/components/ui/toaster";
 import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
+
+import GlobalProvider from "@contexts/globalContext";
 
 import "@/styles/globals.scss";
 
@@ -70,9 +73,13 @@ export default function RootLayout({
 				/>
 			</head>
 			<body className="bg-landscape-300" suppressHydrationWarning={true}>
-				{children}
-				<Toaster />
-				<BlockPopup />
+				<Suspense fallback={<div>Loading...</div>}>
+					<GlobalProvider>
+						{children}
+						<Toaster />
+						<BlockPopup />
+					</GlobalProvider>
+				</Suspense>
 			</body>
 		</html>
 	);

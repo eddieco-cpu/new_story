@@ -38,7 +38,11 @@ export function isLoginWithinDay() {
 		cookies.get("udnland") &&
 		cookies.get("um2") &&
 		cookies.get("udnmember")
-	)
+	) {
+		console.log(`cookies.get("um2"): `, cookies.get("um2"));
+		console.log(`cookies.get("udnmember"): `, cookies.get("udnmember"));
 		return true;
+	}
+	console.log("not isLoginWithinDay");
 	return false;
 }
