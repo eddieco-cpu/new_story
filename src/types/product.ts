@@ -33,6 +33,7 @@ export type FetchedProductDataType = {
 	is_charge: string;
 	view: string;
 	last_update_chapter_name: string;
+	is_collection: "Y" | "N";
 } & FetchedResponseType;
 
 export type ProductCardType = {
