@@ -44,7 +44,10 @@ export default async function Page({
 }) {
 	//
 	const cookieStore = cookies();
-	const um2 = cookieStore.get("um2");
+	let um2 = cookieStore.get("um2");
+
+	if (um2) um2 = { ...um2, value: encodeURIComponent(um2.value) };
+
 	const cookieString = convertCookieObjArrayToString([um2]);
 
 	//
@@ -165,6 +168,7 @@ export default async function Page({
 						<Wrapper
 							pieceBase64={pieceBase64Value as string}
 							productId={pid}
+							is_collection={productData.is_collection}
 							productChapter={productChapter as Chapter}
 							productChapters={productChapters as Chapter[]}
 							publish_article={productData.publish_article as string}

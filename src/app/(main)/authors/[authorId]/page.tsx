@@ -25,6 +25,8 @@ import Breadcrumb from "@/components/Breadcrumb";
 import { UiButton, UiTag } from "@/components/customUI/client";
 import NestedLink from "@/components/customUI/NestedLink";
 
+import CollectBtnController from "@/components/CollectBtnController";
+
 import { formatTimestampToDateString } from "@/lib/helper";
 
 //
@@ -77,7 +79,7 @@ export default async function Page({
 	} catch (error) {
 		console.log("error \n", error);
 	}
-	console.log("authorData; \n", authorData);
+	//console.log("authorData; \n", authorData);
 
 	//
 	var authorPiecesData: null | FetchedAuthorPiecesData = null;
@@ -91,7 +93,7 @@ export default async function Page({
 	} catch (error) {
 		console.log("error \n", error);
 	}
-	//console.log("authorPiecesData; \n", authorPiecesData);
+	console.log("authorPiecesData; \n", authorPiecesData);
 
 	//
 	// var authorFollowersData: null | FetchedAuthorsFollowers = null;
@@ -219,19 +221,25 @@ export default async function Page({
 									</article>
 								</Link>
 								<div className="absolute bottom-0 right-0 flex items-center justify-center gap-4 max-md:gap-3">
-									<UiButton
+									{/* <UiButton
 										variant="secondary"
 										className="flex h-[34px] items-center justify-center gap-2 max-md:h-8 max-md:w-[90px] max-md:gap-1 max-md:rounded-md max-md:text-sm"
 									>
 										<i className="i-heart-empty text-inherit"></i>
 										<span className="text-inherit">收藏</span>
-									</UiButton>
+									</UiButton> */}
+									<CollectBtnController
+										is_collection={"N"}
+										id={card.id}
+										className="h-[34px] max-md:h-8 max-md:w-[90px] max-md:gap-1"
+										isInNav={false}
+									/>
 									<UiButton
 										variant="primary"
 										className="relative h-[34px] max-md:h-8 max-md:w-[90px] max-md:text-sm"
 									>
 										<NestedLink
-											className="absolute bottom-0 left-0 right-0 top-0 block pt-[1px] text-inherit"
+											className="absolute bottom-0 left-0 right-0 top-0 block pt-[1px] text-base leading-[32px] text-inherit max-md:leading-[30px]"
 											link={`/piece/${card.id}/${card.last_update_chapter_id}`}
 										>
 											開始閱讀

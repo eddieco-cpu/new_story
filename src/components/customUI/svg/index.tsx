@@ -11,6 +11,7 @@ import Share from "./Share";
 import PieceCata from "./PieceCata";
 import PieceDetail from "./PieceDetail";
 import PieceHeart from "./PieceHeart";
+import PieceHeartDone from "./PieceHeartDone";
 import PieceMoon from "./PieceMoon";
 import PieceSetting from "./PieceSetting";
 import PieceWarn from "./PieceWarn";
@@ -30,6 +31,7 @@ export {
 	PieceCata,
 	PieceDetail,
 	PieceHeart,
+	PieceHeartDone,
 	PieceMoon,
 	PieceSetting,
 	PieceWarn,

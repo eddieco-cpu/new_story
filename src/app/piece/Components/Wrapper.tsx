@@ -19,12 +19,14 @@ import { unFetchedPieceBase64 } from "@/lib/data";
 
 import { type Chapter } from "../[...pieceSlugs]/page";
 
+import CollectBtnController from "@/components/CollectBtnController";
 import ViolationReportBox from "@/components/ViolationReportBox";
 import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 
 export default function Wrapper({
 	pieceBase64,
 	productId,
+	is_collection,
 	productChapter,
 	productChapters,
 	publish_article,
@@ -33,6 +35,7 @@ export default function Wrapper({
 }: {
 	pieceBase64: string;
 	productId: string;
+	is_collection: "Y" | "N";
 	productChapter: Chapter;
 	productChapters: Chapter[];
 	publish_article: string;
@@ -212,7 +215,14 @@ export default function Wrapper({
 					<NavButton icon="cata" onClick={() => setIsCatagoryBox((v) => !v)}>
 						目錄
 					</NavButton>
-					<NavButton icon="heart">收藏</NavButton>
+					{/* <NavButton icon="heart">收藏</NavButton> */}
+					<CollectBtnController
+						is_collection={is_collection}
+						id={productId}
+						className=""
+						isInNav={true}
+					></CollectBtnController>
+
 					<NavButton icon="moon">夜間</NavButton>
 					<NavButton icon="setting" onClick={() => setIsSettingBox(true)}>
 						設定

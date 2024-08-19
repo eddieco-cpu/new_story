@@ -9,6 +9,7 @@ import React, { CSSProperties, useEffect, useState } from "react";
 import cookies from "js-cookie";
 import { UiButton, UiTag } from "@/components/customUI/client";
 import { Share } from "@/components/customUI/svg";
+import CollectBtnController from "@/components/CollectBtnController";
 
 import { useGlobalContext } from "@contexts/globalContext";
 
@@ -139,34 +140,6 @@ function ShareBox() {
 }
 
 //
-function ComfirmUnCollectPopup({
-	doUpdateCollect,
-}: {
-	doUpdateCollect: () => void;
-}) {
-	return (
-		<div className="flex flex-grow flex-col justify-between">
-			<div className="py-16">
-				<p className="text-center text-xl">確定要 ❝取消❞ 收藏嗎？</p>
-			</div>
-			<div className="mx-auto flex w-5/6 max-w-[400px] items-center justify-center gap-5 *:flex-grow">
-				<UiButton
-					variant="primary"
-					onClick={() => (doUpdateCollect(), BlockPopupModal.setIsOpen(false))}
-				>
-					確定
-				</UiButton>
-				<UiButton
-					variant="secondary"
-					onClick={() => BlockPopupModal.setIsOpen(false)}
-				>
-					返回
-				</UiButton>
-			</div>
-		</div>
-	);
-}
-
 export default function ButtonsBlock({
 	writer_account,
 	is_collection,
@@ -180,11 +153,6 @@ export default function ButtonsBlock({
 }) {
 	//
 	const { directToLogin } = useGlobalContext();
-	const [isCollectStatus, setIsCollectStatus] = useState<boolean>(
-		is_collection === "Y"
-	);
-	const [isCollectStatusLoading, setIsCollectStatusLoading] =
-		useState<boolean>(false);
 
 	//
 	function handleShare() {
@@ -193,52 +161,6 @@ export default function ButtonsBlock({
 			" max-w-[560px] h-[306px] max-h-[calc(100vh-40px)] p-14 !md:px-14 max-lg:pb-6 max-md:h-[262px]"
 		);
 		BlockPopupModal.setIsOpen(true);
-	}
-
-	function handleSetIsCollect() {
-		//
-		if (!isLoginWithinDay()) {
-			return directToLogin();
-		}
-		if (isCollectStatusLoading) return;
-
-		if (isCollectStatus === false) {
-			fetchToSetIsCollect("add");
-		} else {
-			BlockPopupModal.setChildren(
-				<ComfirmUnCollectPopup
-					doUpdateCollect={() => fetchToSetIsCollect("delete")}
-				/>
-			);
-			BlockPopupModal.setBlockClassName("  w-[685px] h-[320px] flex flex-col");
-			BlockPopupModal.setIsOpen(true);
-		}
-	}
-
-	async function fetchToSetIsCollect(action: "add" | "delete") {
-		//
-		setIsCollectStatusLoading(true);
-
-		const acount = cookies.get("udnmember");
-		let url = `/story3/CollectManager?account=${acount}&action=${action}&id=${id}`;
-
-		//
-		try {
-			const res = await getData(url);
-			const data = res.data as FetchedResponseType;
-
-			if (data.status === "200") {
-				setIsCollectStatus((v) => !v);
-				setAdjustCollectAmount((prev) =>
-					action === "add" ? prev + 1 : prev - 1
-				);
-			} else {
-				console.error("updateFollowData error");
-			}
-		} catch (error) {
-			console.error(error);
-		}
-		setIsCollectStatusLoading(false);
 	}
 
 	//
@@ -264,34 +186,15 @@ export default function ButtonsBlock({
 				全本購買
 			</UiButton>
 
-			<UiButton
-				variant={
-					isCollectStatusLoading
-						? "secondary"
-						: isCollectStatus
-							? "tertiary"
-							: "secondary"
-				}
-				className="m-0 flex h-[38px] flex-1 items-center justify-center gap-2 max-md:order-1 max-md:max-w-12"
-				onClick={handleSetIsCollect}
-			>
-				{isCollectStatusLoading ? (
-					""
-				) : (
-					<>
-						<i
-							className={
-								isCollectStatus
-									? "i-heart-2 text-xl text-accent-250"
-									: "i-heart-empty text-accent-250"
-							}
-						></i>
-						<span className="text-inherit max-md:hidden">
-							{isCollectStatus && "已"}收藏
-						</span>
-					</>
-				)}
-			</UiButton>
+			{/* -- */}
+			<CollectBtnController
+				is_collection={is_collection}
+				id={id}
+				setAdjustCollectAmount={setAdjustCollectAmount}
+				className="overflow-hidden max-md:order-1 max-md:max-w-12 max-md:justify-start *:max-md:w-full *:max-md:flex-shrink-0"
+				isInNav={false}
+			/>
+
 			<UiButton
 				variant="secondary"
 				className="m-0 flex h-[38px] flex-1 items-center justify-center gap-2 max-md:order-2 max-md:max-w-12"
