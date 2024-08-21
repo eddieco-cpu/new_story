@@ -8,7 +8,6 @@ export type FetchedAuthorDataType = {
 	reader_description: string;
 	writer_type: string;
 	writer_nickname: string;
-	agree_gt_term_ver: string;
 	agree_w_term_ver: string;
 	writer_description: string;
 	is_stop: string;

@@ -83,7 +83,7 @@ export default function MoreProductsCardGroup({
 				`/story3/ShowStoreProductList?page=${isRefresh ? "1" : Math.floor(cards.length / amount_per_page) + 1}&${new URLSearchParams(searchObject).toString()}`
 			);
 			const fetchedData = data as FetchedProductCardListType;
-			console.log("fetchedData: ", fetchedData);
+			//console.log("fetchedData: ", fetchedData);
 
 			//
 			setTotalAmount(Number(fetchedData.data_count));

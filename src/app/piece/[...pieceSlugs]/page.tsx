@@ -9,6 +9,7 @@ import { convertCookieObjArrayToString } from "@/lib/helper";
 import { UiMain } from "@/components/customUI";
 
 import PieceProvider from "@contexts/pieceContext";
+import AgreementOfRead from "@/components/AgreementOfRead";
 import Wrapper from "../Components/Wrapper";
 
 import { unFetchedPieceBase64 } from "@/lib/data";
@@ -162,6 +163,7 @@ export default async function Page({
 					</p>
 				</nav>
 			</header>
+			<AgreementOfRead />
 			<section className="piece_main bg-[var(--piece-body,--default-body)] py-4 max-lg:pt-0">
 				<UiMain className="flex items-start justify-center gap-[18px] *:flex-shrink-0 max-xl:gap-2 max-lg:flex-col max-lg:gap-0">
 					<PieceProvider>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AgreementOfRead from "@/components/AgreementOfRead";
 
 import { UiMain } from "@/components/customUI";
 
@@ -17,6 +18,7 @@ export default function Layout({
 	return (
 		<>
 			<Header />
+			<AgreementOfRead />
 			<UiMain>{children}</UiMain>
 			<Footer />
 		</>
