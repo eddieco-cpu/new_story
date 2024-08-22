@@ -109,7 +109,7 @@ export default function CollectBtnController({
 						action === "add" ? prev + 1 : prev - 1
 					);
 			} else {
-				console.error("updateFollowData error");
+				throw new Error("updateFollowData error");
 			}
 		} catch (error) {
 			console.error(error);

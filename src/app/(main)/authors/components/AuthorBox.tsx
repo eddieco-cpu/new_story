@@ -39,7 +39,7 @@ export default function AuthorBox({
 			);
 
 			if (res.data.status !== "200" && !res.data.follow_me_list) {
-				console.error("fetchAuthorsFollowersData error");
+				throw new Error("fetchAuthorsFollowersData error");
 			}
 
 			const data = res.data as FetchedAuthorsFollowers;

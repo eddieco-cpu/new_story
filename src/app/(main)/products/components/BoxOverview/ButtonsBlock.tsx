@@ -6,10 +6,10 @@ import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import React, { CSSProperties, useEffect, useState } from "react";
 
-import cookies from "js-cookie";
 import { UiButton, UiTag } from "@/components/customUI/client";
 import { Share } from "@/components/customUI/svg";
 import CollectBtnController from "@/components/CollectBtnController";
+import StartReadBtnController from "@/components/StartReadBtnController";
 
 import { useGlobalContext } from "@contexts/globalContext";
 
@@ -18,8 +18,6 @@ import { useToast } from "@/components/ui/use-toast";
 
 import { isLoginWithinDay } from "@/lib/helper";
 import { getData } from "@/lib/api";
-
-import { type FetchedResponseType } from "@/types";
 
 //
 function ShareBox() {
@@ -173,12 +171,7 @@ export default function ButtonsBlock({
 				} as CSSProperties
 			}
 		>
-			<UiButton
-				variant="primary"
-				className="m-0 h-[38px] flex-1 max-md:order-4"
-			>
-				開始閱讀
-			</UiButton>
+			<StartReadBtnController id={id} />
 			<UiButton
 				variant="primary"
 				className="m-0 h-[38px] flex-1 max-md:order-3"

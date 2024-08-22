@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 import LoadMore from "@/components/customUI/LoadMore";
-import { type Chapter, type ProductChaptersData } from "../../[pid]/page";
+import { type Chapter, type ProductChaptersData } from "@/types/chapter";
 
 import { getData } from "@/lib/api";
 

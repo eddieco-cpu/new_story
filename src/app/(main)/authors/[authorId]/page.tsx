@@ -26,28 +26,9 @@ import { UiButton, UiTag } from "@/components/customUI/client";
 import NestedLink from "@/components/customUI/NestedLink";
 
 import CollectBtnController from "@/components/CollectBtnController";
+import StartReadBtnController from "@/components/StartReadBtnController";
 
 import { formatTimestampToDateString } from "@/lib/helper";
-
-//
-/**
- * {
-  reader_avatar: 'https://story.udn.com/dcstore/img/default-member.jpg',
-  agree_s_term_ver: '1',
-  reader_nickname: '含覓',
-  reader_description: '',
-  status: '200',
-  writer_type: 'N',
-  writer_nickname: '含覓',
-  agree_gt_term_ver: '0',
-  message: '',
-  agree_w_term_ver: '1',
-  writer_description: '寫寫小說，編編劇本，偏好日本文學細水長流型的寫作風格。',
-  is_stop: 'N',
-  published_count: '2',
-  writer_avatar: 'https://story.udn.com/dcstore/accountsdata/16908_writer_avatar.jpg'
-}
- */
 
 //
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
@@ -64,7 +45,9 @@ export default async function Page({
 }) {
 	//
 	const cookieStore = cookies();
-	const um2 = cookieStore.get("um2");
+	let um2 = cookieStore.get("um2");
+
+	if (um2) um2 = { ...um2, value: encodeURIComponent(um2.value) };
 
 	const cookieString = convertCookieObjArrayToString([um2]);
 
@@ -73,7 +56,7 @@ export default async function Page({
 	try {
 		authorData = (await fetchDataWithCookieInServer(
 			`https://story-onlinelab.udn.com/story3/AccountData?account=${authorId}&action=select`,
-			""
+			cookieString
 		)) as FetchedAuthorDataType;
 		if (!authorData) throw new Error("fetch authorData error in author page");
 	} catch (error) {
@@ -95,28 +78,11 @@ export default async function Page({
 	}
 	console.log("authorPiecesData; \n", authorPiecesData);
 
-	//
-	// var authorFollowersData: null | FetchedAuthorsFollowers = null;
-	// try {
-	// 	authorFollowersData = (await fetchDataWithCookieInServer(
-	// 		`https://story-onlinelab.udn.com/story3/FollowControl?account=${authorId}&type=10`,
-	// 		""
-	// 	)) as FetchedAuthorsFollowers;
-
-	// 	if (!authorFollowersData)
-	// 		throw new Error("fetch authorFollowersData error in author page");
-	// 	//
-	// } catch (error) {
-	// 	console.log("error \n", error);
-	// }
-
 	if (
 		!authorData ||
 		!authorPiecesData ||
 		authorData.status !== "200" ||
-		authorPiecesData.status !== "200" //||
-		// !authorFollowersData ||
-		// authorFollowersData.status !== "200"
+		authorPiecesData.status !== "200"
 	) {
 		notFound();
 	}
@@ -234,17 +200,11 @@ export default async function Page({
 										className="h-[34px] max-md:h-8 max-md:w-[90px] max-md:gap-1"
 										isInNav={false}
 									/>
-									<UiButton
-										variant="primary"
-										className="relative h-[34px] max-md:h-8 max-md:w-[90px] max-md:text-sm"
-									>
-										<NestedLink
-											className="absolute bottom-0 left-0 right-0 top-0 block pt-[1px] text-base leading-[32px] text-inherit max-md:leading-[30px]"
-											link={`/piece/${card.id}/${card.last_update_chapter_id}`}
-										>
-											開始閱讀
-										</NestedLink>
-									</UiButton>
+
+									<StartReadBtnController
+										id={card.id}
+										className="h-[34px] max-md:h-8 max-md:w-[90px] max-md:text-sm"
+									/>
 								</div>
 							</li>
 						))}

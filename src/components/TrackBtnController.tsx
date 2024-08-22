@@ -117,7 +117,7 @@ export default function TrackBtnController({
 
 				setFollowingStatus(isFollowed);
 			} else {
-				console.error("fetchFollowData error");
+				throw new Error("fetchFollowData error");
 			}
 		} catch (error) {
 			console.error(error);
@@ -138,7 +138,7 @@ export default function TrackBtnController({
 				setFollowingStatus(act === "1"); //1：關注作者、2：取消關注作者、9：撈取關注清單
 				callback(act === "1" ? "add" : "remove");
 			} else {
-				console.error("updateFollowData error");
+				throw new Error("updateFollowData error");
 			}
 		} catch (error) {
 			console.error(error);

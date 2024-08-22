@@ -36,7 +36,7 @@ export default function Index() {
 			);
 
 			if (!res.data || res.data.status !== "200") {
-				console.error("fetchToCheckIfMemberAcceptAgreement error");
+				throw new Error("fetchToCheckIfMemberAcceptAgreement error");
 			}
 
 			const data = res.data as FetchedAuthorDataType;

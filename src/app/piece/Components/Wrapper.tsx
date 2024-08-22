@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
+import cookies from "js-cookie";
+
 import { usePieceContext } from "@contexts/pieceContext";
 
 import SettingBox from "./SettingBox";
@@ -17,11 +19,15 @@ import { UiButton } from "@/components/customUI/client";
 
 import { unFetchedPieceBase64 } from "@/lib/data";
 
-import { type Chapter } from "../[...pieceSlugs]/page";
+import { type Chapter } from "@/types/chapter";
 
 import CollectBtnController from "@/components/CollectBtnController";
 import ViolationReportBox from "@/components/ViolationReportBox";
 import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
+
+import { getData } from "@/lib/api";
+import { type FetchedResponseType } from "@/types";
+import { isLoginWithinDay } from "@/lib/helper";
 
 export default function Wrapper({
 	pieceBase64,
@@ -58,6 +64,44 @@ export default function Wrapper({
 		BlockPopupModal.setIsOpen(true);
 	}
 
+	async function setLastUpdateChapterId() {
+		//
+		if (!isLoginWithinDay()) return;
+
+		const account = cookies.get("udnmember");
+		if (!account) return;
+
+		try {
+			const res = await getData(
+				`/story3/ReadChapter?account=${account}&id=${productId}&chapter_id=${productChapter.chapter_id}`
+			);
+
+			if (!res.data || res.data.status !== "200") {
+				throw new Error("fetchToCheckIfMemberAcceptAgreement error");
+			}
+
+			const data = res.data as FetchedResponseType;
+			console.log("set last update ChapterId done");
+			console.log(
+				"procduct id: ",
+				productId,
+				"\n",
+				"chapter id: ",
+				productChapter.chapter_id
+			);
+			//
+		} catch (error) {
+			console.log("set last update ChapterId fail");
+			console.error(error);
+		}
+	}
+
+	//
+	useEffect(() => {
+		setLastUpdateChapterId();
+	}, []);
+
+	//
 	return (
 		<>
 			<aside className="sticky top-0 z-[1] block w-[60px] max-lg:w-full">

@@ -11,6 +11,7 @@ import {
 	type FetchedProductDataType,
 	type CategoryType,
 } from "@/types/product";
+import { type Chapter, type ProductChaptersData } from "@/types/chapter";
 import { type FetchedAuthorDataType } from "@/types/author";
 
 import randomPicture from "@tools/randomPicture";
@@ -97,23 +98,6 @@ let detail: DetailType = {
 			})
 		),
 	})),
-};
-
-//
-export type Chapter = {
-	point: string;
-	title: string;
-	order: string;
-	publishtime: string;
-	chapter_id: string;
-	isfree: string;
-	ver: string;
-	right: string;
-};
-export type ProductChaptersData = {
-	message: string;
-	status: string;
-	list: Chapter[];
 };
 
 export default async function Page({

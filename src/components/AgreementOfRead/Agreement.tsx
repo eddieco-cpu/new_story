@@ -65,7 +65,7 @@ export default function AgreementOfRead() {
 			const res = await getData(`/story3/Terms?action=select&type=S`);
 
 			if (!res.data || res.data.status !== "200") {
-				console.error("fetchAgree error");
+				throw new Error("fetchAgree error");
 			}
 
 			const data = res.data as FetchedAgreementOfReadType;

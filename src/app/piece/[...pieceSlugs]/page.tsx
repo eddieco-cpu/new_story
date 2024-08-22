@@ -19,24 +19,9 @@ import {
 	type FetchedProductDataType,
 } from "@/types/product";
 
-import "@/styles/piece.scss";
+import { type Chapter, type ProductChaptersData } from "@/types/chapter";
 
-//
-export type Chapter = {
-	point: string;
-	title: string;
-	order: string;
-	publishtime: string;
-	chapter_id: string;
-	isfree: string;
-	ver: string;
-	right: string;
-};
-export type ProductChaptersData = {
-	message: string;
-	status: string;
-	list: Chapter[];
-};
+import "@/styles/piece.scss";
 
 export default async function Page({
 	params: { pieceSlugs },
