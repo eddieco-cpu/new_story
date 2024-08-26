@@ -3,7 +3,13 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 
-import { fetchDataWithCookieInServer } from "@/lib/api";
+import {
+	fetchDataWithCookieInServer,
+	STORY_DOMAIN,
+	SHOW_STORE_PRODUCT,
+	SHOW_STORE_PRODUCT_CHAPTER,
+	ACCOUNT_DATA,
+} from "@/lib/api";
 import { convertCookieObjArrayToString } from "@/lib/helper";
 
 import { type NewsType } from "@/types";
@@ -11,6 +17,7 @@ import {
 	type FetchedProductDataType,
 	type CategoryType,
 } from "@/types/product";
+import { type Chapter, type ProductChaptersData } from "@/types/chapter";
 import { type FetchedAuthorDataType } from "@/types/author";
 
 import randomPicture from "@tools/randomPicture";
@@ -99,23 +106,6 @@ let detail: DetailType = {
 	})),
 };
 
-//
-export type Chapter = {
-	point: string;
-	title: string;
-	order: string;
-	publishtime: string;
-	chapter_id: string;
-	isfree: string;
-	ver: string;
-	right: string;
-};
-export type ProductChaptersData = {
-	message: string;
-	status: string;
-	list: Chapter[];
-};
-
 export default async function Page({
 	params: { pid },
 }: {
@@ -123,7 +113,9 @@ export default async function Page({
 }) {
 	//
 	const cookieStore = cookies();
-	const um2 = cookieStore.get("um2");
+	let um2 = cookieStore.get("um2");
+
+	if (um2) um2 = { ...um2, value: encodeURIComponent(um2.value) };
 
 	const cookieString = convertCookieObjArrayToString([um2]);
 
@@ -131,21 +123,23 @@ export default async function Page({
 	var productData: null | FetchedProductDataType = null;
 	try {
 		productData = (await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/ShowStoreProduct?id=${pid}`,
-			""
+			STORY_DOMAIN + SHOW_STORE_PRODUCT + `?id=${pid}`,
+			cookieString
 		)) as FetchedProductDataType;
 		if (!productData)
 			throw new Error("fetch productDataerror in products page");
 	} catch (error) {
 		console.log("error \n", error);
 	}
-	//console.log("productData; \n", productData);
+	console.log("productData; \n", productData);
 
 	//
 	var productChaptersData: null | ProductChaptersData = null;
 	try {
 		productChaptersData = await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/ShowStoreProductChapter?id=${pid}&order_by=chapter&amount_per_page=50&page=1`,
+			STORY_DOMAIN +
+				SHOW_STORE_PRODUCT_CHAPTER +
+				`?id=${pid}&order_by=chapter&amount_per_page=50&page=1`,
 			""
 		);
 		if (!productChaptersData)
@@ -168,7 +162,9 @@ export default async function Page({
 	var authorData: null | FetchedAuthorDataType = null;
 	try {
 		authorData = (await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/AccountData?account=${productData.writer_account}&action=select`,
+			STORY_DOMAIN +
+				ACCOUNT_DATA +
+				`?account=${productData.writer_account}&action=select`,
 			""
 		)) as FetchedAuthorDataType;
 		if (!authorData) throw new Error("fetch authorData error in author page");

@@ -12,7 +12,7 @@ import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 import { useGlobalContext } from "@contexts/globalContext";
 
 import { isLoginWithinDay } from "@/lib/helper";
-import { getData } from "@/lib/api";
+import { getData, FOLLOW_CONTROL } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
 import { type FetchedResponseType } from "@/types";
@@ -100,7 +100,7 @@ export default function TrackBtnController({
 	async function fetchFollowData() {
 		//
 		const acount = cookies.get("udnmember");
-		let url = `/story3/FollowControl?account=${acount}&type=9`;
+		let url = FOLLOW_CONTROL + `?account=${acount}&type=9`;
 
 		try {
 			const res = await getData(url);
@@ -117,7 +117,7 @@ export default function TrackBtnController({
 
 				setFollowingStatus(isFollowed);
 			} else {
-				console.error("fetchFollowData error");
+				throw new Error("fetchFollowData error");
 			}
 		} catch (error) {
 			console.error(error);
@@ -127,7 +127,9 @@ export default function TrackBtnController({
 	async function updateFollowData(act: actOfFollow) {
 		//
 		const acount = cookies.get("udnmember");
-		let url = `/story3/FollowControl?account=${acount}&type=${act}&writer_account=${writer_account}`;
+		let url =
+			FOLLOW_CONTROL +
+			`?account=${acount}&type=${act}&writer_account=${writer_account}`;
 
 		try {
 			const res = await getData(url);
@@ -138,7 +140,7 @@ export default function TrackBtnController({
 				setFollowingStatus(act === "1"); //1：關注作者、2：取消關注作者、9：撈取關注清單
 				callback(act === "1" ? "add" : "remove");
 			} else {
-				console.error("updateFollowData error");
+				throw new Error("updateFollowData error");
 			}
 		} catch (error) {
 			console.error(error);

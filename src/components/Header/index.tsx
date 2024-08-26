@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { getData } from "@/lib/api";
+import { getData, SHOW_CATEGORY } from "@/lib/api";
 
 import { CateData, FetchedCateData } from "@/types/cate";
 
@@ -70,7 +70,7 @@ const Header: React.FC = () => {
 
 	useEffect(() => {
 		async function fetchedCategoryData() {
-			const { data } = await getData("/story3/ShowCategory?store=Y");
+			const { data } = await getData(SHOW_CATEGORY + "?store=Y");
 			if (data && data.list) {
 				setCategoryDatas(() => [...data.list]);
 			}

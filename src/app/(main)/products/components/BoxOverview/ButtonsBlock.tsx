@@ -4,13 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 
 import { UiButton, UiTag } from "@/components/customUI/client";
 import { Share } from "@/components/customUI/svg";
+import CollectBtnController from "@/components/CollectBtnController";
+import StartReadBtnController from "@/components/StartReadBtnController";
+
+import { useGlobalContext } from "@contexts/globalContext";
 
 import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 import { useToast } from "@/components/ui/use-toast";
+
+import { isLoginWithinDay } from "@/lib/helper";
+import { getData } from "@/lib/api";
 
 //
 function ShareBox() {
@@ -130,7 +137,21 @@ function ShareBox() {
 	);
 }
 
-export default function ButtonsBlock() {
+//
+export default function ButtonsBlock({
+	writer_account,
+	is_collection,
+	id,
+	setAdjustCollectAmount,
+}: {
+	writer_account: string;
+	is_collection: "Y" | "N";
+	id: string;
+	setAdjustCollectAmount: React.Dispatch<React.SetStateAction<number>>;
+}) {
+	//
+	const { directToLogin } = useGlobalContext();
+
 	//
 	function handleShare() {
 		BlockPopupModal.setChildren(<ShareBox />);
@@ -150,31 +171,28 @@ export default function ButtonsBlock() {
 				} as CSSProperties
 			}
 		>
-			<UiButton
-				variant="primary"
-				className="m-0 h-[38px] flex-1 max-md:order-4"
-			>
-				開始閱讀
-			</UiButton>
+			<StartReadBtnController id={id} />
 			<UiButton
 				variant="primary"
 				className="m-0 h-[38px] flex-1 max-md:order-3"
 			>
 				全本購買
 			</UiButton>
-			<UiButton
-				variant="secondary"
-				className="m-0 flex h-[38px] flex-1 items-center justify-center gap-2 max-md:order-1 max-md:max-w-12"
-			>
-				<i className="i-heart-empty text-inherit"></i>
-				<span className="text-inherit max-md:hidden">收藏</span>
-			</UiButton>
+
+			{/* -- */}
+			<CollectBtnController
+				is_collection={is_collection}
+				id={id}
+				setAdjustCollectAmount={setAdjustCollectAmount}
+				className="overflow-hidden max-md:order-1 max-md:max-w-12 max-md:justify-start *:max-md:w-full *:max-md:flex-shrink-0"
+				isInNav={false}
+			/>
+
 			<UiButton
 				variant="secondary"
 				className="m-0 flex h-[38px] flex-1 items-center justify-center gap-2 max-md:order-2 max-md:max-w-12"
 				onClick={() => handleShare()}
 			>
-				{/* <i className="i-heart-empty text-inherit"></i> */}
 				<Share />
 				<span className="text-inherit max-md:hidden">分享</span>
 			</UiButton>

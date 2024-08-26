@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
@@ -20,6 +22,7 @@ export default function BoxOverview({
 	productData: FetchedProductDataType;
 }) {
 	//
+	const [adjustCollectAmount, setAdjustCollectAmount] = useState<number>(0);
 
 	//
 	return (
@@ -103,7 +106,9 @@ export default function BoxOverview({
 					<div className="h-5 w-[1px] bg-ash-500"></div>
 					<p>
 						<i className="i-heart-2 text-xl text-accent-250"></i>
-						<b className="text-[22px] font-normal">{productData.collection}</b>
+						<b className="text-[22px] font-normal">
+							{Number(productData.collection) + adjustCollectAmount}
+						</b>
 					</p>
 				</div>
 
@@ -125,7 +130,12 @@ export default function BoxOverview({
 
 				{/* --- */}
 				<Suspense fallback={<div>Loading...</div>}>
-					<ButtonsBlock></ButtonsBlock>
+					<ButtonsBlock
+						writer_account={productData.writer_account}
+						is_collection={productData.is_collection}
+						id={productData.id}
+						setAdjustCollectAmount={setAdjustCollectAmount}
+					></ButtonsBlock>
 				</Suspense>
 
 				{/* -- tag 先不做 -- */}

@@ -13,7 +13,7 @@ import ProductCard from "./ProductsCard";
 import LoadMore from "@/components/customUI/LoadMore";
 
 import { isValidPathSegment } from "@/tools/validator";
-import { getData } from "@/lib/api";
+import { getData, SHOW_STORE_PRODUCT_LIST } from "@/lib/api";
 
 export default function MoreProductsCardGroup({
 	groupClassName,
@@ -80,10 +80,11 @@ export default function MoreProductsCardGroup({
 
 		try {
 			const { data } = await getData(
-				`/story3/ShowStoreProductList?page=${isRefresh ? "1" : Math.floor(cards.length / amount_per_page) + 1}&${new URLSearchParams(searchObject).toString()}`
+				SHOW_STORE_PRODUCT_LIST +
+					`?page=${isRefresh ? "1" : Math.floor(cards.length / amount_per_page) + 1}&${new URLSearchParams(searchObject).toString()}`
 			);
 			const fetchedData = data as FetchedProductCardListType;
-			console.log("fetchedData: ", fetchedData);
+			//console.log("fetchedData: ", fetchedData);
 
 			//
 			setTotalAmount(Number(fetchedData.data_count));

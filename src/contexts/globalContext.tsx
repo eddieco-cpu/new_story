@@ -7,6 +7,10 @@ import { useState, useContext, createContext, ReactNode } from "react";
 interface GlobalContextType {
 	count: number;
 	setCount: React.Dispatch<React.SetStateAction<number>>;
+	isMemberConformAgreementOfRead: boolean;
+	setIsMemberConformAgreementOfRead: React.Dispatch<
+		React.SetStateAction<boolean>
+	>;
 	directToLogin: (redirectURI?: string) => void;
 }
 
@@ -21,6 +25,8 @@ const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
 	//
 	const [count, setCount] = useState(5);
+	const [isMemberConformAgreementOfRead, setIsMemberConformAgreementOfRead] =
+		useState<boolean>(false);
 
 	function directToLogin(redirectURI?: string) {
 		//
@@ -40,6 +46,8 @@ const GlobalProvider = ({ children }: { children: ReactNode }) => {
 					count,
 					setCount,
 					directToLogin,
+					isMemberConformAgreementOfRead,
+					setIsMemberConformAgreementOfRead,
 				}}
 			>
 				{children}

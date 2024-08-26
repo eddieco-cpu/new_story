@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import { type FetchedAuthorDataType } from "@/types/author";
 import { type Fan, type FetchedAuthorsFollowers } from "@/types/fan";
 
-import { getData } from "@/lib/api";
+import { getData, FOLLOW_CONTROL } from "@/lib/api";
 
 export default function AuthorBox({
 	authorData,
@@ -35,11 +35,11 @@ export default function AuthorBox({
 	async function fetchAuthorsFollowersData() {
 		try {
 			const res = await getData(
-				`/story3/FollowControl?account=${authorId}&type=10`
+				FOLLOW_CONTROL + `?account=${authorId}&type=10`
 			);
 
 			if (res.data.status !== "200" && !res.data.follow_me_list) {
-				console.error("fetchAuthorsFollowersData error");
+				throw new Error("fetchAuthorsFollowersData error");
 			}
 
 			const data = res.data as FetchedAuthorsFollowers;

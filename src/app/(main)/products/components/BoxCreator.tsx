@@ -10,7 +10,7 @@ import TrackBtnController from "@/components/TrackBtnController";
 import { type FetchedAuthorDataType } from "@/types/author";
 import { type FetchedProductCardListType } from "@/types/product";
 import { type FetchedAuthorsFollowers } from "@/types/fan";
-import { getData } from "@/lib/api";
+import { getData, SHOW_STORE_PRODUCT_LIST, FOLLOW_CONTROL } from "@/lib/api";
 
 /**
  * writer_account 為作者 id, in order to fetch authorData
@@ -40,7 +40,8 @@ export default function BoxCreator({
 		async function fetchAuthorizerProductsAmount() {
 			try {
 				const res = await getData(
-					`/story3/ShowStoreProductList?cpstring=${authorize}&page=1&amount_per_page=1`
+					SHOW_STORE_PRODUCT_LIST +
+						`?cpstring=${authorize}&page=1&amount_per_page=1`
 				);
 				const data = res.data as FetchedProductCardListType;
 				//console.log("data: ", data);
@@ -54,7 +55,7 @@ export default function BoxCreator({
 		async function fetchAuthorsFollowersData() {
 			try {
 				const res = await getData(
-					`/story3/FollowControl?account=${writer_account}&type=10`
+					FOLLOW_CONTROL + `?account=${writer_account}&type=10`
 				);
 				const data = res.data as FetchedAuthorsFollowers;
 				//console.log("data: ", data);

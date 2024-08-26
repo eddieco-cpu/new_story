@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-import { fetchDataWithCookieInServer } from "@/lib/api";
+import {
+	fetchDataWithCookieInServer,
+	STORY_DOMAIN,
+	SHOW_CATEGORY,
+} from "@/lib/api";
 
 import { SortBook } from "@/types/cate";
 
@@ -146,7 +150,7 @@ const publishers = Array.from({ length: 6 }, (_, i) => i + 1).map((i) => ({
 export default async function Page() {
 	//
 	const fetchedCategoryData = await fetchDataWithCookieInServer(
-		"https://story-onlinelab.udn.com/story3/ShowCategory?store=Y",
+		STORY_DOMAIN + SHOW_CATEGORY + "?store=Y",
 		""
 	);
 	let categoryDatas: CateData[] = [];

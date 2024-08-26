@@ -3,12 +3,18 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 
-import { fetchDataWithCookieInServer } from "@/lib/api";
+import {
+	fetchDataWithCookieInServer,
+	STORY_DOMAIN,
+	SHOW_STORE_PRODUCT,
+	SHOW_STORE_PRODUCT_CHAPTER,
+} from "@/lib/api";
 import { convertCookieObjArrayToString } from "@/lib/helper";
 
 import { UiMain } from "@/components/customUI";
 
 import PieceProvider from "@contexts/pieceContext";
+import AgreementOfRead from "@/components/AgreementOfRead";
 import Wrapper from "../Components/Wrapper";
 
 import { unFetchedPieceBase64 } from "@/lib/data";
@@ -18,24 +24,9 @@ import {
 	type FetchedProductDataType,
 } from "@/types/product";
 
-import "@/styles/piece.scss";
+import { type Chapter, type ProductChaptersData } from "@/types/chapter";
 
-//
-export type Chapter = {
-	point: string;
-	title: string;
-	order: string;
-	publishtime: string;
-	chapter_id: string;
-	isfree: string;
-	ver: string;
-	right: string;
-};
-export type ProductChaptersData = {
-	message: string;
-	status: string;
-	list: Chapter[];
-};
+import "@/styles/piece.scss";
 
 export default async function Page({
 	params: { pieceSlugs },
@@ -44,7 +35,10 @@ export default async function Page({
 }) {
 	//
 	const cookieStore = cookies();
-	const um2 = cookieStore.get("um2");
+	let um2 = cookieStore.get("um2");
+
+	if (um2) um2 = { ...um2, value: encodeURIComponent(um2.value) };
+
 	const cookieString = convertCookieObjArrayToString([um2]);
 
 	//
@@ -62,7 +56,7 @@ export default async function Page({
 	var productData: null | FetchedProductDataType = null;
 	try {
 		productData = (await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/ShowStoreProduct?id=${pid}`,
+			STORY_DOMAIN + SHOW_STORE_PRODUCT + `?id=${pid}`,
 			cookieString
 		)) as FetchedProductDataType;
 		if (!productData)
@@ -78,7 +72,7 @@ export default async function Page({
 	var productChaptersData: null | ProductChaptersData = null;
 	try {
 		productChaptersData = await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/ShowStoreProductChapter?id=${pid}&order_by=chapter`,
+			STORY_DOMAIN + SHOW_STORE_PRODUCT_CHAPTER + `?id=${pid}&order_by=chapter`,
 			cookieString
 		);
 		if (!productChaptersData)
@@ -159,12 +153,14 @@ export default async function Page({
 					</p>
 				</nav>
 			</header>
+			<AgreementOfRead />
 			<section className="piece_main bg-[var(--piece-body,--default-body)] py-4 max-lg:pt-0">
 				<UiMain className="flex items-start justify-center gap-[18px] *:flex-shrink-0 max-xl:gap-2 max-lg:flex-col max-lg:gap-0">
 					<PieceProvider>
 						<Wrapper
 							pieceBase64={pieceBase64Value as string}
 							productId={pid}
+							is_collection={productData.is_collection}
 							productChapter={productChapter as Chapter}
 							productChapters={productChapters as Chapter[]}
 							publish_article={productData.publish_article as string}

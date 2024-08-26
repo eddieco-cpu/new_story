@@ -6,6 +6,7 @@ import {
 	PieceCata,
 	PieceDetail,
 	PieceHeart,
+	PieceHeartDone,
 	PieceMoon,
 	PieceSetting,
 	PieceWarn,
@@ -44,6 +45,16 @@ function Icon({ name, className }: { name: string; className?: string }) {
 	if (name === "heart")
 		return (
 			<PieceHeart
+				className={
+					"*:stroke-[var(--piece-text)] " +
+					` group-hover:*:stroke-[var(--icon-hover)] group-active:*:stroke-[var(--icon-active)]` +
+					className
+				}
+			/>
+		);
+	if (name === "heart-done")
+		return (
+			<PieceHeartDone
 				className={
 					"*:stroke-[var(--piece-text)] " +
 					` group-hover:*:stroke-[var(--icon-hover)] group-active:*:stroke-[var(--icon-active)]` +
