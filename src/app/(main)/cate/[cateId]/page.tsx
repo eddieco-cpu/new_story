@@ -8,7 +8,7 @@ import { type CateData, type FetchedCateData } from "@/types/cate";
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
 
-import { fetchDataWithCookieInServer } from "@/lib/api";
+import { fetchDataWithCookieInServer, STORY_DOMAIN } from "@/lib/api";
 
 import { imgClassNameInGroupHover } from "@lib/data"; //categoryDatas,
 
@@ -149,7 +149,7 @@ export default async function Page({ params }: { params: { cateId: string } }) {
 
 	//
 	const fetchedCategoryData = await fetchDataWithCookieInServer(
-		"https://story-onlinelab.udn.com/story3/ShowCategory?store=Y",
+		STORY_DOMAIN + "/story3/ShowCategory?store=Y",
 		""
 	);
 

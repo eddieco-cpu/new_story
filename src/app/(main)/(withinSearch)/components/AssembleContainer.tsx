@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect, notFound } from "next/navigation";
 import React, { Suspense } from "react";
 
-import { fetchDataWithCookieInServer } from "@/lib/api";
+import { fetchDataWithCookieInServer, STORY_DOMAIN } from "@/lib/api";
 
 import { type CateData, type FetchedCateData } from "@/types/cate";
 import { type FetchedProductCardListType } from "@/types/product";
@@ -26,7 +26,7 @@ export default async function PageComponent({
 
 	//
 	const fetchedCategoryData = await fetchDataWithCookieInServer(
-		"https://story-onlinelab.udn.com/story3/ShowCategory?store=Y",
+		STORY_DOMAIN + "/story3/ShowCategory?store=Y",
 		""
 	);
 	let categoryDatas: CateData[] = [];

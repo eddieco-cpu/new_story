@@ -3,7 +3,11 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 
-import { fetchDataWithCookieInServer } from "@/lib/api";
+import {
+	fetchDataWithCookieInServer,
+	STORY_DOMAIN,
+	SHOW_STORE_PRODUCT,
+} from "@/lib/api";
 import { convertCookieObjArrayToString } from "@/lib/helper";
 
 import { type NewsType } from "@/types";
@@ -117,7 +121,7 @@ export default async function Page({
 	var productData: null | FetchedProductDataType = null;
 	try {
 		productData = (await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/ShowStoreProduct?id=${pid}`,
+			STORY_DOMAIN + SHOW_STORE_PRODUCT + `?id=${pid}`,
 			cookieString
 		)) as FetchedProductDataType;
 		if (!productData)
@@ -131,7 +135,8 @@ export default async function Page({
 	var productChaptersData: null | ProductChaptersData = null;
 	try {
 		productChaptersData = await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/ShowStoreProductChapter?id=${pid}&order_by=chapter&amount_per_page=50&page=1`,
+			STORY_DOMAIN +
+				`/story3/ShowStoreProductChapter?id=${pid}&order_by=chapter&amount_per_page=50&page=1`,
 			""
 		);
 		if (!productChaptersData)
@@ -154,7 +159,8 @@ export default async function Page({
 	var authorData: null | FetchedAuthorDataType = null;
 	try {
 		authorData = (await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/AccountData?account=${productData.writer_account}&action=select`,
+			STORY_DOMAIN +
+				`/story3/AccountData?account=${productData.writer_account}&action=select`,
 			""
 		)) as FetchedAuthorDataType;
 		if (!authorData) throw new Error("fetch authorData error in author page");

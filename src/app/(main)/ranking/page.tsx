@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import React, { Suspense } from "react";
-import { fetchDataWithCookieInServer } from "@/lib/api";
+import { fetchDataWithCookieInServer, STORY_DOMAIN } from "@/lib/api";
 
 import { type NewsType } from "@/types";
 import { type CateData, type FetchedCateData } from "@/types/cate";
@@ -29,7 +29,7 @@ const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
 export default async function Page() {
 	//
 	const fetchedCategoryData = await fetchDataWithCookieInServer(
-		"https://story-onlinelab.udn.com/story3/ShowCategory?store=Y",
+		STORY_DOMAIN + "/story3/ShowCategory?store=Y",
 		""
 	);
 	let categoryDatas: CateData[] = [];

@@ -3,7 +3,11 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 
-import { fetchDataWithCookieInServer } from "@/lib/api";
+import {
+	fetchDataWithCookieInServer,
+	STORY_DOMAIN,
+	SHOW_STORE_PRODUCT,
+} from "@/lib/api";
 import { convertCookieObjArrayToString } from "@/lib/helper";
 
 import { UiMain } from "@/components/customUI";
@@ -51,7 +55,7 @@ export default async function Page({
 	var productData: null | FetchedProductDataType = null;
 	try {
 		productData = (await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/ShowStoreProduct?id=${pid}`,
+			STORY_DOMAIN + SHOW_STORE_PRODUCT + `?id=${pid}`,
 			cookieString
 		)) as FetchedProductDataType;
 		if (!productData)
@@ -67,7 +71,8 @@ export default async function Page({
 	var productChaptersData: null | ProductChaptersData = null;
 	try {
 		productChaptersData = await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/ShowStoreProductChapter?id=${pid}&order_by=chapter`,
+			STORY_DOMAIN +
+				`/story3/ShowStoreProductChapter?id=${pid}&order_by=chapter`,
 			cookieString
 		);
 		if (!productChaptersData)

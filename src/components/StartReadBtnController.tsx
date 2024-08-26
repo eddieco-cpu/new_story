@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 import { UiButton, UiTag } from "@/components/customUI/client";
 import { isLoginWithinDay } from "@/lib/helper";
-import { getData } from "@/lib/api";
+import { getData, SHOW_STORE_PRODUCT } from "@/lib/api";
 
 import { type FetchedProductDataType } from "@/types/product";
 import { type ProductChaptersData } from "@/types/chapter";
@@ -40,7 +40,7 @@ export default function StartReadBtnController({
 	//
 	async function handleDirectToLastReadChapter() {
 		try {
-			const res = await getData(`/story3/ShowStoreProduct?id=${id}`);
+			const res = await getData(SHOW_STORE_PRODUCT + `?id=${id}`);
 
 			if (!res.data || res.data.status !== "200") {
 				throw new Error("get lastChapter error");

@@ -94,3 +94,9 @@ export async function fetchDataWithCookieInServer(
 		return null;
 	}
 }
+
+export const STORY_DOMAIN = "https://story-onlinelab.udn.com";
+export const STORY_PATH = "/story3";
+export const SHOW_STORE_PRODUCT = STORY_PATH + "/ShowStoreProduct";
+export const SHOW_STORE_PRODUCT_CHAPTER =
+	STORY_PATH + "/ShowStoreProductChapter";

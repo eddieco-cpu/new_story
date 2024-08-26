@@ -3,7 +3,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 
-import { fetchDataWithCookieInServer } from "@/lib/api";
+import { fetchDataWithCookieInServer, STORY_DOMAIN } from "@/lib/api";
 import { convertCookieObjArrayToString } from "@/lib/helper";
 
 import { type NewsType } from "@/types";
@@ -55,7 +55,7 @@ export default async function Page({
 	var authorData: null | FetchedAuthorDataType = null;
 	try {
 		authorData = (await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/AccountData?account=${authorId}&action=select`,
+			STORY_DOMAIN + `/story3/AccountData?account=${authorId}&action=select`,
 			cookieString
 		)) as FetchedAuthorDataType;
 		if (!authorData) throw new Error("fetch authorData error in author page");
@@ -68,7 +68,8 @@ export default async function Page({
 	var authorPiecesData: null | FetchedAuthorPiecesData = null;
 	try {
 		authorPiecesData = (await fetchDataWithCookieInServer(
-			`https://story-onlinelab.udn.com/story3/AccountData?account=${authorId}&action=select_publish`,
+			STORY_DOMAIN +
+				`/story3/AccountData?account=${authorId}&action=select_publish`,
 			""
 		)) as FetchedAuthorPiecesData;
 		if (!authorPiecesData)
