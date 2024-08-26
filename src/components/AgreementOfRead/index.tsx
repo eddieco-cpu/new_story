@@ -11,6 +11,8 @@ import { FetchedAuthorDataType } from "@/types/author";
 
 import Agreement from "./Agreement";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export default function Index() {
 	//
 	const { isMemberConformAgreementOfRead } = useGlobalContext();
@@ -32,7 +34,7 @@ export default function Index() {
 
 		try {
 			const res = await getData(
-				ACCOUNT_DATA + `?account=${account}&action=select`
+				BASE_PATH + ACCOUNT_DATA + `?account=${account}&action=select`
 			);
 
 			if (!res.data || res.data.status !== "200") {

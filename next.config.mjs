@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
+
 const nextConfig = {
 	reactStrictMode: false, //close useEffect called twice
+	basePath,
 	async rewrites() {
 		return [
 			{

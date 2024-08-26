@@ -29,6 +29,8 @@ import { getData, READ_CHAPTER } from "@/lib/api";
 import { type FetchedResponseType } from "@/types";
 import { isLoginWithinDay } from "@/lib/helper";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export default function Wrapper({
 	pieceBase64,
 	productId,
@@ -73,7 +75,8 @@ export default function Wrapper({
 
 		try {
 			const res = await getData(
-				READ_CHAPTER +
+				BASE_PATH +
+					READ_CHAPTER +
 					`?account=${account}&id=${productId}&chapter_id=${productChapter.chapter_id}`
 			);
 

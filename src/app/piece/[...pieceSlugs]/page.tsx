@@ -28,6 +28,8 @@ import { type Chapter, type ProductChaptersData } from "@/types/chapter";
 
 import "@/styles/piece.scss";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export default async function Page({
 	params: { pieceSlugs },
 }: {
@@ -132,7 +134,7 @@ export default async function Page({
 				<nav className="mx-auto flex h-11 max-w-[1080px] items-center justify-start gap-2 max-lg:px-5">
 					<Link href="/" className="logo-udn">
 						<Image
-							src="/images/reading-logo.svg"
+							src={BASE_PATH + "/images/reading-logo.svg"}
 							alt="聯合新聞網"
 							width={43}
 							height={32}

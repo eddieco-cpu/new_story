@@ -9,6 +9,8 @@ import { CateData } from "@/types/cate";
 
 import { UiButton } from "@/components/customUI/client";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export default function Drawer({
 	isDrawer,
 	setIsDrawer,
@@ -37,7 +39,7 @@ export default function Drawer({
 					<p className="flex items-center justify-start gap-[1px]">
 						<a href="https://udn.com/news/index">
 							<Image
-								src="/images/reading-logo.svg"
+								src={BASE_PATH + "/images/reading-logo.svg"}
 								alt="聯合新聞網"
 								width={34.68}
 								height={26}
@@ -45,7 +47,7 @@ export default function Drawer({
 						</a>
 						<a href="https://reading.udn.com/read/index">
 							<Image
-								src="/images/reading-brand.svg"
+								src={BASE_PATH + "/images/reading-brand.svg"}
 								alt="琅琅悅讀"
 								width={92.36}
 								height={22.66}
@@ -78,7 +80,7 @@ export default function Drawer({
 									className="flex items-center justify-start gap-2"
 								>
 									<Image
-										src="/images/icons/star.svg"
+										src={BASE_PATH + "/images/icons/star.svg"}
 										alt="Star Icon"
 										width={24}
 										height={24}
@@ -92,7 +94,7 @@ export default function Drawer({
 									className="flex items-center justify-start gap-2"
 								>
 									<Image
-										src="/images/icons/cate.svg"
+										src={BASE_PATH + "/images/icons/cate.svg"}
 										alt="cate"
 										width={24}
 										height={24}
@@ -115,7 +117,7 @@ export default function Drawer({
 									className="flex items-center justify-start gap-2"
 								>
 									<Image
-										src="/images/icons/rank.svg"
+										src={BASE_PATH + "/images/icons/rank.svg"}
 										alt=""
 										width={24}
 										height={24}
@@ -129,7 +131,7 @@ export default function Drawer({
 									className="flex items-center justify-start gap-2"
 								>
 									<Image
-										src="/images/icons/light.svg"
+										src={BASE_PATH + "/images/icons/light.svg"}
 										alt=""
 										width={24}
 										height={24}
@@ -143,7 +145,7 @@ export default function Drawer({
 									className="flex items-center justify-start gap-2"
 								>
 									<Image
-										src="/images/icons/write.svg"
+										src={BASE_PATH + "/images/icons/write.svg"}
 										alt=""
 										width={24}
 										height={24}
@@ -157,7 +159,7 @@ export default function Drawer({
 									className="flex items-center justify-start gap-2"
 								>
 									<Image
-										src="/images/icons/smile.svg"
+										src={BASE_PATH + "/images/icons/smile.svg"}
 										alt=""
 										width={24}
 										height={24}
@@ -172,7 +174,7 @@ export default function Drawer({
 								<p className="flex items-center justify-start gap-[1px]">
 									<a href="https://udn.com/news/index">
 										<Image
-											src="/images/reading-logo.svg"
+											src={BASE_PATH + "/images/reading-logo.svg"}
 											alt="聯合新聞網"
 											width={34.68}
 											height={26}
@@ -180,7 +182,7 @@ export default function Drawer({
 									</a>
 									<a href="https://reading.udn.com/read/index">
 										<Image
-											src="/images/reading-brand.svg"
+											src={BASE_PATH + "/images/reading-brand.svg"}
 											alt="琅琅悅讀"
 											width={92.36}
 											height={22.66}
@@ -192,7 +194,7 @@ export default function Drawer({
 								<p className="flex items-center justify-start gap-[1px]">
 									<a href="https://udn.com/news/index">
 										<Image
-											src="/images/reading-logo.svg"
+											src={BASE_PATH + "/images/reading-logo.svg"}
 											alt="聯合新聞網"
 											width={34.68}
 											height={26}
@@ -200,7 +202,7 @@ export default function Drawer({
 									</a>
 									<a href="https://reading.udn.com/read/index">
 										<Image
-											src="/images/reading-brand.svg"
+											src={BASE_PATH + "/images/reading-brand.svg"}
 											alt="琅琅悅讀"
 											width={92.36}
 											height={22.66}

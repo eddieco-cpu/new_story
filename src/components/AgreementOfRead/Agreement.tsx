@@ -15,6 +15,8 @@ import { isLoginWithinDay } from "@/lib/helper";
 import { getData, TERMS } from "@/lib/api";
 import { FetchedResponseType } from "@/types";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 type FetchedAgreementOfReadType = {
 	content: string;
 	title: string;
@@ -62,7 +64,7 @@ export default function AgreementOfRead() {
 	//
 	async function fetchAgree() {
 		try {
-			const res = await getData(TERMS + `?action=select&type=S`);
+			const res = await getData(BASE_PATH + TERMS + `?action=select&type=S`);
 
 			if (!res.data || res.data.status !== "200") {
 				throw new Error("fetchAgree error");
@@ -83,6 +85,7 @@ export default function AgreementOfRead() {
 
 		const account = cookies.get("udnmember");
 		let url =
+			BASE_PATH +
 			TERMS +
 			`?action=agree&type=S&account=${account}&ver=${agreement.ver || "1"}`;
 

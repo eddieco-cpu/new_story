@@ -17,6 +17,8 @@ import { cn } from "@/lib/utils";
 
 import { type FetchedResponseType } from "@/types";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 //
 type actOfFollow = "1" | "2"; //1：關注作者、2：取消關注作者、9：撈取關注清單
 
@@ -100,7 +102,7 @@ export default function TrackBtnController({
 	async function fetchFollowData() {
 		//
 		const acount = cookies.get("udnmember");
-		let url = FOLLOW_CONTROL + `?account=${acount}&type=9`;
+		let url = BASE_PATH + FOLLOW_CONTROL + `?account=${acount}&type=9`;
 
 		try {
 			const res = await getData(url);
@@ -128,6 +130,7 @@ export default function TrackBtnController({
 		//
 		const acount = cookies.get("udnmember");
 		let url =
+			BASE_PATH +
 			FOLLOW_CONTROL +
 			`?account=${acount}&type=${act}&writer_account=${writer_account}`;
 

@@ -24,6 +24,8 @@ import {
 
 import "@styles/header.scss";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 const Header: React.FC = () => {
 	//
 	const targetRef = useRef(null);
@@ -70,7 +72,7 @@ const Header: React.FC = () => {
 
 	useEffect(() => {
 		async function fetchedCategoryData() {
-			const { data } = await getData(SHOW_CATEGORY + "?store=Y");
+			const { data } = await getData(BASE_PATH + SHOW_CATEGORY + "?store=Y");
 			if (data && data.list) {
 				setCategoryDatas(() => [...data.list]);
 			}
@@ -91,7 +93,7 @@ const Header: React.FC = () => {
 						<h1 className="logo">
 							<a href="https://udn.com/news/index" className="logo-udn">
 								<Image
-									src="/images/reading-logo.svg"
+									src={BASE_PATH + "/images/reading-logo.svg"}
 									alt="聯合新聞網"
 									width={43}
 									height={32}
@@ -99,7 +101,7 @@ const Header: React.FC = () => {
 							</a>
 							<a href="https://reading.udn.com/read/index" className="logo-txt">
 								<Image
-									src="/images/reading-brand.svg"
+									src={BASE_PATH + "/images/reading-brand.svg"}
 									alt="琅琅悅讀"
 									width={132}
 									height={32}
