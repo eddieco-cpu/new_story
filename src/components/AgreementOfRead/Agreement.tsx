@@ -15,6 +15,8 @@ import { isLoginWithinDay } from "@/lib/helper";
 import { getData, TERMS } from "@/lib/api";
 import { FetchedResponseType } from "@/types";
 
+import useDirectToLogin from "@/hooks/useDirectToLogin";
+
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
 
 type FetchedAgreementOfReadType = {
@@ -30,12 +32,10 @@ export default function AgreementOfRead() {
 	const searchParams = useSearchParams();
 
 	//
+	const [directToLogin] = useDirectToLogin();
 	const { toast } = useToast();
-	const {
-		directToLogin,
-		isMemberConformAgreementOfRead,
-		setIsMemberConformAgreementOfRead,
-	} = useGlobalContext();
+	const { isMemberConformAgreementOfRead, setIsMemberConformAgreementOfRead } =
+		useGlobalContext();
 
 	//
 	const [isAgreeLoading, setIsAgreeLoading] = useState(false);

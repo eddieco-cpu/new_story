@@ -11,13 +11,8 @@ import { Share } from "@/components/customUI/svg";
 import CollectBtnController from "@/components/CollectBtnController";
 import StartReadBtnController from "@/components/StartReadBtnController";
 
-import { useGlobalContext } from "@contexts/globalContext";
-
 import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 import { useToast } from "@/components/ui/use-toast";
-
-import { isLoginWithinDay } from "@/lib/helper";
-import { getData } from "@/lib/api";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
 
@@ -151,9 +146,6 @@ export default function ButtonsBlock({
 	id: string;
 	setAdjustCollectAmount: React.Dispatch<React.SetStateAction<number>>;
 }) {
-	//
-	const { directToLogin } = useGlobalContext();
-
 	//
 	function handleShare() {
 		BlockPopupModal.setChildren(<ShareBox />);

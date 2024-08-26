@@ -11,7 +11,7 @@ import NavButton from "@/app/piece/Components/NavButton";
 
 import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 
-import { useGlobalContext } from "@contexts/globalContext";
+import useDirectToLogin from "@/hooks/useDirectToLogin";
 
 import { isLoginWithinDay } from "@/lib/helper";
 import { getData, COLLECT_MANAGER } from "@/lib/api";
@@ -65,7 +65,8 @@ export default function CollectBtnController({
 	className?: string;
 }) {
 	//
-	const { directToLogin } = useGlobalContext();
+	const [directToLogin] = useDirectToLogin();
+
 	const [isCollectStatus, setIsCollectStatus] = useState<boolean>(
 		is_collection === "Y"
 	);
@@ -76,7 +77,8 @@ export default function CollectBtnController({
 	function handleSetIsCollect() {
 		//
 		if (!isLoginWithinDay()) {
-			return directToLogin();
+			directToLogin();
+			return;
 		}
 		if (isCollectStatusLoading) return;
 

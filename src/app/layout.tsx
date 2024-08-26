@@ -73,13 +73,11 @@ export default function RootLayout({
 				/>
 			</head>
 			<body className="bg-landscape-300" suppressHydrationWarning={true}>
-				<Suspense fallback={<div>Loading...</div>}>
-					<GlobalProvider>
-						{children}
-						<Toaster />
-						<BlockPopup />
-					</GlobalProvider>
-				</Suspense>
+				<GlobalProvider>
+					{children}
+					<Toaster />
+					<BlockPopup />
+				</GlobalProvider>
 			</body>
 		</html>
 	);
