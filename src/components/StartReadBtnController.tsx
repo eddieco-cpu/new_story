@@ -18,6 +18,8 @@ import { type ProductChaptersData } from "@/types/chapter";
 
 import { useToast } from "@/components/ui/use-toast";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export default function StartReadBtnController({
 	id,
 	className,
@@ -44,7 +46,7 @@ export default function StartReadBtnController({
 	//
 	async function handleDirectToLastReadChapter() {
 		try {
-			const res = await getData(SHOW_STORE_PRODUCT + `?id=${id}`);
+			const res = await getData(BASE_PATH + SHOW_STORE_PRODUCT + `?id=${id}`);
 
 			if (!res.data || res.data.status !== "200") {
 				throw new Error("get lastChapter error");
@@ -73,7 +75,8 @@ export default function StartReadBtnController({
 	async function handleDirectToFirstChapter() {
 		try {
 			const res = await getData(
-				SHOW_STORE_PRODUCT_CHAPTER +
+				BASE_PATH +
+					SHOW_STORE_PRODUCT_CHAPTER +
 					`?id=${id}&order_by=chapter&amount_per_page=1&page=1`
 			);
 

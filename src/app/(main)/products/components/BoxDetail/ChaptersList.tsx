@@ -8,6 +8,8 @@ import { type Chapter, type ProductChaptersData } from "@/types/chapter";
 
 import { getData, SHOW_STORE_PRODUCT_CHAPTER } from "@/lib/api";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 let perPageNumber = 50;
 
 export default function ChaptersList({
@@ -31,7 +33,8 @@ export default function ChaptersList({
 		var moreChaptersData: null | ProductChaptersData = null;
 		try {
 			const { data } = await getData(
-				SHOW_STORE_PRODUCT_CHAPTER +
+				BASE_PATH +
+					SHOW_STORE_PRODUCT_CHAPTER +
 					`?id=${productId}
 				&order_by=chapter
 				&amount_per_page=${perPageNumber}

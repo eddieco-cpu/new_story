@@ -19,6 +19,8 @@ import { cn } from "@/lib/utils";
 
 import { type FetchedResponseType } from "@/types";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 //
 function ComfirmUnCollectPopup({
 	doUpdateCollect,
@@ -96,7 +98,10 @@ export default function CollectBtnController({
 		setIsCollectStatusLoading(true);
 
 		const acount = cookies.get("udnmember");
-		let url = COLLECT_MANAGER + `?account=${acount}&action=${action}&id=${id}`;
+		let url =
+			BASE_PATH +
+			COLLECT_MANAGER +
+			`?account=${acount}&action=${action}&id=${id}`;
 
 		try {
 			const res = await getData(url);

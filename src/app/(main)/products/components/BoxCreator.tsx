@@ -12,6 +12,8 @@ import { type FetchedProductCardListType } from "@/types/product";
 import { type FetchedAuthorsFollowers } from "@/types/fan";
 import { getData, SHOW_STORE_PRODUCT_LIST, FOLLOW_CONTROL } from "@/lib/api";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 /**
  * writer_account 為作者 id, in order to fetch authorData
  * 如果沒有 writer_account ，代表他是大陸授權的作品。不會有 authorData
@@ -40,7 +42,8 @@ export default function BoxCreator({
 		async function fetchAuthorizerProductsAmount() {
 			try {
 				const res = await getData(
-					SHOW_STORE_PRODUCT_LIST +
+					BASE_PATH +
+						SHOW_STORE_PRODUCT_LIST +
 						`?cpstring=${authorize}&page=1&amount_per_page=1`
 				);
 				const data = res.data as FetchedProductCardListType;
@@ -55,7 +58,7 @@ export default function BoxCreator({
 		async function fetchAuthorsFollowersData() {
 			try {
 				const res = await getData(
-					FOLLOW_CONTROL + `?account=${writer_account}&type=10`
+					BASE_PATH + FOLLOW_CONTROL + `?account=${writer_account}&type=10`
 				);
 				const data = res.data as FetchedAuthorsFollowers;
 				//console.log("data: ", data);
@@ -92,7 +95,10 @@ export default function BoxCreator({
 				<Link href={`/authors/${writer_account}`}>
 					<picture className="pic-base aspect-square w-[100px] shrink-0 rounded-full max-md:w-[60px]">
 						<img
-							src={authorData.writer_avatar || "/images/default-member.jpg"}
+							src={
+								authorData.writer_avatar ||
+								BASE_PATH + "/images/default-member.jpg"
+							}
 							alt={authorData.writer_nickname}
 						/>
 					</picture>
@@ -102,7 +108,11 @@ export default function BoxCreator({
 				<div className="grid flex-grow grid-cols-1 gap-2 max-md:flex-grow">
 					{authorData.writer_type === "C" && (
 						<p className="flex items-center justify-center gap-1 max-xl:justify-start">
-							<img src="/images/author_icon.png" className="block w-5" alt="" />
+							<img
+								src={BASE_PATH + "/images/author_icon.png"}
+								className="block w-5"
+								alt=""
+							/>
 							<span className="text-sm text-secondary-500">簽約作家</span>
 						</p>
 					)}

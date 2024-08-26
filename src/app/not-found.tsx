@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 
 import { UiMain } from "@/components/customUI";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 //
 export default function NotFound() {
 	//
@@ -42,7 +44,7 @@ export default function NotFound() {
 					</article>
 					<div>
 						<Image
-							src={"/images/error.png"}
+							src={BASE_PATH + "/images/error.png"}
 							width={170}
 							height={232}
 							alt="error"

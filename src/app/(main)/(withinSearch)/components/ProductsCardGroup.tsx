@@ -15,6 +15,8 @@ import LoadMore from "@/components/customUI/LoadMore";
 import { isValidPathSegment } from "@/tools/validator";
 import { getData, SHOW_STORE_PRODUCT_LIST } from "@/lib/api";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export default function MoreProductsCardGroup({
 	groupClassName,
 }: {
@@ -80,7 +82,8 @@ export default function MoreProductsCardGroup({
 
 		try {
 			const { data } = await getData(
-				SHOW_STORE_PRODUCT_LIST +
+				BASE_PATH +
+					SHOW_STORE_PRODUCT_LIST +
 					`?page=${isRefresh ? "1" : Math.floor(cards.length / amount_per_page) + 1}&${new URLSearchParams(searchObject).toString()}`
 			);
 			const fetchedData = data as FetchedProductCardListType;

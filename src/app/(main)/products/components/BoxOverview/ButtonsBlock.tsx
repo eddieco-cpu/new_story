@@ -19,6 +19,8 @@ import { useToast } from "@/components/ui/use-toast";
 import { isLoginWithinDay } from "@/lib/helper";
 import { getData } from "@/lib/api";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 //
 function ShareBox() {
 	//
@@ -101,7 +103,7 @@ function ShareBox() {
 					}
 				>
 					<Image
-						src="/images/line-logo.svg"
+						src={BASE_PATH + "/images/line-logo.svg"}
 						alt="line"
 						width={41.5}
 						height={40}
@@ -123,7 +125,7 @@ function ShareBox() {
 					}
 				>
 					<Image
-						src="/images/fb-logo.svg"
+						src={BASE_PATH + "/images/fb-logo.svg"}
 						alt="fb"
 						width={40}
 						height={40}

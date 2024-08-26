@@ -13,6 +13,8 @@ import {
 	PopoverClose,
 } from "@/components/ui/popover";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export default function SearchForm({
 	isSearchBox,
 	setIsSearchBox,
@@ -175,7 +177,12 @@ export default function SearchForm({
 					className={"search__submit"}
 					onClick={() => searchWithSearchstring()}
 				>
-					<Image src="/images/search.svg" alt="搜尋" width={24} height={24} />
+					<Image
+						src={BASE_PATH + "/images/search.svg"}
+						alt="搜尋"
+						width={24}
+						height={24}
+					/>
 				</button>
 
 				{/* --- isSearchBox --- */}
@@ -202,7 +209,7 @@ export default function SearchForm({
 									<li className="container-group__item pointer-events-none opacity-60">
 										<picture className="container-group__item-icon opacity-70">
 											<Image
-												src="/images/search.svg"
+												src={BASE_PATH + "/images/search.svg"}
 												alt=""
 												width={15}
 												height={15}
@@ -221,7 +228,7 @@ export default function SearchForm({
 									>
 										<picture className="container-group__item-icon">
 											<Image
-												src="/images/search.svg"
+												src={BASE_PATH + "/images/search.svg"}
 												alt=""
 												width={15}
 												height={15}

@@ -10,6 +10,8 @@ import { type Fan, type FetchedAuthorsFollowers } from "@/types/fan";
 
 import { getData, FOLLOW_CONTROL } from "@/lib/api";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export default function AuthorBox({
 	authorData,
 	authorId,
@@ -35,7 +37,7 @@ export default function AuthorBox({
 	async function fetchAuthorsFollowersData() {
 		try {
 			const res = await getData(
-				FOLLOW_CONTROL + `?account=${authorId}&type=10`
+				BASE_PATH + FOLLOW_CONTROL + `?account=${authorId}&type=10`
 			);
 
 			if (res.data.status !== "200" && !res.data.follow_me_list) {
@@ -76,7 +78,11 @@ export default function AuthorBox({
 				<article className="flex flex-col items-start justify-start gap-2">
 					{authorData.writer_type === "C" && (
 						<p className="flex items-center justify-start gap-1">
-							<img src="/images/author_icon.png" className="block w-5" alt="" />
+							<img
+								src={BASE_PATH + "/images/author_icon.png"}
+								className="block w-5"
+								alt=""
+							/>
 							<span className="text-sm text-secondary-500">簽約作家</span>
 						</p>
 					)}
