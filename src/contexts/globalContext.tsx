@@ -1,6 +1,4 @@
 "use client";
-
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useState, useContext, createContext, ReactNode } from "react";
 
 //
@@ -11,7 +9,6 @@ interface GlobalContextType {
 	setIsMemberConformAgreementOfRead: React.Dispatch<
 		React.SetStateAction<boolean>
 	>;
-	directToLogin: (redirectURI?: string) => void;
 }
 
 //
@@ -19,24 +16,9 @@ const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
 const GlobalProvider = ({ children }: { children: ReactNode }) => {
 	//
-	const router = useRouter();
-	const pathname = usePathname();
-	const searchParams = useSearchParams();
-
-	//
 	const [count, setCount] = useState(5);
 	const [isMemberConformAgreementOfRead, setIsMemberConformAgreementOfRead] =
 		useState<boolean>(false);
-
-	function directToLogin(redirectURI?: string) {
-		//
-		const afterLoginUrl =
-			redirectURI || window.location.origin + pathname + searchParams;
-
-		router.push(
-			`https://reading.udn.com/store/center/login.do?redirect=${afterLoginUrl}`
-		);
-	}
 
 	//
 	return (
@@ -45,7 +27,6 @@ const GlobalProvider = ({ children }: { children: ReactNode }) => {
 				value={{
 					count,
 					setCount,
-					directToLogin,
 					isMemberConformAgreementOfRead,
 					setIsMemberConformAgreementOfRead,
 				}}

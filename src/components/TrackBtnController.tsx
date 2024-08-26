@@ -10,6 +10,7 @@ import { UiButton } from "@/components/customUI/client";
 import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 
 import { useGlobalContext } from "@contexts/globalContext";
+import useDirectToLogin from "@/hooks/useDirectToLogin";
 
 import { isLoginWithinDay } from "@/lib/helper";
 import { getData, FOLLOW_CONTROL } from "@/lib/api";
@@ -82,7 +83,7 @@ export default function TrackBtnController({
 	callback: (v: "add" | "remove") => void;
 }) {
 	//
-	const { directToLogin } = useGlobalContext();
+	const [directToLogin] = useDirectToLogin();
 
 	const [followingStatus, setFollowingStatus] = useState<boolean | "loading">(
 		"loading"
