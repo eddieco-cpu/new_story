@@ -7,6 +7,7 @@ import {
 	fetchDataWithCookieInServer,
 	STORY_DOMAIN,
 	SHOW_STORE_PRODUCT,
+	SHOW_STORE_PRODUCT_CHAPTER,
 } from "@/lib/api";
 import { convertCookieObjArrayToString } from "@/lib/helper";
 
@@ -71,8 +72,7 @@ export default async function Page({
 	var productChaptersData: null | ProductChaptersData = null;
 	try {
 		productChaptersData = await fetchDataWithCookieInServer(
-			STORY_DOMAIN +
-				`/story3/ShowStoreProductChapter?id=${pid}&order_by=chapter`,
+			STORY_DOMAIN + SHOW_STORE_PRODUCT_CHAPTER + `?id=${pid}&order_by=chapter`,
 			cookieString
 		);
 		if (!productChaptersData)

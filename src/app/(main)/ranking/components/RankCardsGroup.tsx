@@ -10,7 +10,7 @@ import {
 
 import RankCard from "./RankCard";
 
-import { getData } from "@/lib/api";
+import { getData, SHOW_STORE_PRODUCT_LIST } from "@/lib/api";
 
 //
 const findType = (leaderboard: string, timing: string): string => {
@@ -50,7 +50,8 @@ export default function RankCardsGroup() {
 		async function handleFetchCards() {
 			try {
 				const { data } = await getData(
-					`/story3/ShowStoreProductList?amount_per_page=60&page=1&type=${type}&category=${category}`
+					SHOW_STORE_PRODUCT_LIST +
+						`?amount_per_page=60&page=1&type=${type}&category=${category}`
 				);
 				const fetchedData = data as FetchedProductCardListType;
 				//console.log("fetchedData.list: ", fetchedData.list);

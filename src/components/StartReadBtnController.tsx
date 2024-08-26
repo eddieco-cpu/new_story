@@ -7,7 +7,11 @@ import { cn } from "@/lib/utils";
 
 import { UiButton, UiTag } from "@/components/customUI/client";
 import { isLoginWithinDay } from "@/lib/helper";
-import { getData, SHOW_STORE_PRODUCT } from "@/lib/api";
+import {
+	getData,
+	SHOW_STORE_PRODUCT,
+	SHOW_STORE_PRODUCT_CHAPTER,
+} from "@/lib/api";
 
 import { type FetchedProductDataType } from "@/types/product";
 import { type ProductChaptersData } from "@/types/chapter";
@@ -69,7 +73,8 @@ export default function StartReadBtnController({
 	async function handleDirectToFirstChapter() {
 		try {
 			const res = await getData(
-				`/story3/ShowStoreProductChapter?id=${id}&order_by=chapter&amount_per_page=1&page=1`
+				SHOW_STORE_PRODUCT_CHAPTER +
+					`?id=${id}&order_by=chapter&amount_per_page=1&page=1`
 			);
 
 			if (

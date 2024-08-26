@@ -100,3 +100,9 @@ export const STORY_PATH = "/story3";
 export const SHOW_STORE_PRODUCT = STORY_PATH + "/ShowStoreProduct";
 export const SHOW_STORE_PRODUCT_CHAPTER =
 	STORY_PATH + "/ShowStoreProductChapter";
+export const SHOW_CATEGORY = STORY_PATH + "/ShowCategory";
+export const READ_CHAPTER = STORY_PATH + "/ReadChapter";
+export const COLLECT_MANAGER = STORY_PATH + "/CollectManager";
+export const ACCOUNT_DATA = STORY_PATH + "/AccountData";
+export const TERMS = STORY_PATH + "/Terms";
+export const SHOW_STORE_PRODUCT_LIST = STORY_PATH + "/ShowStoreProductList";

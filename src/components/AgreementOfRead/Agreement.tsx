@@ -12,7 +12,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 import { isLoginWithinDay } from "@/lib/helper";
 
-import { getData } from "@/lib/api";
+import { getData, TERMS } from "@/lib/api";
 import { FetchedResponseType } from "@/types";
 
 type FetchedAgreementOfReadType = {
@@ -62,7 +62,7 @@ export default function AgreementOfRead() {
 	//
 	async function fetchAgree() {
 		try {
-			const res = await getData(`/story3/Terms?action=select&type=S`);
+			const res = await getData(TERMS + `?action=select&type=S`);
 
 			if (!res.data || res.data.status !== "200") {
 				throw new Error("fetchAgree error");
@@ -82,7 +82,9 @@ export default function AgreementOfRead() {
 		setIsAgreeLoading(true);
 
 		const account = cookies.get("udnmember");
-		let url = `/story3/Terms?action=agree&type=S&account=${account}&ver=${agreement.ver || "1"}`;
+		let url =
+			TERMS +
+			`?action=agree&type=S&account=${account}&ver=${agreement.ver || "1"}`;
 
 		try {
 			const res = await getData(url);

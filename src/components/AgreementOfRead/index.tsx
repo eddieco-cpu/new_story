@@ -6,7 +6,7 @@ import { isLoginWithinDay } from "@/lib/helper";
 
 import { useGlobalContext } from "@contexts/globalContext";
 
-import { getData } from "@/lib/api";
+import { getData, ACCOUNT_DATA } from "@/lib/api";
 import { FetchedAuthorDataType } from "@/types/author";
 
 import Agreement from "./Agreement";
@@ -32,7 +32,7 @@ export default function Index() {
 
 		try {
 			const res = await getData(
-				`/story3/AccountData?account=${account}&action=select`
+				ACCOUNT_DATA + `?account=${account}&action=select`
 			);
 
 			if (!res.data || res.data.status !== "200") {

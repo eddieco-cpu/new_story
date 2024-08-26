@@ -14,7 +14,7 @@ import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 import { useGlobalContext } from "@contexts/globalContext";
 
 import { isLoginWithinDay } from "@/lib/helper";
-import { getData } from "@/lib/api";
+import { getData, COLLECT_MANAGER } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
 import { type FetchedResponseType } from "@/types";
@@ -96,7 +96,7 @@ export default function CollectBtnController({
 		setIsCollectStatusLoading(true);
 
 		const acount = cookies.get("udnmember");
-		let url = `/story3/CollectManager?account=${acount}&action=${action}&id=${id}`;
+		let url = COLLECT_MANAGER + `?account=${acount}&action=${action}&id=${id}`;
 
 		try {
 			const res = await getData(url);

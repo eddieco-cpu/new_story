@@ -7,6 +7,8 @@ import {
 	fetchDataWithCookieInServer,
 	STORY_DOMAIN,
 	SHOW_STORE_PRODUCT,
+	SHOW_STORE_PRODUCT_CHAPTER,
+	ACCOUNT_DATA,
 } from "@/lib/api";
 import { convertCookieObjArrayToString } from "@/lib/helper";
 
@@ -136,7 +138,8 @@ export default async function Page({
 	try {
 		productChaptersData = await fetchDataWithCookieInServer(
 			STORY_DOMAIN +
-				`/story3/ShowStoreProductChapter?id=${pid}&order_by=chapter&amount_per_page=50&page=1`,
+				SHOW_STORE_PRODUCT_CHAPTER +
+				`?id=${pid}&order_by=chapter&amount_per_page=50&page=1`,
 			""
 		);
 		if (!productChaptersData)
@@ -160,7 +163,8 @@ export default async function Page({
 	try {
 		authorData = (await fetchDataWithCookieInServer(
 			STORY_DOMAIN +
-				`/story3/AccountData?account=${productData.writer_account}&action=select`,
+				ACCOUNT_DATA +
+				`?account=${productData.writer_account}&action=select`,
 			""
 		)) as FetchedAuthorDataType;
 		if (!authorData) throw new Error("fetch authorData error in author page");

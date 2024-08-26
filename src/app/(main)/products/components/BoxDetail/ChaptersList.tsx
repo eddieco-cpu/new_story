@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import LoadMore from "@/components/customUI/LoadMore";
 import { type Chapter, type ProductChaptersData } from "@/types/chapter";
 
-import { getData } from "@/lib/api";
+import { getData, SHOW_STORE_PRODUCT_CHAPTER } from "@/lib/api";
 
 let perPageNumber = 50;
 
@@ -31,7 +31,8 @@ export default function ChaptersList({
 		var moreChaptersData: null | ProductChaptersData = null;
 		try {
 			const { data } = await getData(
-				`/story3/ShowStoreProductChapter?id=${productId}
+				SHOW_STORE_PRODUCT_CHAPTER +
+					`?id=${productId}
 				&order_by=chapter
 				&amount_per_page=${perPageNumber}
 				&page=${Math.floor((productChapters.length + moreChapters.length) / perPageNumber) + 1}`

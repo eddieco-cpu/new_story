@@ -25,7 +25,7 @@ import CollectBtnController from "@/components/CollectBtnController";
 import ViolationReportBox from "@/components/ViolationReportBox";
 import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
 
-import { getData } from "@/lib/api";
+import { getData, READ_CHAPTER } from "@/lib/api";
 import { type FetchedResponseType } from "@/types";
 import { isLoginWithinDay } from "@/lib/helper";
 
@@ -73,7 +73,8 @@ export default function Wrapper({
 
 		try {
 			const res = await getData(
-				`/story3/ReadChapter?account=${account}&id=${productId}&chapter_id=${productChapter.chapter_id}`
+				READ_CHAPTER +
+					`?account=${account}&id=${productId}&chapter_id=${productChapter.chapter_id}`
 			);
 
 			if (!res.data || res.data.status !== "200") {
