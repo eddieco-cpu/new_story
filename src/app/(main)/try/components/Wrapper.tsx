@@ -3,6 +3,8 @@
 import React from "react";
 import { useToast } from "@/components/ui/use-toast";
 
+import Loading from "@/components/Loading";
+
 export default function Wrapper() {
 	const { toast } = useToast();
 	return (
@@ -18,6 +20,7 @@ export default function Wrapper() {
 			>
 				Show Toast
 			</button>
+			<Loading />
 		</div>
 	);
 }

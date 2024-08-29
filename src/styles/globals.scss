@@ -343,3 +343,51 @@ html {
     display: none;
   }
 }
+
+.load-animation-s {
+  @keyframes loadAnimationS {
+    0% {
+      transform: translate(0, 0);
+    }
+
+    12.5% {
+      transform: translate(0, 3px);
+    }
+
+    25% {
+      transform: translate(0, 0px);
+    }
+
+    37.5% {
+      transform: translate(0, -3px);
+    }
+
+    50% {
+      transform: translate(0, 0px);
+    }
+  }
+}
+
+.load-animation-m {
+  @keyframes loadAnimationM {
+    0% {
+      transform: translate(0, 0);
+    }
+
+    12.5% {
+      transform: translate(0, 6px);
+    }
+
+    25% {
+      transform: translate(0, 0px);
+    }
+
+    37.5% {
+      transform: translate(0, -6px);
+    }
+
+    50% {
+      transform: translate(0, 0px);
+    }
+  }
+}
