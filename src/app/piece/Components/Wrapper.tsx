@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import cookies from "js-cookie";
@@ -24,6 +24,7 @@ import { type Chapter } from "@/types/chapter";
 import CollectBtnController from "@/components/CollectBtnController";
 import ViolationReportBox from "@/components/ViolationReportBox";
 import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";
+import Loading from "@/components/Loading";
 
 import { getData, READ_CHAPTER } from "@/lib/api";
 import { type FetchedResponseType } from "@/types";
@@ -51,10 +52,13 @@ export default function Wrapper({
 	title: string;
 }) {
 	//
+	const router = useRouter();
 	const pathname = usePathname();
 
 	const { setIsSettingBox, isPieceLoading, isCatagoryBox, setIsCatagoryBox } =
 		usePieceContext();
+
+	const [isSortFromBegin, setIsSortFromBegin] = useState<boolean>(true);
 
 	function setViolationReportBox() {
 		BlockPopupModal.setChildren(
@@ -110,7 +114,12 @@ export default function Wrapper({
 		<>
 			<aside className="sticky top-0 z-[1] block w-[60px] max-lg:w-full">
 				<nav className="piece-aside m-auto mt-4 flex flex-col items-center justify-center gap-4 bg-[var(--piece-aside)] py-4 *:flex-shrink-0 max-lg:mb-[-1px] max-lg:mt-0 max-lg:flex-row max-lg:justify-start max-lg:border-b max-lg:border-[var(--piece-border)] max-lg:px-5 max-lg:py-2 lg:rounded-lg">
-					<NavButton icon="detail">作品詳情</NavButton>
+					<NavButton
+						icon="detail"
+						onClick={() => router.push("/products/" + productId)}
+					>
+						作品詳情
+					</NavButton>
 					<NavButton icon="warn" onClick={setViolationReportBox}>
 						舉報
 					</NavButton>
@@ -140,7 +149,10 @@ export default function Wrapper({
 									{productChapters.length} 章
 								</p>
 							</div>
-							<span className="flex scale-y-[120%] cursor-pointer items-center justify-center">
+							<span
+								className="flex scale-y-[120%] cursor-pointer items-center justify-center"
+								onClick={() => setIsSortFromBegin((v) => !v)}
+							>
 								<i className="i-down-2 mr-[-5px] block leading-none text-accent-300"></i>
 								<i className="i-up-2 ml-[-5px] block leading-none text-ash-600"></i>
 							</span>
@@ -149,7 +161,15 @@ export default function Wrapper({
 							<ChaptersList
 								publish_article={publish_article}
 								productId={productId}
-								productChapters={productChapters}
+								productChapters={
+									isSortFromBegin
+										? productChapters.sort(
+												(a, b) => Number(a.order) - Number(b.order)
+											)
+										: productChapters.sort(
+												(a, b) => Number(b.order) - Number(a.order)
+											)
+								}
 								className="ring-1 *:pr-4 *:pt-3"
 							></ChaptersList>
 						</div>
@@ -263,7 +283,7 @@ export default function Wrapper({
 					<NavButton icon="cata" onClick={() => setIsCatagoryBox((v) => !v)}>
 						目錄
 					</NavButton>
-					{/* <NavButton icon="heart">收藏</NavButton> */}
+
 					<CollectBtnController
 						is_collection={is_collection}
 						id={productId}
@@ -295,7 +315,7 @@ export default function Wrapper({
 						`${isPieceLoading ? " pointer-events-auto opacity-100" : " pointer-events-none opacity-0"}`
 					}
 				>
-					<p className="text-2xl">loading...</p>
+					<Loading className="text-2xl *:text-ash-500" />
 				</div>
 			}
 

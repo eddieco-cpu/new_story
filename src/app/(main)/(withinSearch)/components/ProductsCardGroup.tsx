@@ -11,6 +11,7 @@ import {
 
 import ProductCard from "./ProductsCard";
 import LoadMore from "@/components/customUI/LoadMore";
+import Loading from "@/components/Loading";
 
 import { isValidPathSegment } from "@/tools/validator";
 import { getData, SHOW_STORE_PRODUCT_LIST } from "@/lib/api";
@@ -31,6 +32,8 @@ export default function MoreProductsCardGroup({
 
 	const [cards, setCards] = useState<ProductCardType[]>([]);
 	const amount_per_page = 60;
+
+	const [isLoading, setIsLoading] = useState(true);
 
 	//
 	const sortCards = useCallback(
@@ -97,6 +100,7 @@ export default function MoreProductsCardGroup({
 
 			if (isRefresh) {
 				setCards(() => [...fetchedData.list]);
+				setIsLoading(false);
 			} else {
 				setCards((arr) => [...arr, ...fetchedData.list]);
 			}
@@ -110,16 +114,23 @@ export default function MoreProductsCardGroup({
 
 	//
 	useEffect(() => {
+		setIsLoading(true);
 		handleFetchCards(true);
 	}, [pathname, searchParams]);
 
 	return (
 		<>
-			<ul className={groupClassName || ""}>
-				{sortCards(cards).map((card) => (
-					<ProductCard key={card.id} {...{ card }} />
-				))}
-			</ul>
+			{isLoading ? (
+				<div className="flex h-[40vh] items-center justify-center">
+					<Loading className="text-2xl *:text-ash-500" />
+				</div>
+			) : (
+				<ul className={groupClassName || ""}>
+					{sortCards(cards).map((card) => (
+						<ProductCard key={card.id} {...{ card }} />
+					))}
+				</ul>
+			)}
 			{totalAmount > cards.length && (
 				<LoadMore
 					onClick={() => handleFetchCards(false)}

@@ -9,6 +9,7 @@ import {
 } from "@/types/product";
 
 import RankCard from "./RankCard";
+import Loading from "@/components/Loading";
 
 import { getData, SHOW_STORE_PRODUCT_LIST } from "@/lib/api";
 
@@ -41,12 +42,16 @@ export default function RankCardsGroup() {
 	const timing = searchParams?.get("timing") || "t";
 	const category = searchParams?.get("category") || "";
 
+	const [isLoading, setIsLoading] = useState(true);
+
 	useEffect(() => {
 		//
+		setIsLoading(() => true);
 		const type = findType(leaderboard, timing);
 
 		if (!type) {
 			setCards(() => []);
+			setIsLoading(() => false);
 			return;
 		}
 		async function handleFetchCards() {
@@ -59,6 +64,7 @@ export default function RankCardsGroup() {
 				const fetchedData = data as FetchedProductCardListType;
 				//console.log("fetchedData.list: ", fetchedData.list);
 				setCards(() => [...fetchedData.list]);
+				setIsLoading(() => false);
 			} catch (err) {
 				console.log("error: ", err);
 			}
@@ -67,10 +73,18 @@ export default function RankCardsGroup() {
 	}, [searchParams]);
 
 	return (
-		<ul className="m-auto grid grid-cols-3 gap-x-[30px] gap-y-10 max-xl:grid-cols-2 max-lg:gap-x-10 max-md:grid-cols-1">
-			{cards.map((card, index) => (
-				<RankCard key={card.id} {...{ card, index }} />
-			))}
-		</ul>
+		<>
+			{isLoading ? (
+				<div className="flex h-[45vh] items-center justify-center">
+					<Loading className="text-2xl *:text-ash-500" />
+				</div>
+			) : (
+				<ul className="m-auto grid grid-cols-3 gap-x-[30px] gap-y-10 max-xl:grid-cols-2 max-lg:gap-x-10 max-md:grid-cols-1">
+					{cards.map((card, index) => (
+						<RankCard key={card.id} {...{ card, index }} />
+					))}
+				</ul>
+			)}
+		</>
 	);
 }

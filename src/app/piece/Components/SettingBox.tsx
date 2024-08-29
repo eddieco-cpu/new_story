@@ -7,10 +7,14 @@ import { usePieceContext } from "@contexts/pieceContext";
 
 import useMode from "../Hooks/useMode";
 import { Cross as CrossIcon } from "@components/customUI/svg";
+import LineHeightIcon from "./LineHeightIcon";
 
-//type FontSizeType = 16 | 18 | 20 | 22 | 24;
+//type FontSizeType = 16 | 18 | 20 | 22 | 24 | 26 ;
 type LineHeightType = "S" | "M" | "L";
 const lineHeights: LineHeightType[] = ["S", "M", "L"];
+
+const minFontSize = 16;
+const maxFontSize = 26;
 
 export default function SettingBox() {
 	//
@@ -20,6 +24,7 @@ export default function SettingBox() {
 		fontSize,
 		setFontSize,
 		setLineHeight,
+		lineHeight,
 	} = usePieceContext();
 
 	const [mode, toggleMode] = useMode();
@@ -37,7 +42,12 @@ export default function SettingBox() {
 	useEffect(() => {
 		if (typeof window !== "undefined") {
 			const storeFontSize = localStorage.getItem("piece-font-size");
-			const initFontSize = storeFontSize ? parseInt(storeFontSize) : 20;
+			const initFontSize =
+				storeFontSize &&
+				(parseInt(storeFontSize) <= maxFontSize ||
+					parseInt(storeFontSize) >= minFontSize)
+					? parseInt(storeFontSize)
+					: 20;
 
 			const storeLineHeight = localStorage.getItem(
 				"piece-line-height"
@@ -86,12 +96,8 @@ export default function SettingBox() {
 									<p>字級</p>
 									<div className="flex items-center justify-center rounded-lg border border-landscape-450 *:h-8 *:w-1/3">
 										<button
-											// onClick={() =>
-											// 	fontSize > 16 &&
-											// 	setFontSize((v) => (v <= 20 ? (v -= 2) : (v -= 4)))
-											// }
 											onClick={() =>
-												fontSize > 16 && doSetFontSize(fontSize - 2)
+												fontSize > minFontSize && doSetFontSize(fontSize - 2)
 											}
 										>
 											A-
@@ -100,12 +106,8 @@ export default function SettingBox() {
 											{fontSize}
 										</p>
 										<button
-											// onClick={() =>
-											// 	fontSize < 28 &&
-											// 	setFontSize((v) => (v >= 20 ? (v += 4) : (v += 2)))
-											// }
 											onClick={() =>
-												fontSize < 24 && doSetFontSize(fontSize + 2)
+												fontSize < maxFontSize && doSetFontSize(fontSize + 2)
 											}
 										>
 											A+
@@ -115,14 +117,30 @@ export default function SettingBox() {
 								<li className="grid grid-cols-[auto_1fr] gap-6">
 									<p>行高</p>
 									<div className="flex items-center justify-center rounded-lg border border-landscape-450 *:h-8 *:w-1/3">
-										<button onClick={() => doSetLineHeight("S")}>小</button>
+										<button onClick={() => doSetLineHeight("S")}>
+											<LineHeightIcon
+												className={
+													"gap-[3px] " +
+													`${lineHeight === "S" ? " *:bg-accent-300" : ""}`
+												}
+											/>
+										</button>
 										<button
 											className="flex items-center justify-center border-l border-r border-landscape-450 text-center"
 											onClick={() => doSetLineHeight("M")}
 										>
-											中
+											<LineHeightIcon
+												className={`${lineHeight === "M" ? "*:bg-accent-300" : ""}`}
+											/>
 										</button>
-										<button onClick={() => doSetLineHeight("L")}>大</button>
+										<button onClick={() => doSetLineHeight("L")}>
+											<LineHeightIcon
+												className={
+													"gap-[7px] " +
+													`${lineHeight === "L" ? " *:bg-accent-300" : ""}`
+												}
+											/>
+										</button>
 									</div>
 								</li>
 								<li className="grid grid-cols-[auto_1fr] gap-6">

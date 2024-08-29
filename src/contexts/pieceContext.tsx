@@ -12,9 +12,6 @@ type LineHeightType = "S" | "M" | "L";
 
 //
 interface PieceContextType {
-	count: number;
-	setCount: React.Dispatch<React.SetStateAction<number>>;
-
 	isSettingBox: boolean;
 	setIsSettingBox: React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -36,7 +33,6 @@ const PieceContext = createContext<PieceContextType | undefined>(undefined);
 
 const PieceProvider = ({ children }: { children: ReactNode }) => {
 	//
-	const [count, setCount] = useState(5);
 	const [isSettingBox, setIsSettingBox] = useState(false);
 	const [isCatagoryBox, setIsCatagoryBox] = useState(false);
 	const [fontSize, setFontSize] = useState(20);
@@ -47,9 +43,6 @@ const PieceProvider = ({ children }: { children: ReactNode }) => {
 		<>
 			<PieceContext.Provider
 				value={{
-					count,
-					setCount,
-
 					//
 					isSettingBox,
 					setIsSettingBox,

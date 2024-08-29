@@ -7,6 +7,9 @@ import { usePieceContext } from "@contexts/pieceContext";
 
 const space = 0;
 const xScale = 1;
+const lineHeightScaleS = 1.35;
+const lineHeightScaleM = 1.55;
+const lineHeightScaleL = 1.8;
 
 function applyBoldStyles(textObject, rawText) {
 	//
@@ -66,10 +69,15 @@ export default function FabricCanvas({ decodedHtml }) {
 		if (!fabricRef.current) return;
 		if (!textRef.current) return;
 
-		console.log("lineHeight", lineHeight);
+		//console.log("lineHeight", lineHeight);
 
 		textRef.current.set({
-			lineHeight: lineHeight === "L" ? 1.75 : lineHeight === "M" ? 1.55 : 1.35,
+			lineHeight:
+				lineHeight === "L"
+					? lineHeightScaleL
+					: lineHeight === "M"
+						? lineHeightScaleM
+						: lineHeightScaleS,
 		});
 		textRef.current.canvas.renderAll();
 		fabricRef.current.setHeight(textRef.current.height + space * 2);
@@ -102,7 +110,11 @@ export default function FabricCanvas({ decodedHtml }) {
 				width: (parentContainer.clientWidth - space * 2) * xScale,
 				fontSize: fontSize * xScale,
 				lineHeight:
-					lineHeight === "L" ? 1.75 : lineHeight === "M" ? 1.55 : 1.35,
+					lineHeight === "L"
+						? lineHeightScaleL
+						: lineHeight === "M"
+							? lineHeightScaleM
+							: lineHeightScaleS,
 				splitByGrapheme: true,
 				selectable: false, // 禁止選擇
 				evented: false, // 禁止所有事件

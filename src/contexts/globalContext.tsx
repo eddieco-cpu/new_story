@@ -3,8 +3,6 @@ import { useState, useContext, createContext, ReactNode } from "react";
 
 //
 interface GlobalContextType {
-	count: number;
-	setCount: React.Dispatch<React.SetStateAction<number>>;
 	isMemberConformAgreementOfRead: boolean;
 	setIsMemberConformAgreementOfRead: React.Dispatch<
 		React.SetStateAction<boolean>
@@ -16,7 +14,6 @@ const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
 const GlobalProvider = ({ children }: { children: ReactNode }) => {
 	//
-	const [count, setCount] = useState(5);
 	const [isMemberConformAgreementOfRead, setIsMemberConformAgreementOfRead] =
 		useState<boolean>(false);
 
@@ -25,8 +22,6 @@ const GlobalProvider = ({ children }: { children: ReactNode }) => {
 		<>
 			<GlobalContext.Provider
 				value={{
-					count,
-					setCount,
 					isMemberConformAgreementOfRead,
 					setIsMemberConformAgreementOfRead,
 				}}

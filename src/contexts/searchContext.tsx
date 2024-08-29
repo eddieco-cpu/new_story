@@ -14,9 +14,6 @@ import { SortOptionType } from "@/types/search";
 
 //
 interface SearchContextType {
-	count: number;
-	setCount: React.Dispatch<React.SetStateAction<number>>;
-
 	totalAmount: number;
 	setTotalAmount: React.Dispatch<React.SetStateAction<number>>;
 
@@ -43,7 +40,6 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined);
 const SearchProvider = ({ children }: { children: ReactNode }) => {
 	//
 	const searchParams = useSearchParams();
-	const [count, setCount] = useState<number>(5);
 
 	//
 	const [totalAmount, setTotalAmount] = useState(0);
@@ -95,9 +91,6 @@ const SearchProvider = ({ children }: { children: ReactNode }) => {
 		<>
 			<SearchContext.Provider
 				value={{
-					count,
-					setCount,
-
 					totalAmount,
 					setTotalAmount,
 
