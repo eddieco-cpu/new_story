@@ -13,6 +13,8 @@ import { Share } from "@/components/customUI/svg";
 import { type FetchedProductDataType } from "@/types/product";
 import { formatTimestampToDateString } from "@/lib/helper";
 
+import Loading from "@/components/Loading";
+
 import ButtonsBlock from "./ButtonsBlock";
 import Classification18Popup from "@/components/Classification18Popup";
 
@@ -132,7 +134,13 @@ export default function BoxOverview({
 					</p>
 
 					{/* --- */}
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense
+						fallback={
+							<div>
+								<Loading />
+							</div>
+						}
+					>
 						<ButtonsBlock
 							writer_account={productData.writer_account}
 							is_collection={productData.is_collection}

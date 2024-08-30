@@ -13,6 +13,8 @@ import SearchForm from "./SearchForm";
 import Drawer from "./Drawer";
 import ToTop from "./ToTop";
 
+import Loading from "../Loading";
+
 import {
 	Avatar,
 	Cross,
@@ -110,7 +112,13 @@ const Header: React.FC = () => {
 						</h1>
 
 						{/* -- */}
-						<Suspense fallback={<div>Loading...</div>}>
+						<Suspense
+							fallback={
+								<div>
+									<Loading />
+								</div>
+							}
+						>
 							<SearchForm {...{ isSearchBox, setIsSearchBox }} />
 						</Suspense>
 
@@ -133,7 +141,7 @@ const Header: React.FC = () => {
 							</span>
 							<span className="tools-box__item">
 								<Link href={"https://reading.udn.com/store/center/profile.do"}>
-									<Suspense fallback={<div>Loading...</div>}>
+									<Suspense fallback={<div></div>}>
 										<Avatar />
 									</Suspense>
 								</Link>

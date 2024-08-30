@@ -10,6 +10,7 @@ import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
 
 import AssembleContainer from "../../../components/AssembleContainer";
+import Loading from "@/components/Loading";
 
 import { isValidPathSegment } from "@/tools/validator";
 
@@ -48,7 +49,13 @@ export default function Page({
 			</section>
 
 			{isValidPathSegment(licenseName) ? (
-				<Suspense fallback={<div>Loading...</div>}>
+				<Suspense
+					fallback={
+						<div>
+							<Loading />
+						</div>
+					}
+				>
 					<AssembleContainer searchParams={searchParams} />
 				</Suspense>
 			) : (
