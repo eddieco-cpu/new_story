@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_TC, Roboto } from "next/font/google";
-import React, { Suspense } from "react";
+import React from "react";
 
 import { Toaster } from "@/components/ui/toaster";
 import BlockPopup, { BlockPopupModal } from "@/components/customUI/BlockPopup";

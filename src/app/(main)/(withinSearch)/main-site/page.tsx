@@ -10,6 +10,7 @@ import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
 
 import AssembleContainer from "../components/AssembleContainer";
+import Loading from "@/components/Loading";
 
 //
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
@@ -41,7 +42,13 @@ export default function Page({
 				<Breadcrumb />
 			</section>
 
-			<Suspense fallback={<div>Loading...</div>}>
+			<Suspense
+				fallback={
+					<div>
+						<Loading />
+					</div>
+				}
+			>
 				<AssembleContainer searchParams={searchParams} />
 			</Suspense>
 		</section>

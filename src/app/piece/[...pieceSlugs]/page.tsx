@@ -16,6 +16,7 @@ import { UiMain } from "@/components/customUI";
 import PieceProvider from "@contexts/pieceContext";
 import AgreementOfRead from "@/components/AgreementOfRead";
 import Wrapper from "../Components/Wrapper";
+import Classification18Popup from "@/components/Classification18Popup";
 
 import { unFetchedPieceBase64 } from "@/lib/data";
 
@@ -169,6 +170,10 @@ export default async function Page({
 							status_status={productData.status_status as string}
 							title={productData.title as string}
 						></Wrapper>
+						{(productData.contentrating?.includes("限") ||
+							productData.category.find((el) => el.name.includes("18+"))) && (
+							<Classification18Popup />
+						)}
 					</PieceProvider>
 				</UiMain>
 			</section>

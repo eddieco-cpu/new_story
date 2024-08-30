@@ -17,6 +17,8 @@ import FilterNav from "./components/FilterNav";
 import FilterCate from "./components/FilterCate";
 import RankCardsGroup from "./components/RankCardsGroup";
 
+import Loading from "@/components/Loading";
+
 import NewsSlider from "@/components/slider/NewsSlider";
 import Breadcrumb from "@/components/Breadcrumb";
 import { UiTitle } from "@/components/customUI";
@@ -55,19 +57,37 @@ export default async function Page() {
 				<div className="mb-5 flex items-center justify-start pb-2 pt-3 md:gap-4">
 					<UiTitle className="">排行榜</UiTitle>
 					{categoryDatas && categoryDatas.length > 0 && (
-						<Suspense fallback={<div>Loading...</div>}>
+						<Suspense
+							fallback={
+								<div>
+									<Loading />
+								</div>
+							}
+						>
 							<FilterCate categoryDatas={categoryDatas} />
 						</Suspense>
 					)}
 				</div>
 
 				{/* -- */}
-				<Suspense fallback={<div>Loading...</div>}>
+				<Suspense
+					fallback={
+						<div>
+							<Loading />
+						</div>
+					}
+				>
 					<FilterNav />
 				</Suspense>
 
 				{/* -- */}
-				<Suspense fallback={<div>Loading...</div>}>
+				<Suspense
+					fallback={
+						<div>
+							<Loading />
+						</div>
+					}
+				>
 					<RankCardsGroup />
 				</Suspense>
 			</section>

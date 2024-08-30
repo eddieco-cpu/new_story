@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 
 import FabricCanvasCreator from "./FabricCanvasCreator";
+import { usePieceContext } from "@contexts/pieceContext";
 
 const decodeBase64 = (base64: string): string => {
 	const binaryString = atob(base64);
@@ -83,6 +84,7 @@ function processDecodedText(decodedText: string): string[] {
 
 export default function ArticleBox({ pieceBase64 }: { pieceBase64: string }) {
 	//
+	const { setIsPieceLoading } = usePieceContext();
 	const [decodedHtmls, setDecodedHtmls] = useState<string[]>([]);
 
 	useEffect(() => {
@@ -98,6 +100,14 @@ export default function ArticleBox({ pieceBase64 }: { pieceBase64: string }) {
 
 		//
 		setDecodedHtmls(() => decodedTexts);
+
+		if (
+			decodedTexts.length ===
+			decodedTexts.filter((text) => text.startsWith("<img")).length
+		) {
+			//代表沒有要解析的文字 (no FabricCanvasCreator)，只有圖片
+			setIsPieceLoading(false);
+		}
 		//
 	}, []);
 
