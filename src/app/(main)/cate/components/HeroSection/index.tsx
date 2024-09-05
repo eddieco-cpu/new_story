@@ -1,55 +1,50 @@
 "use client";
 import React, { useState } from "react";
 
-import { IntroCard } from "@/types/cate";
-
 import Introduction from "./Introduction";
+import { type UiDivision } from "@/types/cate";
 
 type IntroductionType = {
 	id: string;
 	name: string;
 };
 
-export default function Index({
-	mainIntroCards,
-}: {
-	mainIntroCards: IntroCard[];
-}) {
+export default function Index({ uiDivision }: { uiDivision: UiDivision }) {
 	//
-	const [introductionTypes] = useState<IntroductionType[]>([
-		{
-			id: "A",
-			name: "大家都在搜",
-		},
-		{
-			id: "B",
-			name: "本週七折小說",
-		},
-		{
-			id: "C",
-			name: "創編精選",
-		},
-		{
-			id: "D",
-			name: "本月言情主打星",
-		},
-		{
-			id: "E",
-			name: "新鮮上架小說",
-		},
-	]);
-	const [activeIntroductionType, setActiveIntroductionType] =
-		useState<string>("A");
+	// const [introductionTypes] = useState<IntroductionType[]>([
+	// 	{
+	// 		id: "A",
+	// 		name: "大家都在搜",
+	// 	},
+	// 	{
+	// 		id: "B",
+	// 		name: "本週七折小說",
+	// 	},
+	// 	{
+	// 		id: "C",
+	// 		name: "創編精選",
+	// 	},
+	// 	{
+	// 		id: "D",
+	// 		name: "本月言情主打星",
+	// 	},
+	// 	{
+	// 		id: "E",
+	// 		name: "新鮮上架小說",
+	// 	},
+	// ]);
+	// const [activeIntroductionType, setActiveIntroductionType] =
+	// 	useState<string>("A");
 
 	return (
 		<article className="grid grid-cols-[1fr_auto] gap-x-7 max-xl:grid-cols-[auto_auto] max-xl:gap-0 max-lg:grid-cols-1 max-lg:grid-rows-[auto_auto]">
 			<Introduction
-				introCards={mainIntroCards}
+				div_items={uiDivision.div_item}
 				className={
 					"max-xl:w-[calc(970px-270px)] max-lg:row-start-2 max-lg:w-auto"
 				}
 			/>
-			<ul className="grid grid-rows-5 gap-6 overflow-auto px-8 py-4 scrollbar-hide max-xl:w-[270px] max-xl:p-4 max-lg:row-start-1 max-lg:w-auto max-lg:grid-flow-col max-lg:grid-rows-1 max-lg:gap-4">
+			{/* <ul className="grid grid-rows-5 gap-6 overflow-auto px-8 py-4 scrollbar-hide max-xl:w-[270px] max-xl:p-4 max-lg:row-start-1 max-lg:w-auto max-lg:grid-flow-col max-lg:grid-rows-1 max-lg:gap-4">
 				{introductionTypes.map((type) => (
 					<li
 						key={type.id}
@@ -62,7 +57,7 @@ export default function Index({
 						{type.name}
 					</li>
 				))}
-			</ul>
+			</ul> */}
 		</article>
 	);
 }

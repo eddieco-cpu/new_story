@@ -61,6 +61,12 @@ export type FetchedProductCardListType = {
 } & FetchedResponseType;
 
 //
+/**
+ * 透過
+ * ACCOUNT_DATA +`?account=${authorId}&action=select_publish`
+ * i.e. /story/authors/bear2718
+ * 取回的產品 schema
+ */
 export type ProductCardViaAuthorType = Omit<
 	ProductCardType,
 	| "publish_article"
@@ -73,4 +79,20 @@ export type ProductCardViaAuthorType = Omit<
 > & {
 	last_update_chapter_id: string; // 添加新屬性
 	last_update_chapter_publishtime: string;
+};
+
+//
+/**
+ * 透過
+ * SHOW_CATEGORY_DIVISIONS + `?div_type=M&contenttype=${cateId}`
+ * i.e. /story/IndexDiv?div_type=M&contenttype=1
+ * 取回的產品 schema
+ */
+export type ProductCardViaCategoryType = {
+	id: string;
+	summary: string;
+	author: string;
+	title: string;
+	category: CategoryType[];
+	imgcover: string;
 };
