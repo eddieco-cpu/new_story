@@ -108,3 +108,4 @@ export const TERMS = STORY_PATH + "/Terms";
 export const SHOW_STORE_PRODUCT_LIST = STORY_PATH + "/ShowStoreProductList";
 export const FOLLOW_CONTROL = STORY_PATH + "/FollowControl";
 export const SHOW_PUBLISHER = STORY_PATH + "/ShowPublisher";
+export const SHOW_CATEGORY_DIVISIONS = STORY_PATH + "/IndexDiv";

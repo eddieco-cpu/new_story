@@ -3,7 +3,13 @@ import { redirect, notFound } from "next/navigation";
 
 import { SortBook } from "@/types/cate";
 import { type PhotoSlider, type NewsType } from "@/types";
-import { type CateData, type FetchedCateData } from "@/types/cate";
+import {
+	type CateData,
+	type FetchedCateData,
+	type FetchedUiDivisionListType,
+	type UiDivision,
+} from "@/types/cate";
+import { type ProductCardViaCategoryType } from "@/types/product";
 
 import randomPicture from "@tools/randomPicture";
 import randomText from "@tools/randomText";
@@ -12,6 +18,7 @@ import {
 	fetchDataWithCookieInServer,
 	STORY_DOMAIN,
 	SHOW_CATEGORY,
+	SHOW_CATEGORY_DIVISIONS,
 } from "@/lib/api";
 
 import { imgClassNameInGroupHover } from "@lib/data"; //categoryDatas,
@@ -29,6 +36,12 @@ import FreeGlide from "@/components/customUI/FreeGlide";
 import NestedLink from "@/components/customUI/NestedLink";
 
 import PageNameInDev from "@/components/customUI/PageNameInDev";
+
+//
+import UiDivision2 from "../components/UiDivision2";
+import UiDivision3 from "../components/UiDivision3";
+import UiDivision5 from "../components/UiDivision5";
+import UiDivision6 from "../components/UiDivision6";
 
 //
 const newsArray: NewsType[] = Array.from({ length: 5 }, (_, i) => i + 1).map(
@@ -147,10 +160,18 @@ const ads = Array.from({ length: 4 }, (_, i) => i + 1).map((i) => ({
 	picture: randomPicture(),
 }));
 
+function splitArray<T>(array: T[]): [T[], T[]] {
+	const midIndex = Math.floor(array.length / 2);
+	const firstHalf = array.slice(0, midIndex);
+	const secondHalf = array.slice(midIndex);
+	return [firstHalf, secondHalf];
+}
+
 export default async function Page({ params }: { params: { cateId: string } }) {
 	//
 	const { cateId } = params;
 
+	////
 	//
 	const fetchedCategoryData = await fetchDataWithCookieInServer(
 		STORY_DOMAIN + SHOW_CATEGORY + "?store=Y",
@@ -164,6 +185,28 @@ export default async function Page({ params }: { params: { cateId: string } }) {
 
 	const categoryData = categoryDatas.find((el) => el.id === cateId);
 	if (!categoryData) notFound();
+
+	////
+	//https://story-onlinelab.udn.com/story3/IndexDiv?div_type=M&contenttype=1
+	//
+	const fetchedDivisionList = await fetchDataWithCookieInServer(
+		STORY_DOMAIN +
+			SHOW_CATEGORY_DIVISIONS +
+			`?div_type=M&contenttype=${cateId}`,
+		""
+	);
+
+	if (!fetchedDivisionList || !fetchedDivisionList.list) notFound();
+
+	const divisionList = fetchedDivisionList.list as UiDivision[];
+	console.log(" divisionList", divisionList);
+
+	const uiDivisions = divisionList.sort(
+		(a, b) => Number(b.div_weight) - Number(a.div_weight)
+	);
+
+	const [firstUiDivisionsHalf, secondUiDivisionsHalf] =
+		splitArray<UiDivision>(uiDivisions);
 
 	return (
 		<section>
@@ -180,117 +223,31 @@ export default async function Page({ params }: { params: { cateId: string } }) {
 				<CategoriesList categoryDatas={categoryDatas} />
 			</section>
 
-			<section>
-				<section className="mb-2 px-6">
-					<UiTitle>{categoryData.name}</UiTitle>
-				</section>
-				<section className="bg-landscape-400 lg:rounded-2xl">
-					<HeroSection {...{ mainIntroCards }} />
-				</section>
-			</section>
+			<>
+				{firstUiDivisionsHalf.map((uiDivision) =>
+					uiDivision.div_ui_type === "1" ? (
+						<section key={uiDivision.div_id}>
+							<section className="mb-2 px-6">
+								<UiTitle>{categoryData.name}</UiTitle>
+							</section>
 
-			<UiSection titleChildren="最近大家看甚麼" titleLink="/cate">
-				<FreeGlide className="free-glide-flex w-[1240px] flex-wrap content-start items-start gap-x-8 gap-y-4">
-					{popularCards.map((card) => (
-						<Link
-							//href={card.link}
-							href={"https://health.udn.com/health/index"}
-							key={card.id}
-							className="group grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
-						>
-							<picture className="pic-base book-base h-full">
-								<img
-									src={card.picture}
-									alt=""
-									className={imgClassNameInGroupHover}
-								/>
-							</picture>
-							<article className="flex h-full w-full flex-col items-start justify-start gap-2">
-								<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
-									{card.title}
-								</h3>
-								<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
-									<NestedLink
-										link="https://www.youtube.com/?app=desktop&hl=zh-tw"
-										className="text-inherit hover:text-accent-250 active:text-accent-220"
-									>
-										{card.author}
-									</NestedLink>
-								</p>
-							</article>
-						</Link>
-					))}
-				</FreeGlide>
-			</UiSection>
-
-			<UiSection titleChildren="新品上架" titleLink="/cate">
-				<FreeGlide className="free-glide-flex gap-x-[30px]">
-					{newPunblishedCards.map((card) => (
-						<Link href={card.link} key={card.id} className="group w-[180px]">
-							<picture className="pic-base book-base h-full">
-								<img
-									src={card.picture}
-									className={imgClassNameInGroupHover}
-									alt=""
-								/>
-							</picture>
-							<article className="h-[104px] p-2">
-								<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
-									{card.title}
-								</h3>
-								<p className="line-clamp-1 text-base font-normal text-primary-200">
-									<NestedLink
-										link={"/"}
-										className="text-inherit hover:text-accent-250 active:text-accent-220"
-									>
-										{card.author}
-									</NestedLink>
-								</p>
-							</article>
-						</Link>
-					))}
-				</FreeGlide>
-			</UiSection>
-
-			<UiSection titleChildren="最近更新" titleLink="/cate">
-				<FreeGlide className="free-glide-flex gap-x-8">
-					{newUpdatedCards.map((card) => (
-						<div
-							key={card.id}
-							className="w-[calc(220px+64px)] px-8 max-md:w-[180px] max-md:px-0"
-						>
-							<Link
-								href={card.link}
-								className="group w-[220px] max-md:w-[180px]"
-							>
-								<picture className="pic-base book-base mb-2 w-full">
-									<img
-										src={card.picture}
-										alt=""
-										className={imgClassNameInGroupHover}
-									/>
-								</picture>
-								<article className="h-[183px] text-center">
-									<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
-										{card.title}
-									</h3>
-									<p className="mb-9 line-clamp-1 text-base font-normal text-primary-200">
-										<NestedLink
-											link={card.authorLink}
-											className="text-inherit hover:text-accent-250 active:text-accent-220"
-										>
-											{card.author}
-										</NestedLink>
-									</p>
-									<p className="line-clamp-3 h-[62px] text-left text-sm font-normal text-ash-600">
-										{card.content}
-									</p>
-								</article>
-							</Link>
-						</div>
-					))}
-				</FreeGlide>
-			</UiSection>
+							<section className="bg-landscape-400 lg:rounded-2xl">
+								<HeroSection uiDivision={uiDivision} />
+							</section>
+						</section>
+					) : uiDivision.div_ui_type === "2" ? (
+						<UiDivision2 uiDivision={uiDivision} key={uiDivision.div_id} />
+					) : uiDivision.div_ui_type === "3" ? (
+						<UiDivision3 uiDivision={uiDivision} key={uiDivision.div_id} />
+					) : uiDivision.div_ui_type === "4" ? (
+						<UiDivision3 uiDivision={uiDivision} key={uiDivision.div_id} />
+					) : uiDivision.div_ui_type === "5" ? (
+						<UiDivision5 uiDivision={uiDivision} key={uiDivision.div_id} />
+					) : uiDivision.div_ui_type === "6" ? (
+						<UiDivision6 uiDivision={uiDivision} key={uiDivision.div_id} />
+					) : null
+				)}
+			</>
 
 			<section className="relative z-[2] bg-landscape-400">
 				<div
@@ -314,106 +271,32 @@ export default async function Page({ params }: { params: { cateId: string } }) {
 				</section>
 			</section>
 
-			<UiSection titleChildren="經典完本" titleLink="/cate">
-				<FreeGlide className="free-glide-flex w-[1240px] flex-wrap content-start items-start gap-x-8 gap-y-4">
-					{classicalCards.map((card) => (
-						<Link
-							href={card.link}
-							key={card.id}
-							className="group grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
-						>
-							<picture className="pic-base book-base h-full">
-								<img
-									src={card.picture}
-									alt=""
-									className={imgClassNameInGroupHover}
-								/>
-							</picture>
-							<article className="flex h-full w-full flex-col items-start justify-start gap-2">
-								<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
-									{card.title}
-								</h3>
-								<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
-									<NestedLink
-										link={""}
-										className="text-inherit hover:text-accent-250 active:text-accent-220"
-									>
-										{card.author}
-									</NestedLink>
-								</p>
-								<p className="mt-1 line-clamp-2 w-full text-sm font-normal text-ash-600">
-									{card.content}
-								</p>
-							</article>
-						</Link>
-					))}
-				</FreeGlide>
-			</UiSection>
+			{/* --- */}
+			<>
+				{secondUiDivisionsHalf.map((uiDivision) =>
+					uiDivision.div_ui_type === "1" ? (
+						<section key={uiDivision.div_id}>
+							<section className="mb-2 px-6">
+								<UiTitle>{categoryData.name}</UiTitle>
+							</section>
 
-			<UiSection titleChildren="新品上架" titleLink="/cate">
-				<FreeGlide className="free-glide-flex gap-x-[30px]">
-					{newPunblishedCards.map((card) => (
-						<Link href={card.link} key={card.id} className="group w-[180px]">
-							<picture className="pic-base book-base h-full">
-								<img
-									src={card.picture}
-									alt=""
-									className={imgClassNameInGroupHover}
-								/>
-							</picture>
-							<article className="h-[104px] p-2">
-								<h3 className="mb-2 line-clamp-2 h-14 text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
-									{card.title}
-								</h3>
-								<p className="line-clamp-1 text-base font-normal text-primary-200">
-									<NestedLink
-										link=""
-										className="text-inherit hover:text-accent-250 active:text-accent-220"
-									>
-										{card.author}
-									</NestedLink>
-								</p>
-							</article>
-						</Link>
-					))}
-				</FreeGlide>
-			</UiSection>
-
-			<UiSection titleChildren="免費試閱" titleLink="/cate">
-				<FreeGlide className="free-glide-flex w-[1240px] flex-wrap content-start items-start gap-x-8 gap-y-4">
-					{classicalCards.map((card) => (
-						<Link
-							href={card.link}
-							key={card.id}
-							className="group grid h-[146px] w-[286px] grid-cols-[auto_1fr] gap-2"
-						>
-							<picture className="pic-base book-base h-full">
-								<img
-									src={card.picture}
-									alt=""
-									className={imgClassNameInGroupHover}
-								/>
-							</picture>
-							<article className="flex h-full w-full flex-col items-start justify-start gap-2">
-								<h3 className="line-clamp-2 h-14 w-full text-lg font-normal text-ash-900 group-hover:text-accent-300 group-active:text-accent-220">
-									{card.title}
-								</h3>
-								<p className="line-clamp-1 w-full text-base font-normal text-primary-200">
-									<NestedLink
-										link={""}
-										className="text-inherit hover:text-accent-250 active:text-accent-220"
-									>
-										{card.author}
-									</NestedLink>
-								</p>
-								<p className="mt-1 line-clamp-2 w-full text-sm font-normal text-ash-600">
-									{card.content}
-								</p>
-							</article>
-						</Link>
-					))}
-				</FreeGlide>
-			</UiSection>
+							<section className="bg-landscape-400 lg:rounded-2xl">
+								<HeroSection uiDivision={uiDivision} />
+							</section>
+						</section>
+					) : uiDivision.div_ui_type === "2" ? (
+						<UiDivision2 uiDivision={uiDivision} key={uiDivision.div_id} />
+					) : uiDivision.div_ui_type === "3" ? (
+						<UiDivision3 uiDivision={uiDivision} key={uiDivision.div_id} />
+					) : uiDivision.div_ui_type === "4" ? (
+						<UiDivision3 uiDivision={uiDivision} key={uiDivision.div_id} />
+					) : uiDivision.div_ui_type === "5" ? (
+						<UiDivision5 uiDivision={uiDivision} key={uiDivision.div_id} />
+					) : uiDivision.div_ui_type === "6" ? (
+						<UiDivision6 uiDivision={uiDivision} key={uiDivision.div_id} />
+					) : null
+				)}
+			</>
 
 			{/* --- */}
 			<UiSection

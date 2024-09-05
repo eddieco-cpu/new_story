@@ -4,14 +4,14 @@ import Link from "next/link";
 import React, { useState } from "react";
 import FreeGlide from "@/components/customUI/FreeGlide";
 
-import { IntroCard } from "@/types/cate";
+import { type ProductCardViaCategoryType } from "@/types/product";
 
 export default function Introduction({
-	introCards,
 	className,
+	div_items,
 }: {
-	introCards: IntroCard[];
 	className: string;
+	div_items: ProductCardViaCategoryType[];
 }) {
 	//
 	const [hoveredIndex, setHoveredIndex] = useState<number>(0);
@@ -31,28 +31,28 @@ export default function Introduction({
 			}
 		>
 			<Link
-				href={introCards[hoveredIndex].link}
+				href={`/products/${div_items[hoveredIndex].id}`}
 				className="col-span-1 row-span-2 block aspect-[var(--pic-w)/var(--pic-h)] h-[calc(var(--pic-h)*1px)] max-lg:row-span-1 max-lg:h-[calc(var(--pic-h)*0.65px)] max-md:h-[calc(var(--pic-h)*0.5px)]"
 			>
 				<picture className="pic-base aspect-[var(--pic-w)/var(--pic-h)] h-full rounded-md">
-					<img src={introCards[hoveredIndex].picture} alt="" />
+					<img src={div_items[hoveredIndex].imgcover} alt="" />
 				</picture>
 			</Link>
 
 			<Link
-				href={introCards[hoveredIndex].link}
+				href={`/products/${div_items[hoveredIndex].id}`}
 				className="col-start-2 row-start-1 block h-[calc((var(--pic-h)-var(--glide-h))*1px)] pb-4 max-lg:h-[calc(var(--pic-h)*0.65px)] max-lg:pb-0 max-md:h-[calc(var(--pic-h)*0.5px)]"
 			>
 				<div className="pt-2 max-md:mr-4">
 					<h2 className="line-clamp-2 h-16 text-2xl font-normal text-ash-900">
-						{introCards[hoveredIndex].title}
+						{div_items[hoveredIndex].title}
 					</h2>
 					<p className="my-3 line-clamp-1 text-base font-normal text-primary-200">
-						{introCards[hoveredIndex].author}
+						{div_items[hoveredIndex].author}
 					</p>
 				</div>
 				<article className="line-clamp-6 h-[120px] text-sm font-normal text-ash-600 max-md:mr-4 max-md:line-clamp-3 max-md:h-[60px]">
-					{introCards[hoveredIndex].content}
+					{div_items[hoveredIndex].summary}
 				</article>
 			</Link>
 
@@ -62,7 +62,7 @@ export default function Introduction({
 					className="free-glide-flex gap-x-4"
 					containerClassName=" max-xl:w-[calc((700-16-40-285)*1px)] max-lg:w-auto max-md:max-w-[calc(100vw-20px)] "
 				>
-					{introCards.map((card, i) => (
+					{div_items.map((card, i) => (
 						<picture
 							key={card.id}
 							className={
@@ -71,7 +71,7 @@ export default function Introduction({
 							}
 							onClick={() => setHoveredIndex(i)}
 						>
-							<img src={card.picture} alt="" />
+							<img src={card.imgcover} alt="" />
 						</picture>
 					))}
 				</FreeGlide>
